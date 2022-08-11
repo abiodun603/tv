@@ -1,0 +1,24 @@
+.alert_danger-with-icon {
+  padding: 0;
+  color: var(--color-typo-danger);
+  background-color: var(--color-bg-danger);
+  border: 1px solid var(--color-typo-danger);
+  border-radius: 0;
+}
+
+.alert_danger-with-icon .alert__icon {
+  padding: 10px;
+  background-color: var(--color-typo-danger);
+  background-size: 20px;
+}
+
+.alert_danger-with-icon .alert__icon::after {
+  display: block;
+  width: 20px;
+  height: 20px;
+  content: "";
+}
+
+.alert_danger-with-icon .alert__text {
+  padding: 10px 16px;
+}

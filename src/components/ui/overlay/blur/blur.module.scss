@@ -1,0 +1,52 @@
+.container {
+  position: relative;
+}
+
+.blur {
+  position: relative;
+
+  &:after {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(8px);
+    content: '';
+    pointer-events: unset;
+    z-index: 99999999;
+  }
+}
+
+.msg {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  height: 100%;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-bottom: -8rem;
+
+  text-align: center;
+
+  font-size: 5rem;
+  font-weight: bold;
+  color: #2dbd58;
+
+  text-shadow: 5px -5px 12px #2b3331;
+
+  z-index: 999999999;
+}
+
+.child {
+  position: relative;
+  z-index: 0;
+
+  user-select: none;
+}

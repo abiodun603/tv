@@ -1,0 +1,22 @@
+.checkout_nav__item {
+  margin-right: 50px !important;
+}
+
+.checkout_nav__link {
+  padding-bottom: 8px;
+  color: var(--color-typo-secondary);
+  border-bottom: 2px solid transparent;
+}
+
+.checkout_nav__link:hover,
+.checkout_nav__link:focus,
+.checkout_nav__link:active {
+  text-decoration: none;
+  color: var(--color-link-hover);
+}
+
+.checkout_nav__link_active {
+  font-weight: bold;
+  color: var(--color-link);
+  border-color: var(--color-link);
+}

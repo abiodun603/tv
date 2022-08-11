@@ -1,0 +1,31 @@
+.slider-control {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.slider-control__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 46px;
+  height: 46px;
+}
+
+.slider-control__btn + .slider-control__btn {
+  margin-left: 16px;
+}
+
+.slider-control__btn:hover,
+.slider-control__btn:active {
+  background-color: transparent;
+}
+
+.slider-control__btn .icon {
+  width: 12px;
+  height: 20px;
+}
+
+.slider-control__btn_direction_left .icon {
+  transform: rotate(180deg);
+}

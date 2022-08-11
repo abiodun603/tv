@@ -1,0 +1,29 @@
+.grid {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.grid-container_full {
+    width: 100%;
+}
+
+.grid-item {
+    display: flex;
+    margin: 4px;
+    background-color: #fff;
+}
+
+.grid-item_4 {
+    flex-basis: calc(25% - 8px);
+    min-width: calc(25% - 8px);
+}
+
+.grid-item_6 {
+    flex-basis: calc(16.6% - 8px);
+    min-width: calc(16.6% - 8px);
+}
+
+.grid-item > * {
+    width: 100%;
+}

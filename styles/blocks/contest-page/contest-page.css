@@ -1,0 +1,12 @@
+.contest-page__section {
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+.contest-page__section_light {
+  background-color: var(--color-bg-essential);
+}
+
+.contest-page__vote-grid {
+  margin-bottom: 30px;
+}

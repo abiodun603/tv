@@ -1,0 +1,23 @@
+.custom-control-input:checked ~ .custom-control-label::before {
+  color: var(--color-bg-essential);
+  background-color: var(--color-link);
+  border-color: var(--color-link);
+}
+
+.custom-control-input:focus ~ .custom-control-label::before {
+  box-shadow: 0 0 0 0.2rem rgba(45, 149, 88, 0.5);
+}
+
+.custom-control-input:focus:not(:checked) ~ .custom-control-label::before {
+  border-color: var(--color-link-hover);
+}
+
+.custom-control-input:not(:disabled):active ~ .custom-control-label::before {
+  color: #fff;
+  background-color: #b3d7ff;
+  border-color: #b3d7ff;
+}
+
+.custom-control-label::before {
+  background-color: transparent;
+}

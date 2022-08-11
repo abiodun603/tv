@@ -1,0 +1,17 @@
+.navbar {
+  padding: 14px 0;
+  background-color: var(--color-bg-essential);
+}
+
+.navbar__nav-link {
+  color: var(--color-typo-primary);
+}
+
+.navbar__nav-link:not([aria-disabled="true"]):hover {
+  color: var(--color-link-hover);
+}
+
+.navbar__nav-link_active {
+  font-weight: bold;
+  color: var(--color-link);
+}

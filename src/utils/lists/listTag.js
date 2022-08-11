@@ -1,0 +1,42 @@
+export default [
+  { key: 0, label: 'Action', enabled: false },
+  { key: 1, label: 'Comedy', enabled: false },
+  { key: 2, label: 'Drama', enabled: false },
+  { key: 3, label: 'Romance', enabled: false },
+  { key: 4, label: 'Crime', enabled: false },
+  { key: 5, label: 'Thriller', enabled: false },
+
+  { key: 6, label: 'Classics', enabled: false },
+  { key: 7, label: 'Horror', enabled: false },
+  { key: 8, label: 'Science Fiction', enabled: false },
+  { key: 9, label: 'Teen', enabled: false },
+  { key: 10, label: 'History', enabled: false },
+  { key: 11, label: 'Documentary', enabled: false },
+
+  { key: 12, label: 'Biography', enabled: false },
+  { key: 13, label: 'Mystery', enabled: false },
+  { key: 14, label: 'Kids', enabled: false },
+  { key: 15, label: 'Animation', enabled: false },
+  { key: 16, label: 'Family', enabled: false },
+  { key: 17, label: 'Music', enabled: false },
+
+  { key: 18, label: 'Music video', enabled: false },
+  { key: 19, label: 'TV', enabled: false },
+  { key: 20, label: 'Series', enabled: false },
+  { key: 21, label: 'Arts & Culture', enabled: false },
+  { key: 22, label: 'Faith / Spirituality', enabled: false },
+  { key: 23, label: 'Gossip / Amebo', enabled: false },
+
+  { key: 24, label: 'Sports', enabled: false },
+  { key: 25, label: 'Fashion & Style', enabled: false },
+  { key: 26, label: 'Food / Recipes', enabled: false },
+  { key: 27, label: 'Home / Garden', enabled: false },
+  { key: 28, label: 'Health & Fitness', enabled: false },
+  { key: 29, label: 'Travel', enabled: false },
+
+  { key: 30, label: 'Politics', enabled: false },
+  { key: 31, label: 'Technology', enabled: false },
+  { key: 32, label: 'Opinion', enabled: false },
+  { key: 33, label: 'Business', enabled: false },
+  { key: 34, label: 'Podcasts', enabled: false },
+];

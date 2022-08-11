@@ -1,0 +1,26 @@
+.form-extra {
+  position: relative;
+}
+
+.form-extra__button {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  z-index: 1;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  transform: translateY(-50%);
+}
+
+.form-extra__show-icon {
+  flex: none;
+  width: 16px;
+  height: 12px;
+  line-height: 12px;
+}
+
+.form-extra .form-control {
+  padding-right: 36px;
+}

@@ -1,0 +1,134 @@
+/* View */
+.text_view_primary {
+  color: var(--color-typo-primary);
+}
+
+.text_view_secondary {
+  color: var(--color-typo-secondary);
+}
+
+.text_view_ghost {
+  color: var(--color-typo-ghost);
+}
+
+.text_view_link {
+  color: var(--color-link);
+}
+
+.text_view_light {
+  color: var(--color-bg-essential);
+}
+
+.text-danger {
+  color: var(--color-typo-danger) !important;
+}
+
+/* Size */
+.text_size_6xl {
+  font-size: var(--size-text-6xl);
+  line-height: var(--line-height-text-m);
+}
+
+.text_size_5xl {
+  font-size: var(--size-text-5xl);
+  line-height: var(--line-height-text-m);
+}
+
+.text_size_4xl {
+  font-size: var(--size-text-4xl);
+  line-height: var(--line-height-text-m);
+}
+
+.text_size_3xl {
+  font-size: var(--size-text-3xl);
+  line-height: var(--line-height-text-m);
+}
+
+.text_size_2xl {
+  font-size: var(--size-text-2xl);
+  line-height: var(--line-height-text-m);
+}
+
+.text_size_xl {
+  font-size: var(--size-text-xl);
+  line-height: var(--line-height-text-m);
+}
+
+.text_size_l {
+  font-size: var(--size-text-l);
+  line-height: var(--line-height-text-m);
+}
+
+.text_size_m {
+  font-size: var(--size-text-m);
+  line-height: var(--line-height-text-m);
+}
+
+.text_size_s {
+  font-size: var(--size-text-s);
+  line-height: var(--line-height-text-m);
+}
+
+.text_size_xs {
+  font-size: var(--size-text-xs);
+  line-height: var(--line-height-text-m);
+}
+
+.text_size_2xs {
+  font-size: var(--size-text-2xs);
+  line-height: var(--line-height-text-m);
+}
+
+/* display */
+.text_typography_display-xl {
+  font-size: 4rem; /* 64px */
+  line-height: 4.1rem;
+  letter-spacing: normal;
+}
+
+/* headline */
+.text_typography_headline-xl {
+  font-size: 2rem; /* 32px */
+  line-height: 2.5rem; /* 40px */
+}
+
+.text_typography_headline-l {
+  font-size: 1.75rem; /* 28px */
+  line-height: 2.25rem; /* 36px */
+}
+
+.text_typography_headline-m {
+  font-size: 1.5rem; /* 24px */
+  line-height: 1.875rem; /* 30px */
+}
+
+.text_typography_headline-s {
+  font-size: 1.25rem; /* 20px */
+  line-height: 1.5rem; /* 24px */
+}
+
+.text_typography_headline-xs {
+  font-size: 1.125rem; /* 18px */
+  line-height: 1.5rem; /* 24px */
+}
+
+/* subheader */
+.text_typography_subheader-xl {
+  font-size: 1rem; /* 16px */
+  line-height: 1.25rem; /* 20px */
+}
+
+.text_typography_subheader-l {
+  font-size: 0.9375rem; /* 15px */
+  line-height: 1.125rem; /* 18px */
+}
+
+.text_typography_subheader-m {
+  font-size: 0.875rem; /* 15px */
+  line-height: 1.125rem; /* 18px */
+}
+
+.text_typography_subheader-s {
+  font-size: 0.875rem; /* 14px */
+  line-height: 1rem; /* 16px */
+}

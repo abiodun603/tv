@@ -1,0 +1,47 @@
+.filter-form__control {
+  width: 262px !important;
+  height: 46px;
+  padding-right: 54px;
+  padding-left: 2px;
+  border: 0;
+  border-bottom: 1px solid var(--color-bg-border);
+  border-radius: 0;
+}
+
+.filter-form__search {
+  position: relative;
+}
+
+.filter-form__search-icon {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  z-index: auto;
+  width: 20px;
+  height: 20px;
+  transform: translateY(-50%);
+}
+
+.filter-form__filter-icon {
+  width: 17px;
+  height: 11px;
+  line-height: 11px;
+}
+
+.filter-form__clear {
+  position: absolute;
+  top: 50%;
+  right: 24px;
+  z-index: auto;
+  padding: 8px;
+  transform: translateY(-50%);
+}
+
+.filter-form__clear-icon {
+  width: 18px;
+  height: 18px;
+  line-height: 18px;
+}
+
+.filter-form__search_filled {
+}

@@ -1,0 +1,26 @@
+.users-list {
+  padding: 12px 24px;
+  background-color: var(--color-bg-default);
+}
+
+.users-list_header {
+  background-color: transparent;
+}
+
+.users-list__userpic {
+  border-radius: 50%;
+}
+
+.users-list__pause-icon {
+  width: 18px;
+  height: 18px;
+  margin-right: 4px;
+  transform: translateY(3px);
+}
+
+.users-list__deny-icon {
+  width: 18px;
+  height: 18px;
+  margin-right: 4px;
+  transform: translateY(3px);
+}

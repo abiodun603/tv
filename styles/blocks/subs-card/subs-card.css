@@ -1,0 +1,27 @@
+.subs-card {
+  padding: 20px;
+  background-color: var(--color-bg-default);
+  border: 2px solid transparent;
+  border-radius: var(--border-radius-s);
+}
+
+.subs-card__price {
+  flex-grow: 1;
+  margin-left: 16px;
+  padding-left: 16px;
+  border-left: 1px solid var(--color-bg-border);
+}
+
+.subs-card__checkbox {
+  visibility: hidden;
+}
+
+/* active */
+.subs-card_active {
+  background-color: var(--color-bg-link);
+  border-color: var(--color-link);
+}
+
+.subs-card_active .subs-card__checkbox {
+  visibility: visible;
+}

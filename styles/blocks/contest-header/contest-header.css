@@ -1,0 +1,36 @@
+.contest-header {
+  height: 600px;
+  padding-top: 110px;
+  background-color: var(--color-bg-essential);
+  background-image: url(contest-header.png);
+  background-position: top center;
+  background-repeat: no-repeat;
+}
+
+.contest-header__description {
+  margin-bottom: 48px;
+}
+
+.contest-header__row {
+  justify-content: space-between;
+}
+
+.contest-header__body-col {
+  flex: none;
+  width: 50%;
+  padding-right: 110px;
+}
+
+.contest-header__time-badge {
+  padding: 5px 10px 5px 30px;
+  font-size: 16px;
+  vertical-align: middle;
+  line-height: 1;
+  color: var(--color-bg-essential);
+  background-color: var(--color-typo-secondary);
+  background-image: url(contest-header__time-badge.svg);
+  background-position: left 10px center;
+  background-repeat: no-repeat;
+  background-size: 14px;
+  border-radius: var(--border-radius-s);
+}

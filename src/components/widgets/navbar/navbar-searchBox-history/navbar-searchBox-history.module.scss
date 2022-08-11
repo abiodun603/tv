@@ -1,0 +1,30 @@
+.searchHistory {
+  display: flex;
+  position: absolute;
+  width: 15%;
+  z-index: 42;
+  justify-content: center;
+  flex-direction: column;
+  top: 88%;
+  background-color: var(--white);
+  border-radius: 2%;
+  -webkit-border-radius: 2%;
+  -moz-border-radius: 2%;
+  -ms-border-radius: 2%;
+  -o-border-radius: 2%;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgb(0 0 0 / 8%);
+}
+.searchHistory__item {
+  color: rgb(138, 138, 138);
+  cursor: pointer;
+  padding: 2%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  &:hover{
+    transition: 0.3s;
+    background-color: rgb(245, 245, 245);
+  }
+}

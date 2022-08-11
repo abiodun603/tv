@@ -1,0 +1,25 @@
+.checkout-paytype__pal {
+  font-weight: normal;
+  color: #494949;
+  background-color: #f9ca23;
+  border-color: #f9ca23;
+}
+
+.checkout-paytype__pal .icon {
+  width: 67px;
+  height: 19px;
+  margin-left: 8px;
+}
+
+.checkout-paytype__google {
+  font-weight: normal;
+  color: #6a6e74;
+  background-color: #fff;
+  border-color: #dfe0e4;
+}
+
+.checkout-paytype__google .icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}

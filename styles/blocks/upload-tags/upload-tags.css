@@ -1,0 +1,32 @@
+.upload-tags {
+  position: relative;
+  padding-right: 25px;
+  padding-left: 25px;
+}
+
+.upload-tags__arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  padding: 0;
+  transform: translateY(-50%);
+}
+
+.upload-tags__arrow .icon_name_arrow-right {
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+}
+
+.upload-tags__arrow-left .icon_name_arrow-right {
+  transform: rotate(180deg);
+}
+
+.upload-tags__arrow-left {
+  right: auto;
+  left: -16px;
+}
+
+.upload-tags__arrow-right {
+  right: -16px;
+}

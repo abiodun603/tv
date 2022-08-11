@@ -1,0 +1,22 @@
+.video-info__cover {
+  border-radius: var(--border-radius-s);
+}
+
+.video-info__subs-bage {
+  display: inline-block;
+  padding: 7px 10px;
+  font-size: 16px;
+  line-height: 1;
+  color: #6c39ac;
+  background: rgba(108, 57, 172, 0.1);
+  border-radius: var(--border-radius-s);
+}
+
+.video-info__subs-bage .icon {
+  width: 11px;
+  height: 14px;
+}
+
+.video-info__actions {
+  margin-left: -6px;
+}

@@ -1,0 +1,131 @@
+.main-settings {
+  padding: 8px;
+  margin: -8px;
+  transition: background .2s ease-in-out;
+  border-radius: 6px;
+}
+
+.main-settings:hover {
+  background-color: #f5f5f5;
+}
+
+.profile-menu {
+  padding-right: 32px;
+  border-right: 1px solid var(--color-bg-border);
+}
+
+.profile-menu__item {
+  position: relative;
+}
+
+.profile-menu__nav-item_active::after {
+  position: absolute;
+  top: 50%;
+  right: -25px;
+  z-index: 1;
+  display: block;
+  width: 3px;
+  height: 24px;
+  content: "";
+  background-color: var(--color-link);
+  transform: translateY(-50%);
+}
+
+.profile-menu__nav-item_active .text_view_secondary {
+  color: var(--color-typo-primary);
+}
+
+.profile-menu__nav-item {
+  padding: .75rem 8px;
+  margin: 0 -8px;
+  transition: background .2s ease-in-out;
+}
+
+.profile-menu__nav-item_disable {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.profile-menu__nav-item:not(.profile-menu__nav-item_disable):hover {
+  background-color: #f5f5f5;
+}
+
+.profile-menu__nav-icon {
+  flex: none;
+  width: 36px;
+  color: var(--color-typo-ghost);
+}
+
+.profile-menu__item_active .profile-menu__nav-icon {
+  color: var(--color-link);
+}
+
+.profile-menu__user-info {
+  align-items: center;
+}
+
+.profile-menu__user-avatar {
+  position: relative;
+}
+
+.profile-menu__userpic {
+  border-radius: 50%;
+}
+
+.profile-menu__edit-icon {
+  position: absolute;
+  right: 12px;
+  bottom: 0;
+  z-index: 1;
+  width: 24px;
+  height: 24px;
+  background-color: var(--color-typo-primary);
+  background-size: 10px;
+  border: 2px solid var(--color-bg-essential);
+  border-radius: 50%;
+}
+
+.profile-menu__nav-item {
+  align-items: center;
+}
+
+.profile-menu__nav-item:hover,
+.profile-menu__nav-item:focus,
+.profile-menu__nav-item:active {
+  text-decoration: none;
+}
+
+.profile-menu__nav-icon.icon_name_upload {
+  width: 22px;
+  height: 14px;
+}
+
+.profile-menu__nav-icon.icon_name_subscription {
+  width: 22px;
+  height: 14px;
+}
+
+.profile-menu__nav-icon.icon_name_payment {
+  width: 20px;
+  height: 20px;
+}
+
+.profile-menu__nav-icon.icon_name_parental {
+  width: 20px;
+  height: 16px;
+}
+
+.profile-menu__nav-icon.icon_name_setings {
+  width: 20px;
+  height: 20px;
+}
+
+.profile-menu__nav-icon.icon_name_users {
+  width: 20px;
+  height: 20px;
+}
+
+.profile-menu__nav-icon.icon_name_logout-red {
+  width: 20px;
+  height: 20px;
+}

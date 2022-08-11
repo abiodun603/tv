@@ -1,0 +1,15 @@
+.counter {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+
+  color: rgba(43, 51, 49, 0.6);
+
+  * + &::before {
+    content: "·";
+
+    display: block;
+
+    margin: 0 8px;
+  }
+}

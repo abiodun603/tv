@@ -1,0 +1,37 @@
+.video-watch__watch-button {
+  padding-right: 32px;
+  padding-left: 32px;
+  color: var(--color-bg-essential);
+  background: #2b3331;
+  border-color: #2dbd58;
+  border-radius: var(--border-radius-s);
+}
+
+.video-watch__watch-button:hover,
+.video-watch__watch-button:focus,
+.video-watch__watch-button:active {
+  color: var(--color-bg-essential);
+}
+
+.video-watch__stat {
+  padding: 0 14px;
+  font-size: 16px;
+  line-height: 1;
+  background: rgba(43, 51, 49, 0.1);
+  border-radius: var(--border-radius-m);
+}
+
+.video-watch__views-icon {
+  width: 26px;
+  height: 18px;
+}
+
+.video-watch__likes-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.video-watch__flag-icon {
+  width: 20px;
+  height: 23px;
+}

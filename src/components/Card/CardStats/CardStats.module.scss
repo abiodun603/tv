@@ -1,0 +1,20 @@
+.stats {
+  display: flex;
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  z-index: 2;
+
+  > div {
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    padding: 4px;
+    color: #fafafa;
+    line-height: 1;
+    margin-right: 8px;
+    font-size: 12px;
+    white-space: nowrap;
+    background-color: rgba(43, 51, 49, 0.1);
+  }
+}

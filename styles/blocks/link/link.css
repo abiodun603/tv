@@ -1,0 +1,30 @@
+/* default */
+.link_view_default {
+  color: var(--color-link);
+}
+
+.link_view_default[aria-disabled="true"] {
+  color: var(--color-typo-disable);
+}
+
+.link_view_default:not([aria-disabled="true"]):hover {
+  color: var(--color-link-hover);
+}
+
+/* danger */
+.link_view_danger {
+  color: var(--color-typo-danger);
+}
+
+/* text */
+.link_view_text {
+  color: var(--color-typo-primary);
+}
+
+.link_view_text[aria-disabled="true"] {
+  color: var(--color-typo-disable);
+}
+
+.link_view_text:not([aria-disabled="true"]):hover {
+  color: var(--color-link-hover);
+}

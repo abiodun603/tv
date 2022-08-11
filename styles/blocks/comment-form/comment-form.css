@@ -1,0 +1,21 @@
+.comment-form {
+  position: relative;
+}
+
+.comment-form__send-button {
+  position: absolute;
+  top: 14px;
+  right: 12px;
+  z-index: 1;
+  padding: 0;
+}
+
+.comment-form__send-icon {
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+}
+
+.comment-form__control {
+  padding-right: 48px;
+}

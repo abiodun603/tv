@@ -1,0 +1,35 @@
+.login-form {
+  width: 615px;
+  margin: auto;
+  padding: 54px 108px;
+  background-color: var(--color-bg-essential);
+  border-radius: var(--border-radius-l);
+}
+
+.login-form__divider {
+  width: 275px;
+}
+
+.login-form__signin-button {
+  padding: 7px;
+}
+
+.login-form__signin-button .icon {
+  width: 31px;
+  height: 31px;
+  line-height: 31px;
+}
+
+.login-form__bottom-text {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: all;
+}
+
+.login-form__auth-method {
+  cursor: pointer;
+  background-color: var(--color-bg-default);
+  border-radius: var(--border-radius-xs);
+}

@@ -1,0 +1,13 @@
+.form-group_theme_isabi label {
+  margin-bottom: 0;
+  font-size: 12px;
+  color: var(--color-typo-ghost);
+}
+
+.form-group_theme_isabi .form-control {
+  padding-left: 0;
+  background-color: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--color-bg-border);
+  border-radius: 0;
+}

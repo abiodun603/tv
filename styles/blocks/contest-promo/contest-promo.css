@@ -1,0 +1,31 @@
+.contest-promo {
+  position: relative;
+  display: inline-block;
+  padding: 30px;
+  background-color: var(--color-bg-default);
+  border-radius: var(--border-radius-s);
+}
+
+.contest-promo__image {
+  display: block;
+  border-radius: var(--border-radius-s);
+}
+
+.contest-promo__label {
+  position: absolute;
+  right: 0;
+  bottom: -26px;
+  z-index: 1;
+  padding: 27px 36px;
+  color: #fff;
+  background-color: var(--color-link);
+  border-radius: var(--border-radius-s);
+}
+
+.contest-promo__label-overline {
+  margin-bottom: 4px;
+  font-size: 14px;
+  text-transform: uppercase;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.8);
+}

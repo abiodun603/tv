@@ -1,0 +1,16 @@
+.root {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  border-width: 2px;
+  border-style: dotted;
+  border-color: rgba(173, 173, 173, 0.2);
+}
+.fileName_progress {
+  max-width: width 85%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

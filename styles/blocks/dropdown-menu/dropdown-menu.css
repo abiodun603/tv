@@ -1,0 +1,20 @@
+.dropdown-menu_theme_isabi {
+  z-index: 10000000000000;
+  box-shadow: var(--elevation-8);
+  background-color: var(--color-bg-essential);
+  border: 0;
+  border-radius: var(--border-radius-xs);
+}
+
+.dropdown-menu_theme_isabi .dropdown-item {
+  z-index: 10000000000000;
+  padding: 12px 24px;
+  margin: 0;
+  color: var(--color-typo-secondary);
+}
+
+.dropdown-menu_theme_isabi .dropdown-item.active,
+.dropdown-menu_theme_isabi .dropdown-item:active {
+  z-index: 10000000000000;
+  background-color: var(--color-bg-default);
+}

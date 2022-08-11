@@ -1,0 +1,22 @@
+.payment-method {
+  background-color: var(--color-bg-default);
+  border-radius: var(--border-radius-l);
+}
+
+.payment-method__edit-button .icon {
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+}
+
+.payment-method__delete-button .icon {
+  width: 12px;
+  height: 16px;
+  line-height: 16px;
+}
+
+.payment-method__cancel-button .icon {
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+}

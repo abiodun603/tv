@@ -1,0 +1,143 @@
+.contest-card__media {
+  position: relative;
+}
+
+.contest-card__cover {
+  width: 100%;
+  height: 165px;
+  object-fit: cover;
+}
+
+.contest-card__cover-vertical {
+  width: 100%;
+  height: 274px;
+  object-fit: cover;
+}
+
+.contest-card__ends {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+}
+
+.contest-card__ends-label {
+  padding: 4px 8px;
+  font-size: 14px;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--color-bg-essential);
+}
+
+.contest-card__time {
+  padding: 4px 8px;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--color-bg-default);
+  background-color: rgba(43, 51, 49, 0.1);
+  border-radius: var(--border-radius-xs);
+}
+
+.contest-card__ends_size_l .contest-card__time {
+  font-size: 18px;
+}
+
+.contest-card__voting {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  background-color: var(--color-bg-tone);
+  transition: opacity 0.15s linear;
+}
+
+.contest-card__media:hover .contest-card__voting {
+  z-index: 2;
+  opacity: 1;
+}
+
+.contest-card__voting-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.contest-card__edit {
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 8px;
+}
+
+.contest-card__info {
+  position: absolute;
+  right: 30px;
+  bottom: 30px;
+  left: 30px;
+  z-index: 1;
+}
+
+.contest-card_size_l {
+  width: 100%;
+}
+
+.contest-card_size_l .contest-card__cover {
+  height: 466px;
+}
+
+.contest-card_size_s {
+  width: 100%;
+}
+
+.contest-card_size_s .contest-card__cover {
+  height: 218px;
+}
+
+.contest-card_size_s .contest-card__info {
+  right: 16px;
+  bottom: 16px;
+  left: 16px;
+}
+
+.contest-card__action-edit {
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+}
+
+.contest-card__action-add {
+  width: 23px;
+  height: 16px;
+  line-height: 16px;
+}
+
+.contest-card__action-delete {
+  width: 12px;
+  height: 16px;
+  line-height: 16px;
+}
+
+.contest-card__action-favorite {
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+}
+
+.contest-card__favorite-button {
+  position: absolute;
+  top: 4px;
+  left: 0;
+  z-index: 1;
+}

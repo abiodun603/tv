@@ -1,0 +1,5 @@
+.form-control {
+  color: var(--color-typo-primary);
+  background-color: var(--color-bg-default);
+  border-color: var(--color-bg-border);
+}

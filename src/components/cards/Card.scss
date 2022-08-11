@@ -1,0 +1,95 @@
+.Card {
+  border: none;
+  background-color: transparent;
+
+  &-ImageContainer {
+    display: flex;
+    justify-content: center;
+  }
+
+  &-ImageRatio {
+    width: 100%;
+  }
+
+  &-Title {
+    color: #000;
+  }
+
+  &-Image {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+}
+
+.CardVideo {
+  border: none;
+  background-color: transparent;
+
+  &-ImageContainer {
+    display: flex;
+    justify-content: center;
+  }
+
+  &-ImageRatio {
+    width: 100%;
+  }
+  &-ImageWrapper {
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+    &:after {
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      content: '';
+      background: linear-gradient(
+        0deg,
+        rgba(21, 21, 21, 0.6) 0.08%,
+        rgba(21, 21, 21, 0) 37.21%
+      );
+    }
+  }
+
+  &-Data {
+    display: flex;
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    z-index: 2;
+
+    > div {
+      display: flex;
+      overflow: hidden;
+      align-items: center;
+      padding: 4px;
+      color: #fafafa;
+      line-height: 1;
+      margin-right: 8px;
+      font-size: 12px;
+      white-space: nowrap;
+      background-color: rgba(43, 51, 49, 0.1);
+    }
+  }
+
+  &-Title {
+    color: #000;
+  }
+
+  &-Image {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+
+  &_centered {
+    font-size: 20px;
+  }
+}

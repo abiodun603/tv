@@ -1,0 +1,56 @@
+.poster {
+  display: flex;
+  justify-content: center;
+}
+
+.ratio {
+  width: 100%;
+}
+
+.wrapper {
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.wrapper_withInfo {
+  &:after {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    content: '';
+    background: linear-gradient(
+      0deg,
+      rgba(21, 21, 21, 0.6) 0.08%,
+      rgba(21, 21, 21, 0) 37.21%
+    );
+  }
+}
+
+.image {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(20, 22, 22, 0.5);
+  background-image: url('/icon/ic_play.svg');
+  background-position: 13px center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}

@@ -1,0 +1,21 @@
+.userBox {
+  display: flex;
+  align-items: center;
+  color: #2b3331;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.userBoxContainer {
+  display: flex;
+  align-items: center;
+}
+
+.userBoxName:not(:empty) {
+  margin-left: .5rem;
+}
+
+.userBoxNickName:not(:empty) {
+  margin-left: .5rem;
+  font-weight: normal;
+}

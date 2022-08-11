@@ -1,0 +1,15 @@
+.close_size_l {
+  width: 46px;
+  height: 46px;
+  opacity: 1;
+  background: url(close_size_l.svg) center no-repeat;
+  background-size: 26px;
+}
+
+.close_size_l span {
+  display: none;
+}
+
+.close_light {
+  background: url(close_size_l-light.svg) center no-repeat;
+}

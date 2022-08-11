@@ -1,0 +1,35 @@
+@import '~react-aspect-ratio/aspect-ratio.css';
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import '~react-responsive-carousel/lib/styles/carousel.min.css';
+
+.carousel .slide {
+  background: transparent;
+}
+
+.carousel-root {
+  position: relative;
+
+  &:before,
+  &:after {
+    content: '';
+    display: block;
+    height: 67%;
+    width: 1%;
+    position: absolute;
+    top: 16%;
+
+    z-index: 1;
+  }
+
+  &:before {
+    left: -8%;
+
+    box-shadow: 60px 2px 10px 42px #141616;
+  }
+
+  &:after {
+    right: -8%;
+
+    box-shadow: -60px 2px 10px 42px #141616;
+  }
+}

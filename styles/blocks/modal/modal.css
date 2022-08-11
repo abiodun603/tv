@@ -1,0 +1,62 @@
+.modal_theme_isabi {
+  background: rgba(250, 250, 250, 0.1);
+  backdrop-filter: blur(27px);
+}
+
+.modal_theme_isabi .modal-dialog {
+  max-width: 615px;
+}
+
+.modal_theme_isabi .modal-content {
+  border: 0;
+}
+
+.modal_theme_isabi .modal-header {
+  padding: 48px 60px 16px;
+  border: 0;
+  border-top-right-radius: var(--border-radius-l);
+  border-top-left-radius: var(--border-radius-l);
+}
+
+.modal_theme_isabi .modal-body {
+  padding: 16px 60px;
+}
+
+.modal_theme_isabi .modal-footer {
+  justify-content: flex-start;
+  padding: 16px 60px 60px;
+  border: 0;
+  border-bottom-right-radius: var(--border-radius-l);
+  border-bottom-left-radius: var(--border-radius-l);
+}
+
+.modal_theme_isabi .modal-header .close {
+  margin: 0;
+  padding: 0;
+}
+
+/* modal_theme_full */
+.modal_theme_full {
+  background: rgba(250, 250, 250, 0.1);
+  backdrop-filter: blur(27px);
+}
+
+.modal_theme_full .modal-content {
+  padding: 1rem;
+  background: transparent;
+  border: 0;
+}
+
+.modal__close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  pointer-events: all;
+}
+
+/* modal_view_login */
+.modal_view_login .modal-body {
+  padding-right: 108px;
+  padding-left: 108px;
+}

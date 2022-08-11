@@ -1,0 +1,12 @@
+export const ALL = 'all';
+export const TV = 'tv';
+export const KIDS = 'kids';
+export const MUSIC = 'music';
+export const PODCASTS = 'podcasts';
+export const MOVIES = 'movies';
+export const DOC = 'doc';
+export const FAVORITE_USER = 'favorite_user';
+export const POPULAR = 'popular';
+export const RECOMMENDED = 'recommended';
+export const SERIES = 'series';
+export const NEWS = 'news';

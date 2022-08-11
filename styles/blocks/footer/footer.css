@@ -1,0 +1,16 @@
+.footer {
+	padding: 56px 0;
+	background-color: var(--color-bg-essential);
+}
+
+.footer__nav-item {
+	margin-bottom: 16px;
+}
+
+.footer__nav-link {
+	color: var(--color-typo-secondary);
+}
+
+.footer__nav-link:not([aria-disabled="true"]):hover {
+	color: var(--color-link-hover);
+}

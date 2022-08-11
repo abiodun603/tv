@@ -1,0 +1,6 @@
+.success-image {
+  width: 100px;
+  height: 100px;
+  background: url(success-image.svg) center no-repeat;
+  background-size: contain;
+}

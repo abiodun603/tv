@@ -1,0 +1,43 @@
+.arrow {
+  position: absolute;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  //noinspection CssOverwrittenProperties
+  top: 50%;
+  //noinspection CssOverwrittenProperties
+  top: calc(50% - 50px);
+
+  height: 100px;
+  width: 70px;
+
+  padding: 0;
+
+  border: 0;
+  border-radius: 50px;
+
+  opacity: .5;
+
+  color: #fff;
+  background: #000;
+
+  z-index: 1;
+
+  svg {
+    fill: #ffffff;
+  }
+}
+
+.left {
+  left: 1%;
+
+  svg {
+    transform: rotate(180deg);
+  }
+}
+
+.right {
+  right: 1%;
+}

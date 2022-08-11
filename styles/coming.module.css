@@ -1,0 +1,14 @@
+#jumbotron_contest {
+  min-height: 70vh;
+  background-image: url('/image/bg_contest.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#jumbotron_contest_desc {
+  min-height: 50vh;
+}
+
+#jumbotron_search {
+  background-color: white;
+}
