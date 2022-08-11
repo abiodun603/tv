@@ -1,12 +1,12 @@
 import React from 'react';
 
 import Page from '../src/components/Page';
-import Home from '../src/components/Home';
+import Libs from '../src/components/Libs';
 
-export default function Index() {
+export default function LibsPage() {
   return (
     <Page>
-      <Home />
+      <Libs />
     </Page>
   );
 }

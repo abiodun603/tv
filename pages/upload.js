@@ -1,12 +1,12 @@
 import React from 'react';
 
 import Page from '../src/components/Page';
-import Home from '../src/components/Home';
+import Upload from '../src/components/Upload';
 
-export default function Index() {
+export default function UploadPage() {
   return (
     <Page>
-      <Home />
+      <Upload />
     </Page>
   );
 }

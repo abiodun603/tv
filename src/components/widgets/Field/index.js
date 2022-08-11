@@ -5,7 +5,6 @@ import {
   KeyboardDatePicker,
   MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
-import DateFnsUtils from '@date-io/date-fns';
 
 export { default as MultiSelect } from './MultiSelect';
 export { default as LanguagesSelect } from './LanguagesSelect';

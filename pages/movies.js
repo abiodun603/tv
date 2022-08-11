@@ -1,12 +1,12 @@
 import React from 'react';
 
 import Page from '../src/components/Page';
-import Home from '../src/components/Home';
+import Movies from '../src/components/Movies';
 
-export default function Index() {
+export default function HomePage() {
   return (
     <Page>
-      <Home />
+      <Movies />
     </Page>
   );
 }

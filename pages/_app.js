@@ -1,6 +1,5 @@
 import React from 'react';
 import { Provider } from 'mobx-react';
-import { SnackbarProvider } from 'notistack';
 
 import '../styles/vendor.scss';
 import '../styles/main.css';
@@ -9,8 +8,9 @@ import '../styles/components.scss';
 
 import initializeStore from '../src/store/store';
 import App from 'next/app';
+import { SnackbarProvider } from 'notistack';
 
-function ISabiTVAPP({ Component, pageProps }) {
+function CustomApp({ Component, pageProps }) {
   let store = initializeStore();
 
   return (
@@ -22,7 +22,7 @@ function ISabiTVAPP({ Component, pageProps }) {
   );
 }
 
-ISabiTVAPP.getInitialProps = async (appContext) => {
+CustomApp.getInitialProps = async (appContext) => {
   const appProps = await App.getInitialProps(appContext);
   const { ctx } = appContext;
   const { req, res, pathname } = ctx;
@@ -31,8 +31,8 @@ ISabiTVAPP.getInitialProps = async (appContext) => {
     let userAgent = req.headers['user-agent'];
     let isMobile = Boolean(
       userAgent.match(
-        /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
-      )
+        /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i,
+      ),
     );
 
     if (isMobile) {
@@ -49,4 +49,4 @@ ISabiTVAPP.getInitialProps = async (appContext) => {
   };
 };
 
-export default ISabiTVAPP;
+export default CustomApp;

@@ -1,12 +1,12 @@
 import React from 'react';
 
 import Page from '../src/components/Page';
-import Home from '../src/components/Home';
+import News from '../src/components/News';
 
-export default function Index() {
+export default function NewsPage() {
   return (
     <Page>
-      <Home />
+      <News />
     </Page>
   );
 }
