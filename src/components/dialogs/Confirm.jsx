@@ -19,11 +19,7 @@ const ConfirmDialog = (props) => {
         >
           Ok
         </ButtonContainer>
-        <Button
-          onClick={onClose}
-          className="mt-5 px-3"
-          size="small"
-        >
+        <Button onClick={onClose} className="mt-5 px-3" size="small">
           Cancel
         </Button>
       </DialogActions>

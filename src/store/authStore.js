@@ -85,7 +85,7 @@ class AuthStore extends BasicStore {
           clearInterval(timer);
         }
       }),
-      1000,
+      1000
     );
   }
 
@@ -175,7 +175,7 @@ class AuthStore extends BasicStore {
             visible: true,
           });
           this.loading = false;
-        }),
+        })
       );
     }
   }
@@ -203,7 +203,7 @@ class AuthStore extends BasicStore {
             type: 'warning',
             visible: true,
           });
-        },
+        }
       );
     }
   }
@@ -229,7 +229,7 @@ class AuthStore extends BasicStore {
             visible: true,
           });
           this.loading = false;
-        }),
+        })
       );
     } else {
       this.validated.email = false;
@@ -246,7 +246,7 @@ class AuthStore extends BasicStore {
           this.status = STATUS_NO_AUTH;
           Router.push('/');
           this.rootStore.refreshStore();
-        }),
+        })
       )
       .catch(function (error) {
         console.log(error);
@@ -259,29 +259,27 @@ class AuthStore extends BasicStore {
       if (this.second < 0) {
         this.loading = true;
 
-        firebase
-          .sendCodePhone(this.phone, (window as any).recaptchaVerifier)
-          .then(
-            action('successSendCode', (confirmationResult) => {
-              this.verificationId = confirmationResult.verificationId;
-              this.loading = false;
-              this.second = 60;
-              this.startTimer();
-              this.statusPhone = AUTH_PHONE_CODE_SEND;
-            }),
-            action('errorSendCode', (error) => {
-              if (error.code === 'auth/invalid-phone-number') {
-                this.validated.phone = false;
-              } else {
-                this.toast.show({
-                  message: error.message,
-                  type: 'warning',
-                  visible: true,
-                });
-              }
-              this.loading = false;
-            }),
-          );
+        firebase.sendCodePhone(this.phone, window.recaptchaVerifier).then(
+          action('successSendCode', (confirmationResult) => {
+            this.verificationId = confirmationResult.verificationId;
+            this.loading = false;
+            this.second = 60;
+            this.startTimer();
+            this.statusPhone = AUTH_PHONE_CODE_SEND;
+          }),
+          action('errorSendCode', (error) => {
+            if (error.code === 'auth/invalid-phone-number') {
+              this.validated.phone = false;
+            } else {
+              this.toast.show({
+                message: error.message,
+                type: 'warning',
+                visible: true,
+              });
+            }
+            this.loading = false;
+          })
+        );
       }
     } else {
       this.validated.phone = false;
@@ -304,7 +302,7 @@ class AuthStore extends BasicStore {
             visible: true,
           });
           this.loading = false;
-        }),
+        })
       );
     } else {
       this.validated.code = false;

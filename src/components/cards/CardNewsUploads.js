@@ -18,7 +18,7 @@ export default class CardNewsUploads extends Component {
       manageble = { isManageble: false, removingNeedsApprove: false },
       removeVideo = () => {},
     } = this.props;
-    
+
     return (
       <Col>
         <Card border="light">

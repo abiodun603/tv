@@ -121,7 +121,7 @@ export function toPodcasts(params = {}) {
 
 export function toVideoGrid(type, tag, params = {}) {
   return cleanURL(
-    `${toListVideo()}/${type}?${qs.stringify({ ...params, tag })}`,
+    `${toListVideo()}/${type}?${qs.stringify({ ...params, tag })}`
   );
 }
 

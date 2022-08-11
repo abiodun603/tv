@@ -384,11 +384,11 @@ namespace google {
         /**
          * Indicates that the error was encountered when the ad was being loaded. Possible causes: there was no response from the ad server, malformed ad response was returned, or ad request parameters failed to pass validation.
          */
-        AD_LOAD = "adLoadError",
+        AD_LOAD = 'adLoadError',
         /**
          * Indicates that the error was encountered after the ad loaded, during ad play. Possible causes: ad assets could not be loaded, etc.
          */
-        AD_PLAY = "adPlayError",
+        AD_PLAY = 'adPlayError',
       }
     }
 
@@ -415,7 +415,7 @@ namespace google {
         /**
          * Fired when an error occurred while the ad was loading or playing.
          */
-        AD_ERROR = "adError",
+        AD_ERROR = 'adError',
       }
 
       type Listener = (event: AdErrorEvent) => void;
@@ -445,107 +445,107 @@ namespace google {
         /**
          * Fired when an ad rule or a VMAP ad break would have played if autoPlayAdBreaks is false.
          */
-        AD_BREAK_READY = "adBreakReady",
+        AD_BREAK_READY = 'adBreakReady',
         /**
          * Fired when the ad has stalled playback to buffer.
          */
-        AD_BUFFERING = "adBuffering",
+        AD_BUFFERING = 'adBuffering',
         /**
          * Fired when an ads list is loaded.
          */
-        AD_METADATA = "adMetadata",
+        AD_METADATA = 'adMetadata',
         /**
          * Fired when the ad's current time value changes. Calling getAdData() on this event will return an AdProgressData object.
          */
-        AD_PROGRESS = "adProgress",
+        AD_PROGRESS = 'adProgress',
         /**
          * Fired when the ads manager is done playing all the ads.
          */
-        ALL_ADS_COMPLETED = "allAdsCompleted",
+        ALL_ADS_COMPLETED = 'allAdsCompleted',
         /**
          * Fired when the ad is clicked.
          */
-        CLICK = "click",
+        CLICK = 'click',
         /**
          * Fired when the ad completes playing.
          */
-        COMPLETE = "complete",
+        COMPLETE = 'complete',
         /**
          * Fired when content should be paused. This usually happens right before an ad is about to cover the content.
          */
-        CONTENT_PAUSE_REQUESTED = "contentPauseRequested",
+        CONTENT_PAUSE_REQUESTED = 'contentPauseRequested',
         /**
          * Fired when content should be resumed. This usually happens when an ad finishes or collapses.
          */
-        CONTENT_RESUME_REQUESTED = "contentResumeRequested",
+        CONTENT_RESUME_REQUESTED = 'contentResumeRequested',
         /**
          * Fired when the ad's duration changes.
          */
-        DURATION_CHANGE = "durationChange",
+        DURATION_CHANGE = 'durationChange',
         /**
          * Fired when the ad playhead crosses first quartile.
          */
-        FIRST_QUARTILE = "firstQuartile",
+        FIRST_QUARTILE = 'firstQuartile',
         /**
          * Fired when the impression URL has been pinged.
          */
-        IMPRESSION = "impression",
+        IMPRESSION = 'impression',
         /**
          * Fired when an ad triggers the interaction callback. Ad interactions contain an interaction ID string in the ad data.
          */
-        INTERACTION = "interaction",
+        INTERACTION = 'interaction',
         /**
          * Fired when the displayed ad changes from linear to nonlinear, or vice versa.
          */
-        LINEAR_CHANGED = "linearChanged",
+        LINEAR_CHANGED = 'linearChanged',
         /**
          * Fired when ad data is available.
          */
-        LOADED = "loaded",
+        LOADED = 'loaded',
         /**
          * Fired when a non-fatal error is encountered. The user need not take any action since the SDK will continue with the same or next ad playback depending on the error situation.
          */
-        LOG = "log",
+        LOG = 'log',
         /**
          * Fired when the ad playhead crosses midpoint.
          */
-        MIDPOINT = "midpoint",
+        MIDPOINT = 'midpoint',
         /**
          * Fired when the ad is paused.
          */
-        PAUSED = "pause",
+        PAUSED = 'pause',
         /**
          * Fired when the ad is resumed.
          */
-        RESUMED = "resume",
+        RESUMED = 'resume',
         /**
          * Fired when the displayed ads skippable state is changed.
          */
-        SKIPPABLE_STATE_CHANGED = "skippableStateChanged",
+        SKIPPABLE_STATE_CHANGED = 'skippableStateChanged',
         /**
          * Fired when the ad is skipped by the user.
          */
-        SKIPPED = "skip",
+        SKIPPED = 'skip',
         /**
          * Fired when the ad starts playing.
          */
-        STARTED = "start",
+        STARTED = 'start',
         /**
          * Fired when the ad playhead crosses third quartile.
          */
-        THIRD_QUARTILE = "thirdQuartile",
+        THIRD_QUARTILE = 'thirdQuartile',
         /**
          * Fired when the ad is closed by the user.
          */
-        USER_CLOSE = "userClose",
+        USER_CLOSE = 'userClose',
         /**
          * Fired when the ad volume has changed.
          */
-        VOLUME_CHANGED = "volumeChange",
+        VOLUME_CHANGED = 'volumeChange',
         /**
          * Fired when the ad volume has been muted.
          */
-        VOLUME_MUTED = "mute",
+        VOLUME_MUTED = 'mute',
       }
 
       type Listener = (event: AdEvent) => void;
@@ -858,7 +858,7 @@ namespace google {
         /**
          * Fired when the ads have been loaded and an AdsManager is available.
          */
-        ADS_MANAGER_LOADED = "adsManagerLoaded",
+        ADS_MANAGER_LOADED = 'adsManagerLoaded',
       }
 
       type Listener = (event: AdsManagerLoadedEvent) => void;
@@ -1061,15 +1061,15 @@ namespace google {
         /**
          * Specifies all creative types.
          */
-        ALL = "All",
+        ALL = 'All',
         /**
          * Specifies Flash creatives.
          */
-        FLASH = "Flash",
+        FLASH = 'Flash',
         /**
          * Specifies image creatives (such as JPEG, PNG, GIF, etc).
          */
-        IMAGE = "Image",
+        IMAGE = 'Image',
       }
 
       /**
@@ -1079,19 +1079,19 @@ namespace google {
         /**
          * Specifies that the resource can be any type of resource.
          */
-        ALL = "All",
+        ALL = 'All',
         /**
          * Specifies that the resource should be an HTML snippet.
          */
-        HTML = "Html",
+        HTML = 'Html',
         /**
          * Specifies that the resource should be a URL that should be used as the source of an iframe.
          */
-        IFRAME = "IFrame",
+        IFRAME = 'IFrame',
         /**
          * Specifies that the resource should be a static file (usually the URL of an image of SWF).
          */
-        STATIC = "Static",
+        STATIC = 'Static',
       }
 
       /**
@@ -1101,15 +1101,15 @@ namespace google {
         /**
          * Specifies that size should be ignored when choosing companions.
          */
-        IGNORE = "IgnoreSize",
+        IGNORE = 'IgnoreSize',
         /**
          * Specifies that only companions that match the size of the companion ad slot exactly should be chosen.
          */
-        SELECT_EXACT_MATCH = "SelectExactMatch",
+        SELECT_EXACT_MATCH = 'SelectExactMatch',
         /**
          * Specifies that any companion close to the size of the companion ad slot should be chosen.
          */
-        SELECT_NEAR_MATCH = "SelectNearMatch",
+        SELECT_NEAR_MATCH = 'SelectNearMatch',
       }
     }
 
@@ -1230,11 +1230,11 @@ namespace google {
         /**
          * If the value is ALWAYS, companion backfill will be attempted in all situations, even when there is no master ad returned.
          */
-        ALWAYS = "always",
+        ALWAYS = 'always',
         /**
          * If the value is ON_MASTER_AD, companion backfill will be attempted if there is a master ad with fewer companions than there are companion slots. The missing companions will be backfilled.
          */
-        ON_MASTER_AD = "on_master_ad",
+        ON_MASTER_AD = 'on_master_ad',
       }
 
       /**
@@ -1263,11 +1263,11 @@ namespace google {
       /**
        * Displays the "Ad" text in the ad UI. Must be present to show the countdown timer.
        */
-      AD_ATTRIBUTION = "adAttribution",
+      AD_ATTRIBUTION = 'adAttribution',
       /**
        * Ad attribution is required for a countdown timer to be displayed. Both UiElements.COUNTDOWN and UiElements.AD_ATTRIBUTION must be present in AdsRenderingSettings.uiElements.
        */
-      COUNTDOWN = "countdown",
+      COUNTDOWN = 'countdown',
     }
 
     /**
@@ -1277,11 +1277,11 @@ namespace google {
       /**
        * Fullscreen ad view mode. Indicates to the ads manager that the publisher considers the current AdDisplayContainer arrangement as fullscreen (i.e. simulated fullscreen). This does not cause the ads manager to enter fullscreen.
        */
-      FULLSCREEN = "fullscreen",
+      FULLSCREEN = 'fullscreen',
       /**
        * Normal ad view mode.
        */
-      NORMAL = "normal",
+      NORMAL = 'normal',
     }
 
     /**

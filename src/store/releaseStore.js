@@ -94,8 +94,7 @@ class ReleaseStore extends BasicStore {
           last_name: 'Dev',
           name: 'Alex',
           photo: {
-            url:
-              'https://d2pvw7djt6urpd.cloudfront.net/users/b2m1uG…4_E23_16096_0000193_FA_7_F1_E7_A9_c8c9228d67.jpeg',
+            url: 'https://d2pvw7djt6urpd.cloudfront.net/users/b2m1uG…4_E23_16096_0000193_FA_7_F1_E7_A9_c8c9228d67.jpeg',
           },
           username: 'altenaar',
         },

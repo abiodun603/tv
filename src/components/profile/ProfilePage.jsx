@@ -150,7 +150,7 @@ class ProfilePage extends React.Component {
                         'profile-menu__nav-item_active':
                           item.key === profile.profileState,
                         'profile-menu__nav-item_disable': !Boolean(item.key),
-                      },
+                      }
                     )}
                     bsPrefix="clear"
                     eventKey={item.key}
@@ -159,7 +159,7 @@ class ProfilePage extends React.Component {
                     <span
                       className={classNames(
                         'profile-menu__nav-icon icon mr-3',
-                        item.iconClassName,
+                        item.iconClassName
                       )}
                     />
                     <span className="text text_view_secondary">

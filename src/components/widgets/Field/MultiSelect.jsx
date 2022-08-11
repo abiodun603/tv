@@ -28,8 +28,8 @@ const useStyles = makeStyles((theme) => ({
   },
   selectItem: {
     '&.Mui-selected': {
-      fontWeight: 'bold'
-    }
+      fontWeight: 'bold',
+    },
   },
   chips: {
     display: 'flex',

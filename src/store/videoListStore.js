@@ -145,7 +145,7 @@ class VideoListStore extends BasicStore {
     http.post(`video/remove_my/${id}`, {}).then(() => {
       runInAction(() => {
         this.removingNeedsApprove = this.removingNeedsApprove.filter(
-          (value) => value !== id,
+          (value) => value !== id
         );
         this.toast.show({
           message: 'Your video has been successfully deleted!',

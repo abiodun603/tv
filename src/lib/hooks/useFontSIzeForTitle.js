@@ -6,7 +6,7 @@ const getFontSizeForCardTitle = (title) => {
 
   let fontSize = Math.min(
     originFontSize,
-    originFontSize / (title.length / maxDisplayCharInLine),
+    originFontSize / (title.length / maxDisplayCharInLine)
   );
   if (fontSize < minFontSize) {
     fontSize = optimalSize;

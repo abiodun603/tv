@@ -12,10 +12,7 @@ export const SeriesControlsMock = ({}) => {
 
   const seasonsItems = [].map((season, index) => {
     return (
-      <MenuItem
-        key={index}
-        data-data={season.season}
-      >
+      <MenuItem key={index} data-data={season.season}>
         Season {season.season}
       </MenuItem>
     );
@@ -24,13 +21,7 @@ export const SeriesControlsMock = ({}) => {
   const episodesItems =
     currentEpisode &&
     [].map((episode, index) => {
-      return (
-        <MenuItem
-          key={index}
-        >
-          Episode {episode.series}
-        </MenuItem>
-      );
+      return <MenuItem key={index}>Episode {episode.series}</MenuItem>;
     });
 
   return (

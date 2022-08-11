@@ -22,9 +22,7 @@ import { PROFILE_MY } from '../constants/routes';
 import { BasicStore } from './BasicStore';
 
 import { valText, valEmail, valPhone, valDate } from '../utils/validate';
-import {
-  getFormDataWithImage,
-} from '../utils/getFormDataWithImage';
+import { getFormDataWithImage } from '../utils/getFormDataWithImage';
 
 configure({ enforceActions: 'always' });
 
@@ -323,7 +321,7 @@ class ProfileStore extends BasicStore {
             type: 'error',
             visible: true,
           });
-        }),
+        })
       )
       .catch((e) => {
         runInAction(() => {
@@ -356,7 +354,7 @@ class ProfileStore extends BasicStore {
             type: 'error',
             visible: true,
           });
-        }),
+        })
       )
       .catch((e) => {
         runInAction(() => {
@@ -390,7 +388,7 @@ class ProfileStore extends BasicStore {
             type: 'error',
             visible: true,
           });
-        }),
+        })
       )
       .catch((e) => {
         runInAction(() => {
@@ -418,7 +416,7 @@ class ProfileStore extends BasicStore {
             type: 'error',
             visible: true,
           });
-        }),
+        })
       )
       .catch((e) => {
         runInAction(() => {
@@ -483,7 +481,7 @@ class ProfileStore extends BasicStore {
             visible: true,
           });
         }
-      }),
+      })
     );
   }
 

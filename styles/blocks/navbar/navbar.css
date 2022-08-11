@@ -7,7 +7,7 @@
   color: var(--color-typo-primary);
 }
 
-.navbar__nav-link:not([aria-disabled="true"]):hover {
+.navbar__nav-link:not([aria-disabled='true']):hover {
   color: var(--color-link-hover);
 }
 

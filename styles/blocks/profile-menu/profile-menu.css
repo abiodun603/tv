@@ -1,7 +1,7 @@
 .main-settings {
   padding: 8px;
   margin: -8px;
-  transition: background .2s ease-in-out;
+  transition: background 0.2s ease-in-out;
   border-radius: 6px;
 }
 
@@ -26,7 +26,7 @@
   display: block;
   width: 3px;
   height: 24px;
-  content: "";
+  content: '';
   background-color: var(--color-link);
   transform: translateY(-50%);
 }
@@ -36,9 +36,9 @@
 }
 
 .profile-menu__nav-item {
-  padding: .75rem 8px;
+  padding: 0.75rem 8px;
   margin: 0 -8px;
-  transition: background .2s ease-in-out;
+  transition: background 0.2s ease-in-out;
 }
 
 .profile-menu__nav-item_disable {

@@ -22,7 +22,7 @@ class CountriesStore extends BasicStore {
 
     http
       .get(PATH_URL_COUNTRIES, {
-        _limit: -1
+        _limit: -1,
       })
       .then((res) => {
         const data = res.data;

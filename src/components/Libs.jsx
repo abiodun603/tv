@@ -15,9 +15,8 @@ class Libs extends React.Component {
     this.loadLibWatch = this.loadLibWatch.bind(this);
     this.loadLibHistory = this.loadLibHistory.bind(this);
     this.loadLibResume = this.loadLibResume.bind(this);
-    this.loadLibSubScribedCollections = this.loadLibSubScribedCollections.bind(
-      this,
-    );
+    this.loadLibSubScribedCollections =
+      this.loadLibSubScribedCollections.bind(this);
   }
 
   componentDidMount() {
@@ -49,9 +48,8 @@ class Libs extends React.Component {
     const historyData = this.props.lib.video[TYPES.LIB_HISTORY];
     const watchData = this.props.lib.video[TYPES.LIB_WATCH];
     const resumeData = this.props.lib.video[TYPES.LIB_RESUME];
-    const subscribedCollectionsData = this.props.lib.video[
-      TYPES.LIB_SUBSCRIBED_COLLECTIONS
-    ];
+    const subscribedCollectionsData =
+      this.props.lib.video[TYPES.LIB_SUBSCRIBED_COLLECTIONS];
 
     return (
       <Container className="py-5 px-5">

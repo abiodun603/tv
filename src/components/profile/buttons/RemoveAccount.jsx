@@ -2,10 +2,7 @@ import { Col, Row } from 'react-bootstrap';
 import { ButtonText } from '../../widgets/Button';
 import ConfirmDialog from '../../dialogs/Confirm';
 
-const RemoveAccount = ({
-  onClick,
-  dialog,
-}) => {
+const RemoveAccount = ({ onClick, dialog }) => {
   return (
     <Row className="mb-4">
       <Col>

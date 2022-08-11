@@ -8,7 +8,7 @@
 .divider::after {
   flex-grow: 1;
   height: 1px;
-  content: "";
+  content: '';
   background-color: var(--color-bg-border);
 }
 

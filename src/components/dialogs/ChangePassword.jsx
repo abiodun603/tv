@@ -14,7 +14,6 @@ import {
 import { ButtonContainer, ButtonTextGreen } from '../widgets/Button';
 import { CustomTextField } from '../widgets/Field';
 
-
 @inject('ui', 'profile')
 @observer
 class ChangePassword extends React.Component {

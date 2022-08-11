@@ -8,12 +8,7 @@ import { PATH_URL_SUBSCRIBE, PATH_URL_UNSUBSCRIBE } from '../../constants/API';
 
 import { ButtonContainer } from '../widgets/Button';
 
-const SubscribeButton = ({
-  isSubscribed,
-  id,
-  disabled,
-  type = '',
-}) => {
+const SubscribeButton = ({ isSubscribed, id, disabled, type = '' }) => {
   const { enqueueSnackbar } = useSnackbar();
   const [isLoading, setLoading] = useState(false);
   const [isCurrentSubscribed, setCurrentSubscribed] = useState(isSubscribed);

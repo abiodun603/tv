@@ -269,7 +269,7 @@ class News extends React.Component {
                 if (
                   this.props.news.categoryCheck(
                     item.tags,
-                    this.state.categoriesFilter,
+                    this.state.categoriesFilter
                   )
                 ) {
                   return <NewsCard key={item.id} item={item} />;

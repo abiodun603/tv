@@ -10,12 +10,7 @@ import { getPoster } from '../../utils/pathUtil';
 import { getTags } from '../../utils/formate';
 import { TYPE_FILM } from '../../constants/API';
 
-const CardVideo = ({
-  video = {},
-  className = '',
-  maxWidthImage,
-  full,
-}) => {
+const CardVideo = ({ video = {}, className = '', maxWidthImage, full }) => {
   if (video.video) {
     video = video.video;
   }

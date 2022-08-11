@@ -15,7 +15,9 @@ export const Comment = ({ comment }) => {
           {comment.social.profile.name}
         </h5>
         {comment.message.split(/\n/).map((paragraph, index) => (
-          <p key={index} className="text-break m-0 pt-1">{paragraph}</p>
+          <p key={index} className="text-break m-0 pt-1">
+            {paragraph}
+          </p>
         ))}
       </Col>
       <Col sm="auto">
@@ -23,4 +25,4 @@ export const Comment = ({ comment }) => {
       </Col>
     </Row>
   );
-}
+};

@@ -61,7 +61,7 @@ export const DetailsControls = (props) => {
     try {
       FileSaver.saveAs(
         `https://api.isabi.tv/episodes/download/${video.id}?id=${video.id}`,
-        `${video.title}`,
+        `${video.title}`
       );
     } catch (e) {
       console.log(e);

@@ -5,13 +5,7 @@ import AspectRatio from 'react-aspect-ratio';
 
 import style from './CardPoster.module.scss';
 
-const CardPoster = ({
-  imgUrl,
-  maxWidth,
-  ratio,
-  children,
-  hasPlay,
-}) => {
+const CardPoster = ({ imgUrl, maxWidth, ratio, children, hasPlay }) => {
   if (!imgUrl) {
     return null;
   }

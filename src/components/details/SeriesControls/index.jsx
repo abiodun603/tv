@@ -12,19 +12,18 @@ export const SeriesControls = ({
   const didMountRef = useRef(false);
   const [currentSeason, setCurrentSeason] = useState(
     seriesData.seasons.filter((season) => Boolean(season.season) !== false)[0]
-      .season,
+      .season
   );
   const [currentEpisode, setCurrentEpisode] = useState({
     number: seriesData.episodes[0].series,
     season: '1',
   });
   const [currentEpisodeID, setCurrentEpisodeID] = useState(
-    seriesData.episodes[0].id,
+    seriesData.episodes[0].id
   );
 
-  const [anchorSeason, setAnchorSeason] = useState<HTMLElement>(null);
-  const [anchorEpisode, setAnchorEpisode] = useState<HTMLElement>(null);
-
+  const [anchorSeason, setAnchorSeason] = useState < HTMLElement > null;
+  const [anchorEpisode, setAnchorEpisode] = useState < HTMLElement > null;
 
   useEffect(() => {
     if (didMountRef.current) {
@@ -89,7 +88,7 @@ export const SeriesControls = ({
   };
 
   const seasonList = seriesData.seasons.filter(
-    (season) => Boolean(season.season) !== false,
+    (season) => Boolean(season.season) !== false
   );
 
   const seasonsItems = seasonList.map((season, index) => {
@@ -100,7 +99,7 @@ export const SeriesControls = ({
           handleSelectSeason(
             season.season,
             '1',
-            getFirstEpisodeFromSeason(season.season, allEpisodes),
+            getFirstEpisodeFromSeason(season.season, allEpisodes)
           );
         }}
       >

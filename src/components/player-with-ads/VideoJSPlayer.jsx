@@ -25,7 +25,7 @@ export class VideoJSPlayer extends React.Component {
     this.player = videojs(
       this.videoNode,
       this.props.options,
-      this.onPlayerReady,
+      this.onPlayerReady
     );
     // @ts-ignore
     this.player.ima({

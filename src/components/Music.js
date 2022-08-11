@@ -60,7 +60,7 @@ class Music extends React.Component {
             onNext={() => music.getList(type, true)}
           >
             {videos[type].media.map((item, key) =>
-              this.getCardType(type, item, key),
+              this.getCardType(type, item, key)
             )}
           </ListView>
         ))}

@@ -61,12 +61,8 @@ class FilmVideo extends DetailsVideoCommon {
   }
 
   render() {
-    const {
-      videoData,
-      anotherVideo,
-      seriesData,
-      episodeData,
-    } = this.props.video;
+    const { videoData, anotherVideo, seriesData, episodeData } =
+      this.props.video;
 
     const currentFilm = videoData.media;
 

@@ -212,8 +212,8 @@ button:focus {
 
 a.text-title:hover,
 a.text-title:active {
-	color: black;
-	text-decoration: none;
+  color: black;
+  text-decoration: none;
 }
 
 .text-dark-footer {

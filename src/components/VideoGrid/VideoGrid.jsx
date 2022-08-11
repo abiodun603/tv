@@ -209,7 +209,7 @@ export default class VideoGrid extends React.Component {
                   key={item.id}
                   className={classNames(
                     style['grid-item'],
-                    style[`grid-item_${cardsInRow}`],
+                    style[`grid-item_${cardsInRow}`]
                   )}
                 >
                   {this.getCardType(item)}

@@ -119,7 +119,7 @@ class LibStore {
   @action
   updateFullResumeData() {
     this.video[TYPES.LIB_RESUME].full = JSON.parse(
-      localStorage.getItem('resume'),
+      localStorage.getItem('resume')
     );
   }
 
@@ -171,7 +171,7 @@ class LibStore {
                 firstParams._start === 0
                   ? data.result.lib
                   : this.video[TYPES.LIB_SUBSCRIBED_COLLECTIONS].media.concat(
-                      data.result.lib,
+                      data.result.lib
                     ),
             };
           });

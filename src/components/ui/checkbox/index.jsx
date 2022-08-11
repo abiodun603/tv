@@ -6,11 +6,7 @@ function getUniqueID() {
   return `CheckBox_id${id++}`;
 }
 
-export const CheckBox = ({
-  title,
-  checked,
-  onChange,
-}) => {
+export const CheckBox = ({ title, checked, onChange }) => {
   const htmlID = useMemo(() => {
     return getUniqueID();
   }, []);

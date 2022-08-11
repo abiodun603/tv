@@ -25,7 +25,7 @@ export class BasicStore {
 
     if (!(rootStore instanceof RootStore)) {
       console.warn(
-        'Please, pass instance of the RootStore class to the BasicStore',
+        'Please, pass instance of the RootStore class to the BasicStore'
       );
     }
 

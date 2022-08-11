@@ -29,11 +29,7 @@ const years = listYear();
 @inject('ui', 'search')
 @observer
 export class FiltersModal extends React.Component {
-  componentDidUpdate(
-    prevProps,
-    prevState,
-    snapshot
-  ) {
+  componentDidUpdate(prevProps, prevState, snapshot) {
     const {
       ui: { isOpenDialog },
     } = this.props;

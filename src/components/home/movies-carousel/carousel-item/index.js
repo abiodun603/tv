@@ -18,7 +18,7 @@ export const CarouselItem = ({ video, active = false }) => {
         className={classNames(
           css.element,
           active && css.active,
-          'cursor-pointer',
+          'cursor-pointer'
         )}
       >
         <img src={getPoster(video.poster_h)} alt="" />

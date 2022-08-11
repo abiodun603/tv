@@ -12,7 +12,7 @@
 }
 
 .news-card__image {
-  object-fit:cover;
+  object-fit: cover;
   margin-right: 12px;
   border-radius: 50%;
 }

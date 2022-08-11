@@ -61,7 +61,7 @@ class CollectionsStore {
               start: data.result.start,
               end: data.result.end,
               media: this.collections.media.concat(
-                data.result.collections ? data.result.collections : [],
+                data.result.collections ? data.result.collections : []
               ),
               hasMore: data.result.has,
               hasPrev:

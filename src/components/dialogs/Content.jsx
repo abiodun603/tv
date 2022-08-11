@@ -32,10 +32,11 @@ const useStyles = makeStyles((theme) =>
       alignItems: 'center',
       justifyContent: 'center',
       backgroundColor: '#000',
-    }
-  }));
+    },
+  })
+);
 
-const Transition = React.forwardRef(function Transition( props, ref) {
+const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
@@ -44,17 +45,29 @@ const ContentDialog = (props) => {
   const { opened, onClose, title, children } = props;
 
   return (
-    <Dialog maxWidth={false} open={opened} onClose={onClose} TransitionComponent={Transition}>
-      <DialogTitle id="dialog-title" className={classes.title}>{title}
-        <IconButton className={classes.closeButton} edge="start" color="inherit" onClick={onClose} aria-label="close">
-          <CloseIcon />
-        </IconButton></DialogTitle>
-      <DialogContent dividers className={classes.content}>{children}</DialogContent>
-      <DialogActions>
-        <Button
+    <Dialog
+      maxWidth={false}
+      open={opened}
+      onClose={onClose}
+      TransitionComponent={Transition}
+    >
+      <DialogTitle id="dialog-title" className={classes.title}>
+        {title}
+        <IconButton
+          className={classes.closeButton}
+          edge="start"
+          color="inherit"
           onClick={onClose}
-          color="primary"
+          aria-label="close"
         >
+          <CloseIcon />
+        </IconButton>
+      </DialogTitle>
+      <DialogContent dividers className={classes.content}>
+        {children}
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={onClose} color="primary">
           Close
         </Button>
       </DialogActions>

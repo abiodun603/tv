@@ -9,9 +9,11 @@ const CardMeta = ({ content }) => {
     return null;
   }
 
-  return <Card.Text className={classNames(style.meta)}>{
-    content.filter(Boolean).join(' · ')
-  }</Card.Text>;
+  return (
+    <Card.Text className={classNames(style.meta)}>
+      {content.filter(Boolean).join(' · ')}
+    </Card.Text>
+  );
 };
 
 export default CardMeta;

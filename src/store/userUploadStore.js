@@ -214,7 +214,7 @@ class UserUploadStore extends BasicStore {
   removeItemFromUploads(id) {
     runInAction(() => {
       this.allUploads.data = this.allUploads.data.filter(
-        (item) => item.id !== id,
+        (item) => item.id !== id
       );
       this.allNews.data = this.allNews.data.filter((item) => item.id !== id);
     });
@@ -304,7 +304,7 @@ class UserUploadStore extends BasicStore {
           });
         }
         this.loading = false;
-      }),
+      })
     );
   }
 

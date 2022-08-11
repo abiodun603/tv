@@ -31,8 +31,8 @@ ISabiTVAPP.getInitialProps = async (appContext) => {
     let userAgent = req.headers['user-agent'];
     let isMobile = Boolean(
       userAgent.match(
-        /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i,
-      ),
+        /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
+      )
     );
 
     if (isMobile) {

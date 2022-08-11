@@ -52,9 +52,8 @@ class ProfileMy extends React.Component {
 
     this.setState({ name, lastName, userName });
 
-    this.toggleDeleteAllUploadsDialog = this.toggleDeleteAllUploadsDialog.bind(
-      this,
-    );
+    this.toggleDeleteAllUploadsDialog =
+      this.toggleDeleteAllUploadsDialog.bind(this);
     this.toggleRemoveAccount = this.toggleRemoveAccount.bind(this);
     this.toggleClearHistoryDialog = this.toggleClearHistoryDialog.bind(this);
     this.toggleLogoutDialog = this.toggleLogoutDialog.bind(this);
@@ -143,7 +142,7 @@ class ProfileMy extends React.Component {
     const { name, lastName, userName } = this.state;
 
     const isDataValid = Boolean(
-      name && lastName && userName && profileStore.profile.birthday,
+      name && lastName && userName && profileStore.profile.birthday
     );
 
     const baseTitle = (text) => (
@@ -264,7 +263,7 @@ class ProfileMy extends React.Component {
                     disabled={!profileStore.profile.phone}
                     checked={Boolean(
                       profileStore.profile.display_phone &&
-                        profileStore.profile.phone,
+                        profileStore.profile.phone
                     )}
                     onChange={(event) => {
                       profileStore.setShowPhone(event.target.checked);
@@ -463,7 +462,7 @@ class ProfileMy extends React.Component {
                     id="track_watch"
                     title="Do not track my watch history"
                     checked={Boolean(
-                      profileStore.profile.watch_history_enabled,
+                      profileStore.profile.watch_history_enabled
                     )}
                     onChange={(event) => {
                       profileStore.setDontTrackWatch(event.target.checked);
@@ -477,7 +476,7 @@ class ProfileMy extends React.Component {
                     id="track_search"
                     title="Do not track my search history"
                     checked={Boolean(
-                      profileStore.profile.search_history_enabled,
+                      profileStore.profile.search_history_enabled
                     )}
                     onChange={(event) => {
                       profileStore.setDontTrackSearch(event.target.checked);

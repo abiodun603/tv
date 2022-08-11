@@ -16,7 +16,7 @@
   display: block;
   width: 20px;
   height: 20px;
-  content: "";
+  content: '';
 }
 
 .alert_danger-with-icon .alert__text {

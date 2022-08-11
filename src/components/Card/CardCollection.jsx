@@ -12,14 +12,9 @@ import { ButtonTextGreen } from '../widgets/Button';
 import { getPoster, getPhoto } from '../../utils/pathUtil';
 import { toCollection } from '../../lib/url/generator';
 
-const CardCollection = ({
-  data,
-  canSubscribe = false,
-  transparent,
-  full,
-}) => {
-  const photo = data?.owner?.photo
-  const username = data?.owner?.username
+const CardCollection = ({ data, canSubscribe = false, transparent, full }) => {
+  const photo = data?.owner?.photo;
+  const username = data?.owner?.username;
 
   return (
     <Card url={toCollection(data.id)} transparent={transparent} full={full}>

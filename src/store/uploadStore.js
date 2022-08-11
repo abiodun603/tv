@@ -241,7 +241,7 @@ class UploadStore extends BasicStore {
           });
         }
         this.loading = false;
-      }),
+      })
     );
   }
 

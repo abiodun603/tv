@@ -47,7 +47,7 @@ const RouterWatcher = ({ searchStore }) => {
 class SearchComponent extends React.Component {
   componentDidMount() {
     this.props.search.setLanguages(
-      this.props.auth.profileStore.profile.languages,
+      this.props.auth.profileStore.profile.languages
     );
 
     if (this.isFirstMount()) {
