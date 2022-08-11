@@ -17,7 +17,7 @@ import {
 
 import { NEWS, SINGLE_VIDEO } from '../constants/types';
 
-import style from '../../style/dropZone.module.css';
+import style from '../../styles/dropZone.module.css';
 
 @inject('uploadNews', 'auth')
 @observer

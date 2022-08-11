@@ -13,7 +13,7 @@ import { getPhoto, getPoster, getTrailer } from '../../utils/pathUtil';
 import { getTags } from '../../utils/formate';
 import { COMING_SOON, SERIAL } from '../../constants/types';
 
-import style from '../../../style/detailsVideo.module.scss';
+import style from '../../../styles/detailsVideo.module.scss';
 import DetailsVideoCommon from './DetailsCommon';
 import { DetailsControls } from './DetailsControls/DetailsControls';
 import { SeriesControls } from './SeriesControls';

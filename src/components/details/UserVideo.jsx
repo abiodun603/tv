@@ -4,7 +4,7 @@ import { inject, observer } from 'mobx-react';
 
 import * as url from '../../lib/url/generator';
 
-import style from '../../../style/detailsVideo.module.scss';
+import style from '../../../styles/detailsVideo.module.scss';
 
 import { getMedia, getPhoto } from '../../utils/pathUtil';
 import { getTags } from '../../utils/formate';

@@ -11,7 +11,7 @@ import {
   Spinner,
 } from 'react-bootstrap';
 
-import style from '../../style/auth.module.css';
+import style from '../../styles/auth.module.css';
 import {
   AUTH_EMAIL,
   AUTH_PHONE,

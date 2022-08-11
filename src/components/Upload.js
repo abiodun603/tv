@@ -13,7 +13,7 @@ import {
   LanguagesSelect,
 } from './widgets/Field';
 
-import style from '../../style/dropZone.module.css';
+import style from '../../styles/dropZone.module.css';
 
 import { SINGLE_VIDEO } from '../constants/types';
 
