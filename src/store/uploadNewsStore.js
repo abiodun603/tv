@@ -199,7 +199,7 @@ class UploadNewsStore extends BasicStore {
     fd.append('path', 'video');
     fd.append('files', toJS(this.file));
 
-    const data: any = toJS(this.dataVideo);
+    const data = toJS(this.dataVideo);
 
     data.type = type;
     data.tags = [...tags, NEWS];

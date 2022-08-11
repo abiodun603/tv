@@ -77,7 +77,7 @@ class LibStore {
   };
 
   @action
-  getLib(type: string, firstParams: any = {}) {
+  getLib(type, firstParams = {}) {
     http.setToken(cookies.get('token'));
 
     const params = {
@@ -144,7 +144,7 @@ class LibStore {
   }
 
   @action
-  getSubscribedCollecions(firstParams: any = {}) {
+  getSubscribedCollecions(firstParams = {}) {
     http.setToken(cookies.get('token'));
 
     const params = {
