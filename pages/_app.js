@@ -1,5 +1,8 @@
 import React from 'react';
 import { Provider } from 'mobx-react';
+import { ThemeProvider } from 'styled-components';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import theme from '../src/theme';
 
 import '../styles/vendor.scss';
 import '../styles/main.css';
@@ -16,7 +19,11 @@ function CustomApp({ Component, pageProps }) {
   return (
     <SnackbarProvider maxSnack={2}>
       <Provider {...store}>
-        <Component {...pageProps} />
+        <ThemeProvider theme={theme}>
+          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+          <CssBaseline />
+          <Component {...pageProps} />
+        </ThemeProvider>
       </Provider>
     </SnackbarProvider>
   );
