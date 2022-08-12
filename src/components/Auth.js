@@ -141,7 +141,7 @@ class Auth extends React.Component {
                           className="mt-4"
                         />
                       ) : (
-                        <Form.Row className="mt-4">
+                        <Row className="mt-4">
                           <Col className="d-flex justify-content-end">
                             <button
                               type="button"
@@ -152,7 +152,7 @@ class Auth extends React.Component {
                               <Image src="icon/ic_arrow.svg" />
                             </button>
                           </Col>
-                        </Form.Row>
+                        </Row>
                       )}
                     </Form>
                   </Card.Body>
@@ -293,7 +293,7 @@ class Auth extends React.Component {
                           className="mt-4"
                         />
                       ) : (
-                        <Form.Row className="mt-4">
+                        <Row className="mt-4">
                           <Col className="d-flex justify-content-start">
                             <button
                               type="button"
@@ -324,7 +324,7 @@ class Auth extends React.Component {
                               <Image src="icon/ic_arrow.svg" />
                             </button>
                           </Col>
-                        </Form.Row>
+                        </Row>
                       )}
                     </Form>
                   </Card.Body>

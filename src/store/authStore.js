@@ -74,7 +74,7 @@ class AuthStore extends BasicStore {
   @observable second = -1;
   @observable statusPhone = AUTH_PHONE;
 
-  @observable status = STATUS_LOADING;
+  @observable status = STATUS_NO_AUTH;
   @observable type = TYPE_AUTH;
 
   startTimer() {
