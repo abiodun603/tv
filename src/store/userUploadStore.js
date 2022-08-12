@@ -46,7 +46,9 @@ class UserUploadStore extends BasicStore {
 
   @observable tagsVideo = listTag;
 
-  @observable languages = this.auth.profileStore.profile.languages || [];
+  // TODO: Debug this
+  // @observable languages = this.auth.profileStore.profile.languages || [];
+  @observable languages = [];
 
   currentSocialId = null;
 

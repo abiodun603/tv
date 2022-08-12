@@ -12,7 +12,7 @@ import { Container, Row, Spinner } from 'react-bootstrap';
 
 import { STATUS_LOADING, STATUS_NO_AUTH } from '../constants/auth';
 
-// import { recaptchaVerifier } from '../firebase/firebase';
+import { recaptchaVerifier } from '../firebase/firebase';
 
 import Auth from './Auth';
 

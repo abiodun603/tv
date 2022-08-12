@@ -1,10 +1,10 @@
-import { useStaticRendering } from 'mobx-react';
+import { enableStaticRendering } from 'mobx-react';
 
 import { RootStore } from './RootStore';
 
 const isServer = typeof window === 'undefined';
 
-useStaticRendering(isServer);
+enableStaticRendering(isServer);
 
 let store = null;
 

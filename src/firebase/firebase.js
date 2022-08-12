@@ -1,13 +1,5 @@
-import { initializeApp } from 'firebase/app';
-import {
-  getAuth,
-  PhoneAuthProvider,
-  GoogleAuthProvider,
-  FacebookAuthProvider,
-  TwitterAuthProvider,
-  EmailAuthProvider,
-  RecaptchaVerifier,
-} from 'firebase/auth';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyABC_t7HohIXCfWqUML-wyS-CLvYQ5Wy0c',
@@ -17,22 +9,23 @@ const firebaseConfig = {
   storageBucket: 'isabitv.appspot.com',
   messagingSenderId: '938535839812',
   appId: '1:938535839812:web:7ee54ffcc09c10a7aab411',
-  measurementId: 'G-E8KDZC9EH5',
 };
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
 
-const providerPhone = new PhoneAuthProvider();
-const providerGoogle = new GoogleAuthProvider();
-const providerFacebook = new FacebookAuthProvider();
-const providerTwitter = new TwitterAuthProvider();
+const auth = firebase.auth();
+const providerPhone = new firebase.auth.PhoneAuthProvider();
+const providerGoogle = new firebase.auth.GoogleAuthProvider();
+const providerFacebook = new firebase.auth.FacebookAuthProvider();
+const providerTwitter = new firebase.auth.TwitterAuthProvider();
 
 let credentialsEmail = (email, password) =>
-  new EmailAuthProvider.credential(email, password);
+  new firebase.auth.EmailAuthProvider.credential(email, password);
 
 let recaptchaVerifier = () => {
-  return new RecaptchaVerifier('recaptcha-container', {
+  return new firebase.auth.RecaptchaVerifier('recaptcha-container', {
     size: 'invisible',
   });
 };
