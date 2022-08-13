@@ -1,4 +1,5 @@
 import { withStyles, Tab, Tabs } from '@material-ui/core';
+import AppTheme from '../../theme';
 
 export var TabsCustom = withStyles({
   indicator: {
@@ -7,22 +8,23 @@ export var TabsCustom = withStyles({
     backgroundColor: 'transparent',
     '& > span': {
       width: '100%',
-      backgroundColor: '#2dbd58',
+      backgroundColor: AppTheme.palette.primary.main,
     },
   },
 })((props) => <Tabs {...props} TabIndicatorProps={{ children: <span /> }} />);
 
-export var TabCustom = withStyles((theme) => ({
+export var TabCustom = withStyles({
   root: {
     textTransform: 'none',
-    color: '#959595',
-    fontWeight: theme.typography.fontWeightRegular,
-    fontSize: theme.typography.pxToRem(15),
-    marginRight: theme.spacing(1),
+    color: AppTheme.palette.grey.grey60,
+    fontWeight: AppTheme.typography.fontWeightRegular,
+    fontSize: AppTheme.typography.pxToRem(15),
+    marginRight: AppTheme.spacing(1),
     '&$selected': {
-      color: '#2dbd58',
-      fontWeight: theme.typography.fontWeightMedium,
+      color: AppTheme.palette.primary.main,
+      fontWeight: AppTheme.typography.fontWeightMedium,
+      fontSize: AppTheme.spacing(1) * 2,
     },
   },
   selected: {},
-}))((props) => <Tab disableRipple {...props} />);
+})((props) => <Tab disableRipple {...props} />);

@@ -23,7 +23,7 @@ export const NavBarLink = ({ menu }) => {
         <a
           className={classNames(
             'navbar__nav-link nav-link',
-            isActive && 'navbar__nav-link_active'
+            isActive && 'navbar__nav-link_active',
           )}
         >
           {menu.title}
@@ -38,7 +38,7 @@ export const NavBarMenu = () => {
     <Nav
       className={classNames(
         'flex-grow-1 justify-content-between ml-3 mr-3',
-        css.nav
+        css.nav,
       )}
     >
       {menu.map((menu, idx) => (

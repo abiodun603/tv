@@ -5,7 +5,7 @@ import { red } from '@material-ui/core/colors';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#556cd6',
+      main: '#2dbd58',
     },
     secondary: {
       main: '#19857b',
@@ -17,7 +17,10 @@ const theme = createTheme({
       default: '#fff',
     },
     grey: {
-      default: 'RGBA(43, 51, 49, 0.6)',
+      default: '#BFC1C1',
+      grey10: 'RGBA(43, 51, 49, 0.1)',
+      grey30: 'RGBA(43, 51, 49, 0.3)',
+      grey60: 'RGBA(43, 51, 49, 0.6)',
     },
   },
 });

@@ -1,6 +1,6 @@
 import React from 'react';
+import DateFnsUtils from '@date-io/date-fns';
 import { withStyles, TextField, Checkbox } from '@material-ui/core';
-
 import {
   KeyboardDatePicker,
   MuiPickersUtilsProvider,
@@ -8,12 +8,13 @@ import {
 
 export { default as MultiSelect } from './MultiSelect';
 export { default as LanguagesSelect } from './LanguagesSelect';
+import AppTheme from '../../../theme';
 
 export var GreenCheckbox = withStyles({
   root: {
-    color: 'rgba(43,51,49,0.3)',
+    color: AppTheme.palette.grey.grey30,
     '&$checked': {
-      color: '#2dbd58',
+      color: AppTheme.palette.primary.main,
     },
   },
   checked: {},
@@ -22,16 +23,16 @@ export var GreenCheckbox = withStyles({
 export var CustomTextField = withStyles({
   root: {
     '& label.Mui-focused': {
-      color: 'green',
+      color: AppTheme.palette.primary.main,
     },
     '& .MuiInput-underline:after': {
-      borderBottomColor: 'green',
+      borderBottomColor: AppTheme.palette.primary.main,
     },
     '&  .MuiInput-underline.Mui-error:after': {
       borderBottomColor: 'red',
     },
     '&  .MuiInput-underline:before': {
-      borderBottomColor: 'rgba(0, 0, 0, 0.1)',
+      borderBottomColor: AppTheme.palette.secondary.main,
     },
   },
 })((props) => <TextField {...props} />);
@@ -39,16 +40,16 @@ export var CustomTextField = withStyles({
 export var CustomDatePicker = withStyles({
   root: {
     '& label.Mui-focused': {
-      color: 'green',
+      color: AppTheme.palette.primary.main,
     },
     '& .MuiInput-underline:after': {
-      borderBottomColor: 'green',
+      borderBottomColor: AppTheme.palette.primary.main,
     },
     '& .MuiInput-underline.Mui-error:after': {
       borderBottomColor: 'red',
     },
     '&  .MuiInput-underline:before': {
-      borderBottomColor: 'rgba(0, 0, 0, 0.1)',
+      borderBottomColor: AppTheme.palette.secondary.main,
     },
   },
 })((props) => (

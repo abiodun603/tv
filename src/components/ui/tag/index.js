@@ -6,7 +6,7 @@ export const Tag = ({ title, active = false, onClick }) => {
     <div
       className={classNames(
         'upload-tag mr-3 mb-3',
-        active && 'upload-tag_active'
+        active && 'upload-tag_active',
       )}
       onClick={onClick}
     >
