@@ -12,8 +12,9 @@ export function valPhone(text) {
   return !text || re.test(String(text).toLowerCase());
 }
 
-export function valPassword(text) {
-  return text != null && text.length >= 6;
+export function valPassword(password) {
+  let regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
+  return regex.test(password);
 }
 
 export function valDate(date) {

@@ -24,7 +24,7 @@ import {
   TYPE_AUTH,
   TYPE_CREATE_PROFILE,
 } from '../constants/auth';
-import { valEmail, valPassword, valText } from '../utils/validate';
+import { valEmail, valPassword, valPhone, valText } from '../utils/validate';
 
 // don't allow state modifications outside actions
 configure({ enforceActions: 'always' });
@@ -85,7 +85,7 @@ class AuthStore extends BasicStore {
           clearInterval(timer);
         }
       }),
-      1000
+      1000,
     );
   }
 
@@ -175,7 +175,7 @@ class AuthStore extends BasicStore {
             visible: true,
           });
           this.loading = false;
-        })
+        }),
       );
     }
   }
@@ -203,7 +203,7 @@ class AuthStore extends BasicStore {
             type: 'warning',
             visible: true,
           });
-        }
+        },
       );
     }
   }
@@ -229,7 +229,7 @@ class AuthStore extends BasicStore {
             visible: true,
           });
           this.loading = false;
-        })
+        }),
       );
     } else {
       this.validated.email = false;
@@ -246,7 +246,7 @@ class AuthStore extends BasicStore {
           this.status = STATUS_NO_AUTH;
           Router.push('/');
           this.rootStore.refreshStore();
-        })
+        }),
       )
       .catch(function (error) {
         console.log(error);
@@ -278,7 +278,7 @@ class AuthStore extends BasicStore {
               });
             }
             this.loading = false;
-          })
+          }),
         );
       }
     } else {
@@ -302,7 +302,7 @@ class AuthStore extends BasicStore {
             visible: true,
           });
           this.loading = false;
-        })
+        }),
       );
     } else {
       this.validated.code = false;
@@ -316,7 +316,7 @@ class AuthStore extends BasicStore {
 
   @action.bound
   setEmail(email) {
-    this.validated.email = true;
+    this.validated.email = valEmail(email);
     this.email = email;
   }
 
@@ -328,13 +328,18 @@ class AuthStore extends BasicStore {
 
   @action.bound
   setPhone(phone) {
-    this.validated.phone = true;
-    this.phone = phone;
+    let plainPhone = phone
+      .replace(/\s/g, '')
+      .replace(/[()]/g, '')
+      .replace(/[-]/g, '');
+    console.log(plainPhone);
+    this.validated.phone = valPhone(plainPhone);
+    this.phone = plainPhone;
   }
 
   @action.bound
   setPassword(password) {
-    this.validated.password = true;
+    this.validated.password = this.isSignIn ? true : valPassword(password);
     this.password = password;
   }
 

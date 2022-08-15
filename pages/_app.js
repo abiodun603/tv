@@ -41,15 +41,17 @@ CustomApp.getInitialProps = async (appContext) => {
         /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i,
       ),
     );
+    console.log(userAgent);
+    console.log(isMobile);
 
-    if (isMobile) {
-      if (pathname !== '/mobile') {
-        if (res) {
-          res.writeHead(301, { Location: '/mobile' });
-          res.end();
-        }
-      }
-    }
+    // if (isMobile) {
+    //   if (pathname !== '/mobile') {
+    //     if (res) {
+    //       res.writeHead(301, { Location: '/mobile' });
+    //       res.end();
+    //     }
+    //   }
+    // }
   }
   return {
     ...appProps,

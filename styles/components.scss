@@ -1,1 +1,21 @@
 @import '../src/components/cards/Card.scss';
+
+// Custom Styles for Phone Input Field
+.isabitv-phone {
+  .MuiFormLabel-root.Mui-focused {
+    color: #2dbd58 !important;
+  }
+  .MuiInput-underline {
+    &:before {
+      border-bottom-color: #19857b !important;
+    }
+    &:after {
+      border-bottom-color: #2dbd58 !important;
+    }
+  }
+  .MuiInput-underline.Mui-error {
+    &:after {
+      border-bottom-color: red !important;
+    }
+  }
+}

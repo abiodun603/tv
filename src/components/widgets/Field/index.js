@@ -1,16 +1,21 @@
 import React from 'react';
 import DateFnsUtils from '@date-io/date-fns';
 import { withStyles, TextField, Checkbox } from '@material-ui/core';
+import dynamic from 'next/dynamic';
 import {
   KeyboardDatePicker,
   MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
 
+import AppTheme from '../../../theme';
 export { default as MultiSelect } from './MultiSelect';
 export { default as LanguagesSelect } from './LanguagesSelect';
-import AppTheme from '../../../theme';
 
-export var GreenCheckbox = withStyles({
+const MuiPhoneNumber = dynamic(import('material-ui-phone-number'), {
+  ssr: false,
+});
+
+export const GreenCheckbox = withStyles({
   root: {
     color: AppTheme.palette.grey.grey30,
     '&$checked': {
@@ -20,7 +25,7 @@ export var GreenCheckbox = withStyles({
   checked: {},
 })((props) => <Checkbox color="default" {...props} />);
 
-export var CustomTextField = withStyles({
+export const CustomTextField = withStyles({
   root: {
     '& label.Mui-focused': {
       color: AppTheme.palette.primary.main,
@@ -37,8 +42,9 @@ export var CustomTextField = withStyles({
   },
 })((props) => <TextField {...props} />);
 
-export var CustomDatePicker = withStyles({
+export const CustomDatePicker = withStyles({
   root: {
+    width: '100%',
     '& label.Mui-focused': {
       color: AppTheme.palette.primary.main,
     },
@@ -57,3 +63,7 @@ export var CustomDatePicker = withStyles({
     <KeyboardDatePicker {...props} />
   </MuiPickersUtilsProvider>
 ));
+
+export const CustomPhoneField = (props) => (
+  <MuiPhoneNumber {...props} className="isabitv-phone" />
+);

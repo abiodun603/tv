@@ -1,6 +1,6 @@
 import React from 'react';
 import { inject, observer } from 'mobx-react';
-import { Container, Grid, Avatar } from '@material-ui/core';
+import { Container, Grid, Avatar, NoSsr } from '@material-ui/core';
 import styled, { withTheme } from 'styled-components';
 import {
   compose,
@@ -11,11 +11,9 @@ import {
   display,
 } from '@material-ui/system';
 
-import style from '../../styles/auth.module.css';
 import {
   AUTH_EMAIL,
   AUTH_PHONE,
-  AUTH_PHONE_CODE_SEND,
   FACEBOOK,
   GOOGLE,
   TWITTER,
@@ -23,7 +21,13 @@ import {
 } from '../constants/auth';
 import { TabsCustom, TabCustom } from './widgets/Tabs';
 import Logo from './widgets/Logo';
-import { CustomDatePicker, CustomTextField } from './widgets/Field';
+import {
+  CustomDatePicker,
+  CustomTextField,
+  CustomPhoneField,
+} from './widgets/Field';
+import { TextButton } from './ui/buttons/TextButton';
+import { Spinner } from './ui/spiner';
 
 const AuthContainer = styled.div`
   width: 612px;
@@ -36,6 +40,11 @@ const AuthContainer = styled.div`
   margin: 0 auto;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
+
+  @media only screen and (max-width: 767px) {
+    width: 99%;
+    height: 100vh;
+  }
 `;
 
 const Box = styled('div')(
@@ -64,7 +73,6 @@ const Separator = styled.div`
 `;
 
 const SignInForm = observer(({ storeAuth, theme }) => {
-  const storeProfile = storeAuth.profileStore;
   const authSocial = (type) => {
     storeAuth.signInFirebaseSocial(type);
   };
@@ -114,35 +122,133 @@ const SignInForm = observer(({ storeAuth, theme }) => {
         <TabCustom label="Email" />
         <TabCustom label="Phone" />
       </TabsCustom>
-      <Box display="flex" justifyContent="center" flexDirection="column" m={4}>
-        <Box mb={2}>
+      <Box
+        display="flex"
+        justifyContent="center"
+        flexDirection="column"
+        mx={4}
+        mt={4}
+        mb={3}
+      >
+        <Box
+          mb={2}
+          display={storeAuth.typeAuth === AUTH_PHONE ? 'none' : 'block'}
+        >
           <CustomTextField
             id="email"
             fullWidth
-            error={!storeProfile.validated.email}
+            error={!storeAuth.validated.email}
             label="Email"
+            type="email"
             helperText={
-              !storeProfile.validated.username ? 'Incorrect username' : ''
+              !storeAuth.validated.email ? 'Your e-mail is wrong' : ''
             }
-            value={storeProfile.profile.username}
+            value={storeAuth.email}
             onChange={(event) => {
-              storeProfile.setUserName(event.target.value);
+              storeAuth.setEmail(event.target.value);
             }}
           />
         </Box>
-        <CustomTextField
-          id="password"
-          fullWidth
-          error={!storeProfile.validated.email}
-          label="Password"
+        <Box
+          mb={2}
+          display={storeAuth.typeAuth === AUTH_PHONE ? 'none' : 'block'}
+        >
+          <CustomTextField
+            id="password"
+            fullWidth
+            error={!storeAuth.validated.password}
+            label="Password"
+            helperText={
+              !storeAuth.validated.password
+                ? storeAuth.isSignIn
+                  ? 'Your password is wrong.'
+                  : 'Password must be more than 6 characters including at least one number and one character.'
+                : ''
+            }
+            value={storeAuth.password}
+            onChange={(event) => {
+              storeAuth.setPassword(event.target.value);
+            }}
+          />
+        </Box>
+        <Box
+          mb={2}
+          display={storeAuth.typeAuth === AUTH_EMAIL ? 'none' : 'block'}
+        >
+          <CustomPhoneField
+            id="phone"
+            fullWidth
+            error={!storeAuth.validated.phone}
+            label="Phone"
+            type="phone"
+            defaultCountry={'us'}
+            helperText={
+              !storeAuth.validated.phone ? 'Your phone number is wrong' : ''
+            }
+            value={storeAuth.phone}
+            onChange={(value) => {
+              storeAuth.setPhone(value);
+            }}
+          />
+        </Box>
+        <Box mb={2} display={storeAuth.isSendCode ? 'none' : 'block'}>
+          <CustomTextField
+            id="code"
+            fullWidth
+            error={!storeAuth.validated.code}
+            type="number"
+            label="Code"
+            helperText={!storeAuth.validated.code ? 'Your code is wrong' : ''}
+            value={storeAuth.code}
+            onChange={(event) => {
+              storeAuth.setCode(event.target.value);
+            }}
+          />
+        </Box>
+      </Box>
+      {storeAuth.loading ? (
+        <Box display="flex" justifyContent="center" mb={5}>
+          <Spinner color="primary" />
+        </Box>
+      ) : (
+        <Box
+          display="flex"
+          justifyContent="space-between"
+          flexDirection="row"
+          mx={4}
+          mb={5}
+        >
+          {!storeAuth.isForgotPassword && (
+            <TextButton onClick={storeAuth.forgotPassword}>
+              Forgot password?
+            </TextButton>
+          )}
+          {!storeAuth.isSendCode && (
+            <TextButton onClick={storeAuth.sendCodePhone}>
+              {storeAuth.second <= 0
+                ? 'Resend code'
+                : `Time left: ${storeAuth.second} s`}
+            </TextButton>
+          )}
+          {storeAuth.isForgotPassword && storeAuth.isSendCode && <div />}
+          <TextButton onClick={storeAuth.nextStep} imageSrc="icon/ic_arrow.svg">
+            {storeAuth.nameButtonNext}
+          </TextButton>
+        </Box>
+      )}
+      <Box
+        display={storeAuth.typeAuth === AUTH_PHONE ? 'none' : 'flex'}
+        justifyContent="center"
+        mb={7}
+      >
+        <TextButton
+          onClick={storeAuth.changeSignIn}
           helperText={
-            !storeProfile.validated.username ? 'Incorrect username' : ''
+            storeAuth.isSignIn ? 'New to iSabiTv?' : 'Have an account?'
           }
-          value={storeProfile.profile.username}
-          onChange={(event) => {
-            storeProfile.setUserName(event.target.value);
-          }}
-        />
+        >
+          {storeAuth.isSignIn ? 'Sign Up' : 'Sign In'}
+        </TextButton>
       </Box>
     </>
   );
@@ -201,7 +307,7 @@ const AccountCreationForm = observer(({ storeAuth }) => {
           }}
         />
       </Box>
-      <Box mb={2}>
+      <Box mb={4}>
         <CustomDatePicker
           id="birthday"
           label="Date of birth"
@@ -212,6 +318,25 @@ const AccountCreationForm = observer(({ storeAuth }) => {
           onChange={handleChangeBirthday}
         />
       </Box>
+      {storeProfile.loading ? (
+        <Box display="flex" justifyContent="center" mb={4}>
+          <Spinner color="primary" />
+        </Box>
+      ) : (
+        <>
+          <Box display="flex" justifyContent="end" mb={4}>
+            <TextButton
+              onClick={storeProfile.createUser}
+              imageSrc="icon/ic_arrow.svg"
+            >
+              Next
+            </TextButton>
+          </Box>
+          <Box display="flex" justifyContent="center" mb={2}>
+            <TextButton onClick={storeProfile.signOut}>Logout</TextButton>
+          </Box>
+        </>
+      )}
     </Box>
   );
 });
@@ -223,28 +348,30 @@ class Auth extends React.Component {
     const { auth: storeAuth, theme } = this.props;
 
     return (
-      <AuthContainer>
-        <Container maxWidth="xs">
-          <Box
-            display="flex"
-            justifyContent="center"
-            color={theme.palette.grey.grey60}
-            mt={5}
-          >
-            {storeAuth.type === TYPE_CREATE_PROFILE
-              ? 'create profile'
-              : 'Welcome back to'}
-          </Box>
-          <Box display="flex" justifyContent="center" mt={2} mb={4}>
-            <Logo height={68} />
-          </Box>
-          {storeAuth.type !== TYPE_CREATE_PROFILE ? (
-            <AccountCreationForm storeAuth={storeAuth} />
-          ) : (
-            <SignInForm storeAuth={storeAuth} theme={theme} />
-          )}
-        </Container>
-      </AuthContainer>
+      <NoSsr>
+        <AuthContainer>
+          <Container maxWidth="xs">
+            <Box
+              display="flex"
+              justifyContent="center"
+              color={theme.palette.grey.grey60}
+              mt={7}
+            >
+              {storeAuth.type === TYPE_CREATE_PROFILE
+                ? 'create profile'
+                : 'Welcome back to'}
+            </Box>
+            <Box display="flex" justifyContent="center" mt={2} mb={4}>
+              <Logo height={68} />
+            </Box>
+            {storeAuth.type === TYPE_CREATE_PROFILE ? (
+              <AccountCreationForm storeAuth={storeAuth} />
+            ) : (
+              <SignInForm storeAuth={storeAuth} theme={theme} />
+            )}
+          </Container>
+        </AuthContainer>
+      </NoSsr>
     );
   }
 }
