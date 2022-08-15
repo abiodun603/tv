@@ -1,6 +1,6 @@
 import React from 'react';
 import { inject, observer } from 'mobx-react';
-import { Container, Grid, Avatar, NoSsr } from '@material-ui/core';
+import { Container, Grid, Avatar } from '@material-ui/core';
 import styled, { withTheme } from 'styled-components';
 import {
   compose,
@@ -346,32 +346,30 @@ const AccountCreationForm = observer(({ storeAuth }) => {
 class Auth extends React.Component {
   render() {
     const { auth: storeAuth, theme } = this.props;
-
+    console.log(storeAuth.status);
     return (
-      <NoSsr>
-        <AuthContainer>
-          <Container maxWidth="xs">
-            <Box
-              display="flex"
-              justifyContent="center"
-              color={theme.palette.grey.grey60}
-              mt={7}
-            >
-              {storeAuth.type === TYPE_CREATE_PROFILE
-                ? 'create profile'
-                : 'Welcome back to'}
-            </Box>
-            <Box display="flex" justifyContent="center" mt={2} mb={4}>
-              <Logo height={68} />
-            </Box>
-            {storeAuth.type === TYPE_CREATE_PROFILE ? (
-              <AccountCreationForm storeAuth={storeAuth} />
-            ) : (
-              <SignInForm storeAuth={storeAuth} theme={theme} />
-            )}
-          </Container>
-        </AuthContainer>
-      </NoSsr>
+      <AuthContainer>
+        <Container maxWidth="xs">
+          <Box
+            display="flex"
+            justifyContent="center"
+            color={theme.palette.grey.grey60}
+            mt={7}
+          >
+            {storeAuth.type === TYPE_CREATE_PROFILE
+              ? 'create profile'
+              : 'Welcome back to'}
+          </Box>
+          <Box display="flex" justifyContent="center" mt={2} mb={4}>
+            <Logo height={68} />
+          </Box>
+          {storeAuth.type === TYPE_CREATE_PROFILE ? (
+            <AccountCreationForm storeAuth={storeAuth} />
+          ) : (
+            <SignInForm storeAuth={storeAuth} theme={theme} />
+          )}
+        </Container>
+      </AuthContainer>
     );
   }
 }

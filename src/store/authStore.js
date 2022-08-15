@@ -74,7 +74,7 @@ class AuthStore extends BasicStore {
   @observable second = -1;
   @observable statusPhone = AUTH_PHONE;
 
-  @observable status = STATUS_NO_AUTH;
+  @observable status = STATUS_LOADING;
   @observable type = TYPE_AUTH;
 
   startTimer() {
@@ -96,6 +96,7 @@ class AuthStore extends BasicStore {
         runInAction(() => {
           this.profileStore.profile.email = user.email;
           this.profileStore.profile.phone = user.phoneNumber;
+          this.status = STATUS_LOADING;
         });
 
         firebase
@@ -288,7 +289,7 @@ class AuthStore extends BasicStore {
 
   @action.bound
   authPhone() {
-    if (valPassword(this.code)) {
+    if (this.code.length === 6) {
       this.loading = true;
 
       firebase.signInPhone(this.verificationId, this.code).then(

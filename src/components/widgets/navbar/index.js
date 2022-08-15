@@ -60,7 +60,7 @@ const SearchBox = ({ searchHistory = [] }) => {
   } = useRouter();
 
   const [query, setQuery] = useState('');
-  const [isBoxActive, setIsBoxActive] = useState < Boolean > false;
+  const [isBoxActive, setIsBoxActive] = useState(false);
 
   useEffect(() => {
     if (keyWord) {
