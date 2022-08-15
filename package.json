@@ -37,6 +37,7 @@
     "react-dom": "18.2.0",
     "react-dropzone": "^14.2.2",
     "react-icons": "^4.4.0",
+    "react-loader-spinner": "^5.1.7-beta.1",
     "react-responsive-carousel": "^3.2.23",
     "react-share": "^4.4.0",
     "sass": "^1.54.4",

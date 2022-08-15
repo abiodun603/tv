@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { autorun } from 'mobx';
 import { inject, observer } from 'mobx-react';
 import Head from 'next/head';
@@ -6,50 +6,41 @@ import { Container, Row, Spinner } from 'react-bootstrap';
 import { STATUS_LOADING, STATUS_NO_AUTH } from '../constants/auth';
 
 import Auth from './Auth';
-import { NavBar } from './widgets/navbar';
 import Footer from './widgets/footer';
+import { NavBar } from './widgets/navbar';
 
-@inject('auth', 'toast', 'search')
-@observer
-class AuthLayout extends React.Component {
-  componentDidMount() {
-    let store = this.props.auth;
-    store.startListener();
+const AuthLayout = inject(
+  'auth',
+  'toast',
+  'search',
+)(
+  observer((props) => {
+    const { auth: storeAuth, search, children } = props;
 
-    this.status = autorun(() => {
-      let state = this.props.toast.state;
+    useEffect(() => {
+      storeAuth.startListener();
 
-      if (state.visible) {
-        this.props.snackbar(state.message, {
-          anchorOrigin: {
-            vertical: 'bottom',
-            horizontal: 'center',
-          },
-          variant: state.type,
-        });
-      }
-      this.props.search.getSearchHistory();
-    });
-  }
+      return autorun(() => {
+        let state = props.toast.state;
 
-  componentWillUnmount() {
-    this.status();
-    this.props.toast.clear();
-  }
+        if (state.visible) {
+          props.snackbar(state.message, {
+            anchorOrigin: {
+              vertical: 'bottom',
+              horizontal: 'center',
+            },
+            variant: state.type,
+          });
+        }
 
-  render() {
-    const { auth: storeAuth, children, search } = this.props;
-    console.log(storeAuth.status);
+        props.search.getSearchHistory();
+      });
+    }, []);
 
     return (
       <>
         <Head>
           <title>IsabiTV</title>
-          <script
-            async
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3971957669020641"
-            crossOrigin="anonymous"
-          ></script>
         </Head>
         <div className="page theme theme_font_default theme_color_default theme_space_default theme_size_default">
           <div id="recaptcha-container" />
@@ -75,7 +66,7 @@ class AuthLayout extends React.Component {
         </div>
       </>
     );
-  }
-}
+  }),
+);
 
 export default AuthLayout;
