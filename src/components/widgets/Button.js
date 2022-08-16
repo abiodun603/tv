@@ -1,6 +1,7 @@
 import { withStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
 import React from 'react';
+import AppTheme from '../../theme';
 
 export var ButtonContainer = withStyles((theme) => ({
   root: (props) => ({
@@ -18,7 +19,8 @@ export var ButtonContainer = withStyles((theme) => ({
 export var ButtonText = withStyles({
   root: {
     textTransform: 'none',
-    color: '#ffffff',
+    color: AppTheme.palette.grey.grey60,
+    fontWeight: 600,
   },
 })((props) => <Button size="small" variant="text" {...props} />);
 

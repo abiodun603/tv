@@ -35,23 +35,6 @@ CustomApp.getInitialProps = async (appContext) => {
   const { req, res, pathname } = ctx;
 
   if (req) {
-    let userAgent = req.headers['user-agent'];
-    let isMobile = Boolean(
-      userAgent.match(
-        /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i,
-      ),
-    );
-    console.log(userAgent);
-    console.log(isMobile);
-
-    // if (isMobile) {
-    //   if (pathname !== '/mobile') {
-    //     if (res) {
-    //       res.writeHead(301, { Location: '/mobile' });
-    //       res.end();
-    //     }
-    //   }
-    // }
   }
   return {
     ...appProps,

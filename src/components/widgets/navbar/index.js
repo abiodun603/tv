@@ -1,60 +1,77 @@
-import React, { useEffect, useState } from 'react';
-import Link from 'next/link';
-import Router, { useRouter } from 'next/router';
-
+import React, { useState, useEffect } from 'react';
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  InputBase,
+  useMediaQuery,
+  makeStyles,
+  Avatar,
+} from '@material-ui/core';
 import { inject, observer } from 'mobx-react';
-
-import { Navbar, Container, FormControl } from 'react-bootstrap';
-
-import ProfileStore from '../../../store/profileStore';
-import searchStore from '../../../store/searchStore';
-
+import { Menu as MenuIcon } from '@material-ui/icons';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 import { Logo } from '../../ui/logo';
-import { NavBarMenu } from './navbar-menu';
-
-import { getPhoto } from '../../../utils/pathUtil';
+import { MENU, NavBarLink, Box, UserProfileIcon } from './navbar-utils';
+import SubMenu from './sub-menu';
+import AppTheme from '../../../theme';
 import * as url from '../../../lib/url/generator';
 import { SearchBoxHistory } from './navbar-searchBox-history';
+import { SideBar } from './sidebar';
 
-@inject('profile', 'search')
-@observer
-class NavBarProfile extends React.Component {
-  render() {
-    const {
-      profile: { profile },
-    } = this.props;
-
-    return (
-      <Link href={url.toSettings()}>
-        <a
-          className="media ml-3 color-inherit text-decoration-none col-sm-auto"
-          style={{
-            maxWidth: '250px',
-          }}
-        >
-          <img
-            src={getPhoto(profile.photo)}
-            width="52"
-            height="52"
-            className="rounded-circle mr-2"
-            alt="avatar"
-            style={{ objectFit: 'cover' }}
-          />
-          <div className="media-body">
-            <div>
-              {profile.name} {profile.last_name}
-            </div>
-            <div className="text text_view_secondary text_size_s">
-              @{profile.username}
-            </div>
-          </div>
-        </a>
-      </Link>
-    );
-  }
-}
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  appBar: {
+    backgroundColor: AppTheme.palette.background.default,
+    ['@media (min-width:1169px)']: {
+      display: 'flex',
+      alignItems: 'center',
+    },
+  },
+  toolbar: {
+    ['@media (max-width:1169px)']: {
+      display: 'flex',
+      justifyContent: 'space-between',
+    },
+  },
+  menuButton: {
+    color: AppTheme.palette.primary.main,
+  },
+  title: {
+    flexGrow: 1,
+    display: 'none',
+    [theme.breakpoints.up('sm')]: {
+      display: 'block',
+    },
+  },
+  search: {
+    position: 'relative',
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: AppTheme.palette.grey.grey10,
+    '&:hover': {
+      backgroundColor: AppTheme.palette.grey.grey10,
+    },
+    marginLeft: 0,
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: theme.spacing(1),
+      width: 'auto',
+    },
+  },
+  inputRoot: {
+    color: 'black',
+  },
+  inputInput: {
+    padding: theme.spacing(1),
+    width: '100%',
+  },
+}));
 
 const SearchBox = ({ searchHistory = [] }) => {
+  const classes = useStyles();
   const {
     query: { query: keyWord },
   } = useRouter();
@@ -70,25 +87,32 @@ const SearchBox = ({ searchHistory = [] }) => {
 
   return (
     <>
-      <FormControl
-        placeholder="Search"
-        value={query}
-        onKeyUp={(e) => {
-          if (e.key === 'Enter') {
-            Router.push(url.toSearch({ query }));
-          }
-        }}
-        onChange={(e) => setQuery(e.target.value)}
-        onFocus={() => {
-          setIsBoxActive(true);
-        }}
-        onBlur={() => {
-          // todo: refactor
-          setTimeout(() => {
-            setIsBoxActive(false);
-          }, 100);
-        }}
-      />
+      <div className={classes.search}>
+        <InputBase
+          placeholder="Search…"
+          value={query}
+          classes={{
+            root: classes.inputRoot,
+            input: classes.inputInput,
+          }}
+          inputProps={{ 'aria-label': 'search' }}
+          onKeyUp={(e) => {
+            if (e.key === 'Enter') {
+              Router.push(url.toSearch({ query }));
+            }
+          }}
+          onChange={(e) => setQuery(e.target.value)}
+          onFocus={() => {
+            setIsBoxActive(true);
+          }}
+          onBlur={() => {
+            // todo: refactor
+            setTimeout(() => {
+              setIsBoxActive(false);
+            }, 100);
+          }}
+        />
+      </div>
       {isBoxActive && searchHistory.length > 0 && (
         <SearchBoxHistory
           historyItems={searchHistory}
@@ -99,37 +123,96 @@ const SearchBox = ({ searchHistory = [] }) => {
       )}
 
       <Link href={url.toSearch({ query })}>
-        <button className="navbar__search-button btn" type="button">
+        <Box mx={1}>
           <span className="icon icon_name_search-navbar icon_size_l" />
-          <span className="sr-only">Search</span>
-        </button>
+        </Box>
       </Link>
     </>
   );
 };
 
-export const NavBar = ({ searchHistory = [] }) => {
+const UserProfile = ({ profile }) => {
   return (
-    <nav className="navbar navbar-expand-sm">
-      <Container style={{ position: 'relative' }}>
-        <Logo />
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <NavBarMenu />
-          <div className="navbar__end d-flex align-items-center">
-            <SearchBox searchHistory={searchHistory} />
-
-            <Link href={url.toLibs()}>
-              <button className="navbar__library-button btn" type="button">
-                <span className="icon icon_name_library icon_size_l" />
-                <span className="sr-only">Library</span>
-              </button>
-            </Link>
-
-            <NavBarProfile />
-          </div>
-        </Navbar.Collapse>
-      </Container>
-    </nav>
+    <Link href={url.toSettings()}>
+      <Box display="flex" flexDirection="row" alignItems="center">
+        <UserProfileIcon photo={profile.photo} />
+        <Box color={AppTheme.palette.info.main} lineHeight="1.2" ml={1}>
+          {profile.name} {profile.last_name}
+          <Box color={AppTheme.palette.grey.grey60} fontSize="14px">
+            @{profile.username}
+          </Box>
+        </Box>
+      </Box>
+    </Link>
   );
 };
+
+export const NavBar = inject(
+  'profile',
+  'search',
+)(
+  observer((props) => {
+    const classes = useStyles();
+    const [isOpen, setOpen] = useState(false);
+    const isDeskTop = useMediaQuery('(min-width:1169px)');
+    const isMobile = useMediaQuery('(max-width:720px)');
+    const {
+      profile: { profile },
+    } = props;
+
+    return (
+      <div className={classes.root}>
+        <AppBar position="relative" className={classes.appBar}>
+          <Toolbar className={classes.toolbar}>
+            <Box mr={3}>
+              <Logo />
+            </Box>
+            <Box flexDirection="row" display="flex" alignItems="center">
+              {isDeskTop && (
+                <>
+                  {MENU.map((menu, idx) => (
+                    <NavBarLink
+                      key={`NavBarMenu_${idx.toString()}`}
+                      menu={menu}
+                    />
+                  ))}
+                  <SubMenu />
+                </>
+              )}
+
+              {!isMobile && (
+                <>
+                  <SearchBox />
+                  <Link href={url.toLibs()}>
+                    <Box mr={4} ml={2}>
+                      <span className="icon icon_name_library icon_size_l" />
+                    </Box>
+                  </Link>
+                  <UserProfile profile={profile} />
+                </>
+              )}
+              {!isDeskTop && (
+                <Box ml={4}>
+                  <IconButton
+                    edge="end"
+                    className={classes.menuButton}
+                    aria-label="open drawer"
+                    onClick={() => setOpen(!isOpen)}
+                    size="medium"
+                  >
+                    <MenuIcon />
+                  </IconButton>
+                </Box>
+              )}
+            </Box>
+          </Toolbar>
+        </AppBar>
+        <SideBar
+          open={isOpen}
+          onClose={() => setOpen(false)}
+          profile={profile}
+        />
+      </div>
+    );
+  }),
+);

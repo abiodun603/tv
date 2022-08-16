@@ -16,6 +16,9 @@ const theme = createTheme({
     background: {
       default: '#fff',
     },
+    info: {
+      main: '#2B3331',
+    },
     grey: {
       default: '#BFC1C1',
       grey10: 'RGBA(43, 51, 49, 0.1)',
