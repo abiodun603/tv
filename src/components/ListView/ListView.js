@@ -81,10 +81,7 @@ export const ListView = (props) => {
       // style={{
       //   minHeight: `${props.itemsInRow === 4 ? '350px' : '480px'}`,
       // }}
-      className={classNames(
-        isWhite ? 'bg-white' : '',
-        isOnBoard ? '' : 'py-5 px-5',
-      )}
+      className={classNames(isWhite ? 'bg-white' : '', isOnBoard ? '' : 'py-5')}
     >
       <Row className="d-flex mb-3">
         <Col className="d-flex justify-content-start">{titleElem}</Col>

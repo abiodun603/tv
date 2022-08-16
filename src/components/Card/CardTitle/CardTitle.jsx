@@ -6,14 +6,17 @@ import style from './CardTitle.module.scss';
 
 import getFontSizeForCardTitle from '../../../lib/hooks/useFontSIzeForTitle';
 
-const CardTitle = ({ title }) => {
+const CardTitle = ({ title, isWhite = false }) => {
   if (!title) {
     return null;
   }
 
   return (
     <Card.Title
-      className={classNames(style.cardTitle, 'mb-0')}
+      className={classNames(
+        isWhite ? style.cardTitleWhite : style.cardTitle,
+        'mb-0',
+      )}
       style={{
         fontSize: `${getFontSizeForCardTitle(title)}px`,
         textOverflow: 'ellipsis',

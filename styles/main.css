@@ -352,3 +352,11 @@ a.text-title:active {
 .color-inherit:hover {
   color: inherit;
 }
+
+#jumbotron_search {
+  min-height: 55vh;
+  background-image: url('/image/bg_header_home.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: white;
+}

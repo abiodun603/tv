@@ -32,10 +32,11 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   toolbar: {
-    ['@media (max-width:1169px)']: {
-      display: 'flex',
-      justifyContent: 'space-between',
+    ['@media (min-width:1280px)']: {
+      minWidth: 1280,
     },
+    display: 'flex',
+    justifyContent: 'space-between',
   },
   menuButton: {
     color: AppTheme.palette.primary.main,

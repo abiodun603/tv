@@ -24,6 +24,7 @@ const theme = createTheme({
       grey10: 'RGBA(43, 51, 49, 0.1)',
       grey30: 'RGBA(43, 51, 49, 0.3)',
       grey60: 'RGBA(43, 51, 49, 0.6)',
+      white60: 'RGBA(255, 255, 255, 0.6)',
     },
   },
 });

@@ -6,15 +6,7 @@ import ComingStore from '../../store/comingStore';
 import { MANAGER } from '../../constants/API';
 import { COMING, FILM, NEWS, SERIES, USER } from '../../constants/types';
 
-interface IDetailsVideoCommonProps {
-  id?: string;
-  type?: any;
-  video?: VideoStore;
-  coming?: ComingStore;
-  profile?: ProfileStore;
-}
-
-class DetailsVideoCommon extends React.Component<IDetailsVideoCommonProps> {
+class DetailsVideoCommon extends React.Component {
   componentDidUpdate(prevProps) {
     if (prevProps.id && prevProps.id !== this.props.id) {
       this.getData();

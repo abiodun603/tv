@@ -11,7 +11,7 @@ import { SkeletonHorizontal } from '../widgets/Skeletons';
 
 @inject('collections')
 @observer
-class VideoCollections extends React {
+class VideoCollections extends React.Component {
   componentDidMount() {
     this.loadCollections();
   }
