@@ -30,7 +30,7 @@ export function CardContestHome({ contest }) {
 
 export function CardContest({ item }) {
   return (
-    <div className="contest-card col">
+    <div className="contest-card col mb-4">
       <div className="contest-card__media mb-3">
         <img
           src={item.image.url}

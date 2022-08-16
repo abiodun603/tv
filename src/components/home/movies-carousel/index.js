@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { inject, observer } from 'mobx-react';
 
 import { Carousel } from 'react-responsive-carousel';
@@ -24,55 +24,35 @@ const Slider = React.forwardRef(({ children, ...props }, ref) => {
   );
 });
 
-@inject('home')
-@observer
-class MoviesCarousel extends React.Component {
-  constructor(props) {
-    super(props);
+const SlidingInterval = 5000;
 
-    this.state = {
-      currentSlide: 0,
-      slidingInterval: 5000,
+const MoviesCarousel = inject('home')(
+  observer((props) => {
+    const [currentSlide, setCurrentSlide] = useState(0);
+    const { home: homeStore } = props;
+    const movies = homeStore.sliderMovies;
+
+    useEffect(() => {
+      homeStore.getCarouselMovies();
+    }, []);
+
+    const RenderItem = (movie, idx) => {
+      return (
+        <CarouselItem
+          key={`MoviesCarousel_item_${idx.toString()}`}
+          active={idx === currentSlide}
+          video={movie}
+        />
+      );
     };
-  }
 
-  componentDidMount() {
-    const { home: homeStore } = this.props;
+    const RenderPrevArrow = (onClickHandler) => {
+      return <ArrowButton position="left" onClick={onClickHandler} />;
+    };
 
-    homeStore.getCarouselMovies();
-  }
-
-  handleSlideChange = (idx) => {
-    this.setState({
-      ...this.state,
-      currentSlide: idx,
-    });
-  };
-
-  renderItem = (movie, idx) => {
-    const { currentSlide } = this.state;
-
-    return (
-      <CarouselItem
-        key={`MoviesCarousel_item_${idx.toString()}`}
-        active={idx === currentSlide}
-        video={movie}
-      />
-    );
-  };
-
-  renderPrevArrow = (onClickHandler) => {
-    return <ArrowButton position="left" onClick={onClickHandler} />;
-  };
-
-  renderNextArrow = (onClickHandler) => {
-    return <ArrowButton position="right" onClick={onClickHandler} />;
-  };
-
-  render() {
-    const { home } = this.props;
-    const movies = home.sliderMovies;
-    const { slidingInterval } = this.state;
+    const RenderNextArrow = (onClickHandler) => {
+      return <ArrowButton position="right" onClick={onClickHandler} />;
+    };
 
     return (
       <div className={style.carousel_wrapper}>
@@ -83,20 +63,20 @@ class MoviesCarousel extends React.Component {
             showIndicators={false}
             showArrows
             centerMode
-            interval={slidingInterval}
+            interval={SlidingInterval}
             infiniteLoop
             autoPlay
-            onChange={this.handleSlideChange}
-            onClickItem={this.handleSlideChange}
-            renderArrowPrev={this.renderPrevArrow}
-            renderArrowNext={this.renderNextArrow}
+            onChange={(idx) => setCurrentSlide(idx)}
+            onClickItem={(idx) => setCurrentSlide(idx)}
+            renderArrowPrev={RenderPrevArrow}
+            renderArrowNext={RenderNextArrow}
           >
-            {movies.map(this.renderItem)}
+            {movies.map(RenderItem)}
           </Slider>
         )}
       </div>
     );
-  }
-}
+  }),
+);
 
 export { MoviesCarousel };

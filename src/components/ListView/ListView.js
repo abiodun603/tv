@@ -83,7 +83,7 @@ export const ListView = (props) => {
       // }}
       className={classNames(
         isWhite ? 'bg-white' : '',
-        isOnBoard ? '' : 'py-5 px-5'
+        isOnBoard ? '' : 'py-5 px-5',
       )}
     >
       <Row className="d-flex mb-3">

@@ -46,7 +46,6 @@ const CardVideo = ({ video = {}, className = '', maxWidthImage, full }) => {
           textOverflow: 'ellipsis',
           maxHeight: '1.25rem',
           whiteSpace: 'nowrap',
-          overflow: 'hidden',
         }}
       >
         <CardTitle title={video.title} />
