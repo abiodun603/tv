@@ -1,107 +1,85 @@
 import React, { useEffect, useState } from 'react';
 import { inject, observer } from 'mobx-react';
-import styled, { withTheme } from 'styled-components';
-import {
-  compose,
-  flexbox,
-  palette,
-  spacing,
-  typography,
-  display,
-} from '@material-ui/system';
-import Slider from 'react-slick';
+import { Carousel } from 'react-responsive-carousel';
 import { useMediaQuery } from '@material-ui/core';
-import { Container } from 'react-bootstrap';
-// Import css files
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 
-import BannerCard from '../../Card/CardBanner';
+import { useCurrentWidth } from '../../../lib/hooks/useCurrentWidth';
+
+import { CarouselItem } from './carousel-item';
+import { ArrowButton } from './arrow-button';
+
 import style from './movies-carousel.module.scss';
 
-const Box = styled('div')(
-  compose(display, flexbox, spacing, palette, typography),
-);
+const SlidingInterval = 5000;
+
+const Slider = React.forwardRef(({ children, ...props }, ref) => {
+  const width = Math.min(useCurrentWidth(), 1344);
+
+  return (
+    <div className={style.carousel}>
+      <div className="d-flex justify-content-center">
+        <Carousel ref={ref} width={width} {...props}>
+          {children}
+        </Carousel>
+      </div>
+    </div>
+  );
+});
 
 const MoviesCarousel = inject('home')(
-  observer(
-    withTheme((props) => {
-      const { home: homeStore, theme } = props;
-      const movies = homeStore.sliderMovies;
-      const settings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 6,
-        slidesToScroll: 1,
-        autoPlay: true,
-        autoPlaySpeed: 3000,
-        arrows: false,
-        responsive: [
-          {
-            breakpoint: 1024,
-            settings: {
-              slidesToShow: 3,
-              slidesToScroll: 3,
-              infinite: true,
-              dots: true,
-            },
-          },
-          {
-            breakpoint: 600,
-            settings: {
-              slidesToShow: 2,
-              slidesToScroll: 2,
-              initialSlide: 2,
-            },
-          },
-          {
-            breakpoint: 480,
-            settings: {
-              slidesToShow: 1,
-              slidesToScroll: 1,
-            },
-          },
-        ],
-      };
+  observer((props) => {
+    const [currentSlide, setCurrentSlide] = useState(0);
+    const { home: homeStore } = props;
+    const movies = homeStore.sliderMovies;
+    const isMobile = useMediaQuery('(max-width:767px)');
 
-      useEffect(() => {
-        homeStore.getCarouselMovies();
-      }, []);
+    useEffect(() => {
+      homeStore.getCarouselMovies();
+    }, []);
 
+    const renderItem = (movie, idx) => {
       return (
-        <div className={style.carousel_wrapper} id="jumbotron_search">
-          <Container>
-            <Box fontSize={64} lineHeight={1}>
-              All Your Favorite Movies <br />
-              In One Place
-            </Box>
-            <Box my={2} color={theme.palette.grey.white60}>
-              Watch thousands of amazing movies and TV shows. Available
-              Anywhere.
-            </Box>
-            {movies.length > 0 && (
-              <Box mt={10}>
-                <Slider {...settings}>
-                  {movies.map((movie, index) => (
-                    <div key={index}>
-                      <Box mx={1}>
-                        <BannerCard
-                          video={movie}
-                          full
-                          className="transparent-bg"
-                        />
-                      </Box>
-                    </div>
-                  ))}
-                </Slider>
-              </Box>
-            )}
-          </Container>
-        </div>
+        <CarouselItem
+          key={`MoviesCarousel_item_${idx.toString()}`}
+          active={idx === currentSlide}
+          video={movie}
+        />
       );
-    }),
-  ),
+    };
+
+    const renderPrevArrow = (onClickHandler) => {
+      if (isMobile) return null;
+      return <ArrowButton position="left" onClick={onClickHandler} />;
+    };
+
+    const renderNextArrow = (onClickHandler) => {
+      if (isMobile) return null;
+      return <ArrowButton position="right" onClick={onClickHandler} />;
+    };
+
+    return (
+      <div className={style.carousel_wrapper}>
+        {movies.length > 0 && (
+          <Slider
+            showThumbs={false}
+            showStatus={false}
+            showIndicators={false}
+            showArrows
+            centerMode={isMobile ? false : true}
+            interval={SlidingInterval}
+            infiniteLoop
+            autoPlay
+            onChange={(idx) => setCurrentSlide(idx)}
+            onClickItem={(idx) => setCurrentSlide(idx)}
+            renderArrowPrev={renderPrevArrow}
+            renderArrowNext={renderNextArrow}
+          >
+            {movies.map(renderItem)}
+          </Slider>
+        )}
+      </div>
+    );
+  }),
 );
 
 export { MoviesCarousel };

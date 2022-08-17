@@ -6,7 +6,6 @@ import {
   InputBase,
   useMediaQuery,
   makeStyles,
-  Avatar,
 } from '@material-ui/core';
 import { inject, observer } from 'mobx-react';
 import { Menu as MenuIcon } from '@material-ui/icons';
@@ -124,7 +123,7 @@ const SearchBox = ({ searchHistory = [] }) => {
       )}
 
       <Link href={url.toSearch({ query })}>
-        <Box mx={1}>
+        <Box mx={1} className="clickable">
           <span className="icon icon_name_search-navbar icon_size_l" />
         </Box>
       </Link>
@@ -135,7 +134,12 @@ const SearchBox = ({ searchHistory = [] }) => {
 const UserProfile = ({ profile }) => {
   return (
     <Link href={url.toSettings()}>
-      <Box display="flex" flexDirection="row" alignItems="center">
+      <Box
+        display="flex"
+        flexDirection="row"
+        alignItems="center"
+        className="clickable"
+      >
         <UserProfileIcon photo={profile.photo} />
         <Box color={AppTheme.palette.info.main} lineHeight="1.2" ml={1}>
           {profile.name} {profile.last_name}
@@ -185,7 +189,7 @@ export const NavBar = inject(
                 <>
                   <SearchBox />
                   <Link href={url.toLibs()}>
-                    <Box mr={4} ml={2}>
+                    <Box mr={4} ml={2} className="clickable">
                       <span className="icon icon_name_library icon_size_l" />
                     </Box>
                   </Link>

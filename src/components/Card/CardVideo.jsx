@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { useMediaQuery } from '@material-ui/core';
 
 import CardPoster from './CardPoster/CardPoster';
 import CardStats from './CardStats/CardStats';
@@ -11,6 +12,8 @@ import { getTags } from '../../utils/formate';
 import { TYPE_FILM } from '../../constants/API';
 
 const CardVideo = ({ video = {}, className = '', maxWidthImage, full }) => {
+  const isMobile = useMediaQuery('(max-width:767px)');
+
   if (video.video) {
     video = video.video;
   }
@@ -30,7 +33,7 @@ const CardVideo = ({ video = {}, className = '', maxWidthImage, full }) => {
       url={`/details/${TYPE_FILM}?id=${video.id}`}
     >
       <CardPoster
-        ratio={0.66}
+        ratio={isMobile ? 1 : 0.66}
         imgUrl={getPoster(video.poster_v)}
         maxWidth={maxWidthImage}
       >
