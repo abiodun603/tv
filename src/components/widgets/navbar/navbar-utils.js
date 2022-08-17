@@ -115,14 +115,6 @@ export const MOBLE_MENU = [
     title: 'News',
     href: url.toNews(),
   },
-  {
-    title: 'My Library',
-    href: url.toLibs(),
-  },
-  {
-    title: 'Settings',
-    href: url.toSettings(),
-  },
 ];
 
 export const MOBLE_SUB_MENU = [

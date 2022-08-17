@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { inject, observer } from 'mobx-react';
 
@@ -16,8 +16,6 @@ import ProfileSub from './tabs/ProfileSub';
 import ProfileParental from './tabs/ProfileParental';
 import ProfileUsers from './tabs/ProfileUsers';
 
-import ProfileStore from '../../store/profileStore';
-
 import UploadPhoto from '../widgets/UploadPhoto';
 import UserContent from '../UserContent/UserContent';
 
@@ -34,48 +32,49 @@ const menu = [
   { title: 'Active users', iconClassName: 'icon_name_users', key: null },
 ];
 
-@inject('profile')
-@observer
-class ProfilePage extends React.Component {
-  state = {
-    profileId: this.props.profile.profile.social.id,
-  };
+const ProfilePage = inject('profile')(
+  observer((props) => {
+    const {
+      profile: {
+        profile: storeProfile,
+        uploadPhoto,
+        setStateProfile,
+        profileState,
+      },
+    } = props;
+    const [profileId, setProfileId] = useState(storeProfile.social.id);
 
-  renderSwitch(type) {
-    switch (type) {
-      case Routes.PROFILE_MY:
-        return <ProfileMy />;
-      case Routes.PROFILE_SUB:
-        return <ProfileSub />;
-      case Routes.PROFILE_PAYMENTS:
-        return <ProfilePayments />;
-      case Routes.PROFILE_PARENTAL:
-        return <ProfileParental />;
-      case Routes.PROFILE_SETTINGS:
-        return <ProfileSettings />;
-      case Routes.PROFILE_USERS:
-        return <ProfileUsers />;
-      case Routes.PROFILE_UPLOADS:
-        return (
-          <div className="profile-page__body">
-            <h1 className="font-weight-bold text text_typography_headline-xl mb-4">
-              Uploads
-            </h1>
-            <UserContent profileId={this.state.profileId} />
-          </div>
-        );
-      default:
-        return '';
-    }
-  }
+    const RenderSwitch = (type) => {
+      switch (type) {
+        case Routes.PROFILE_MY:
+          return <ProfileMy />;
+        case Routes.PROFILE_SUB:
+          return <ProfileSub />;
+        case Routes.PROFILE_PAYMENTS:
+          return <ProfilePayments />;
+        case Routes.PROFILE_PARENTAL:
+          return <ProfileParental />;
+        case Routes.PROFILE_SETTINGS:
+          return <ProfileSettings />;
+        case Routes.PROFILE_USERS:
+          return <ProfileUsers />;
+        case Routes.PROFILE_UPLOADS:
+          return (
+            <div className="profile-page__body">
+              <h1 className="font-weight-bold text text_typography_headline-xl mb-4">
+                Uploads
+              </h1>
+              <UserContent profileId={profileId} />
+            </div>
+          );
+        default:
+          return '';
+      }
+    };
 
-  changeState(type) {
-    this.props.profile.setStateProfile(type);
-  }
-
-  render() {
-    const { profile } = this.props;
-    const { profile: storeProfile } = profile;
+    const changeState = (type) => {
+      setStateProfile(type);
+    };
 
     return (
       <Container className="mb-4 mt-5">
@@ -83,14 +82,11 @@ class ProfilePage extends React.Component {
           <div className="profile-page__menu profile-menu">
             <div className="profile-menu__item profile-menu__user-info media mb-4">
               <div className="profile-menu__user-avatar mr-4">
-                <UploadPhoto
-                  storeProfile={storeProfile}
-                  upload={profile.uploadPhoto}
-                />
+                <UploadPhoto storeProfile={storeProfile} upload={uploadPhoto} />
               </div>
               <div
                 className="main-settings media-body clickable"
-                onClick={(e) => this.changeState(Routes.PROFILE_MY)}
+                onClick={(e) => changeState(Routes.PROFILE_MY)}
               >
                 <div>
                   {[storeProfile.name, storeProfile.last_name].join(' ')}
@@ -141,16 +137,16 @@ class ProfilePage extends React.Component {
               {menu.map((item) => (
                 <Nav.Item
                   key={item.title}
-                  onClick={() => item.key && this.changeState(item.key)}
+                  onClick={() => item.key && changeState(item.key)}
                 >
                   <Nav.Link
                     className={classNames(
                       'profile-menu__item profile-menu__nav-item d-flex',
                       {
                         'profile-menu__nav-item_active':
-                          item.key === profile.profileState,
+                          item.key === profileState,
                         'profile-menu__nav-item_disable': !Boolean(item.key),
-                      }
+                      },
                     )}
                     bsPrefix="clear"
                     eventKey={item.key}
@@ -159,7 +155,7 @@ class ProfilePage extends React.Component {
                     <span
                       className={classNames(
                         'profile-menu__nav-icon icon mr-3',
-                        item.iconClassName
+                        item.iconClassName,
                       )}
                     />
                     <span className="text text_view_secondary">
@@ -170,11 +166,11 @@ class ProfilePage extends React.Component {
               ))}
             </Nav>
           </div>
-          {this.renderSwitch(profile.profileState)}
+          {RenderSwitch(profileState)}
         </div>
       </Container>
     );
-  }
-}
+  }),
+);
 
 export default ProfilePage;
