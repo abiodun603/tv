@@ -1,14 +1,5 @@
 import styled from 'styled-components';
 import { Avatar, useTheme } from '@material-ui/core';
-import {
-  compose,
-  palette,
-  typography,
-  display,
-  flexbox,
-  spacing,
-  width,
-} from '@material-ui/system';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import AppTheme from '../../../theme';
@@ -41,10 +32,6 @@ const MobileLinkText = styled.div`
     color: ${AppTheme.palette.primary.main};
   }
 `;
-
-export const Box = styled('div')(
-  compose(width, display, flexbox, spacing, palette, typography),
-);
 
 export const UserProfileIcon = ({ photo }) => {
   return (

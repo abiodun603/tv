@@ -10,11 +10,11 @@ import { Close as CloseIcon } from '@material-ui/icons';
 import {
   MOBLE_MENU,
   MOBLE_SUB_MENU,
-  Box,
   NavBarLink,
   UserProfileIcon,
 } from './navbar-utils';
 import { ButtonText } from '../../widgets/Button';
+import { Box } from '../Box';
 
 const useStyles = makeStyles((theme) => ({
   sideBar: {

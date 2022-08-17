@@ -23,6 +23,7 @@ const theme = createTheme({
       default: '#BFC1C1',
       grey10: 'RGBA(43, 51, 49, 0.1)',
       grey30: 'RGBA(43, 51, 49, 0.3)',
+      grey50: 'RGBA(43, 51, 49, 0.05)',
       grey60: 'RGBA(43, 51, 49, 0.6)',
       white60: 'RGBA(255, 255, 255, 0.6)',
     },
