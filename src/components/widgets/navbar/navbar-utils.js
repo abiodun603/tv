@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Avatar } from '@material-ui/core';
+import { Avatar, useTheme } from '@material-ui/core';
 import {
   compose,
   palette,
@@ -21,7 +21,7 @@ export const LinkText = styled.div`
       ? AppTheme.palette.primary.main
       : AppTheme.palette.info.main};
   cursor: pointer;
-  margin: ${(props) => `0 ${props.theme.spacing(2)}px`};
+  margin: 0 16px;
   &:hover {
     color: ${AppTheme.palette.primary.main};
   }
@@ -34,7 +34,7 @@ const MobileLinkText = styled.div`
       : AppTheme.palette.info.main};
   background-color: ${(props) =>
     props.isActive ? AppTheme.palette.primary.main : 'transparent'};
-  padding: ${(props) => `${props.theme.spacing(2)}px`};
+  padding: 16px;
   font-size: 1rem;
   font-weight: 600;
   &:hover {
@@ -57,13 +57,16 @@ export const UserProfileIcon = ({ photo }) => {
 };
 
 export const NavBarLink = ({ menu, isDesktop = true }) => {
+  const theme = useTheme();
   const { asPath: path } = useRouter();
   const isActive = menu.href === path;
 
   return (
     <Link href={menu.href}>
       {isDesktop ? (
-        <LinkText isActive={isActive}>{menu.title}</LinkText>
+        <LinkText isActive={isActive} theme={theme}>
+          {menu.title}
+        </LinkText>
       ) : (
         <MobileLinkText isActive={isActive}>{menu.title}</MobileLinkText>
       )}

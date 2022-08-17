@@ -1,7 +1,7 @@
 import React from 'react';
 import { inject, observer } from 'mobx-react';
-import { Container, Grid, Avatar, NoSsr } from '@material-ui/core';
-import styled, { withTheme } from 'styled-components';
+import { Container, Grid, Avatar, NoSsr, useTheme } from '@material-ui/core';
+import styled from 'styled-components';
 import {
   compose,
   flexbox,
@@ -56,18 +56,18 @@ const Separator = styled.div`
   &:before {
     content: '';
     position: absolute;
-    border-top: ${(props) => `1px solid ${props.theme.palette.grey.grey10}`};
+    border-top: ${(props) => `1px solid ${props.color}`};
     width: 65px;
     top: 40%;
-    right: ${(props) => `${props.theme.spacing() * 4}px`};
+    right: ${(props) => `${props.spacing}px`};
   }
   &:after {
     content: '';
     position: absolute;
-    border-top: ${(props) => `1px solid ${props.theme.palette.grey.grey10}`};
+    border-top: ${(props) => `1px solid ${props.color}`};
     width: 65px;
     top: 40%;
-    left: ${(props) => `${props.theme.spacing() * 4}px`};
+    left: ${(props) => `${props.spacing}px`};
   }
   ${palette}
 `;
@@ -112,7 +112,9 @@ const SignInForm = observer(({ storeAuth, theme }) => {
         </Grid>
       </Grid>
       <Box display="flex" justifyContent="center" mt={2} mb={4}>
-        <Separator color={theme.palette.grey.default}>or</Separator>
+        <Separator color={theme.palette.grey.grey10} spacing={theme.spacing(4)}>
+          or
+        </Separator>
       </Box>
       <TabsCustom
         value={storeAuth.typeAuth}
@@ -346,7 +348,8 @@ const Auth = inject(
   'profile',
 )(
   observer((props) => {
-    const { auth: storeAuth, theme } = props;
+    const theme = useTheme();
+    const { auth: storeAuth } = props;
 
     return (
       <NoSsr>
@@ -377,4 +380,4 @@ const Auth = inject(
   }),
 );
 
-export default withTheme(Auth);
+export default Auth;
