@@ -153,6 +153,7 @@ const UserProfile = ({ profile }) => {
 };
 
 export const NavBar = inject(
+  'auth',
   'profile',
   'search',
 )(
@@ -163,6 +164,7 @@ export const NavBar = inject(
     const isMobile = useMediaQuery('(max-width:720px)');
     const {
       profile: { profile },
+      auth: { signOut },
     } = props;
 
     return (
@@ -216,6 +218,7 @@ export const NavBar = inject(
           open={isOpen}
           onClose={() => setOpen(false)}
           profile={profile}
+          logout={signOut}
         />
       </div>
     );
