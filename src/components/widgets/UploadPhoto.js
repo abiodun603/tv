@@ -1,37 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import Spinner from 'react-bootstrap/Spinner';
 import { Badge, Avatar } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 
 import EditIcon from '../../../public/icon/ic_edit.svg';
 import { getPhoto } from '../../utils/pathUtil';
 
-const useStyles = makeStyles((theme) => ({
-  avatar: {
-    width: 60,
-    height: 60,
-  },
-}));
-
 function UploadPhoto(props) {
   const [loading, setLoading] = useState(false);
   const { storeProfile } = props;
-  const classes = useStyles();
+
+  const onDrop = useCallback((file) => {
+    setLoading(true);
+    props.upload(file).then(() => {
+      setLoading(false);
+    });
+  }, []);
 
   const { getRootProps, getInputProps } = useDropzone({
-    onDrop: (file) => {
-      setLoading(true);
-      props.upload(file).then(() => {
-        setLoading(false);
-      });
-    },
+    onDrop,
     multiple: false,
-    accept: '.png, .jpeg, .jpg',
+    accept: {
+      'image/png': ['.png', '.jpg', '.jpeg'],
+    },
   });
 
   const avatar = (
-    <Avatar src={getPhoto(storeProfile.photo)} className={classes.avatar} />
+    <Avatar src={getPhoto(storeProfile.photo)} className={props.classname} />
   );
 
   if (loading) {
@@ -42,7 +37,7 @@ function UploadPhoto(props) {
     <div {...getRootProps()}>
       <input {...getInputProps()} />
       <Badge
-        overlap="circle"
+        overlap="circular"
         anchorOrigin={{
           vertical: 'bottom',
           horizontal: 'right',

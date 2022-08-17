@@ -37,6 +37,10 @@ const useStyles = makeStyles((theme) => ({
       borderRight: 'none',
     },
   },
+  avatar: {
+    width: 60,
+    height: 60,
+  },
 }));
 
 function a11yProps(index) {
@@ -104,7 +108,11 @@ const ProfilePage = inject('profile')(
         mr={1}
         p={1.5}
       >
-        <UploadPhoto storeProfile={storeProfile} upload={uploadPhoto} />
+        <UploadPhoto
+          storeProfile={storeProfile}
+          upload={uploadPhoto}
+          classname={classes.avatar}
+        />
         <Box
           color={theme.palette.info.main}
           lineHeight="1.2"
