@@ -11,17 +11,17 @@ export const Spinner = withStyles({
   },
 })((props) => <CircularProgress color="default" {...props} />);
 
-export const ThreeDotsLoader = withTheme((props) => {
+export const ThreeDotsLoader = (props) => {
   return (
     <ThreeDots
       height="80"
       width="80"
       radius="9"
-      color={props.theme.palette.primary.main}
+      color={AppTheme.palette.primary.main}
       ariaLabel="three-dots-loading"
       wrapperStyle={{}}
       wrapperClassName=""
       visible={true}
     />
   );
-});
+};

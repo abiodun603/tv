@@ -20,7 +20,7 @@ const AuthLayout = inject(
     useEffect(() => {
       storeAuth.startListener();
 
-      return autorun(() => {
+      autorun(() => {
         let state = props.toast.state;
 
         if (state.visible) {

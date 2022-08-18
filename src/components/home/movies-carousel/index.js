@@ -5,7 +5,7 @@ import { useMediaQuery } from '@material-ui/core';
 
 import { useCurrentWidth } from '../../../lib/hooks/useCurrentWidth';
 
-import { CarouselItem } from './carousel-item';
+import { CarouselItem, LoadingCarousel } from './carousel-item';
 import { ArrowButton } from './arrow-button';
 
 import style from './movies-carousel.module.scss';
@@ -59,6 +59,13 @@ const MoviesCarousel = inject('home')(
 
     return (
       <div className={style.carousel_wrapper}>
+        {homeStore.carousel.loading && (
+          <div className={style.carousel}>
+            <div className="d-flex justify-content-center">
+              <LoadingCarousel />
+            </div>
+          </div>
+        )}
         {movies.length > 0 && (
           <Slider
             showThumbs={false}

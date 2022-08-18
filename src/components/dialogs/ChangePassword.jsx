@@ -19,7 +19,7 @@ const ChangePassword = inject(
 )(
   observer((props) => {
     useEffect(() => {
-      return autorun(() => {
+      autorun(() => {
         let state = props.profile.statusChangePass;
 
         if (state === 'success') {

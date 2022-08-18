@@ -2,6 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import Link from 'next/link';
 
+import { ThreeDotsLoader } from '../../../ui/spiner';
 import { getPoster } from '../../../../utils/pathUtil';
 import { getTags } from '../../../../utils/formate';
 
@@ -18,7 +19,7 @@ export const CarouselItem = ({ video, active = false }) => {
         className={classNames(
           css.element,
           active && css.active,
-          'cursor-pointer'
+          'cursor-pointer',
         )}
       >
         <img src={getPoster(video.poster_h)} alt="" />
@@ -36,3 +37,9 @@ export const CarouselItem = ({ video, active = false }) => {
     </Link>
   );
 };
+
+export const LoadingCarousel = () => (
+  <div className={classNames(css.element, 'd-flex align-items-center')}>
+    <ThreeDotsLoader />
+  </div>
+);

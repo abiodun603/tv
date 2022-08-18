@@ -161,7 +161,7 @@ class HomeStore extends BasicStore {
 
       const { data: recent } = await http.get(
         PATH_URL_VIDEOS,
-        recentMoviesParams
+        recentMoviesParams,
       );
 
       if (recent.success && recent.result.video.length) {
@@ -170,6 +170,7 @@ class HomeStore extends BasicStore {
     }
 
     runInAction(() => {
+      this.carousel.loading = false;
       this.carousel.media = oneByOne(...videosList);
     });
   }
