@@ -160,6 +160,7 @@ const SignInForm = observer(({ storeAuth, theme }) => {
             fullWidth
             error={!storeAuth.validated.password}
             label="Password"
+            type="password"
             helperText={
               !storeAuth.validated.password
                 ? storeAuth.isSignIn
