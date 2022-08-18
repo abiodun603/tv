@@ -21,7 +21,8 @@ function UploadPhoto(props) {
     onDrop,
     multiple: false,
     accept: {
-      'image/png': ['.png', '.jpg', '.jpeg'],
+      'image/png': ['.png'],
+      'image/jpeg': ['.jpg', '.jpeg'],
     },
   });
 

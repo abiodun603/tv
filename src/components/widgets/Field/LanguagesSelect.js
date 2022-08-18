@@ -1,24 +1,25 @@
-import { Component } from 'react';
+import { useEffect } from 'react';
 import MultiSelect from './MultiSelect';
 import { inject, observer } from 'mobx-react';
 
-@inject('languages')
-@observer
-export default class LanguagesSelect extends Component {
-  componentDidMount() {
-    this.props.languages.load();
-  }
-  render() {
+const LanguagesSelect = inject('languages')(
+  observer((props) => {
+    useEffect(() => {
+      props.languages.load();
+    }, []);
+
     return (
       <MultiSelect
-        loading={this.props.languages.loading}
-        value={this.props.value}
-        handleChange={(e) => this.props.handleChange(e)}
-        options={this.props.languages.items.map((item) => ({
+        loading={props.languages.loading}
+        value={props.value}
+        handleChange={(e) => props.handleChange(e)}
+        options={props.languages.items.map((item) => ({
           value: item.id,
           label: item.name,
         }))}
       />
     );
-  }
-}
+  }),
+);
+
+export default LanguagesSelect;
