@@ -1,164 +1,195 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { inject, observer } from 'mobx-react';
+import classNames from 'classnames';
+import { Grid, makeStyles, useMediaQuery, useTheme } from '@material-ui/core';
+import { Box } from '../../widgets/Box';
+import ConfirmDialog from '../../dialogs/Confirm';
+import { ButtonText } from '../../widgets/Button';
+import Toggler from './../../Toggler/Toggler';
+import { PrettoSlider } from '../../ui/slider';
 
-class ProfileSettings extends React.Component {
-  render() {
+const useStyles = makeStyles((theme) => ({
+  gridContainer: {
+    padding: theme.spacing(2),
+  },
+  rBorder: {
+    borderRight: `1px solid ${theme.palette.grey.grey50}`,
+  },
+}));
+
+const ProfileSettings = inject('auth')(
+  observer((props) => {
+    const { profileStore } = props.auth;
+    const [quality, setQuality] = useState(480);
+    const [qualityText, setQualityText] = useState('');
+    const [deleteAllUploadsDialog, setDeleteAllUploadsDialog] = useState(false);
+    const [clearHistoryDialog, setClearHistoryDialog] = useState(false);
+    const classes = useStyles();
+    const isMobile = useMediaQuery('(max-width:768px)');
+    const theme = useTheme();
+
+    useEffect(() => {
+      if (quality <= 500) {
+        setQualityText(`Low ${quality}p`);
+      } else if ((quality > 500) & (quality <= 1000)) {
+        setQualityText(`Medium ${quality}p`);
+      } else {
+        setQualityText(`High ${quality}p`);
+      }
+    }, [quality]);
+    const toggleDeleteAllUploadsDialog = () => {
+      setDeleteAllUploadsDialog(!deleteAllUploadsDialog);
+    };
+
+    const handleSubmitRemoveUploads = () => {
+      const {
+        profileStore: { removeUploads },
+      } = props.auth;
+
+      toggleDeleteAllUploadsDialog();
+
+      removeUploads();
+    };
+
+    const toggleClearHistoryDialog = () => {
+      setClearHistoryDialog(!clearHistoryDialog);
+    };
+
+    const handleSubmitClearHistory = () => {
+      const {
+        profileStore: { clearHistory },
+      } = props.auth;
+
+      toggleClearHistoryDialog();
+
+      clearHistory();
+    };
+
     return (
-      <div className="profile-page__body">
-        <h1 className="font-weight-bold text text_typography_headline-xl mb-4">
-          Settings
-        </h1>
-
-        <div className="row">
-          <div className="col col-sm-4">
-            {/*<div className="font-weight-bold mb-3">Downloads location</div>*/}
-            {/*<div className="profile-page__downloads d-flex align-items-center justify-content-between mb-3">*/}
-            {/*  <div className="text text_view_secondary text-truncate">*/}
-            {/*    D:/Users/Downloads*/}
-            {/*  </div>*/}
-            {/*  <a href="" className="link link_view_default font-weight-bold">*/}
-            {/*    Change*/}
-            {/*  </a>*/}
-            {/*</div>*/}
-            {/*<div className="custom-control custom-checkbox mb-5">*/}
-            {/*  <input*/}
-            {/*    type="checkbox"*/}
-            {/*    className="custom-control-input"*/}
-            {/*    id="customCheck1"*/}
-            {/*  />*/}
-            {/*  <label*/}
-            {/*    className="custom-control-label text text_view_secondary"*/}
-            {/*    htmlFor="customCheck1"*/}
-            {/*  >*/}
-            {/*    Always ask where to save file*/}
-            {/*  </label>*/}
-            {/*</div>*/}
-            <div className="d-flex align-items-center justify-content-between mb-3">
-              <div className="font-weight-bold">Video quality</div>
-              <div className="text">Low 480p</div>
-            </div>
-            <input
-              type="range"
-              className="custom-range mb-5"
-              id="customRange1"
-            />
-            <div className="font-weight-bold mb-4">Watch history</div>
-            <div className="form-group d-flex align-items-center justify-content-between">
-              Do not track my watch history
-              <div className="custom-control custom-switch ml-2">
-                <input
-                  type="checkbox"
-                  className="custom-control-input"
-                  id="customSwitch1"
-                />
-                <label
-                  className="custom-control-label"
-                  htmlFor="customSwitch1"
-                />
-              </div>
-            </div>
-            <div className="form-group d-flex align-items-center justify-content-between">
-              Do not track my search history
-              <div className="custom-control custom-switch ml-2">
-                <input
-                  type="checkbox"
-                  className="custom-control-input"
-                  id="customSwitch1"
-                />
-                <label
-                  className="custom-control-label"
-                  htmlFor="customSwitch1"
-                />
-              </div>
-            </div>
-          </div>
-
-          <div className="col col-sm-8">
-            {/*<div className="d-flex align-items-center justify-content-between mb-3">*/}
-            {/*  <div className="font-weight-bold">Storage usage</div>*/}
-            {/*  <div className="text text_view_secondary">*/}
-            {/*    49,56 GB free of 499,62 GB*/}
-            {/*  </div>*/}
-            {/*</div>*/}
-            {/*<div className="progress progress_theme_isabi mb-3">*/}
-            {/*   <div className="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="15"
-                             aria-valuemin="0" aria-valuemax="100"></div>
-                        <div className="progress-bar bg-success" role="progressbar" style="width: 10%"
-                             aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>*/}
-            {/*</div>*/}
-            {/*<div className="d-flex align-items-center justify-content-between mb-4">*/}
-            {/*  <div>*/}
-            {/*    <div className="text text_view_secondary text_size_xs">*/}
-            {/*      Other*/}
-            {/*    </div>*/}
-            {/*    400,04 GB*/}
-            {/*  </div>*/}
-            {/*  <div>*/}
-            {/*    <div className="text text_view_secondary text_size_xs">*/}
-            {/*      iSabiTV*/}
-            {/*    </div>*/}
-            {/*    2,1GB*/}
-            {/*  </div>*/}
-            {/*  <div>*/}
-            {/*    <div className="text text_view_secondary text_size_xs">*/}
-            {/*      Available*/}
-            {/*    </div>*/}
-            {/*    49,56 GB*/}
-            {/*  </div>*/}
-            {/*</div>*/}
-            <div className="mb-5">
-              <a
-                href=""
-                className="link link_view_danger font-weight-bold text-uppercase text text_size_s"
+      <Box ml={isMobile ? 0 : 4}>
+        <Grid container>
+          <Grid container item xs={12} className={classes.gridContainer}>
+            <Grid item xs={12}>
+              <Box fontWeight="500" fontSize="2rem">
+                Settings
+              </Box>
+            </Grid>
+          </Grid>
+          <Grid
+            container
+            item
+            xs={12}
+            md={4}
+            className={classNames(classes.gridContainer, classes.rBorder)}
+          >
+            <Grid item xs={12}>
+              <Box
+                display="flex"
+                flexDirection="row"
+                alignItems="center"
+                justifyContent="space-between"
+                mb={1}
               >
-                <u>Delete all Uploads</u>
-              </a>
-            </div>
-            <div className="font-weight-bold mb-3">My devices</div>
-            <p className="text text_view_secondary">
-              Devices that are currently signed in on your account
-            </p>
-            <div className="mb-2">
-              <strong>PC, Windows 10</strong>
-              <span className="text text_view_secondary">
-                — Toronto, Canada
-              </span>
-              <span className="text text_view_link">This device</span>
-            </div>
-            <div className="d-flex align-items-center justify-content-between mb-3">
-              <div className="">
-                <strong>Samsung Galaxy Note II, Android 9 P</strong>
-                <span className="text text_view_secondary">
-                  — Toronto, Canada
-                </span>
-              </div>
-              <div className="">
-                <span className="text text_view_secondary">Sun</span>
-                <div className="btn-group dropleft">
-                  <button
-                    type="button"
-                    className="profile-page__drop-button btn dropdown-toggle"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    <span className="icon icon_name_more-dots" />
-                  </button>
-                  <div className="dropdown-menu">
-                    <a className="dropdown-item" href="#">
-                      Temporarily disable account
-                    </a>
-                    <a className="dropdown-item" href="#">
-                      Deny access
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+                <Box>Video Quality</Box>
+                <Box>{qualityText}</Box>
+              </Box>
+              <Box mb={2}>
+                <PrettoSlider
+                  valueLabelDisplay="auto"
+                  aria-label="pretto slider"
+                  value={quality}
+                  min={360}
+                  max={1200}
+                  onChange={(e, v) => setQuality(v)}
+                  step={10}
+                />
+              </Box>
+            </Grid>
+            <Grid item xs={12}>
+              <Box mb={2}>
+                <Toggler
+                  id="track_watch"
+                  title="Do not track my watch history"
+                  checked={Boolean(profileStore.profile.watch_history_enabled)}
+                  onChange={(event) => {
+                    profileStore.setDontTrackWatch(event.target.checked);
+                  }}
+                />
+              </Box>
+            </Grid>
+            <Grid item xs={12}>
+              <Box mb={2}>
+                <Toggler
+                  id="track_search"
+                  title="Do not track my search history"
+                  checked={Boolean(profileStore.profile.search_history_enabled)}
+                  onChange={(event) => {
+                    profileStore.setDontTrackSearch(event.target.checked);
+                  }}
+                />
+              </Box>
+            </Grid>
+            <Grid item xs={12}>
+              <Box mb={2}>
+                <ButtonText onClick={toggleDeleteAllUploadsDialog}>
+                  <span className="font-weight-bold text-danger text-uppercase">
+                    <u>Delete All Uploads</u>
+                  </span>
+                </ButtonText>
+                <ConfirmDialog
+                  opened={Boolean(deleteAllUploadsDialog)}
+                  onClose={toggleDeleteAllUploadsDialog}
+                  onSubmit={handleSubmitRemoveUploads}
+                />
+              </Box>
+            </Grid>
+            <Grid item xs={12}>
+              <Box mb={2}>
+                <ButtonText onClick={toggleClearHistoryDialog}>
+                  <span className="font-weight-bold text-danger text-uppercase">
+                    <u>Clear History</u>
+                  </span>
+                </ButtonText>
+                <ConfirmDialog
+                  opened={Boolean(clearHistoryDialog)}
+                  onClose={toggleClearHistoryDialog}
+                  onSubmit={handleSubmitClearHistory}
+                />
+              </Box>
+            </Grid>
+          </Grid>
+          <Grid container item xs={12} md={8} className={classes.gridContainer}>
+            <Grid item xs={12}>
+              <Box fontWeight="500" mb={2}>
+                My Devices
+              </Box>
+              <Box color={theme.palette.grey.grey60} mb={2}>
+                Devices that are currently signed in on your account
+              </Box>
+              <Box
+                display="flex"
+                flexDirection="row"
+                alignItems="center"
+                mb={2}
+              >
+                <Box>PC, Windows 10 -&nbsp;&nbsp;</Box>
+                <Box color={theme.palette.grey.grey60}>Toronto, Canada</Box>
+              </Box>
+              <Box
+                display="flex"
+                flexDirection="row"
+                alignItems="center"
+                mb={2}
+              >
+                <Box>Samsung Galaxy, Android 9P -&nbsp;&nbsp;</Box>
+                <Box color={theme.palette.grey.grey60}>Toronto, Canada</Box>
+              </Box>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Box>
     );
-  }
-}
+  }),
+);
 
 export default ProfileSettings;

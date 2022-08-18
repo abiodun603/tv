@@ -36,9 +36,7 @@ const MyProfile = inject(
 )(
   observer((props) => {
     const { profileStore, signOut } = props.auth;
-    const [deleteAllUploadsDialog, setDeleteAllUploadsDialog] = useState(false);
     const [removeAccountDialog, setRemoveAccountDialog] = useState(false);
-    const [clearHistoryDialog, setClearHistoryDialog] = useState(false);
     const [logoutDialog, setLogoutDialog] = useState(false);
     const [userName, setUserName] = useState('');
     const [firstName, setFirstName] = useState('');
@@ -61,30 +59,12 @@ const MyProfile = inject(
       setLastName(lastName);
     }, []);
 
-    const toggleDeleteAllUploadsDialog = () => {
-      setDeleteAllUploadsDialog(!deleteAllUploadsDialog);
-    };
-
     const toggleRemoveAccount = () => {
       setRemoveAccountDialog(!removeAccountDialog);
     };
 
-    const toggleClearHistoryDialog = () => {
-      setClearHistoryDialog(!clearHistoryDialog);
-    };
-
     const toggleLogoutDialog = () => {
       setLogoutDialog(!logoutDialog);
-    };
-
-    const handleSubmitRemoveUploads = () => {
-      const {
-        profileStore: { removeUploads },
-      } = props.auth;
-
-      toggleDeleteAllUploadsDialog();
-
-      removeUploads();
     };
 
     const handleSubmitRemoveAccount = () => {
@@ -97,16 +77,6 @@ const MyProfile = inject(
 
       removeAccount();
       signOut();
-    };
-
-    const handleSubmitClearHistory = () => {
-      const {
-        profileStore: { clearHistory },
-      } = props.auth;
-
-      toggleClearHistoryDialog();
-
-      clearHistory();
     };
 
     const handleChangeName = (event) => {
@@ -333,6 +303,22 @@ const MyProfile = inject(
                 />
               </Box>
             </Grid>
+            <Grid item xs={12}>
+              <Box mb={2}>
+                <MultiSelect
+                  loading={props.languages.loading}
+                  value={profileStore.profile.languages || []}
+                  handleChange={(event) =>
+                    profileStore.setLanguages(event.target.value)
+                  }
+                  options={props.languages.items.map((item) => ({
+                    key: item.id,
+                    value: item.id,
+                    label: item.name,
+                  }))}
+                />
+              </Box>
+            </Grid>
           </Grid>
           <Grid container item xs={12} md={6} className={classes.gridContainer}>
             <Grid item xs={12}>
@@ -434,104 +420,8 @@ const MyProfile = inject(
                 />
               </Box>
             </Grid>
-          </Grid>
-          <Grid container item xs={12} className={classes.gridContainer}>
-            <Grid item xs={12} md={6}>
-              <Box>
-                <Box fontWeight="500" fontSize="2rem">
-                  Settings
-                </Box>
-              </Box>
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <Box ml={2}>
-                {!isMobile && (
-                  <Box fontWeight="500" fontSize="2rem">
-                    Watch History
-                  </Box>
-                )}
-              </Box>
-            </Grid>
-          </Grid>
-          <Grid
-            container
-            item
-            xs={12}
-            md={6}
-            className={classNames(classes.gridContainer, classes.rBorder)}
-          >
             <Grid item xs={12}>
-              <Box mb={2}>
-                <MultiSelect
-                  loading={props.languages.loading}
-                  value={profileStore.profile.languages || []}
-                  handleChange={(event) =>
-                    profileStore.setLanguages(event.target.value)
-                  }
-                  options={props.languages.items.map((item) => ({
-                    key: item.id,
-                    value: item.id,
-                    label: item.name,
-                  }))}
-                />
-              </Box>
-            </Grid>
-            <Grid item xs={12}>
-              <Box mb={2}>
-                <ButtonText onClick={toggleDeleteAllUploadsDialog}>
-                  <span className="font-weight-bold text-danger text-uppercase">
-                    <u>Delete All Uploads</u>
-                  </span>
-                </ButtonText>
-                <ConfirmDialog
-                  opened={Boolean(deleteAllUploadsDialog)}
-                  onClose={toggleDeleteAllUploadsDialog}
-                  onSubmit={handleSubmitRemoveUploads}
-                />
-              </Box>
-            </Grid>
-            <Grid item xs={12}>
-              <Box mb={2}>
-                <ButtonText onClick={toggleClearHistoryDialog}>
-                  <span className="font-weight-bold text-danger text-uppercase">
-                    <u>Clear History</u>
-                  </span>
-                </ButtonText>
-                <ConfirmDialog
-                  opened={Boolean(clearHistoryDialog)}
-                  onClose={toggleClearHistoryDialog}
-                  onSubmit={handleSubmitClearHistory}
-                />
-              </Box>
-            </Grid>
-          </Grid>
-          <Grid container item xs={12} md={6} className={classes.gridContainer}>
-            <Grid item xs={12} className={classes.gridFlex}>
-              <Box mb={2}>
-                <Toggler
-                  id="track_watch"
-                  title="Do not track my watch history"
-                  checked={Boolean(profileStore.profile.watch_history_enabled)}
-                  onChange={(event) => {
-                    profileStore.setDontTrackWatch(event.target.checked);
-                  }}
-                />
-              </Box>
-            </Grid>
-            <Grid item xs={12} className={classes.gridFlex}>
-              <Box mb={2}>
-                <Toggler
-                  id="track_search"
-                  title="Do not track my search history"
-                  checked={Boolean(profileStore.profile.search_history_enabled)}
-                  onChange={(event) => {
-                    profileStore.setDontTrackSearch(event.target.checked);
-                  }}
-                />
-              </Box>
-            </Grid>
-            <Grid item xs={12}>
-              <Box height={40} />
+              <div style={{ height: '54px' }} />
             </Grid>
           </Grid>
         </Grid>

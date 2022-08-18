@@ -68,7 +68,7 @@ const TAB_MENU = [
   {
     title: 'Settings',
     icon: SettingsIcon,
-    disabled: true,
+    disabled: false,
   },
   { title: 'Active users', icon: VerifiedUserIcon, disabled: true },
 ];
