@@ -109,7 +109,7 @@ const ProfilePage = inject('profile')(
           display="flex"
           flexDirection="row"
           alignItems="center"
-          justifyContent={isMobile ? 'space-between' : 'flex-start'}
+          justifyContent="flex-start"
         >
           <UploadPhoto
             storeProfile={storeProfile}
@@ -202,6 +202,7 @@ const ProfilePage = inject('profile')(
             ))}
           </ProfileTabs>
           <TabPanel className={classes.tabPanel} value={tabIndex} index={0}>
+            {isMobile && <UserProfileBox />}
             <ProfileMy />
           </TabPanel>
           <TabPanel className={classes.tabPanel} value={tabIndex} index={1}>

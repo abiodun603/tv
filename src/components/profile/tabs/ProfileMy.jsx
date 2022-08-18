@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { inject, observer } from 'mobx-react';
 import classNames from 'classnames';
 import { Spinner } from 'react-bootstrap';
-import { MenuItem, Grid, makeStyles } from '@material-ui/core';
+import { MenuItem, Grid, makeStyles, useMediaQuery } from '@material-ui/core';
 
 import { Box } from '../../widgets/Box';
 import ChangePassword from '../../dialogs/ChangePassword';
@@ -44,6 +44,7 @@ const MyProfile = inject(
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const classes = useStyles();
+    const isMobile = useMediaQuery('(max-width:768px)');
 
     useEffect(() => {
       const {
@@ -133,7 +134,7 @@ const MyProfile = inject(
     );
 
     return (
-      <>
+      <Box ml={isMobile ? 0 : 4}>
         <Grid container>
           <Grid item xs={12} className={classes.gridContainer}>
             <Box
@@ -166,7 +167,7 @@ const MyProfile = inject(
             className={classNames(classes.gridContainer, classes.rBorder)}
           >
             <Grid item xs={12} sm={12} md={6}>
-              <Box mr={2} mb={2}>
+              <Box mr={isMobile ? 0 : 2} mb={2}>
                 <CustomTextField
                   id="name"
                   fullWidth
@@ -224,7 +225,7 @@ const MyProfile = inject(
               </Box>
             </Grid>
             <Grid item xs={12} md={4} className={classes.gridFlex}>
-              <Box mb={2} ml={2}>
+              <Box mb={2} ml={isMobile ? 0 : 2}>
                 <Toggler
                   id="email-show"
                   title="Show On/Off"
@@ -253,7 +254,7 @@ const MyProfile = inject(
               </Box>
             </Grid>
             <Grid item xs={12} md={4} className={classes.gridFlex}>
-              <Box mb={2} ml={2}>
+              <Box mb={2} ml={isMobile ? 0 : 2}>
                 <Toggler
                   id="phone-show"
                   title="Show On/Off"
@@ -308,7 +309,7 @@ const MyProfile = inject(
               </Box>
             </Grid>
             <Grid item xs={12} md={4}>
-              <Box mb={2} ml={2}>
+              <Box mb={2} ml={isMobile ? 0 : 2}>
                 <CustomTextField
                   id="city"
                   fullWidth
@@ -321,7 +322,7 @@ const MyProfile = inject(
               </Box>
             </Grid>
             <Grid item xs={12} md={4} className={classes.gridFlex}>
-              <Box mb={2} ml={2}>
+              <Box mb={2} ml={isMobile ? 0 : 2}>
                 <Toggler
                   id="location-show"
                   title="Show On/Off"
@@ -444,9 +445,11 @@ const MyProfile = inject(
             </Grid>
             <Grid item xs={12} md={6}>
               <Box ml={2}>
-                <Box fontWeight="500" fontSize="2rem">
-                  Watch History
-                </Box>
+                {!isMobile && (
+                  <Box fontWeight="500" fontSize="2rem">
+                    Watch History
+                  </Box>
+                )}
               </Box>
             </Grid>
           </Grid>
@@ -532,7 +535,7 @@ const MyProfile = inject(
             </Grid>
           </Grid>
         </Grid>
-      </>
+      </Box>
     );
   }),
 );

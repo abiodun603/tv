@@ -1,4 +1,4 @@
-import React, { ReactEventHandler } from 'react';
+import React, { useEffect } from 'react';
 import { autorun } from 'mobx';
 import { inject, observer } from 'mobx-react';
 import { Spinner } from 'react-bootstrap';
@@ -7,41 +7,38 @@ import {
   DialogTitle,
   DialogActions,
   DialogContent,
-  Typography,
   Button,
 } from '@material-ui/core';
 
 import { ButtonContainer, ButtonTextGreen } from '../widgets/Button';
 import { CustomTextField } from '../widgets/Field';
 
-@inject('ui', 'profile')
-@observer
-class ChangePassword extends React.Component {
-  static autoRunPass;
+const ChangePassword = inject(
+  'ui',
+  'profile',
+)(
+  observer((props) => {
+    useEffect(() => {
+      return autorun(() => {
+        let state = props.profile.statusChangePass;
 
-  componentDidMount() {
-    this.autoRunPass = autorun(() => {
-      let state = this.props.profile.statusChangePass;
+        if (state === 'success') {
+          close();
+          props.profile.clearPass();
+        }
+      });
+    }, []);
 
-      if (state === 'success') {
-        this.close();
-        this.props.profile.clearPass();
-      }
-    });
-  }
-
-  close = () => {
-    this.props.profile.clearPass();
-    this.props.ui.closeDialog();
-  };
-
-  render() {
-    let store = this.props.profile;
+    close = () => {
+      props.profile.clearPass();
+      props.ui.closeDialog();
+    };
+    let store = props.profile;
 
     return (
       <div>
         <ButtonTextGreen
-          onClick={this.props.ui.openDialog}
+          onClick={props.ui.openDialog}
           startIcon={
             <span className="account-list__lock-icon icon icon_name_lock" />
           }
@@ -50,13 +47,11 @@ class ChangePassword extends React.Component {
         </ButtonTextGreen>
 
         <Dialog
-          open={this.props.ui.isOpenDialog}
-          onClose={this.close}
+          open={props.ui.isOpenDialog}
+          onClose={close}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="dialog-title">
-            <Typography variant="h6">Change password</Typography>
-          </DialogTitle>
+          <DialogTitle id="dialog-title">Change password</DialogTitle>
           <DialogContent>
             <CustomTextField
               label="Old password"
@@ -108,14 +103,13 @@ class ChangePassword extends React.Component {
                 Save
               </ButtonContainer>
             )}
-            <Button onClick={this.close} className="mt-5 px-5" size="small">
+            <Button onClick={close} className="mt-5 px-5" size="small">
               Cancel
             </Button>
           </DialogActions>
         </Dialog>
       </div>
     );
-  }
-}
-
+  }),
+);
 export default ChangePassword;
