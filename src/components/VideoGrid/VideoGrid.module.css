@@ -4,6 +4,11 @@
   flex-wrap: wrap;
 }
 
+@media screen and (max-width: 767px) {
+  .grid {
+    display: block;
+  }
+}
 .grid-container_full {
   width: 100%;
 }

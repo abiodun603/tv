@@ -1,106 +1,88 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { inject, observer } from 'mobx-react';
-import { Col, Container, Row, Tab, Tabs } from 'react-bootstrap';
+import { Tab, Tabs } from 'react-bootstrap';
+import { Container } from '@material-ui/core';
 
 import VideoGrid from '../VideoGrid/VideoGrid';
 
-import UserUploadStore from '../../store/userUploadStore';
+const UserContent = inject('userUpload')(
+  observer((props) => {
+    const [uploadLoading, setUploadLoading] = useState(false);
+    const { allUploads, allNews } = props.userUpload;
 
-@inject('userUpload')
-@observer
-class UserContent extends React.Component {
-  state = {
-    uploadLoading: false,
-  };
-  constructor(props) {
-    super(props);
+    useEffect(() => {
+      return () => props.userUpload.clearUploads();
+    }, []);
 
-    this.getUploads = this.getUploads.bind(this);
-    this.getNews = this.getNews.bind(this);
-  }
+    const clearData = () => {
+      props.userUpload.clearUploads();
+    };
+    const getUploads = () => {
+      setUploadLoading(true);
 
-  componentWillUnmount() {
-    this.props.userUpload.clearUploads();
-  }
-
-  getUploads() {
-    this.setState({ uploadLoading: true });
-
-    this.props.userUpload
-      .getAllUploads({
-        social: this.props.profileId,
-      })
-      .then(() => {
-        this.setState({
-          uploadLoading: false,
+      props.userUpload
+        .getAllUploads({
+          social: props.profileId,
+        })
+        .then(() => {
+          setUploadLoading(false);
+        })
+        .catch(() => {
+          setUploadLoading(false);
         });
-      })
-      .catch(() => {
-        this.setState({ uploadLoading: false });
-      });
-  }
-  getNews() {
-    this.setState({ uploadLoading: true });
+    };
 
-    this.props.userUpload
-      .getUserNews({
-        social: this.props.profileId,
-      })
-      .then(() => {
-        this.setState({
-          uploadLoading: false,
+    const getNews = () => {
+      setUploadLoading(true);
+
+      props.userUpload
+        .getUserNews({
+          social: props.profileId,
+        })
+        .then(() => {
+          setUploadLoading(false);
+        })
+        .catch(() => {
+          setUploadLoading(false);
         });
-      })
-      .catch(() => {
-        this.setState({ uploadLoading: false });
-      });
-  }
-
-  render() {
-    const { uploadLoading } = this.state;
-
-    const { allUploads, allNews } = this.props.userUpload;
+    };
 
     return (
-      <Container>
-        <Row>
-          <Col>
-            <Tabs defaultActiveKey="alluploads">
-              <Tab eventKey="alluploads" title="All Uploads">
-                <Container className="mt-5">
-                  <VideoGrid
-                    data={allUploads.data}
-                    loading={uploadLoading}
-                    hasMore={allUploads.hasMore}
-                    loadData={this.getUploads}
-                    manageble
-                    needRefresh
-                    isUpload
-                    profileId={this.props.profileId}
-                    isFromALlUploads={true}
-                  />
-                </Container>
-              </Tab>
-              <Tab eventKey="news" title="News">
-                <Container className="mt-5">
-                  <VideoGrid
-                    data={allNews.data}
-                    loading={uploadLoading}
-                    hasMore={allNews.hasMore}
-                    loadData={this.getNews}
-                    manageble
-                    needRefresh
-                    isUpload
-                  />
-                </Container>
-              </Tab>
-              <Tab eventKey="contests" title="Contests" disabled />
-            </Tabs>
-          </Col>
-        </Row>
-      </Container>
+      <Tabs defaultActiveKey="alluploads">
+        <Tab eventKey="alluploads" title="All Uploads">
+          <Container className="mt-5">
+            <VideoGrid
+              data={allUploads.data}
+              loading={uploadLoading}
+              hasMore={allUploads.hasMore}
+              loadData={getUploads}
+              clearData={clearData}
+              manageble
+              needRefresh
+              isUpload
+              profileId={props.profileId}
+              isFromALlUploads={true}
+            />
+          </Container>
+        </Tab>
+        <Tab eventKey="news" title="News">
+          <Container className="mt-5">
+            <VideoGrid
+              data={allNews.data}
+              loading={uploadLoading}
+              hasMore={allNews.hasMore}
+              loadData={getNews}
+              clearData={clearData}
+              manageble
+              needRefresh
+              isUpload
+            />
+          </Container>
+        </Tab>
+        <Tab eventKey="contests" title="Contests" disabled />
+      </Tabs>
     );
-  }
-}
+  }),
+);
 
 export default UserContent;

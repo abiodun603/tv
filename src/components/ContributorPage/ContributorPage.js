@@ -13,11 +13,7 @@ import UserContent from '../UserContent/UserContent';
 
 @inject('contributor', 'profile', 'upload')
 @observer
-export class ContributorPage extends React.Component<{
-  contributor: ContributorStore;
-  profile: ProfileStore;
-  upload: UploadStore;
-}> {
+export class ContributorPage extends React.Component {
   componentDidMount() {
     const { contributor } = this.props;
     const { id } = Router.query;

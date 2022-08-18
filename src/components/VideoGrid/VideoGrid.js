@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { inject, observer } from 'mobx-react';
 
 import { Col, Container, Row, Image } from 'react-bootstrap';
@@ -19,133 +19,127 @@ import { MANAGER, USER, SINGLE_VIDEO, SERIES } from '../../constants/types';
 
 import CardCollection from '../Card/CardCollection';
 
-@inject('videos', 'userUpload', 'profile', 'auth')
-@observer
-export default class VideoGrid extends React.Component {
-  constructor(props) {
-    super(props);
-    this.manageble = this.props.manageble || false;
-    this.loadData = this.props.loadData || function () {};
-    this.clearData = this.props.clearData || function () {};
-    this.isUpload = this.props.isUpload || false;
-    this.isFromALlUploads = this.props.isFromALlUploads || false;
-    this.profileId = this.props.profileId || null;
-  }
+const VideoGrid = inject(
+  'videos',
+  'userUpload',
+  'profile',
+  'auth',
+)(
+  observer((props) => {
+    const isUpload = props.isUpload || false;
+    const isFromALlUploads = props.isFromALlUploads || false;
 
-  componentDidMount() {
-    if (!this.props.data || !this.props.data.length || this.props.needRefresh) {
-      this.loadData();
-    }
-  }
-
-  componentWillUnmount() {
-    this.clearData();
-  }
-
-  getCardType(item) {
-    const type = item.video ? item.video.type : item.type;
-
-    const isNews = item.video
-      ? item.video.tags.includes(NEWS)
-      : item.tags
-      ? item.tags.includes(NEWS)
-      : false;
-
-    const creator = item.video ? item.video.creator : item.creator;
-
-    const isYourOwnVideo = () => {
-      if (this.props.profile?.profile?.social?.id == item?.social?.id) {
-        return true;
+    useEffect(() => {
+      if (!props.data || !props.data.length || props.needRefresh) {
+        props.loadData();
       }
-      return false;
-    };
 
-    const removeVideo = async () => {
-      if (this.props.videos.removingNeedsApprove.includes(item.id)) {
-        await this.props.videos.removeVideo(item.id);
-        await this.props.userUpload.removeItemFromUploads(item.id);
-        await this.props.auth.startListener();
-        return;
-      }
-      this.props.videos.removeVideo(item.id);
-    };
+      return () => props.clearData();
+    }, []);
 
-    const status = item.video
-      ? item.video.status
+    const getCardType = (item) => {
+      const type = item.video ? item.video.type : item.type;
+
+      const isNews = item.video
+        ? item.video.tags.includes(NEWS)
+        : item.tags
+        ? item.tags.includes(NEWS)
+        : false;
+
+      const creator = item.video ? item.video.creator : item.creator;
+
+      const isYourOwnVideo = () => {
+        if (props.profile?.profile?.social?.id == item?.social?.id) {
+          return true;
+        }
+        return false;
+      };
+
+      const removeVideo = async () => {
+        if (props.videos.removingNeedsApprove.includes(item.id)) {
+          await props.videos.removeVideo(item.id);
+          await props.userUpload.removeItemFromUploads(item.id);
+          await props.auth.startListener();
+          return;
+        }
+        props.videos.removeVideo(item.id);
+      };
+
+      const status = item.video
         ? item.video.status
-        : RELEASED
-      : RELEASED;
-    if (item.count_video >= 0) {
-      return <CardCollection data={item} />;
-    }
-    if (isNews && !this.isFromALlUploads) {
-      if (this.isUpload) {
+          ? item.video.status
+          : RELEASED
+        : RELEASED;
+      if (item.count_video >= 0) {
+        return <CardCollection data={item} />;
+      }
+      if (isNews && !isFromALlUploads) {
+        if (isUpload) {
+          return (
+            <CardNewsUploads
+              item={item}
+              removeVideo={removeVideo}
+              manageble={{
+                isManageble: props.manageble && isYourOwnVideo(),
+                removingNeedsApprove: props.videos.removingNeedsApprove,
+              }}
+            />
+          );
+        }
         return (
-          <CardNewsUploads
+          <CardNews
             item={item}
-            removeVideo={removeVideo}
             manageble={{
-              isManageble: this.props.manageble && isYourOwnVideo(),
-              removingNeedsApprove: this.props.videos.removingNeedsApprove,
+              isManageble: props.manageble && isYourOwnVideo(),
+              removingNeedsApprove: props.videos.removingNeedsApprove,
             }}
           />
         );
       }
-      return (
-        <CardNews
-          item={item}
-          manageble={{
-            isManageble: this.props.manageble && isYourOwnVideo(),
-            removingNeedsApprove: this.props.videos.removingNeedsApprove,
-          }}
-        />
-      );
-    }
 
-    if (creator === MANAGER) {
-      return <CardVideo centered video={item} maxWidthImage="170" />;
-    }
+      if (creator === MANAGER) {
+        return <CardVideo centered video={item} maxWidthImage="170" />;
+      }
 
-    if (creator === USER) {
+      if (creator === USER) {
+        return (
+          <CardUserVideo
+            video={item}
+            withProfile={false}
+            withTitle
+            withInfo={false}
+            removeVideo={removeVideo}
+            manageble={{
+              isManageble: props.manageble && isYourOwnVideo(),
+              removingNeedsApprove: props.videos.removingNeedsApprove,
+            }}
+            withTags
+          />
+        );
+      }
+
+      if (status === COMING_SOON) {
+        return <CardComing centered video={item} maxWidthImage="170" />;
+      }
+      if ((type === SINGLE_VIDEO || type === SERIES) && !isNews) {
+        return <CardVideo centered video={item} maxWidthImage="170" />;
+      }
+
       return (
         <CardUserVideo
           video={item}
           withProfile={false}
           withTitle
           withInfo={false}
-          removeVideo={removeVideo}
           manageble={{
-            isManageble: this.props.manageble && isYourOwnVideo(),
-            removingNeedsApprove: this.props.videos.removingNeedsApprove,
+            isManageble: props.manageble && isYourOwnVideo(),
+            removingNeedsApprove: props.videos.removingNeedsApprove,
           }}
           withTags
         />
       );
-    }
+    };
 
-    if (status === COMING_SOON) {
-      return <CardComing centered video={item} maxWidthImage="170" />;
-    }
-    if ((type === SINGLE_VIDEO || type === SERIES) && !isNews) {
-      return <CardVideo centered video={item} maxWidthImage="170" />;
-    }
-
-    return (
-      <CardUserVideo
-        video={item}
-        withProfile={false}
-        withTitle
-        withInfo={false}
-        manageble={{
-          isManageble: this.props.manageble && isYourOwnVideo(),
-          removingNeedsApprove: this.props.videos.removingNeedsApprove,
-        }}
-        withTags
-      />
-    );
-  }
-
-  render() {
     const {
       data,
       title,
@@ -154,7 +148,7 @@ export default class VideoGrid extends React.Component {
       hasMore = false,
       hasContainer = true,
       containerType,
-    } = this.props;
+    } = props;
 
     const nothingElem = (
       <Row>
@@ -186,12 +180,12 @@ export default class VideoGrid extends React.Component {
     );
 
     const buttonShowMore = (
-      <ButtonTextGreen onClick={() => this.loadData()}>
+      <ButtonTextGreen onClick={() => props.loadData()}>
         Show more
       </ButtonTextGreen>
     );
 
-    const cardsInRow = this.props.cardsInRow || 4;
+    const cardsInRow = props.cardsInRow || 4;
 
     const content = (
       <>
@@ -199,20 +193,20 @@ export default class VideoGrid extends React.Component {
 
         {Boolean(data.length) && (
           <div className={style.grid}>
-            {data.map((item) => {
+            {data.map((item, index) => {
               const id = item.video ? item.video.id : item.id; // if the video is removed from DB but left in "libs" table, we'll need to make this video not to appear
               if (!id) {
                 return null;
               }
               return (
                 <div
-                  key={item.id}
+                  key={index}
                   className={classNames(
                     style['grid-item'],
                     style[`grid-item_${cardsInRow}`],
                   )}
                 >
-                  {this.getCardType(item)}
+                  {getCardType(item)}
                 </div>
               );
             })}
@@ -238,5 +232,6 @@ export default class VideoGrid extends React.Component {
     }
 
     return <Container className={className}>{content}</Container>;
-  }
-}
+  }),
+);
+export default VideoGrid;

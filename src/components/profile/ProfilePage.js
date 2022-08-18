@@ -13,9 +13,15 @@ import {
   SupervisorAccount as SupervisorAccountIcon,
 } from '@material-ui/icons';
 import { ProfileTabs, ProfileTab } from './tabs';
+import ProfileSettings from './tabs/ProfileSettings';
 import ProfileMy from './tabs/ProfileMy';
+import ProfilePayments from './tabs/ProfilePayments';
+import ProfileSub from './tabs/ProfileSub';
+import ProfileParental from './tabs/ProfileParental';
+import ProfileUsers from './tabs/ProfileUsers';
 import { PROFILE_UPLOADS } from '../../constants/routes';
 import UploadPhoto from '../widgets/UploadPhoto';
+import UserContent from '../UserContent/UserContent';
 import { Box } from '../widgets/Box';
 
 const useStyles = makeStyles((theme) => ({
@@ -55,16 +61,16 @@ function a11yProps(index) {
 }
 
 const TAB_MENU = [
-  { title: 'Uploads', icon: UploadIcon, key: PROFILE_UPLOADS },
-  { title: 'Subscription', icon: SubscriptionsIcon, key: null },
-  { title: 'Payment methods', icon: PaymentIcon, key: null },
-  { title: 'Parental control', icon: SupervisorAccountIcon, key: null },
+  { title: 'Uploads', icon: UploadIcon, disabled: false },
+  { title: 'Subscription', icon: SubscriptionsIcon, disabled: true },
+  { title: 'Payment methods', icon: PaymentIcon, disabled: true },
+  { title: 'Parental control', icon: SupervisorAccountIcon, disabled: true },
   {
     title: 'Settings',
     icon: SettingsIcon,
-    key: null,
+    disabled: true,
   },
-  { title: 'Active users', icon: VerifiedUserIcon, key: null },
+  { title: 'Active users', icon: VerifiedUserIcon, disabled: true },
 ];
 
 function TabPanel(props) {
@@ -198,6 +204,7 @@ const ProfilePage = inject('profile')(
                 {...a11yProps(index + 1)}
                 icon={<menu.icon />}
                 aria-label={menu.title}
+                disabled={menu.disabled}
               />
             ))}
           </ProfileTabs>
@@ -206,22 +213,33 @@ const ProfilePage = inject('profile')(
             <ProfileMy />
           </TabPanel>
           <TabPanel className={classes.tabPanel} value={tabIndex} index={1}>
-            Item Two
+            <Box ml={isMobile ? 0 : 4}>
+              <Box
+                ml={1}
+                mt={isMobile ? 2 : 0}
+                fontSize="2rem"
+                fontWeight="500"
+                mb={2}
+              >
+                Uploads
+              </Box>
+              <UserContent profileId={profileId} />
+            </Box>
           </TabPanel>
           <TabPanel className={classes.tabPanel} value={tabIndex} index={2}>
-            Item Three
+            <ProfileSub />
           </TabPanel>
           <TabPanel className={classes.tabPanel} value={tabIndex} index={3}>
-            Item Four
+            <ProfilePayments />
           </TabPanel>
           <TabPanel className={classes.tabPanel} value={tabIndex} index={4}>
-            Item Five
+            <ProfileParental />
           </TabPanel>
           <TabPanel className={classes.tabPanel} value={tabIndex} index={5}>
-            Item Six
+            <ProfileSettings />
           </TabPanel>
           <TabPanel className={classes.tabPanel} value={tabIndex} index={6}>
-            Item Seven
+            <ProfileUsers />
           </TabPanel>
         </div>
       </Container>
