@@ -15,6 +15,7 @@ export const ProfileTabs = withStyles((theme) => ({
       width: '100%',
       backgroundColor: theme.palette.primary.main,
     },
+    maxHeight: 70,
   },
 }))((props) => <Tabs {...props} TabIndicatorProps={{ children: <span /> }} />);
 

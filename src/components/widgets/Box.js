@@ -7,8 +7,9 @@ import {
   flexbox,
   spacing,
   width,
+  borders,
 } from '@material-ui/system';
 
 export const Box = styled('div')(
-  compose(width, display, flexbox, spacing, palette, typography),
+  compose(width, display, flexbox, spacing, palette, typography, borders),
 );

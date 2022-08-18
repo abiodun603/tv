@@ -100,31 +100,70 @@ const ProfilePage = inject('profile')(
     };
 
     const UserProfileBox = () => (
-      <Box
-        display="flex"
-        flexDirection="row"
-        alignItems="center"
-        justifyContent={isMobile ? 'space-between' : 'flex-start'}
-        mr={1}
-        p={1.5}
-      >
-        <UploadPhoto
-          storeProfile={storeProfile}
-          upload={uploadPhoto}
-          classname={classes.avatar}
-        />
+      <Box mr={1} p={1.5}>
         <Box
-          color={theme.palette.info.main}
-          lineHeight="1.2"
-          ml={1}
-          className="clickable"
-          onClick={() => setTabIndex(0)}
+          display="flex"
+          flexDirection="row"
+          alignItems="center"
+          justifyContent={isMobile ? 'space-between' : 'flex-start'}
         >
-          {storeProfile.name} {storeProfile.last_name}
-          <Box color={theme.palette.grey.grey60} fontSize="14px">
-            @{storeProfile.username}
+          <UploadPhoto
+            storeProfile={storeProfile}
+            upload={uploadPhoto}
+            classname={classes.avatar}
+          />
+          <Box
+            color={theme.palette.info.main}
+            lineHeight="1.2"
+            ml={1}
+            className="clickable"
+            onClick={() => setTabIndex(0)}
+          >
+            {storeProfile.name} {storeProfile.last_name}
+            <Box color={theme.palette.grey.grey60} fontSize="14px">
+              @{storeProfile.username}
+            </Box>
           </Box>
         </Box>
+        <Box
+          display="flex"
+          flexDirection="row"
+          alignItems="center"
+          justifyContent="space-between"
+          mt={3}
+        >
+          <Box>
+            <Box color={theme.palette.grey.default} fontSize={12}>
+              Videos
+            </Box>
+            <Box textAlign="center">{storeProfile.social.count_videos}</Box>
+          </Box>
+          <Box>
+            <Box color={theme.palette.grey.default} fontSize={12}>
+              Followers
+            </Box>
+            <Box textAlign="center">{storeProfile.social.count_followers}</Box>
+          </Box>
+          <Box>
+            <Box color={theme.palette.grey.default} fontSize={12}>
+              Following
+            </Box>
+            <Box textAlign="center">{storeProfile.social.count_following}</Box>
+          </Box>
+        </Box>
+        <Link href="/upload">
+          <Box
+            className="clickable"
+            bgcolor={theme.palette.primary.main}
+            color={theme.palette.background.default}
+            textAlign="center"
+            py={1.75}
+            mt={1}
+            borderRadius={4}
+          >
+            Upload Video
+          </Box>
+        </Link>
       </Box>
     );
 
