@@ -6,10 +6,10 @@ import {
   display,
   flexbox,
   spacing,
-  width,
+  sizing,
   borders,
 } from '@material-ui/system';
 
 export const Box = styled('div')(
-  compose(width, display, flexbox, spacing, palette, typography, borders),
+  compose(sizing, display, flexbox, spacing, palette, typography, borders),
 );
