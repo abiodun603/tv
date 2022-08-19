@@ -158,7 +158,7 @@ const ProfileSettings = inject('auth')(
               </Box>
             </Grid>
           </Grid>
-          <Grid container item xs={12} md={8} className={classes.gridContainer}>
+          {/* <Grid container item xs={12} md={8} className={classes.gridContainer}>
             <Grid item xs={12}>
               <Box fontWeight="500" mb={2}>
                 My Devices
@@ -185,7 +185,7 @@ const ProfileSettings = inject('auth')(
                 <Box color={theme.palette.grey.grey60}>Toronto, Canada</Box>
               </Box>
             </Grid>
-          </Grid>
+          </Grid> */}
         </Grid>
       </Box>
     );

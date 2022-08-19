@@ -80,7 +80,7 @@ const Upload = inject(
               <Col lg={6} className={`mb-4 ${isMobile ? 'px-2' : 'px-5'}`}>
                 <Form>
                   <Row>
-                    <Col md={5}>
+                    <Col md={5} className="mb-2">
                       <CustomTextField
                         id="title"
                         fullWidth
@@ -93,7 +93,7 @@ const Upload = inject(
                         onChange={handleChangeText}
                       />
                     </Col>
-                    <Col md={{ span: 5, offset: 1 }}>
+                    <Col md={{ span: 5, offset: 1 }} className="mb-2">
                       <CustomTextField
                         id="description"
                         fullWidth

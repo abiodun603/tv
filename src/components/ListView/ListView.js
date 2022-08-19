@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import classNames from 'classnames';
 import { Container, Row, Col, Image } from 'react-bootstrap';
+import { useMediaQuery } from '@material-ui/core';
 
 import ArrowNextDis from '../../../public/icon/ic_arrow_next_dis.svg';
 import ArrowBackEn from '../../../public/icon/ic_arrow_prev_en.svg';
@@ -32,11 +33,12 @@ export const ListView = (props) => {
     hasNavigion = true,
     isOnBoard = false,
   } = props;
+  const isMobile = useMediaQuery('(max-width:768px)');
 
   const content = (
     <Row>
       {isLoading ? (
-        Array(itemsInRow)
+        Array(isMobile ? 1 : itemsInRow)
           .fill(0)
           .map((_, index) => <Skeleton key={index} />)
       ) : props.children.length > 0 ? (

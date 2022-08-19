@@ -360,3 +360,7 @@ a.text-title:active {
   background-repeat: no-repeat;
   color: white;
 }
+
+.disabled {
+  opacity: 0.5;
+}

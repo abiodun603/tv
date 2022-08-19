@@ -37,7 +37,11 @@ export const CustomTextField = withStyles({
       borderBottomColor: 'red',
     },
     '&  .MuiInput-underline:before': {
-      borderBottomColor: AppTheme.palette.secondary.main,
+      borderBottomColor: 'rgba(0, 0, 0, 0.1)',
+    },
+    '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
+      borderBottomColor: AppTheme.palette.grey.grey30,
+      borderWidth: 1.5,
     },
   },
 })((props) => <TextField {...props} />);
@@ -55,7 +59,11 @@ export const CustomDatePicker = withStyles({
       borderBottomColor: 'red',
     },
     '&  .MuiInput-underline:before': {
-      borderBottomColor: AppTheme.palette.secondary.main,
+      borderBottomColor: 'rgba(0, 0, 0, 0.1)',
+    },
+    '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
+      borderBottomColor: AppTheme.palette.grey.grey30,
+      borderWidth: 1.5,
     },
   },
 })((props) => (

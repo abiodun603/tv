@@ -103,12 +103,17 @@ const SignInForm = observer(({ storeAuth, theme }) => {
         <Grid item>
           <Avatar
             variant="square"
-            onClick={() => authSocial(TWITTER)}
+            className="disabled"
             src="/icon/ic_twitter.svg"
           />
         </Grid>
         <Grid item>
-          <Avatar variant="square" src="/icon/ic_ig.svg" />
+          <Avatar
+            variant="square"
+            className="disabled"
+            src="/icon/ic_ig.svg"
+            disabled
+          />
         </Grid>
       </Grid>
       <Box display="flex" justifyContent="center" mt={2} mb={4}>

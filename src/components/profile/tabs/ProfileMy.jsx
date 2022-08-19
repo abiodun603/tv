@@ -42,7 +42,7 @@ const MyProfile = inject(
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const classes = useStyles();
-    const isMobile = useMediaQuery('(max-width:768px)');
+    const isMobile = useMediaQuery('(max-width:959px)');
 
     useEffect(() => {
       const {
