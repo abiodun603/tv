@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { inject, observer } from 'mobx-react';
 
 import { Col, Container, Row } from 'react-bootstrap';
@@ -6,21 +6,16 @@ import { Col, Container, Row } from 'react-bootstrap';
 import CardCollection from './Card/CardCollection';
 import { ShowMore } from './list/show-more';
 
-@inject('collections')
-@observer
-class Collections extends React.Component {
-  componentDidMount() {
-    this.loadCollections();
-  }
+const Collections = inject('collections')(
+  observer((props) => {
+    useEffect(() => {
+      loadCollections();
+    }, []);
 
-  loadCollections() {
-    this.props.collections.getCollections();
-  }
-
-  render() {
+    const loadCollections = () => props.collections.getCollections();
     const {
       collections: { collections },
-    } = this.props;
+    } = props;
 
     return (
       <Container className="bg-light-gray mb-5 pt-4 pb-4 py-5 px-5">
@@ -31,18 +26,15 @@ class Collections extends React.Component {
         </div>
         <Row>
           {collections.media.map((item) => (
-            <Col xs={12} md={3} className="mb-4" key={item.id}>
+            <Col md={6} xl={3} className="mb-4" key={item.id}>
               <CardCollection data={item} />
             </Col>
           ))}
         </Row>
 
-        {collections.hasMore && (
-          <ShowMore onClick={() => this.loadCollections()} />
-        )}
+        {collections.hasMore && <ShowMore onClick={() => loadCollections()} />}
       </Container>
     );
-  }
-}
-
+  }),
+);
 export default Collections;

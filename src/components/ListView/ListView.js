@@ -50,7 +50,7 @@ export const ListView = (props) => {
   );
 
   const navigation = (
-    <Col className="d-flex justify-content-end">
+    <div className="d-flex justify-content-end">
       <button
         type="button"
         className="button-img-svg"
@@ -67,7 +67,7 @@ export const ListView = (props) => {
       >
         {nextEnable ? <ArrowNextEn /> : <ArrowNextDis />}
       </button>
-    </Col>
+    </div>
   );
 
   const titleElem = titleUrl ? (
@@ -80,15 +80,19 @@ export const ListView = (props) => {
 
   return (
     <Container
-      // style={{
-      //   minHeight: `${props.itemsInRow === 4 ? '350px' : '480px'}`,
-      // }}
-      className={classNames(isWhite ? 'bg-white' : '', isOnBoard ? '' : 'py-5')}
+      className={classNames(
+        isWhite ? 'bg-white' : '',
+        isOnBoard ? '' : isMobile ? 'py-3' : 'py-5',
+      )}
     >
-      <Row className="d-flex mb-3">
-        <Col className="d-flex justify-content-start">{titleElem}</Col>
+      <div
+        className={`d-flex mb-3 align-items-center justify-content-between ${
+          isMobile ? 'flex-column' : 'flex-row'
+        }`}
+      >
+        <div>{titleElem}</div>
         {hasNavigion && navigation}
-      </Row>
+      </div>
       {isCommingSoon ? <BlurOverlay>{content}</BlurOverlay> : content}
     </Container>
   );

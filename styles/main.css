@@ -210,6 +210,12 @@ button:focus {
   font-size: 1.7rem;
 }
 
+.text-info-title {
+  color: black;
+  font-weight: 500;
+  font-size: 1.2rem;
+}
+
 a.text-title:hover,
 a.text-title:active {
   color: black;

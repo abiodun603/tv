@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { inject, observer } from 'mobx-react';
 
 import { Col, Container, Row } from 'react-bootstrap';
@@ -53,97 +53,87 @@ const TITLES = {
   },
 };
 
-@inject('videos')
-@observer
-class VideoList extends React.Component {
-  componentDidUpdate(prevProps) {
-    if (
-      prevProps.type !== this.props.type ||
-      prevProps.tag !== this.props.tag
-    ) {
-      this.props.videos.clearData();
-      this.loadVideo();
-    }
-  }
+const VideoList = inject('videos')(
+  observer((props) => {
+    useEffect(() => {
+      props.videos.clearData();
+    }, [props.type, props.tag]);
 
-  componentDidMount() {
-    this.loadVideo();
-  }
+    useEffect(() => {
+      loadVideo();
 
-  componentWillUnmount() {
-    this.props.videos.clearData();
-  }
+      return () => props.videos.clearData();
+    }, []);
 
-  loadVideo() {
-    const { tag, params, type } = this.props;
+    const loadVideo = () => {
+      const { tag, params, type } = props;
 
-    const filters = typeof params === 'object' ? params : {};
+      const filters = typeof params === 'object' ? params : {};
 
-    this.props.videos.getVideo(type, tag, filters);
-  }
+      props.videos.getVideo(type, tag, filters);
+    };
 
-  getCardType(item) {
-    const { tag, size = 3 } = this.props;
+    const getCardType = (item) => {
+      const { tag, size = 3 } = props;
 
-    if (
-      tag === TAGS.FAVORITE_USER ||
-      tag === TAGS.POPULAR ||
-      tag === TAGS.RECOMMENDED
-    ) {
+      if (
+        tag === TAGS.FAVORITE_USER ||
+        tag === TAGS.POPULAR ||
+        tag === TAGS.RECOMMENDED
+      ) {
+        return (
+          <Col key={item.id} xs={size} className="mb-3">
+            <CardUserVideo video={item} />
+          </Col>
+        );
+      }
+
       return (
-        <Col key={item.id} xs={size} className="mb-3">
-          <CardUserVideo video={item} />
+        <Col key={item.id} md={6} xl={2} className="mb-3">
+          <CardVideo video={item} />
         </Col>
       );
-    }
+    };
 
-    return (
-      <Col key={item.id} xs={2} className="mb-3">
-        <CardVideo video={item} />
-      </Col>
-    );
-  }
+    const renderTitle = () => {
+      const {
+        showTitle = false,
+        title: originalTitle = null,
+        type,
+        tag,
+      } = props;
 
-  renderTitle() {
-    const {
-      showTitle = false,
-      title: originalTitle = null,
-      type,
-      tag,
-    } = this.props;
+      if (!showTitle) {
+        return null;
+      }
 
-    if (!showTitle) {
-      return null;
-    }
+      const { title: typeTitle } = typeParams[type] || {};
+      const { title: tagTitle } = TITLES[tag] || {};
 
-    const { title: typeTitle } = typeParams[type] || {};
-    const { title: tagTitle } = TITLES[tag] || {};
+      const title = originalTitle || typeTitle || tagTitle;
 
-    const title = originalTitle || typeTitle || tagTitle;
+      if (!title) {
+        return null;
+      }
+      return (
+        <Row>
+          <Col className="mb-4">
+            <span className="text-title">{title}</span>
+          </Col>
+        </Row>
+      );
+    };
 
-    if (!title) {
-      return null;
-    }
-    return (
-      <Row>
-        <Col className="mb-4">
-          <span className="text-title">{title}</span>
-        </Col>
-      </Row>
-    );
-  }
-
-  render() {
     const {
       videos: { media, loading, hasMore },
       className,
-    } = this.props;
+    } = props;
 
     return (
       <Container className={className}>
-        {this.renderTitle()}
+        {renderTitle()}
 
-        <Row>{media.map((item) => this.getCardType(item))}</Row>
+        <Row>{media.map((item) => getCardType(item))}</Row>
 
         {loading && (
           <Row className="d-flex justify-content-center mt-5">
@@ -154,7 +144,7 @@ class VideoList extends React.Component {
         <Row>
           <Col className="text-center my-5">
             {hasMore && (
-              <ButtonTextGreen onClick={() => this.loadVideo()}>
+              <ButtonTextGreen onClick={() => loadVideo()}>
                 Show more
               </ButtonTextGreen>
             )}
@@ -162,7 +152,7 @@ class VideoList extends React.Component {
         </Row>
       </Container>
     );
-  }
-}
+  }),
+);
 
 export default VideoList;

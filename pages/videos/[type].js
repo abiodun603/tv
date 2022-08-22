@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import { useRouter } from 'next/router';
+import { useMediaQuery } from '@material-ui/core';
 
 import Page from '../../src/components/Page';
 import VideoList from '../../src/components/VideoList';
@@ -14,6 +15,7 @@ const decodeParams = (params) => {
 
 export default function VideosType() {
   const router = useRouter();
+  const isMobile = useMediaQuery('(max-width:768px)');
 
   const { title, params, ...props } = router.query;
 
@@ -24,7 +26,7 @@ export default function VideosType() {
   return (
     <Page>
       <VideoList
-        className="py-5 px-5"
+        className={isMobile ? 'p-3' : 'p-5'}
         title={title}
         showTitle
         params={filters}
