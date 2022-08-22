@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { inject, observer } from 'mobx-react';
 
 import { ListView } from './ListView/ListView';
@@ -20,29 +20,25 @@ const titles = {
   musicVideo: 'Music Videos',
 };
 
-@inject('music')
-@observer
-class Music extends React.Component {
-  componentDidMount() {
-    const { music } = this.props;
-
-    // start loading
-    types.forEach((type) => music.getList(type));
-  }
-  getCardType(type, item, key) {
-    switch (type) {
-      case MUSIC_RECENT: {
-        return <CardMusic key={key} video={item.video} />;
-      }
-      default: {
-        return <CardMusic key={key} video={item} />;
-      }
-    }
-  }
-
-  render() {
-    const { music } = this.props;
+const Music = inject('music')(
+  observer((props) => {
+    const { music } = props;
     const { list: videos } = music;
+
+    useEffect(() => {
+      types.forEach((type) => props.music.getList(type));
+    }, []);
+
+    const getCardType = (type, item, key) => {
+      switch (type) {
+        case MUSIC_RECENT: {
+          return <CardMusic key={key} video={item.video} />;
+        }
+        default: {
+          return <CardMusic key={key} video={item} />;
+        }
+      }
+    };
 
     return (
       <>
@@ -60,13 +56,13 @@ class Music extends React.Component {
             onNext={() => music.getList(type, true)}
           >
             {videos[type].media.map((item, key) =>
-              this.getCardType(type, item, key)
+              getCardType(type, item, key),
             )}
           </ListView>
         ))}
       </>
     );
-  }
-}
+  }),
+);
 
 export default Music;

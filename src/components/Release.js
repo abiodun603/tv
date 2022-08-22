@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { inject, observer } from 'mobx-react';
 import { Col } from 'react-bootstrap';
 
@@ -14,25 +14,21 @@ import * as TAGS from '../constants/tags';
 import * as urlGenerator from '../lib/url/generator';
 import { SkeletonHorizontal, SkeletonVertical } from './widgets/Skeletons';
 
-@inject('release')
-@observer
-class Release extends React.Component {
-  componentDidMount() {
-    const { release } = this.props;
+const Release = inject('release')(
+  observer((props) => {
+    useEffect(() => {
+      [
+        TAGS.FAVORITE_USER,
+        TAGS.ALL,
+        TAGS.TV,
+        TAGS.KIDS,
+        TAGS.MUSIC,
+        TAGS.PODCASTS,
+        TAGS.DOC,
+      ].forEach((tag) => props.release.getVideo(tag, true, { _start: 0 }));
+    }, []);
 
-    [
-      TAGS.FAVORITE_USER,
-      TAGS.ALL,
-      TAGS.TV,
-      TAGS.KIDS,
-      TAGS.MUSIC,
-      TAGS.PODCASTS,
-      TAGS.DOC,
-    ].forEach((tag) => release.getVideo(tag, true, { _start: 0 }));
-  }
-
-  render() {
-    const { release } = this.props;
+    const { release } = props;
     const { video: videos } = release;
 
     return (
@@ -67,7 +63,7 @@ class Release extends React.Component {
           onNext={() => release.getVideo(TAGS.ALL, true)}
         >
           {videos[TAGS.ALL].media.map((item) => (
-            <Col key={item.id} xs="2">
+            <Col key={item.id} md={6} xl={2}>
               <CardVideo video={item} full />
             </Col>
           ))}
@@ -85,7 +81,7 @@ class Release extends React.Component {
           onNext={() => release.getVideo(TAGS.MUSIC, true)}
         >
           {videos[TAGS.MUSIC].media.map((item) => (
-            <Col key={item.id} xs="2">
+            <Col key={item.id} md={6} xl={2}>
               <CardVideo video={item} full />
             </Col>
           ))}
@@ -103,7 +99,7 @@ class Release extends React.Component {
           onNext={() => release.getVideo(TAGS.PODCASTS, true)}
         >
           {videos[TAGS.PODCASTS].media.map((item) => (
-            <Col key={item.id} xs="2">
+            <Col key={item.id} md={6} xl={2}>
               <CardVideo video={item} full />
             </Col>
           ))}
@@ -121,7 +117,7 @@ class Release extends React.Component {
           onNext={() => release.getVideo(TAGS.KIDS, true)}
         >
           {videos[TAGS.KIDS].media.map((item) => (
-            <Col key={item.id} xs="2">
+            <Col key={item.id} md={6} xl={2}>
               <CardVideo video={item} full />
             </Col>
           ))}
@@ -139,7 +135,7 @@ class Release extends React.Component {
           onNext={() => release.getVideo(TAGS.DOC, true)}
         >
           {videos[TAGS.DOC].media.map((item) => (
-            <Col key={item.id} xs="2">
+            <Col key={item.id} md={6} xl={2}>
               <CardVideo video={item} full />
             </Col>
           ))}
@@ -157,14 +153,14 @@ class Release extends React.Component {
           onNext={() => release.getVideo(TAGS.TV, true)}
         >
           {videos[TAGS.TV].media.map((item) => (
-            <Col key={item.id} xs="2">
+            <Col key={item.id} md={6} xl={2}>
               <CardVideo video={item} full />
             </Col>
           ))}
         </ListView>
       </>
     );
-  }
-}
+  }),
+);
 
 export default Release;

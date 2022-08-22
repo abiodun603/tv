@@ -10,6 +10,7 @@ import * as TYPES from '../constants/types';
 import CardVideo from './Card/CardVideo';
 import CardUserVideo from './Card/CardUserVideo';
 import { ButtonTextGreen } from './widgets/Button';
+import { MockEmptySpace } from './mock/MockEmptySpace';
 
 const typeParams = {
   [TYPES.FILM]: {
@@ -133,12 +134,20 @@ const VideoList = inject('videos')(
       <Container className={className}>
         {renderTitle()}
 
-        <Row>{media.map((item) => getCardType(item))}</Row>
-
-        {loading && (
+        {loading ? (
           <Row className="d-flex justify-content-center mt-5">
             <Spinner animation="border" variant="success" />
           </Row>
+        ) : (
+          <>
+            {media.length > 0 ? (
+              <Row>{media.map((item) => getCardType(item))}</Row>
+            ) : (
+              <Row>
+                <MockEmptySpace width={250} />
+              </Row>
+            )}
+          </>
         )}
 
         <Row>
