@@ -1,5 +1,5 @@
 export default [
-  { key: 0, label: 'Politic', enabled: false },
+  { key: 0, label: 'Politics', enabled: false },
   { key: 1, label: 'Sport', enabled: false },
   { key: 2, label: 'Accident', enabled: false },
 
