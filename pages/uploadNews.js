@@ -1,12 +1,12 @@
 import React from 'react';
 
 import Page from '../src/components/Page';
-import UploadNews from '../src/components/UploadNews';
+import Upload from '../src/components/Upload';
 
 export default function UploadPage() {
   return (
     <Page>
-      <UploadNews />
+      <Upload news={true} />
     </Page>
   );
 }

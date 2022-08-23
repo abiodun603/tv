@@ -19,21 +19,36 @@ import { SINGLE_VIDEO } from '../constants/types';
 
 const Upload = inject(
   'upload',
-  'auth',
+  'uploadNews',
 )(
   observer((props) => {
     const isMobile = useMediaQuery('(max-width:768px)');
 
-    let storeUpload = props.upload;
     const handleChangeText = (event) => {
-      props.upload.setDataVideo(event.target.value, event.target.id);
+      props.news
+        ? props.uploadNews.setDataVideo(event.target.value, event.target.id)
+        : props.upload.setDataVideo(event.target.value, event.target.id);
     };
     const handleChangeCheckbox = (event) => {
-      props.upload.setDataVideo(event.target.checked, event.target.id);
+      props.news
+        ? props.uploadNews.setDataVideo(event.target.checked, event.target.id)
+        : props.upload.setDataVideo(event.target.checked, event.target.id);
     };
     const setEnabled = (key, enabled) => {
-      props.upload.setEnabledTag(key, enabled);
+      props.news
+        ? props.uploadNews.setEnabledTag(key, enabled)
+        : props.upload.setEnabledTag(key, enabled);
     };
+    const onUpload = () => {
+      if (storeUpload.loading) {
+        storeUpload.cancel();
+      } else {
+        props.news
+          ? storeUpload.uploadNews(SINGLE_VIDEO)
+          : storeUpload.uploadVideo(SINGLE_VIDEO);
+      }
+    };
+    const storeUpload = props.news ? props.uploadNews : props.upload;
 
     return (
       <Container id={style.settings_background}>
@@ -113,6 +128,9 @@ const Upload = inject(
 
                   <div className="mt-3 mb-5 d-flex flex-wrap">
                     {storeUpload.tagsVideo.map((tag) => {
+                      if (tag.label === 'All') {
+                        return null;
+                      }
                       return (
                         <div key={tag.key}>
                           <Chip
@@ -163,11 +181,7 @@ const Upload = inject(
 
                   <ButtonContainer
                     color="primary"
-                    onClick={(e) =>
-                      !storeUpload.loading
-                        ? storeUpload.uploadVideo(SINGLE_VIDEO)
-                        : storeUpload.cancel()
-                    }
+                    onClick={(e) => onUpload()}
                     variant="contained"
                   >
                     {storeUpload.loading ? 'Cancel' : 'Submit'}

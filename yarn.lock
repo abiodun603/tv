@@ -4287,6 +4287,11 @@
     "lodash.debounce" "^4.0.8"
     "resize-observer-polyfill" "^1.5.0"
 
+"react-tabs-scrollable@^1.0.9":
+  "integrity" "sha512-vBDbmLyOT4UYhuUJYW9Q8RrN9dgM66FSPAhLfbCj2O0nAQjSzNIaYtaXvtDEWUCLhygmX8xO0nfsusX1dWy+Ow=="
+  "resolved" "https://registry.npmjs.org/react-tabs-scrollable/-/react-tabs-scrollable-1.0.9.tgz"
+  "version" "1.0.9"
+
 "react-transition-group@^4.0.0", "react-transition-group@^4.4.0", "react-transition-group@^4.4.2":
   "integrity" "sha512-pZcd1MCJoiKiBR2NRxeCRg13uCXbydPnmB4EOeRrY7480qNWO8IIgQG6zlDkm6uRMsURXPuKq0GWtiM59a5Q6g=="
   "resolved" "https://registry.npmjs.org/react-transition-group/-/react-transition-group-4.4.5.tgz"

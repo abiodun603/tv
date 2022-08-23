@@ -12,6 +12,7 @@ import { ButtonTextGreen } from '../widgets/Button';
 
 import possibleCategories from '../../utils/lists/listTagNews';
 import { TYPE_NEWS } from '../../constants/API';
+import NewsTabs from './NewsTabs';
 
 const News = inject('news')(
   observer((props) => {
@@ -70,36 +71,9 @@ const News = inject('news')(
               <span className="text-title">Latest in the community</span>
             </div>
           </div>
-          <ul className="news-nav d-flex align-items-center justify-content-between flex-wrap mb-4">
-            <li className="news-nav__item">
-              <a
-                onClick={() => setCategoriesFilter([])}
-                className={`news-nav__link ${
-                  categoriesFilter.length === 0 && 'news-nav__link_active'
-                }`}
-              >
-                All
-              </a>
-            </li>
-            {categories.map((category) => (
-              <li
-                key={category.key}
-                className="news-nav__item list-inline-item"
-              >
-                <a
-                  className={`news-nav__link ${
-                    categoriesFilter.includes(category.label) &&
-                    'news-nav__link_active'
-                  }`}
-                  onClick={(e) => {
-                    toggleFilter(category.label);
-                  }}
-                >
-                  {category.label}
-                </a>
-              </li>
-            ))}
-          </ul>
+          <div className="mb-4 news-tabs">
+            <NewsTabs categories={categories} />
+          </div>
 
           <div className="news-filter d-flex justify-content-between mb-4">
             <div className="news-filter__search">
