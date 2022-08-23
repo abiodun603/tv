@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { inject, observer } from 'mobx-react';
 
 import { Col, Container, Row, Image } from 'react-bootstrap';
-import Spinner from 'react-bootstrap/Spinner';
 import classNames from 'classnames';
 
 import CardVideo from '../Card/CardVideo';
@@ -10,6 +9,7 @@ import CardUserVideo from '../Card/CardUserVideo';
 import CardNews from '../cards/CardNews';
 import CardNewsUploads from '../cards/CardNewsUploads';
 import { ButtonTextGreen } from '../widgets/Button';
+import { ThreeDotsLoader } from '../ui/spiner';
 
 import style from './VideoGrid.module.css';
 import CardComing from '../Card/CardComing';
@@ -172,10 +172,10 @@ const VideoGrid = inject(
 
     const spinner = (
       <Row
-        className="d-flex justify-content-center mt-5 align-items-center"
+        className="d-flex justify-content-center mt-5 align-items-center w-100"
         style={{ minHeight: `${!data.length ? '330' : '20'}px` }}
       >
-        <Spinner animation="border" variant="success" />
+        <ThreeDotsLoader />
       </Row>
     );
 
@@ -190,36 +190,40 @@ const VideoGrid = inject(
     const content = (
       <>
         {titleElem}
+        {loading ? (
+          spinner
+        ) : (
+          <>
+            {Boolean(data.length) && (
+              <div className={style.grid}>
+                {data.map((item, index) => {
+                  const id = item.video ? item.video.id : item.id; // if the video is removed from DB but left in "libs" table, we'll need to make this video not to appear
+                  if (!id) {
+                    return null;
+                  }
+                  return (
+                    <div
+                      key={index}
+                      className={classNames(
+                        style['grid-item'],
+                        style[`grid-item_${cardsInRow}`],
+                      )}
+                    >
+                      {getCardType(item)}
+                    </div>
+                  );
+                })}
+              </div>
+            )}
 
-        {Boolean(data.length) && (
-          <div className={style.grid}>
-            {data.map((item, index) => {
-              const id = item.video ? item.video.id : item.id; // if the video is removed from DB but left in "libs" table, we'll need to make this video not to appear
-              if (!id) {
-                return null;
-              }
-              return (
-                <div
-                  key={index}
-                  className={classNames(
-                    style['grid-item'],
-                    style[`grid-item_${cardsInRow}`],
-                  )}
-                >
-                  {getCardType(item)}
-                </div>
-              );
-            })}
-          </div>
+            {!data.length && !loading && nothingElem}
+            <Row>
+              <Col className="text-center my-5">
+                {hasMore && buttonShowMore}
+              </Col>
+            </Row>
+          </>
         )}
-
-        {!data.length && !loading && nothingElem}
-
-        {loading && spinner}
-
-        <Row>
-          <Col className="text-center my-5">{hasMore && buttonShowMore}</Col>
-        </Row>
       </>
     );
 

@@ -19,7 +19,11 @@ export const ThreeDotsLoader = (props) => {
       radius="9"
       color={AppTheme.palette.primary.main}
       ariaLabel="three-dots-loading"
-      wrapperStyle={{}}
+      wrapperStyle={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
       wrapperClassName=""
       visible={true}
     />

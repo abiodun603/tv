@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Row } from 'react-bootstrap';
 
 import { inject, observer } from 'mobx-react';
 import { useMediaQuery } from '@material-ui/core';
@@ -9,6 +10,8 @@ import { Container, Spinner } from 'react-bootstrap';
 
 import { NewsCard } from '../cards/_html/NewsCard';
 import { ButtonTextGreen } from '../widgets/Button';
+import { MockEmptySpace } from '../mock/MockEmptySpace';
+import { ThreeDotsLoader } from '../ui/spiner';
 
 import possibleCategories from '../../utils/lists/listTagNews';
 import { TYPE_NEWS } from '../../constants/API';
@@ -16,24 +19,27 @@ import NewsTabs from './NewsTabs';
 
 const News = inject('news')(
   observer((props) => {
+    const [activeTab, setAactiveTab] = useState(0);
     const [categories, setCategories] = useState([]);
     const [categoriesFilter, setCategoriesFilter] = useState([]);
-    const [amountOfActiveFilters, setAmountOfActiveFilters] = useState(0);
     const [searchingFor, setSearchingFor] = useState('');
-    const [searchLoading, setSearchLoading] = useState(false);
-    const [searchResults, setSearchResults] = useState([]);
     const isMobile = useMediaQuery('(max-width:768px)');
     const isLargeScreen = useMediaQuery('(min-width:1280px)');
 
     useEffect(() => {
       setCategories(possibleCategories);
-
-      loadNews();
     }, []);
 
-    const loadNews = () => {
+    useEffect(() => {
+      const selectedTag = categories.find((c) => c.key === activeTab);
+      if (selectedTag) {
+        loadNews(selectedTag.label);
+      }
+    }, [activeTab]);
+
+    const loadNews = (tag = TYPE_NEWS) => {
       props.news.getNews('news', {
-        _where: { tags_contains: [TYPE_NEWS] },
+        _where: { tags_contains: [tag] },
       });
     };
 
@@ -50,17 +56,6 @@ const News = inject('news')(
       });
     };
 
-    const toggleFilter = (filter) => {
-      const filterIndex = categoriesFilter.indexOf(filter);
-      if (filterIndex === -1) {
-        categoriesFilter.push(filter);
-        setAmountOfActiveFilters(amountOfActiveFilters + 1);
-      } else {
-        categoriesFilter.splice(filterIndex, 1);
-        setAmountOfActiveFilters(amountOfActiveFilters - 1);
-      }
-    };
-
     const news = props.news.media;
 
     return (
@@ -72,7 +67,11 @@ const News = inject('news')(
             </div>
           </div>
           <div className="mb-4 news-tabs">
-            <NewsTabs categories={categories} />
+            <NewsTabs
+              categories={categories}
+              activeTab={activeTab}
+              onTabSelected={(e, i) => setAactiveTab(i)}
+            />
           </div>
 
           <div className="news-filter d-flex justify-content-between mb-4">
@@ -106,15 +105,26 @@ const News = inject('news')(
             className="row row-cols-1 row-cols-sm-2 row-cols-md-4"
             style={{ minHeight: '302px' }}
           >
-            {categoriesFilter.length === 0
-              ? news.map((item) => <NewsCard key={item.id} item={item} />)
-              : news.map((item) => {
-                  if (props.news.categoryCheck(item.tags, categoriesFilter)) {
-                    return <NewsCard key={item.id} item={item} />;
-                  }
-                })}
+            {props.news.loading ? (
+              <div className="d-flex align-items-center justify-content-center w-100">
+                <ThreeDotsLoader />
+              </div>
+            ) : (
+              <>
+                {news.length === 0 && <MockEmptySpace width={250} />}
+                {categoriesFilter.length === 0
+                  ? news.map((item) => <NewsCard key={item.id} item={item} />)
+                  : news.map((item) => {
+                      if (
+                        props.news.categoryCheck(item.tags, categoriesFilter)
+                      ) {
+                        return <NewsCard key={item.id} item={item} />;
+                      }
+                    })}
+              </>
+            )}
           </div>
-          <div className="row">
+          <Row>
             {props.news.hasMore && (
               <div
                 onClick={() => {
@@ -125,7 +135,7 @@ const News = inject('news')(
                 <ButtonTextGreen>Show more</ButtonTextGreen>
               </div>
             )}
-          </div>
+          </Row>
         </div>
       </Container>
     );
