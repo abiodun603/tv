@@ -264,6 +264,7 @@ const SignInForm = observer(({ storeAuth, theme }) => {
 
 const AccountCreationForm = observer(({ storeAuth }) => {
   const storeProfile = storeAuth.profileStore;
+
   const handleChangeBirthday = (data) => {
     storeProfile.setBirthday(data);
   };
@@ -341,7 +342,7 @@ const AccountCreationForm = observer(({ storeAuth }) => {
             </TextButton>
           </Box>
           <Box display="flex" justifyContent="center" mb={2}>
-            <TextButton onClick={storeProfile.signOut}>Logout</TextButton>
+            <TextButton onClick={() => storeAuth.signOut()}>Logout</TextButton>
           </Box>
         </>
       )}
