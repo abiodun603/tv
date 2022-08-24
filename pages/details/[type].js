@@ -6,7 +6,6 @@ import { DetailsVideo } from '../../src/components/details';
 
 export default function DetailsType() {
   const { query } = useRouter();
-
   return (
     <Page>
       <DetailsVideo query={query} />

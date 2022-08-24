@@ -33,7 +33,7 @@ export function CardStatsWatchDetails({ value }) {
   return (
     <div>
       <IoIosEye fill="#2b3331" />
-      <span className="ml-1 text-dark">{getNumber(value)}</span>
+      <span className="m-1 text-dark">{getNumber(value)}</span>
     </div>
   );
 }

@@ -42,7 +42,7 @@ export class PlayerWithAds extends React.Component {
   }
 
   onVideoProgress(event, currentTime) {
-    this.props.onProgress?.(event, currentTime);
+    this.props.onProgress(event, currentTime);
     this.userWatchedSeconds++;
     // Run ad every AD_BREAK_SECONDS
     if (this.userWatchedSeconds > AD_BREAK_SECONDS) {

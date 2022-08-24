@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { inject, observer } from 'mobx-react';
 import { Col, Container, Row, Spinner } from 'react-bootstrap';
 import {
@@ -14,29 +14,23 @@ import { Comment } from './Comment';
 import MessageIcon from '../../../public/icon/ic_message.svg';
 import { ButtonTextGreen } from '../widgets/Button';
 
-@inject('video', 'profile')
-@observer
-class Comments extends React.Component {
-  componentDidMount() {
-    this.getData();
-  }
+const Comments = inject(
+  'video',
+  'profile',
+)(
+  observer((props) => {
+    useEffect(() => {
+      getCommentsData();
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.id && prevProps.id !== this.props.id) {
-      this.getData();
-    }
-  }
-  componentWillUnmount() {
-    this.props.video.clearComments();
-  }
+      return () => props.video.clearComments();
+    }, [props.id]);
 
-  getData() {
-    this.props.video.clearComments();
-    this.props.video.getComments(this.props.id);
-  }
+    const getCommentsData = () => {
+      props.video.clearComments();
+      props.video.getComments(props.id);
+    };
 
-  render() {
-    const { video, profile: profileStore } = this.props;
+    const { video, profile: profileStore } = props;
 
     return (
       <Container className="px-0">
@@ -60,7 +54,7 @@ class Comments extends React.Component {
                 }}
                 onKeyPress={(event) => {
                   if (event.shiftKey && event.key == 'Enter') {
-                    video.createComment(profileStore.profile, this.props.id);
+                    video.createComment(profileStore.profile, props.id);
                   }
                 }}
               />
@@ -70,7 +64,7 @@ class Comments extends React.Component {
           <Col sm="auto">
             <IconButton
               onClick={(e) =>
-                video.createComment(profileStore.profile, this.props.id)
+                video.createComment(profileStore.profile, props.id)
               }
             >
               <MessageIcon />
@@ -88,9 +82,7 @@ class Comments extends React.Component {
               {video.loading.comments ? (
                 <Spinner animation="border" variant="success" />
               ) : (
-                <ButtonTextGreen
-                  onClick={() => video.getComments(this.props.id)}
-                >
+                <ButtonTextGreen onClick={() => video.getComments(props.id)}>
                   Show more
                 </ButtonTextGreen>
               )}
@@ -101,7 +93,7 @@ class Comments extends React.Component {
         )}
       </Container>
     );
-  }
-}
+  }),
+);
 
 export { Comments };

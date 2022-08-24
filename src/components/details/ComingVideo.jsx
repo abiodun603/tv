@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Col, Container, Image, Row } from 'react-bootstrap';
 
 import { inject, observer } from 'mobx-react';
@@ -25,47 +25,32 @@ import UserBox from '../UserBox/UserBox';
 import { ComeBackButton } from './ComeBackButton/ComeBackButton';
 import { MockEmptySpace } from '../mock/MockEmptySpace';
 
-@inject('video', 'coming')
-@observer
-class ComingVideo extends DetailsVideoCommon {
-  constructor(props) {
-    super(props);
+const ComingVideo = inject(
+  'video',
+  'coming',
+)(
+  observer((props) => {
+    const [trailerDialog, setTrailerDialog] = useState(false);
 
-    this.state = {
-      trailerDialog: false,
+    const onSelectSeason = ({ season, episode }) => {
+      props.video.getSeries(props.id, season, episode);
     };
 
-    this.toggleTrailerDialog = this.toggleTrailerDialog.bind(this);
-    this.onSelectSeason = this.onSelectSeason.bind(this);
-    this.onSelectEpisode = this.onSelectEpisode.bind(this);
-  }
+    const onSelectEpisode = ({ episode_id }) => {
+      props.video.getEpisode(episode_id);
+    };
 
-  toggleTrailerDialog() {
-    this.setState({
-      trailerDialog: !this.state.trailerDialog,
-    });
-  }
+    const { videoData, seriesData, episodeData } = props.video;
 
-  onSelectSeason({ season, episode }) {
-    this.props.video.getSeries(this.props.id, season, episode);
-  }
+    const anotherVideo = props.coming.anotherVideo;
 
-  onSelectEpisode({ episode_id }) {
-    this.props.video.getEpisode(episode_id);
-  }
-
-  render() {
-    const { videoData, seriesData, episodeData } = this.props.video;
-
-    const anotherVideo = this.props.coming.anotherVideo;
-
-    const comingSoonData = this.props.coming.videoData.result;
+    const comingSoonData = props.coming.videoData.result;
 
     const currentFilm = videoData.media;
 
     const trailer = comingSoonData.media[0].trailer;
 
-    if (!comingSoonData.id && !this.props.coming.videoData.loading) {
+    if (!comingSoonData.id && !props.coming.videoData.loading) {
       return (
         <Container className={'mt-5 mb-5'}>
           <Row>
@@ -111,8 +96,8 @@ class ComingVideo extends DetailsVideoCommon {
                       ) : (
                         <SeriesControls
                           seriesData={seriesData}
-                          onSelectEpisode={this.onSelectEpisode}
-                          onSelectSeason={this.onSelectSeason}
+                          onSelectEpisode={onSelectEpisode}
+                          onSelectSeason={onSelectSeason}
                           allEpisodes={currentFilm}
                         />
                       ))}
@@ -146,8 +131,8 @@ class ComingVideo extends DetailsVideoCommon {
               <Container fluid className="mt-5 mb-4">
                 <Row className="d-flex justify-content-center">
                   <PlayerWithAds
-                    onProgress={this.props.video.onProgressVideo}
-                    onDuration={this.props.video.onDurationVideo}
+                    onProgress={props.video.onProgressVideo}
+                    onDuration={props.video.onDurationVideo}
                     url={getTrailer(comingSoonData.media)}
                     startFrom={videoData.startFrom}
                     videojsOptions={{
@@ -162,20 +147,20 @@ class ComingVideo extends DetailsVideoCommon {
             <DetailsControls
               viewsCount={comingSoonData.count_watch || 0}
               likesCount={comingSoonData.count_like || 0}
-              setLike={this.props.coming.createLike}
-              removeLike={this.props.coming.deleteLike}
+              setLike={props.coming.createLike}
+              removeLike={props.coming.deleteLike}
               isLike={comingSoonData.isLike}
               isWatchLater={comingSoonData.lib.watch}
               hasTrailer={getTrailer(currentFilm)}
-              openTrailer={this.toggleTrailerDialog}
+              openTrailer={() => setTrailerDialog(!trailerDialog)}
               pageType={COMING_SOON}
               video={comingSoonData}
             />
 
             <ContentDialog
               title={videoData.title}
-              opened={this.state.trailerDialog}
-              onClose={this.toggleTrailerDialog}
+              opened={trailerDialog}
+              onClose={() => setTrailerDialog(!trailerDialog)}
             >
               <PlayerWithAds
                 url={getTrailer(currentFilm)}
@@ -214,7 +199,7 @@ class ComingVideo extends DetailsVideoCommon {
         </div>
 
         <Container className="bg-light-gray mb-5 pt-4 pb-4">
-          <VideoCollections filmId={this.props.id} />
+          <VideoCollections filmId={props.id} />
 
           {anotherVideo.data && anotherVideo.data.length > 0 && (
             <ListView
@@ -233,7 +218,7 @@ class ComingVideo extends DetailsVideoCommon {
         </Container>
       </div>
     );
-  }
-}
+  }),
+);
 
 export default ComingVideo;

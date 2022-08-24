@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { Button, IconButton } from '@material-ui/core';
+import { Button, IconButton, useMediaQuery } from '@material-ui/core';
 import {
   IoIosBookmark,
   IoIosThumbsUp,
@@ -7,7 +7,7 @@ import {
   IoMdCloudDownload,
 } from 'react-icons/io';
 import { HiDotsHorizontal } from 'react-icons/hi';
-import { Col, Container, Row, OverlayTrigger, Popover } from 'react-bootstrap';
+import { Container, OverlayTrigger, Popover } from 'react-bootstrap';
 
 import style from './DetailsControl.module.css';
 
@@ -41,6 +41,8 @@ export const DetailsControls = (props) => {
   const [watched, setWatched] = useState(isWatchLater);
   const [complaint, setComplaint] = useState(false);
 
+  const isNotMobile = useMediaQuery('(min-width:767px)');
+
   useEffect(() => {
     setComplaint(video.lib.complaint);
   }, [video.lib.complaint]);
@@ -57,16 +59,16 @@ export const DetailsControls = (props) => {
     });
   }, [watched, video.id]);
 
-  const downloadHandler = () => {
-    try {
-      FileSaver.saveAs(
-        `https://api.isabi.tv/episodes/download/${video.id}?id=${video.id}`,
-        `${video.title}`
-      );
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  // const downloadHandler = () => {
+  //   try {
+  //     FileSaver.saveAs(
+  //       `https://api.isabi.tv/episodes/download/${video.id}?id=${video.id}`,
+  //       `${video.title}`
+  //     );
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
 
   const complain = () => {
     http.setToken(cookies.get('token'));
@@ -81,15 +83,15 @@ export const DetailsControls = (props) => {
 
   const shareTooltip = (
     <Popover id="share-content">
-      <Popover.Content>
+      <Popover.Body>
         <Share />
-      </Popover.Content>
+      </Popover.Body>
     </Popover>
   );
 
   const submenu = (
     <Popover id="submenu">
-      <Popover.Content>
+      <Popover.Body>
         <Complaint
           id={video.id}
           hasComplaint={complaint}
@@ -99,19 +101,19 @@ export const DetailsControls = (props) => {
             complain();
           }}
         />
-      </Popover.Content>
+      </Popover.Body>
     </Popover>
   );
 
   return (
     <Container className="mb-3 px-0">
-      <Row>
+      <div className="d-flex align-items-center justify-content-between">
         {pageType !== COMING_SOON && (
-          <Col className={`${style['meta-left']}`} sm="1">
+          <div className={`${style['meta-left']}`}>
             <CardStatsWatchDetails value={viewsCount} />
-          </Col>
+          </div>
         )}
-        <Col className={style['meta-right']}>
+        <div className={style['meta-right']}>
           {hasTrailer && (
             <Button
               startIcon={<IoIosPlay />}
@@ -120,7 +122,7 @@ export const DetailsControls = (props) => {
               onClick={openTrailer}
               disableElevation
             >
-              Trailer
+              {isNotMobile ? 'Trailer' : ''}
             </Button>
           )}
           <Button
@@ -139,9 +141,9 @@ export const DetailsControls = (props) => {
             size="large"
             startIcon={<IoIosBookmark fill={watched ? '#2DBD58' : '#2b3331'} />}
           >
-            Watch Later
+            {isNotMobile ? 'Watch Later' : ''}
           </Button>
-          {video.allow_download &&
+          {/* {video.allow_download &&
             pageType !== COMING_SOON &&
             video.creator === USER && (
               <Button
@@ -151,9 +153,9 @@ export const DetailsControls = (props) => {
                 onClick={downloadHandler}
                 startIcon={<IoMdCloudDownload fill={'#2b3331'} />}
               >
-                Download
+                {isNotMobile ? 'Download' : ''}
               </Button>
-            )}
+            )} */}
           <OverlayTrigger
             trigger="click"
             rootClose
@@ -166,7 +168,7 @@ export const DetailsControls = (props) => {
               variant="contained"
               disableElevation
             >
-              Share
+              {isNotMobile ? 'Share' : ''}
             </Button>
           </OverlayTrigger>
           <OverlayTrigger
@@ -179,8 +181,8 @@ export const DetailsControls = (props) => {
               <HiDotsHorizontal fill="#2b3331" />
             </IconButton>
           </OverlayTrigger>
-        </Col>
-      </Row>
+        </div>
+      </div>
     </Container>
   );
 };

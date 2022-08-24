@@ -14,10 +14,12 @@ const UserBox = ({
   const UserBoxContent = (
     <div className={style.userBoxContainer}>
       <Avatar src={avatarUrl} />
-      <span className={style.userBoxName}>{userName}</span>
-      <span className={style.userBoxNickName}>
-        {nickName ? `@${nickName}` : nickName}
-      </span>
+      <div>
+        <p className={style.userBoxName}>{userName}</p>
+        <p className={style.userBoxNickName}>
+          {nickName ? `@${nickName}` : nickName}
+        </p>
+      </div>
     </div>
   );
   return (

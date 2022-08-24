@@ -13,9 +13,11 @@
 
 .userBoxName:not(:empty) {
   margin-left: 0.5rem;
+  margin-bottom: 0;
 }
 
 .userBoxNickName:not(:empty) {
   margin-left: 0.5rem;
   font-weight: normal;
+  margin-bottom: 0;
 }

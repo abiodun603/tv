@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Col, Container, Image, Row } from 'react-bootstrap';
 
 import { inject, observer } from 'mobx-react';
@@ -30,43 +30,27 @@ import UserBox from '../UserBox/UserBox';
 import { ComeBackButton } from './ComeBackButton/ComeBackButton';
 import { MockEmptySpace } from '../mock/MockEmptySpace';
 
-@inject('video', 'social', 'profile', 'ui')
-@observer
-class FilmVideo extends DetailsVideoCommon {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      currentFilm: props.video.videoData.media,
-      trailerDialog: false,
+const FilmVideo = inject(
+  'video',
+  'social',
+  'profile',
+  'ui',
+)(
+  observer((props) => {
+    const [trailerDialog, setTrailerDialog] = useState();
+    const onSelectSeason = ({ season, episode }) => {
+      props.video.getSeries(props.id, season, episode);
     };
 
-    this.toggleTrailerDialog = this.toggleTrailerDialog.bind(this);
-    this.onSelectSeason = this.onSelectSeason.bind(this);
-    this.onSelectEpisode = this.onSelectEpisode.bind(this);
-  }
+    const onSelectEpisode = ({ episode_id }) => {
+      props.video.getEpisode(episode_id);
+    };
 
-  toggleTrailerDialog() {
-    this.setState({
-      trailerDialog: !this.state.trailerDialog,
-    });
-  }
-
-  onSelectSeason({ season, episode }) {
-    this.props.video.getSeries(this.props.id, season, episode);
-  }
-
-  onSelectEpisode({ episode_id }) {
-    this.props.video.getEpisode(episode_id);
-  }
-
-  render() {
-    const { videoData, anotherVideo, seriesData, episodeData } =
-      this.props.video;
+    const { videoData, anotherVideo, seriesData, episodeData } = props.video;
 
     const currentFilm = videoData.media;
 
-    if (!this.props.video.videoData.id && !this.props.video.loading.video) {
+    if (!props.video.videoData.id && !props.video.loading.video) {
       return (
         <Container className={'mt-5 mb-5'}>
           <Row>
@@ -110,8 +94,8 @@ class FilmVideo extends DetailsVideoCommon {
                       ) : (
                         <SeriesControls
                           seriesData={seriesData}
-                          onSelectEpisode={this.onSelectEpisode}
-                          onSelectSeason={this.onSelectSeason}
+                          onSelectEpisode={onSelectEpisode}
+                          onSelectSeason={onSelectSeason}
                           allEpisodes={currentFilm}
                         />
                       ))}
@@ -146,13 +130,13 @@ class FilmVideo extends DetailsVideoCommon {
                 <PlayerWithAds
                   onProgress={
                     episodeData
-                      ? this.props.video.onProgressEpisode
-                      : this.props.video.onProgressVideo
+                      ? props.video.onProgressEpisode
+                      : props.video.onProgressVideo
                   }
                   onDuration={
                     episodeData
-                      ? this.props.video.onDurationEpisode
-                      : this.props.video.onDurationVideo
+                      ? props.video.onDurationEpisode
+                      : props.video.onDurationVideo
                   }
                   url={
                     episodeData ? getMedia(episodeData) : getMedia(currentFilm)
@@ -171,19 +155,19 @@ class FilmVideo extends DetailsVideoCommon {
             <DetailsControls
               viewsCount={videoData.count_watch}
               likesCount={videoData.count_like}
-              setLike={this.props.video.createLike}
-              removeLike={this.props.video.deleteLike}
+              setLike={props.video.createLike}
+              removeLike={props.video.deleteLike}
               isLike={videoData.isLike}
               isWatchLater={videoData.lib.watch}
               hasTrailer={getTrailer(currentFilm)}
-              openTrailer={this.toggleTrailerDialog}
+              openTrailer={() => setTrailerDialog(!trailerDialog)}
               video={videoData}
             />
 
             <ContentDialog
               title={videoData.title}
-              opened={this.state.trailerDialog}
-              onClose={this.toggleTrailerDialog}
+              opened={trailerDialog}
+              onClose={() => setTrailerDialog(!trailerDialog)}
             >
               <PlayerWithAds
                 url={getTrailer(currentFilm)}
@@ -215,12 +199,12 @@ class FilmVideo extends DetailsVideoCommon {
               </Container>
             </div>
 
-            {videoData.allow_comments && <Comments id={this.props.id} />}
+            {videoData.allow_comments && <Comments id={props.id} />}
           </div>
         </div>
 
         <Container className="bg-light-gray mb-5 pt-4 pb-4">
-          <VideoCollections filmId={this.props.id} />
+          <VideoCollections filmId={props.id} />
 
           {anotherVideo.data && anotherVideo.data.length > 0 && (
             <ListView
@@ -239,7 +223,5 @@ class FilmVideo extends DetailsVideoCommon {
         </Container>
       </div>
     );
-  }
-}
-
-export default FilmVideo;
+  }),
+);

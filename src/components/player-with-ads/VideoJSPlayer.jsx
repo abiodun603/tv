@@ -25,7 +25,7 @@ export class VideoJSPlayer extends React.Component {
     this.player = videojs(
       this.videoNode,
       this.props.options,
-      this.onPlayerReady
+      this.onPlayerReady,
     );
     // @ts-ignore
     this.player.ima({
@@ -43,7 +43,7 @@ export class VideoJSPlayer extends React.Component {
 
   componentDidUpdate() {
     // todo обрабатывать несколько sources
-    this.player.src(this.props.options.sources[0]?.src);
+    this.player.src(this.props.options.sources[0].src);
     this.player.currentTime(this.props.startFrom || 0);
   }
 
