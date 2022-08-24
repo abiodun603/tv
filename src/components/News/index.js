@@ -23,7 +23,7 @@ const News = inject('news')(
     const [categories, setCategories] = useState([]);
     const [categoriesFilter, setCategoriesFilter] = useState([]);
     const [searchingFor, setSearchingFor] = useState('');
-    const isMobile = useMediaQuery('(max-width:768px)');
+    const isMobile = useMediaQuery('(max-width:767px)');
     const isLargeScreen = useMediaQuery('(min-width:1280px)');
 
     useEffect(() => {

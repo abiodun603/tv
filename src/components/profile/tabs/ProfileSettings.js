@@ -25,7 +25,7 @@ const ProfileSettings = inject('auth')(
     const [deleteAllUploadsDialog, setDeleteAllUploadsDialog] = useState(false);
     const [clearHistoryDialog, setClearHistoryDialog] = useState(false);
     const classes = useStyles();
-    const isMobile = useMediaQuery('(max-width:768px)');
+    const isMobile = useMediaQuery('(max-width:767px)');
     const theme = useTheme();
 
     useEffect(() => {

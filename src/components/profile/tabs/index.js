@@ -26,7 +26,7 @@ export const ProfileTab = withStyles((theme) => ({
     fontWeight: theme.typography.fontWeightRegular,
     fontSize: theme.typography.pxToRem(15),
     marginRight: theme.spacing(1),
-    ['@media (max-width:768px)']: {
+    ['@media (max-width:767px)']: {
       minWidth: '40px !important',
       padding: '6px !important',
     },
@@ -45,7 +45,7 @@ export const ProfileTab = withStyles((theme) => ({
         marginBottom: '0 !important',
         marginRight: theme.spacing(1),
       },
-      ['@media (max-width:768px)']: {
+      ['@media (max-width:767px)']: {
         display: 'block',
         '& .MuiSvgIcon-root': {
           margin: '0 !important',

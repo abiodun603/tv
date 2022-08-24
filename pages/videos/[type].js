@@ -15,7 +15,7 @@ const decodeParams = (params) => {
 
 export default function VideosType() {
   const router = useRouter();
-  const isMobile = useMediaQuery('(max-width:768px)');
+  const isMobile = useMediaQuery('(max-width:767px)');
 
   const { title, params, ...props } = router.query;
 

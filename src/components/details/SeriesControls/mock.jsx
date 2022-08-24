@@ -7,8 +7,8 @@ export const SeriesControlsMock = ({}) => {
   const [currentSeason, setCurrentSeason] = useState('1');
   const [currentEpisode, setCurrentEpisode] = useState('1');
 
-  const [anchorSeason, setAnchorSeason] = useState(null);
-  const [anchorEpisode, setAnchorEpisode] = useState(null);
+  const [anchorSeason, setAnchorSeason] = useState(false);
+  const [anchorEpisode, setAnchorEpisode] = useState(false);
 
   const seasonsItems = [].map((season, index) => {
     return (

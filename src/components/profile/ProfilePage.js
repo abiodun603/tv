@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
     margin: `${theme.spacing(10)}px 0`,
     borderRadius: theme.spacing(1),
     padding: theme.spacing(4),
-    ['@media (max-width:768px)']: {
+    ['@media (max-width:767px)']: {
       display: 'block',
       margin: `${theme.spacing(4)}px 0`,
       padding: 0,
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
   },
   tabs: {
     borderRight: `1px solid ${theme.palette.grey.grey50}`,
-    ['@media (max-width:768px)']: {
+    ['@media (max-width:767px)']: {
       borderRight: 'none',
     },
   },
@@ -103,7 +103,7 @@ const ProfilePage = inject('profile')(
     const [profileId, setProfileId] = useState(storeProfile.social.id);
     const classes = useStyles();
     const [tabIndex, setTabIndex] = useState(0);
-    const isMobile = useMediaQuery('(max-width:768px)');
+    const isMobile = useMediaQuery('(max-width:767px)');
 
     const handleChange = (event, newValue) => {
       setTabIndex(newValue);

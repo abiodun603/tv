@@ -12,7 +12,7 @@ import { getTags } from '../../utils/formate';
 import { TYPE_FILM } from '../../constants/API';
 
 const CardVideo = ({ video = {}, className = '', maxWidthImage, full }) => {
-  const isMobile = useMediaQuery('(max-width:767px)');
+  const isSmallWidth = useMediaQuery('(max-width:1199px)');
 
   if (video.video) {
     video = video.video;
@@ -26,6 +26,7 @@ const CardVideo = ({ video = {}, className = '', maxWidthImage, full }) => {
   //   originFontSize / (video.title.length / maxDisplayCharInLine),
   // );
 
+  const ratio = isSmallWidth ? 1.2 : 0.66;
   return (
     <Card
       className={className}
@@ -33,7 +34,7 @@ const CardVideo = ({ video = {}, className = '', maxWidthImage, full }) => {
       url={`/details/${TYPE_FILM}?id=${video.id}`}
     >
       <CardPoster
-        ratio={isMobile ? 1 : 0.66}
+        ratio={ratio}
         imgUrl={getPoster(video.poster_v)}
         maxWidth={maxWidthImage}
       >

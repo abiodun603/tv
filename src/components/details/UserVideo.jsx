@@ -32,7 +32,7 @@ const UserVideo = inject(
     const { videoData, anotherVideo } = props.video;
     const profileStore = props.profile;
     const videoDataSocial = videoData.social;
-    const isMobile = useMediaQuery('(max-width:768px)');
+    const isMobile = useMediaQuery('(max-width:767px)');
 
     useEffect(() => {
       if (props.id > 0) {

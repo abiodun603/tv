@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Col, Container, Image, Row } from 'react-bootstrap';
-
+import { useMediaQuery } from '@material-ui/core';
 import { inject, observer } from 'mobx-react';
 
 import { PlayerWithAds } from '../player-with-ads/PlayerWithAds';
@@ -19,13 +19,13 @@ import { getTags } from '../../utils/formate';
 import { SERIES } from '../../constants/types';
 
 import style from '../../../styles/detailsVideo.module.scss';
-import DetailsVideoCommon from './DetailsCommon';
 import { DetailsControls } from './DetailsControls/DetailsControls';
 import { SeriesControls } from './SeriesControls';
 import { SeriesControlsMock } from './SeriesControls/mock';
 import ContentDialog from '../dialogs/Content';
 import CardVideo from '../Card/CardVideo';
 import UserBox from '../UserBox/UserBox';
+import { MANAGER } from '../../constants/API';
 
 import { ComeBackButton } from './ComeBackButton/ComeBackButton';
 import { MockEmptySpace } from '../mock/MockEmptySpace';
@@ -37,7 +37,15 @@ const FilmVideo = inject(
   'ui',
 )(
   observer((props) => {
-    const [trailerDialog, setTrailerDialog] = useState();
+    const [trailerDialog, setTrailerDialog] = useState(false);
+    const isMobile = useMediaQuery('(max-width:767px)');
+
+    useEffect(() => {
+      if (props.id > 0) {
+        props.video.getVideo(props.id, {}, MANAGER);
+      }
+    }, [props.id]);
+
     const onSelectSeason = ({ season, episode }) => {
       props.video.getSeries(props.id, season, episode);
     };
@@ -65,63 +73,75 @@ const FilmVideo = inject(
 
     return (
       <div>
-        <Container fluid className={style.topContainer}>
-          <div className={`d-flex align-items-end ${style.topContent}`}>
-            <Container>
+        {isMobile ? (
+          <div className="m-3 mb-0">
+            <p className="text-title mb-0">{videoData.title}</p>
+            <p className="mb-0">
+              {videoData.year} · {getTags(videoData.tags)}
+            </p>
+          </div>
+        ) : (
+          <Container fluid className={style.topContainer}>
+            <div className={`d-flex align-items-end ${style.topContent}`}>
+              <Container>
+                <Row className="d-flex align-items-end">
+                  <Image
+                    className={style.posterVertical}
+                    src={
+                      episodeData
+                        ? getPoster(episodeData.poster_vertical)
+                        : getPoster(videoData.poster_v)
+                    }
+                  />
+                  <Col className="ml-5">
+                    <Row className="mt-3">
+                      <p className="text-title">{videoData.title}</p>
+                    </Row>
+                    <Row>
+                      <p>
+                        {videoData.year} · {getTags(videoData.tags)}
+                      </p>
+                    </Row>
+                    <Row>
+                      {videoData.type === SERIES &&
+                        (seriesData.episodes.length === 0 ||
+                        seriesData.seasons.length === 0 ? (
+                          <SeriesControlsMock />
+                        ) : (
+                          <SeriesControls
+                            seriesData={seriesData}
+                            onSelectEpisode={onSelectEpisode}
+                            onSelectSeason={onSelectSeason}
+                            allEpisodes={currentFilm}
+                          />
+                        ))}
+                    </Row>
+                  </Col>
+                </Row>
+              </Container>
+            </div>
+            <Container
+              style={{ marginTop: '10px' }}
+              className="position-relative"
+            >
               <Row className="d-flex align-items-end">
-                <Image
-                  className={style.posterVertical}
-                  src={
-                    episodeData
-                      ? getPoster(episodeData.poster_vertical)
-                      : getPoster(videoData.poster_v)
-                  }
-                />
-                <Col className="ml-5">
-                  <Row className="mt-3">
-                    <p className="text-title">{videoData.title}</p>
-                  </Row>
-                  <Row>
-                    <p>
-                      {videoData.year} · {getTags(videoData.tags)}
-                    </p>
-                  </Row>
-                  <Row>
-                    {videoData.type === SERIES &&
-                      (seriesData.episodes.length === 0 ||
-                      seriesData.seasons.length === 0 ? (
-                        <SeriesControlsMock />
-                      ) : (
-                        <SeriesControls
-                          seriesData={seriesData}
-                          onSelectEpisode={onSelectEpisode}
-                          onSelectSeason={onSelectSeason}
-                          allEpisodes={currentFilm}
-                        />
-                      ))}
-                  </Row>
+                <Col>
+                  <ComeBackButton />
                 </Col>
               </Row>
             </Container>
-          </div>
-          <Container style={{ marginTop: '10px' }}>
-            <Row className="d-flex align-items-end">
-              <Col>
-                <ComeBackButton />
-              </Col>
-            </Row>
-          </Container>
 
-          <Image
-            fluid
-            className={style.posterBackground}
-            src={
-              episodeData
-                ? getPoster(episodeData.poster_horizontal)
-                : getPoster(videoData.poster_h)
-            }
-          />
-        </Container>
+            <Image
+              fluid
+              className={style.posterBackground}
+              src={
+                episodeData
+                  ? getPoster(episodeData.poster_horizontal)
+                  : getPoster(videoData.poster_h)
+              }
+            />
+          </Container>
+        )}
 
         <div className={style['user-video']}>
           <div className={style['user-video-main']}>
@@ -162,6 +182,7 @@ const FilmVideo = inject(
               hasTrailer={getTrailer(currentFilm)}
               openTrailer={() => setTrailerDialog(!trailerDialog)}
               video={videoData}
+              isMobile={isMobile}
             />
 
             <ContentDialog
@@ -199,7 +220,9 @@ const FilmVideo = inject(
               </Container>
             </div>
 
-            {videoData.allow_comments && <Comments id={props.id} />}
+            {videoData.allow_comments && (
+              <Comments id={props.id} isMobile={isMobile} />
+            )}
           </div>
         </div>
 
@@ -225,3 +248,5 @@ const FilmVideo = inject(
     );
   }),
 );
+
+export default FilmVideo;

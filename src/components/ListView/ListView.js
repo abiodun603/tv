@@ -33,7 +33,7 @@ export const ListView = (props) => {
     hasNavigion = true,
     isOnBoard = false,
   } = props;
-  const isMobile = useMediaQuery('(max-width:768px)');
+  const isMobile = useMediaQuery('(max-width:767px)');
 
   const content = (
     <Row>
