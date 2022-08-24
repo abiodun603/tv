@@ -18,3 +18,7 @@
 .meta-right > button + button {
   margin-left: 4px;
 }
+
+.meta-absolute {
+  position: absolute;
+}

@@ -2,11 +2,7 @@ import React, { ReactEventHandler } from 'react';
 import { Spinner } from 'react-bootstrap';
 import { v4 as uuid } from 'uuid';
 import throttle from 'lodash/throttle';
-import 'videojs-contrib-ads';
-import 'videojs-ima';
-import 'videojs-ima/dist/videojs.ima.css';
 import { VideoJSPlayer } from './VideoJSPlayer';
-import { VideoJsPlayerOptions } from 'video.js';
 
 const AD_BREAK_SECONDS = 10 * 60; // 10 minutes
 const dummyAdURL =
@@ -25,20 +21,13 @@ export class PlayerWithAds extends React.Component {
   constructor(props) {
     super(props);
 
-    this.injectImaSDK();
-
-    this.state = {
-      isLoadingIma: true,
-    };
-
     this.onVideoProgress = this.onVideoProgress.bind(this);
     // fire progress every one second (videojs fires every 15-250 milliseconds)
     this.throttledOnVideoProgress = throttle(this.onVideoProgress, 1000);
   }
 
-  componentWillUnmount() {
-    const imaScript = document.getElementById(this.imaScriptId);
-    imaScript.parentNode.removeChild(imaScript);
+  shouldComponentUpdate() {
+    return false;
   }
 
   onVideoProgress(event, currentTime) {
@@ -51,17 +40,6 @@ export class PlayerWithAds extends React.Component {
     }
   }
 
-  injectImaSDK() {
-    this.imaScriptId = uuid();
-    this.imaScript = document.createElement('script');
-    this.imaScript.id = this.imaScriptId;
-    this.imaScript.src = 'https://imasdk.googleapis.com/js/sdkloader/ima3.js';
-    this.imaScript.addEventListener('load', () => {
-      this.setState({ isLoadingIma: false });
-    });
-    document.head.appendChild(this.imaScript);
-  }
-
   requestAd() {
     const player = this.videoJsPlayerRef.current.getPlayer();
     player.ima.requestAds();
@@ -70,31 +48,13 @@ export class PlayerWithAds extends React.Component {
   render() {
     const videojsOptions = this.props.videojsOptions || {};
 
-    if (this.state.isLoadingIma) {
-      return (
-        <div
-          style={{
-            width: videojsOptions.width,
-            height: videojsOptions.height,
-          }}
-        >
-          <Spinner
-            animation="grow"
-            variant="success"
-            className="mx-auto my-auto"
-          />
-        </div>
-      );
-    }
-
-    const videoJsOptions = {
+    const options = {
       ...videojsOptions,
       autoplay: false,
       controls: true,
-      // @ts-ignore disablePictureInPicture не описан в пропсах, но он есть
+      responsive: true,
       disablePictureInPicture: true,
       controlBar: {
-        // @ts-ignore pictureInPictureToggle не описан в пропсах, но он есть
         pictureInPictureToggle: false,
       },
       sources: [
@@ -108,7 +68,7 @@ export class PlayerWithAds extends React.Component {
       <VideoJSPlayer
         ref={this.videoJsPlayerRef}
         imaTag={dummyAdURL}
-        options={videoJsOptions}
+        options={options}
         startFrom={this.props.startFrom}
         onReady={(player) => {
           if (this.props.onDuration) {

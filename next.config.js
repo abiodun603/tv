@@ -5,7 +5,7 @@ const env = {
 
 const nextConfig = {
   env,
-  reactStrictMode: true,
+  reactStrictMode: false,
   swcMinify: true,
   // experimental: {
   //   forceSwcTransforms: true,

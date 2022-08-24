@@ -36,6 +36,7 @@ export const DetailsControls = (props) => {
     openTrailer = () => {},
     pageType = 'prof_and_user',
     video,
+    isMobile,
   } = props;
 
   const [watched, setWatched] = useState(isWatchLater);
@@ -109,7 +110,11 @@ export const DetailsControls = (props) => {
     <Container className="mb-3 px-0">
       <div className="d-flex align-items-center justify-content-between">
         {pageType !== COMING_SOON && (
-          <div className={`${style['meta-left']}`}>
+          <div
+            className={`${style['meta-left']} ${
+              isMobile ? style['meta-absolute'] : ''
+            }`}
+          >
             <CardStatsWatchDetails value={viewsCount} />
           </div>
         )}

@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { inject, observer } from 'mobx-react';
+import { useMediaQuery } from '@material-ui/core';
 
 import * as url from '../../lib/url/generator';
-
-import style from '../../../styles/detailsVideo.module.scss';
 
 import { getMedia, getPhoto } from '../../utils/pathUtil';
 import { getTags } from '../../utils/formate';
@@ -18,11 +17,12 @@ import CardNewsVideo from '../Card/CardNewsVideo';
 import UserBox from '../UserBox/UserBox';
 import SubscribeButton from '../SubscribeButton/SubscribeButton';
 
-import DetailsVideoCommon from './DetailsCommon';
 import { TYPE_NEWS, USER } from '../../constants/API';
 
 import { ComeBackButton } from './ComeBackButton/ComeBackButton';
 import { MockEmptySpace } from '../mock/MockEmptySpace';
+
+import style from '../../../styles/detailsVideo.module.scss';
 
 const UserVideo = inject(
   'video',
@@ -32,6 +32,7 @@ const UserVideo = inject(
     const { videoData, anotherVideo } = props.video;
     const profileStore = props.profile;
     const videoDataSocial = videoData.social;
+    const isMobile = useMediaQuery('(max-width:768px)');
 
     useEffect(() => {
       if (props.id > 0) {
@@ -53,28 +54,27 @@ const UserVideo = inject(
     }
 
     return (
-      <div className={style['user-video']}>
+      <div className={`${isMobile ? 'my-3' : 'my-5'}`}>
         <div className={style['user-video-main']}>
-          <Container fluid className="mt-5 mb-4">
-            <Row className="d-flex justify-content-center">
-              <PlayerWithAds
-                onProgress={props.video.onProgressVideo}
-                onDuration={props.video.onDurationVideo}
-                url={getMedia(props.video.videoData.media)}
-                startFrom={props.video.videoData.startFrom}
-                videojsOptions={{
-                  height: 400,
-                  width: 'auto',
-                }}
-              />
-            </Row>
-          </Container>
-          <Container className="mb-3 px-0">
+          <Row className="d-flex justify-content-center">
+            <PlayerWithAds
+              onProgress={props.video.onProgressVideo}
+              onDuration={props.video.onDurationVideo}
+              url={getMedia(props.video.videoData.media)}
+              startFrom={props.video.videoData.startFrom}
+              videojsOptions={{
+                height: 400,
+                width: 'auto',
+              }}
+            />
+          </Row>
+
+          <Row className="my-3 px-0">
             <h6 className="text-select">
               {getTags(props.video.videoData.tags)}
             </h6>
             <h4 className="mt-3">{props.video.videoData.title}</h4>
-          </Container>
+          </Row>
           <DetailsControls
             viewsCount={videoData.count_watch}
             likesCount={videoData.count_like}
@@ -83,26 +83,23 @@ const UserVideo = inject(
             isLike={videoData.isLike}
             isWatchLater={videoData.lib.watch}
             video={videoData}
+            isMobile={isMobile}
           />
-          <Container className="px-0">
+          <div>
             <hr />
             <Row className="my-3 mt-3">
               <Col className="my-auto">
-                <Container>
-                  <Row>
-                    <UserBox
-                      avatarUrl={getPhoto(videoDataSocial.profile.photo)}
-                      url={url.toContributor(videoDataSocial?.id)}
-                      userName={[
-                        videoDataSocial.profile.name,
-                        videoDataSocial.profile.last_name,
-                      ]
-                        .filter(Boolean)
-                        .join(' ')}
-                      nickName={videoDataSocial?.profile?.username}
-                    />
-                  </Row>
-                </Container>
+                <UserBox
+                  avatarUrl={getPhoto(videoDataSocial.profile.photo)}
+                  url={url.toContributor(videoDataSocial?.id)}
+                  userName={[
+                    videoDataSocial.profile.name,
+                    videoDataSocial.profile.last_name,
+                  ]
+                    .filter(Boolean)
+                    .join(' ')}
+                  nickName={videoDataSocial?.profile?.username}
+                />
               </Col>
 
               <Col className="d-flex justify-content-end">
@@ -114,19 +111,19 @@ const UserVideo = inject(
                 )}
               </Col>
             </Row>
-          </Container>
-
-          <div className="bg-light-gray py-3">
-            <Container className="px-0">
-              <h5 className="text-dark mb-3">Overview</h5>
-              <p>{props.video.videoData.description}</p>
-            </Container>
           </div>
 
-          {props.video.videoData.allow_comments && <Comments id={props.id} />}
+          <div className="bg-light-gray py-3">
+            <h5 className="text-dark mb-3">Overview</h5>
+            <p>{props.video.videoData.description}</p>
+          </div>
+
+          {props.video.videoData.allow_comments && (
+            <Comments id={props.id} isMobile={isMobile} />
+          )}
           <ComeBackButton />
         </div>
-        {anotherVideo.data && anotherVideo.data.length && (
+        {anotherVideo.data && anotherVideo.data.length > 0 && (
           <ListView
             title="You may also like"
             isLoading={anotherVideo.loading}

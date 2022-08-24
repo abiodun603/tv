@@ -21,8 +21,31 @@ export const Comment = ({ comment }) => {
         ))}
       </Col>
       <Col sm="auto">
-        <p className="text-break m-0 pt-1">{getDate(comment.created_at)}</p>
+        <p className="text-break m-0 pt-1" style={{ color: '#BFC1C1' }}>
+          {getDate(comment.created_at)}
+        </p>
       </Col>
     </Row>
+  );
+};
+
+export const CommentSM = ({ comment }) => {
+  return (
+    <div className="mt-4 d-flex">
+      <Avatar alt="photo" src={getPhoto(comment.social.profile.photo)} />
+      <div className="m-2">
+        <h5 className="text-break text-dark-label m-0">
+          {comment.social.profile.name}
+        </h5>
+        {comment.message.split(/\n/).map((paragraph, index) => (
+          <p key={index} className="text-break m-0 pt-1">
+            {paragraph}
+          </p>
+        ))}
+        <p className="text-break m-0 pt-1" style={{ color: '#BFC1C1' }}>
+          {getDate(comment.created_at)}
+        </p>
+      </div>
+    </div>
   );
 };

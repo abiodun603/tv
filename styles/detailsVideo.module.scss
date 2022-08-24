@@ -50,6 +50,11 @@
   max-width: 800px;
   margin: auto;
   position: relative;
+
+  @media screen and (max-width: 800px) {
+    max-width: 100%;
+    margin: 0 16px;
+  }
 }
 
 .button_text {

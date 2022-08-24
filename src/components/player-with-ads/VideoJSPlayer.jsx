@@ -1,6 +1,10 @@
 import React from 'react';
-import videojs, { VideoJsPlayer } from 'video.js';
+import videojs from 'video.js';
 import 'video.js/dist/video-js.css';
+import 'videojs-contrib-ads';
+import 'videojs-contrib-ads/dist/videojs.ads.css';
+import 'videojs-ima';
+import 'videojs-ima/dist/videojs.ima.css';
 
 export class VideoJSPlayer extends React.Component {
   static player;
@@ -8,11 +12,8 @@ export class VideoJSPlayer extends React.Component {
 
   constructor(props) {
     super(props);
-    this.onPlayerReady = this.onPlayerReady.bind(this);
-  }
 
-  getPlayer() {
-    return this.player;
+    this.onPlayerReady = this.onPlayerReady.bind(this);
   }
 
   onPlayerReady() {
@@ -27,10 +28,6 @@ export class VideoJSPlayer extends React.Component {
       this.props.options,
       this.onPlayerReady,
     );
-    // @ts-ignore
-    this.player.ima({
-      adTagUrl: this.props.imaTag,
-    });
 
     const onProgress = this.props.onProgress;
 
@@ -39,16 +36,24 @@ export class VideoJSPlayer extends React.Component {
     this.player.on('timeupdate', function (event) {
       onProgress(event, this.currentTime());
     });
+
+    if (this.player.isReady_) {
+      this.player.ima({
+        adTagUrl: this.props.imaTag,
+      });
+    }
   }
 
   componentDidUpdate() {
     // todo обрабатывать несколько sources
-    this.player.src(this.props.options.sources[0].src);
-    this.player.currentTime(this.props.startFrom || 0);
+    if (this.player) {
+      this.player.src(this.props.options.sources[0].src);
+      this.player.currentTime(this.props.startFrom || 0);
+    }
   }
 
   componentWillUnmount() {
-    if (this.player) {
+    if (this.player && this.player.isReady_) {
       this.player.dispose();
     }
   }
@@ -58,13 +63,11 @@ export class VideoJSPlayer extends React.Component {
   // see https://github.com/videojs/video.js/pull/3856
   render() {
     return (
-      <div>
-        <div data-vjs-player>
-          <video
-            ref={(node) => (this.videoNode = node)}
-            className="video-js"
-          ></video>
-        </div>
+      <div data-vjs-player>
+        <video
+          ref={(node) => (this.videoNode = node)}
+          className="video-js vjs-big-play-centered vjs-tech"
+        />
       </div>
     );
   }

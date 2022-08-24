@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core';
 
 import { getPhoto } from '../../utils/pathUtil';
-import { Comment } from './Comment';
+import { Comment, CommentSM } from './Comment';
 import MessageIcon from '../../../public/icon/ic_message.svg';
 import { ButtonTextGreen } from '../widgets/Button';
 
@@ -30,7 +30,60 @@ const Comments = inject(
       props.video.getComments(props.id);
     };
 
-    const { video, profile: profileStore } = props;
+    const { video, profile: profileStore, isMobile } = props;
+
+    if (isMobile) {
+      return (
+        <Container className="px-0">
+          <div className="d-flex align-items-center justify-content-between mb-2">
+            <Avatar alt="photo" src={getPhoto(profileStore.profile.photo)} />
+
+            <IconButton
+              onClick={(e) =>
+                video.createComment(profileStore.profile, props.id)
+              }
+            >
+              <MessageIcon />
+            </IconButton>
+          </div>
+          <div>
+            <FormControl fullWidth variant="outlined">
+              <TextField
+                multiline
+                variant="outlined"
+                value={video.comment.value}
+                onChange={(event) => {
+                  video.setComment(event.target.value);
+                }}
+                onKeyPress={(event) => {
+                  if (event.shiftKey && event.key == 'Enter') {
+                    video.createComment(profileStore.profile, props.id);
+                  }
+                }}
+              />
+              <FormHelperText>must be at least 10 characters</FormHelperText>
+            </FormControl>
+          </div>
+          {video.comments.data.map((item) => (
+            <CommentSM key={item.id} comment={item} />
+          ))}
+
+          {video.comments.hasMore ? (
+            <Row>
+              <Col className="text-center my-3">
+                {video.loading.comments ? (
+                  <Spinner animation="border" variant="success" />
+                ) : (
+                  <ButtonTextGreen onClick={() => video.getComments(props.id)}>
+                    Show more
+                  </ButtonTextGreen>
+                )}
+              </Col>
+            </Row>
+          ) : null}
+        </Container>
+      );
+    }
 
     return (
       <Container className="px-0">
@@ -88,9 +141,7 @@ const Comments = inject(
               )}
             </Col>
           </Row>
-        ) : (
-          <div />
-        )}
+        ) : null}
       </Container>
     );
   }),
