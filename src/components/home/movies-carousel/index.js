@@ -25,6 +25,7 @@ const Slider = React.forwardRef(({ children, ...props }, ref) => {
     </div>
   );
 });
+Slider.displayName = 'Slider';
 
 const MoviesCarousel = inject('home')(
   observer((props) => {

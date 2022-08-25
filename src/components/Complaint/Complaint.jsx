@@ -40,8 +40,7 @@ export const Complaint = ({
       }}
       startIcon={
         <FlagIcon
-          className={className}
-          className="icon-small"
+          className={`${className} icon-small`}
           fill={isComplaint ? '#bd392d' : 'rgba(172,170,170,0.4)'}
         />
       }
@@ -50,11 +49,10 @@ export const Complaint = ({
     </Button>
   ) : (
     <FlagIcon
-      className={className}
       onClick={() => {
         isFromDetailsPage ? onComplain() : complain();
       }}
-      className="icon-small"
+      className={`${className} icon-small`}
       fill={isComplaint ? '#bd392d' : 'rgba(172,170,170,0.4)'}
     />
   );

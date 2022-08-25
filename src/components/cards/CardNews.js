@@ -48,8 +48,7 @@ export default class CardNews extends Component {
                 </h6>
                 <FlagIcon
                   // onClick={this.props.item.video.lib.complaint}
-                  className="my-auto d-flex justify-content-end"
-                  className="icon-small"
+                  className="my-auto d-flex justify-content-end icon-small"
                   fill={
                     this.props.item.video.lib.complaint
                       ? '#bd392d'
