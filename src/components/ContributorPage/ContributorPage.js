@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Router from 'next/router';
 import { inject, observer } from 'mobx-react';
 
-import { Spinner } from 'react-bootstrap';
+import { Spinner, Row, Col, Container } from 'react-bootstrap';
 
 import ContributorStore from '../../store/contributorStore';
 import ProfileStore from '../../store/profileStore';
@@ -11,32 +11,30 @@ import UploadStore from '../../store/uploadStore';
 import { ContributorProfileInfo } from './ContributorProfileInfo';
 import UserContent from '../UserContent/UserContent';
 
-@inject('contributor', 'profile', 'upload')
-@observer
-export class ContributorPage extends React.Component {
-  componentDidMount() {
-    const { contributor } = this.props;
-    const { id } = Router.query;
+export const ContributorPage = inject(
+  'contributor',
+  'profile',
+  'upload',
+)(
+  observer((props) => {
+    const socialID = Number(Router.query.id);
+    const { contributor } = props;
 
-    const socialID = Number(id);
+    useEffect(() => {
+      if (socialID) {
+        contributor.getProfile(socialID);
+      }
 
-    if (socialID) {
-      contributor.getProfile(socialID);
-    }
-  }
+      return () => contributor.clear();
+    }, []);
 
-  componentWillUnmount() {
-    this.props.contributor.clear();
-  }
-
-  render() {
     const {
       contributor: { profile },
       profile: {
         profile: { social },
       },
       upload: { allUploads },
-    } = this.props;
+    } = props;
 
     const isCurrentUser = profile?.social?.id === social?.id;
 
@@ -57,19 +55,19 @@ export class ContributorPage extends React.Component {
     }
 
     return (
-      <div className="container mb-4 mt-5 ">
-        <div className="row">
-          <div className="col col-sm-3">
+      <Container className="mb-4 mt-5 ">
+        <Row>
+          <Col md={12} xl={3}>
             <ContributorProfileInfo
-              contributor={this.props.contributor}
+              contributor={contributor}
               isCurrentUser={isCurrentUser}
             />
-          </div>
-          <div className="col col-sm-9">
+          </Col>
+          <Col md={12} xl={9}>
             <UserContent profileId={profile?.social?.id} />
-          </div>
-        </div>
-      </div>
+          </Col>
+        </Row>
+      </Container>
     );
-  }
-}
+  }),
+);

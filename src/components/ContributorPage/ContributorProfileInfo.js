@@ -1,12 +1,14 @@
 import React from 'react';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 import { ContributorSubscribeButton } from './ContributorSubscribeButton';
-
+import { Box } from '../widgets/Box';
 import { getPhoto } from '../../utils/pathUtil';
 import { getNumber } from '../../utils/formate';
 
 export const ContributorProfileInfo = ({ contributor, isCurrentUser }) => {
   const { profile } = contributor;
+  const theme = useTheme();
 
   const {
     photo,
@@ -110,22 +112,32 @@ export const ContributorProfileInfo = ({ contributor, isCurrentUser }) => {
           isCurrentUser={isCurrentUser}
         />
       </div>
-      <div className="profile-view__stats">
-        <div className="row">
-          <div className="col">
-            <div className="text text_view_ghost text_size_xs">Videos</div>
-            <div className="text">{getNumber(social.count_videos)}</div>
-          </div>
-          <div className="col">
-            <div className="text text_view_ghost text_size_xs">Followers</div>
-            <div className="text">{getNumber(social.count_followers)}</div>
-          </div>
-          <div className="col">
-            <div className="text text_view_ghost text_size_xs">Following</div>
-            <div className="text">{getNumber(social.count_following)}</div>
-          </div>
-        </div>
-      </div>
+      <Box
+        display="flex"
+        flexDirection="row"
+        alignItems="center"
+        justifyContent="space-around"
+        mt={3}
+      >
+        <Box>
+          <Box color={theme.palette.grey.default} fontSize={12}>
+            Videos
+          </Box>
+          <Box textAlign="center">{getNumber(social.count_videos)}</Box>
+        </Box>
+        <Box>
+          <Box color={theme.palette.grey.default} fontSize={12}>
+            Followers
+          </Box>
+          <Box textAlign="center">{getNumber(social.count_followers)}</Box>
+        </Box>
+        <Box>
+          <Box color={theme.palette.grey.default} fontSize={12}>
+            Following
+          </Box>
+          <Box textAlign="center">{getNumber(social.count_following)}</Box>
+        </Box>
+      </Box>
       <div className="profile-view__body">
         {profileInfoItem('Location', [city, country])}
         {profileInfoItem('Email', [email])}

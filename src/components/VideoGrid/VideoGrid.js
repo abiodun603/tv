@@ -195,25 +195,19 @@ const VideoGrid = inject(
         ) : (
           <>
             {Boolean(data.length) && (
-              <div className={style.grid}>
+              <Row>
                 {data.map((item, index) => {
                   const id = item.video ? item.video.id : item.id; // if the video is removed from DB but left in "libs" table, we'll need to make this video not to appear
                   if (!id) {
                     return null;
                   }
                   return (
-                    <div
-                      key={index}
-                      className={classNames(
-                        style['grid-item'],
-                        style[`grid-item_${cardsInRow}`],
-                      )}
-                    >
+                    <Col key={index} md={6} xl={3} className="mb-4">
                       {getCardType(item)}
-                    </div>
+                    </Col>
                   );
                 })}
-              </div>
+              </Row>
             )}
 
             {!data.length && !loading && nothingElem}
