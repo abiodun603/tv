@@ -21,6 +21,7 @@ import { TYPE_NEWS, USER } from '../../constants/API';
 
 import { ComeBackButton } from './ComeBackButton/ComeBackButton';
 import { MockEmptySpace } from '../mock/MockEmptySpace';
+import { ThreeDotsLoader } from '../ui/spiner';
 
 import style from '../../../styles/detailsVideo.module.scss';
 
@@ -29,7 +30,7 @@ const UserVideo = inject(
   'profile',
 )(
   observer((props) => {
-    const { videoData, anotherVideo } = props.video;
+    const { videoData, anotherVideo, loading } = props.video;
     const profileStore = props.profile;
     const videoDataSocial = videoData.social;
     const isMobile = useMediaQuery('(max-width:767px)');
@@ -40,7 +41,15 @@ const UserVideo = inject(
       }
     }, [props.id]);
 
-    if (!props.video.videoData.id && !props.video.loading.video) {
+    if (loading.video) {
+      return (
+        <div className={style['loading-wrapper']}>
+          <ThreeDotsLoader />
+        </div>
+      );
+    }
+
+    if (videoData.id && Number(videoData.id) !== Number(props.id)) {
       return (
         <Container className={'mt-5 mb-5'}>
           <Row>
@@ -60,8 +69,8 @@ const UserVideo = inject(
             <PlayerWithAds
               onProgress={props.video.onProgressVideo}
               onDuration={props.video.onDurationVideo}
-              url={getMedia(props.video.videoData.media)}
-              startFrom={props.video.videoData.startFrom}
+              url={getMedia(videoData.media)}
+              startFrom={videoData.startFrom}
               videojsOptions={{
                 height: 400,
                 width: 'auto',
@@ -70,10 +79,8 @@ const UserVideo = inject(
           </Row>
 
           <Row className="my-3 px-0">
-            <h6 className="text-select">
-              {getTags(props.video.videoData.tags)}
-            </h6>
-            <h4 className="mt-3">{props.video.videoData.title}</h4>
+            <h6 className="text-select">{getTags(videoData.tags)}</h6>
+            <h4 className="mt-3">{videoData.title}</h4>
           </Row>
           <DetailsControls
             viewsCount={videoData.count_watch}
@@ -115,10 +122,10 @@ const UserVideo = inject(
 
           <div className="bg-light-gray py-3">
             <h5 className="text-dark mb-3">Overview</h5>
-            <p>{props.video.videoData.description}</p>
+            <p>{videoData.description}</p>
           </div>
 
-          {props.video.videoData.allow_comments && (
+          {videoData.allow_comments && (
             <Comments id={props.id} isMobile={isMobile} />
           )}
           <ComeBackButton />

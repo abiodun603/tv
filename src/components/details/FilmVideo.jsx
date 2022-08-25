@@ -26,6 +26,7 @@ import ContentDialog from '../dialogs/Content';
 import CardVideo from '../Card/CardVideo';
 import UserBox from '../UserBox/UserBox';
 import { MANAGER } from '../../constants/API';
+import { ThreeDotsLoader } from '../ui/spiner';
 
 import { ComeBackButton } from './ComeBackButton/ComeBackButton';
 import { MockEmptySpace } from '../mock/MockEmptySpace';
@@ -54,11 +55,20 @@ const FilmVideo = inject(
       props.video.getEpisode(episode_id);
     };
 
-    const { videoData, anotherVideo, seriesData, episodeData } = props.video;
+    const { videoData, anotherVideo, seriesData, episodeData, loading } =
+      props.video;
 
     const currentFilm = videoData.media;
 
-    if (!props.video.videoData.id && !props.video.loading.video) {
+    if (loading.video) {
+      return (
+        <div className={style['loading-wrapper']}>
+          <ThreeDotsLoader />
+        </div>
+      );
+    }
+
+    if (videoData.id && Number(videoData.id) !== Number(props.id)) {
       return (
         <Container className={'mt-5 mb-5'}>
           <Row>

@@ -76,3 +76,11 @@
   backdrop-filter: blur(1px);
   background-color: rgba(43, 51, 49, 0.1);
 }
+
+.loading-wrapper {
+  min-height: 600px;
+  margin-top: 60px;
+  @media screen and (max-width: 800px) {
+    min-height: 300px;
+  }
+}
