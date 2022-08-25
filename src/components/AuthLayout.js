@@ -3,7 +3,7 @@ import { autorun } from 'mobx';
 import { inject, observer } from 'mobx-react';
 import Head from 'next/head';
 import { Container, Row, Spinner } from 'react-bootstrap';
-import { STATUS_LOADING, STATUS_NO_AUTH } from '../constants/auth';
+import { STATUS_LOADING, STATUS_NO_AUTH, STATUS_AUTH } from '../constants/auth';
 
 import Auth from './Auth';
 import Footer from './widgets/footer';
@@ -19,7 +19,6 @@ const AuthLayout = inject(
 
     useEffect(() => {
       storeAuth.startListener();
-
       autorun(() => {
         let state = props.toast.state;
 
@@ -32,10 +31,14 @@ const AuthLayout = inject(
             variant: state.type,
           });
         }
-
-        props.search.getSearchHistory();
       });
     }, []);
+
+    useEffect(() => {
+      if (storeAuth.status === STATUS_AUTH) {
+        props.search.getSearchHistory();
+      }
+    }, [storeAuth.status]);
 
     return (
       <>

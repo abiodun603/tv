@@ -1,4 +1,4 @@
-import { observable, action, configure } from 'mobx';
+import { observable, action, configure, runInAction } from 'mobx';
 
 configure({ enforceActions: 'always' });
 
@@ -7,6 +7,12 @@ class Toast {
 
   @action show(state) {
     this.state = state;
+
+    setTimeout(() => {
+      runInAction(() => {
+        this.state = { message: '', type: 'none', visible: false };
+      });
+    }, 100);
   }
   @action clear() {
     this.state = { message: '', type: 'none', visible: false };

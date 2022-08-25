@@ -89,13 +89,50 @@ class AuthStore extends BasicStore {
     );
   }
 
+  async checkUserProfile(idToken) {
+    try {
+      const authUser = firebase.getCurrentUser();
+
+      http.setToken(idToken);
+
+      const res = await http.post('profile/isUser', {
+        email: authUser.email,
+        phone: authUser.phone,
+      });
+      const isRegisteredUser = res.data.success;
+
+      if (isRegisteredUser) {
+        const response = await http.get('profile');
+
+        if (response.data.success) {
+          return {
+            status: STATUS_AUTH,
+            profile: response.data.result,
+          };
+        }
+      } else {
+        if (this.isSignIn) {
+          return {
+            status: STATUS_NO_AUTH,
+            errorMsg: "Account doesn't exist!",
+          };
+        } else {
+          return {
+            status: STATUS_NO_AUTH,
+            type: TYPE_CREATE_PROFILE,
+          };
+        }
+      }
+    } catch (err) {
+      throw new Error('Auth Failed!');
+    }
+  }
+
   @action
   startListener() {
     firebase.onAuthStateChanged((user) => {
       if (user) {
         runInAction(() => {
-          this.profileStore.profile.email = user.email;
-          this.profileStore.profile.phone = user.phoneNumber;
           this.status = STATUS_LOADING;
         });
 
@@ -105,31 +142,37 @@ class AuthStore extends BasicStore {
           .then((idToken) => {
             cookies.set('token', idToken, { expires: 1 });
 
-            http.setToken(idToken);
-
-            http
-              .get('profile')
-              .then((res) => {
-                if (res.data.success) {
-                  runInAction(() => {
-                    this.profileStore.profile = res.data.result;
-                    this.status = STATUS_AUTH;
-                  });
-                }
-              })
-              .catch((error) => {
-                runInAction(() => {
-                  this.status = STATUS_NO_AUTH;
-                  this.type = TYPE_CREATE_PROFILE;
-                });
+            return this.checkUserProfile(idToken);
+          })
+          .then((data) => {
+            if (data.status === STATUS_AUTH) {
+              runInAction(() => {
+                this.profileStore.profile = data.profile;
+                this.status = data.status;
               });
+            } else {
+              if (data.type) {
+                runInAction(() => {
+                  this.type = data.type;
+                  this.status = data.status;
+                });
+              } else {
+                runInAction(() => {
+                  this.status = data.status;
+                  this.toast.show({
+                    message: data.errorMsg,
+                    type: 'warning',
+                    visible: true,
+                  });
+                });
+              }
+            }
           })
           .catch((error) => {
             runInAction(() => {
               this.type = TYPE_AUTH;
               this.status = STATUS_NO_AUTH;
             });
-            console.log(error + '--'); // Nothing
           });
       } else {
         runInAction(() => {
