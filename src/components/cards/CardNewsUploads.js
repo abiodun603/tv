@@ -22,7 +22,7 @@ export default class CardNewsUploads extends Component {
     return (
       <Col>
         <Card border="light">
-          <Card.Body style={{ padding: '.5rem' }}>
+          <Card.Body style={{ padding: '.5rem', paddingBottom: '12px' }}>
             <Row>
               <Link href={`/details/news?id=${this.props.item.id}`}>
                 <Col>
@@ -37,7 +37,7 @@ export default class CardNewsUploads extends Component {
                   <div className="card-play" />
                   <div
                     className="card-info"
-                    style={{ bottom: '3px', left: '8px' }}
+                    style={{ bottom: '3px', left: '-5px' }}
                   >
                     <CardStatsWatch
                       value={
