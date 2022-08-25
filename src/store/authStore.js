@@ -112,6 +112,9 @@ class AuthStore extends BasicStore {
         }
       } else {
         if (this.isSignIn) {
+          await firebase.doSignOut();
+          cookies.remove('token');
+
           return {
             status: STATUS_NO_AUTH,
             errorMsg: "Account doesn't exist!",
