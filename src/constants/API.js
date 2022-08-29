@@ -25,12 +25,12 @@ export const PATH_URL_COMMENTS = 'comments/video/';
 export const PATH_URL_COMMENT_CREATE = 'comment/create';
 
 export const PATH_URL_LIKE_CREATE = 'like/create';
-export const PATH_URL_LIKE_DELETE = 'like/delete';
+export const PATH_URL_LIKE_DELETE = (id) => `like/delete/${id}`;
 
 export const PATH_URL_LIB_WATCH = 'lib/watch';
 export const PATH_URL_LIB_HISTORY = 'lib/history';
 export const PATH_URL_LIB_SUBSCIBED_COLLECTIONS = '/collections/my';
-export const PATH_URL_LIB_COMPLAINT = 'lib/complaint';
+export const PATH_URL_LIB_COMPLAINT = 'complaints/create';
 
 export const PATH_URL_COUNTRIES = 'countries/';
 

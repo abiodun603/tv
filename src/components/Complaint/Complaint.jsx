@@ -24,9 +24,14 @@ export const Complaint = ({
     const method = complaint ? 'delete' : 'post';
     http[method](PATH_URL_LIB_COMPLAINT, {
       video_id: id,
-    }).then(() => {
-      setComplaint(!complaint);
-    });
+      reason: 'Suspicious, spam, or fake',
+    })
+      .then(() => {
+        setComplaint(!complaint);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
   const isComplaint = isFromDetailsPage ? hasComplaint : complaint;

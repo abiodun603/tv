@@ -50,7 +50,7 @@ const UserContent = inject('userUpload')(
     return (
       <Tabs defaultActiveKey="alluploads">
         <Tab eventKey="alluploads" title="All Uploads">
-          <Container className="mt-5">
+          <Container className="mt-3">
             <VideoGrid
               data={allUploads.data}
               loading={uploadLoading}
@@ -66,7 +66,7 @@ const UserContent = inject('userUpload')(
           </Container>
         </Tab>
         <Tab eventKey="news" title="News">
-          <Container className="mt-5">
+          <Container className="mt-3">
             <VideoGrid
               data={allNews.data}
               loading={uploadLoading}

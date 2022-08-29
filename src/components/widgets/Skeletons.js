@@ -8,21 +8,17 @@ export function SkeletonHorizontal({ isMobile }) {
       <Skeleton
         animation="wave"
         variant="rect"
-        height={176.9}
+        height={150}
         style={{ borderRadius: '0.25rem 0.25rem 0rem 0rem' }}
       />
-      {!isMobile && (
-        <>
-          <Skeleton className="mt-3" animation="wave" variant="rect" />
-          <Skeleton
-            className="mt-3"
-            animation="wave"
-            variant="rect"
-            width={65}
-            style={{ borderRadius: '0rem 0rem 0.25rem 0.25rem' }}
-          />
-        </>
-      )}
+      <Skeleton className="mt-1" animation="wave" variant="rect" />
+      <Skeleton
+        className="mt-1"
+        animation="wave"
+        variant="rect"
+        width={65}
+        style={{ borderRadius: '0rem 0rem 0.25rem 0.25rem' }}
+      />
     </Col>
   );
 }

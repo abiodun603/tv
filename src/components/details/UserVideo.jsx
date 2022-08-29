@@ -95,7 +95,7 @@ const UserVideo = inject(
           <div>
             <hr />
             <Row className="my-3 mt-3">
-              <Col className="my-auto">
+              <Col className="my-auto" xs={8}>
                 <UserBox
                   avatarUrl={getPhoto(videoDataSocial.profile.photo)}
                   url={url.toContributor(videoDataSocial?.id)}
@@ -109,7 +109,7 @@ const UserVideo = inject(
                 />
               </Col>
 
-              <Col className="d-flex justify-content-end">
+              <Col className="d-flex justify-content-end" xs={4}>
                 {profileStore.profile.social !== videoDataSocial?.id && (
                   <SubscribeButton
                     id={videoDataSocial?.id}

@@ -84,15 +84,15 @@ export class UserVideosStore extends BasicStore {
     const requests = [
       this.loadVideoToCollection('popular', {
         ...collectionQueryParams.popular,
-        _start: this.popular.start,
+        // _start: this.popular.start,
       }),
       this.loadVideoToCollection('favorite', {
         ...collectionQueryParams.favorite,
-        _start: this.favorite.start,
+        // _start: this.favorite.start,
       }),
       this.loadVideoToCollection('recommended', {
         ...collectionQueryParams.recommended,
-        _start: this.recommended.start,
+        // _start: this.recommended.start,
       }),
     ];
 

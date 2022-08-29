@@ -8,17 +8,20 @@ const UserBox = ({
   url = '',
   avatarUrl,
   children,
-  userName,
+  userName = '',
   nickName = '',
+  isMobile = false,
 }) => {
   const UserBoxContent = (
     <div className={style.userBoxContainer}>
-      <Avatar src={avatarUrl} />
+      {!isMobile && <Avatar src={avatarUrl} />}
       <div>
-        <p className={style.userBoxName}>{userName}</p>
-        <p className={style.userBoxNickName}>
-          {nickName ? `@${nickName}` : nickName}
-        </p>
+        {userName && <p className={style.userBoxName}>{userName}</p>}
+        {nickName && (
+          <p className={style.userBoxNickName}>
+            {nickName ? `@${nickName}` : nickName}
+          </p>
+        )}
       </div>
     </div>
   );

@@ -4,10 +4,6 @@ import { inject, observer } from 'mobx-react';
 
 import { Spinner, Row, Col, Container } from 'react-bootstrap';
 
-import ContributorStore from '../../store/contributorStore';
-import ProfileStore from '../../store/profileStore';
-import UploadStore from '../../store/uploadStore';
-
 import { ContributorProfileInfo } from './ContributorProfileInfo';
 import UserContent from '../UserContent/UserContent';
 
@@ -18,7 +14,7 @@ export const ContributorPage = inject(
 )(
   observer((props) => {
     const socialID = Number(Router.query.id);
-    const { contributor } = props;
+    const { contributor, isMobile } = props;
 
     useEffect(() => {
       if (socialID) {
@@ -55,7 +51,7 @@ export const ContributorPage = inject(
     }
 
     return (
-      <Container className="mb-4 mt-5 ">
+      <Container className={`mb-4 ${isMobile ? 'mt-3' : 'mt-5'}`}>
         <Row>
           <Col md={12} xl={3}>
             <ContributorProfileInfo

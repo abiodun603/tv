@@ -422,7 +422,7 @@ class VideoDetailsStore extends BasicStore {
     let video_id = this.videoData.id;
 
     http
-      .delete(PATH_URL_LIKE_DELETE, { video_id: video_id })
+      .delete(PATH_URL_LIKE_DELETE(video_id))
       .then((res) => {
         let data = res.data;
 

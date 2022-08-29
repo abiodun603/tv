@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 
-import { Col, Row } from 'react-bootstrap';
 import ClearIcon from '@material-ui/icons/Clear';
 import CheckIcon from '@material-ui/icons/Check';
 
@@ -31,7 +30,7 @@ export default class CardUserVideo extends Component {
       withProfile = true,
       withInfo = true,
       withTitle = false,
-      withTags = false,
+      withTags = true,
       removeVideo = () => {},
       manageble = { isManageble: false, removingNeedsApprove: false },
       isMobile,
@@ -53,7 +52,7 @@ export default class CardUserVideo extends Component {
     );
 
     const tagsContainer = withTags && (
-      <div className="mt-2">
+      <div className="m-2">
         <CardMeta content={[video.year, getTags(video.tags)]} />
       </div>
     );
@@ -67,26 +66,25 @@ export default class CardUserVideo extends Component {
     );
 
     const profileContainer = withProfile && profile && (
-      <Row className="mt-3 justify-content-space-between">
-        <Col>
+      <div className="d-flex justify-content-between align-items-center mt-3">
+        <div>
           <UserBox
             avatarUrl={getPhoto(profile.photo)}
             url={social ? url.toContributor(social.id) : ''}
-            userName={[profile.name, profile.last_name]
-              .filter(Boolean)
-              .join(' ')}
+            nickName={profile.username}
+            isMobile={isMobile}
           />
-        </Col>
-        <Col className="my-auto d-flex justify-content-end" md={2}>
+        </div>
+        <div className="mx-2">
           <Complaint id={video.id} hasComplaint={lib.complaint} />
-        </Col>
-      </Row>
+        </div>
+      </div>
     );
 
     return (
       <Card className={className} url={`/details/${TYPE_USER}?id=${video.id}`}>
         <CardPoster
-          ratio={isMobile ? 16 / 13 : 16 / 9}
+          ratio={isMobile ? 16 / 15 : 16 / 9}
           imgUrl={
             video.preview_url
               ? getPreview(video.preview_url)
@@ -96,9 +94,9 @@ export default class CardUserVideo extends Component {
         >
           {statsContainer}
         </CardPoster>
-        {!isMobile && profileContainer}
-        {!isMobile && titleContainer}
-        {!isMobile && tagsContainer}
+        {profileContainer}
+        {titleContainer}
+        {tagsContainer}
         {manageble.isManageble && (
           <div
             onClick={(event) => {
