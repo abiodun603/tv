@@ -4,7 +4,7 @@ import { inject, observer } from 'mobx-react';
 import { ListView } from './ListView/ListView';
 import CardMusic from './cards/CardMusic';
 
-import { PARAM_LIMIT_LARGE } from '../constants/API';
+import { PARAM_LIMIT_L } from '../constants/API';
 
 import * as urlGenerator from '../lib/url/generator';
 import { SkeletonVertical } from './widgets/Skeletons';
@@ -26,7 +26,7 @@ const Music = inject('music')(
     const { list: videos } = music;
 
     useEffect(() => {
-      types.forEach((type) => props.music.getList(type));
+      types.forEach((type) => music.getList(type));
     }, []);
 
     const getCardType = (type, item, key) => {
@@ -47,7 +47,7 @@ const Music = inject('music')(
             key={type}
             title={titles[type]}
             titleUrl={urlGenerator.toMusicListVideo()}
-            itemsInRow={PARAM_LIMIT_LARGE}
+            itemsInRow={PARAM_LIMIT_L}
             skeleton={SkeletonVertical}
             isLoading={videos[type].loading}
             prevEnable={music.canBack(type)}

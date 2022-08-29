@@ -7,7 +7,7 @@ import { ListView } from './ListView/ListView';
 import CardVideo from './Card/CardVideo';
 import CardUserVideo from './Card/CardUserVideo';
 
-import { PARAM_LIMIT_LARGE } from '../constants/API';
+import { PARAM_LIMIT_L } from '../constants/API';
 
 import * as TAGS from '../constants/tags';
 
@@ -16,6 +16,7 @@ import { SkeletonHorizontal, SkeletonVertical } from './widgets/Skeletons';
 
 const Release = inject('release')(
   observer((props) => {
+    const { isMobile } = props;
     useEffect(() => {
       [
         TAGS.FAVORITE_USER,
@@ -45,8 +46,12 @@ const Release = inject('release')(
           onNext={() => release.getVideo(TAGS.FAVORITE_USER, true)}
         >
           {videos[TAGS.FAVORITE_USER].media.map((item, key) => (
-            <Col key={key} md={6} xl={3} className="mb-4">
-              <CardUserVideo video={item} />
+            <Col key={key} xs={6} xl={3} className="mb-4">
+              <CardUserVideo
+                video={item}
+                isMobile={isMobile}
+                className="card-user-video"
+              />
             </Col>
           ))}
         </ListView>
@@ -56,14 +61,14 @@ const Release = inject('release')(
           skeleton={SkeletonVertical}
           titleUrl={urlGenerator.toUserListVideo({ tag: TAGS.ALL })}
           isLoading={videos[TAGS.ALL].loading}
-          itemsInRow={PARAM_LIMIT_LARGE}
+          itemsInRow={PARAM_LIMIT_L}
           prevEnable={videos[TAGS.ALL].hasPrev}
           nextEnable={videos[TAGS.ALL].hasMore}
           onPrev={() => release.getVideo(TAGS.ALL, false)}
           onNext={() => release.getVideo(TAGS.ALL, true)}
         >
           {videos[TAGS.ALL].media.map((item) => (
-            <Col key={item.id} md={6} xl={2}>
+            <Col key={item.id} xs={6} xl={2}>
               <CardVideo video={item} full />
             </Col>
           ))}
@@ -74,14 +79,14 @@ const Release = inject('release')(
           skeleton={SkeletonVertical}
           titleUrl={urlGenerator.toMusic()}
           isLoading={videos[TAGS.MUSIC].loading}
-          itemsInRow={PARAM_LIMIT_LARGE}
+          itemsInRow={PARAM_LIMIT_L}
           prevEnable={videos[TAGS.MUSIC].hasPrev}
           nextEnable={videos[TAGS.MUSIC].hasMore}
           onPrev={() => release.getVideo(TAGS.MUSIC, false)}
           onNext={() => release.getVideo(TAGS.MUSIC, true)}
         >
           {videos[TAGS.MUSIC].media.map((item) => (
-            <Col key={item.id} md={6} xl={2}>
+            <Col key={item.id} xs={6} xl={2}>
               <CardVideo video={item} full />
             </Col>
           ))}
@@ -92,14 +97,14 @@ const Release = inject('release')(
           skeleton={SkeletonVertical}
           titleUrl={urlGenerator.toPodcasts()}
           isLoading={videos[TAGS.PODCASTS].loading}
-          itemsInRow={PARAM_LIMIT_LARGE}
+          itemsInRow={PARAM_LIMIT_L}
           prevEnable={videos[TAGS.PODCASTS].hasPrev}
           nextEnable={videos[TAGS.PODCASTS].hasMore}
           onPrev={() => release.getVideo(TAGS.PODCASTS, false)}
           onNext={() => release.getVideo(TAGS.PODCASTS, true)}
         >
           {videos[TAGS.PODCASTS].media.map((item) => (
-            <Col key={item.id} md={6} xl={2}>
+            <Col key={item.id} xs={6} xl={2}>
               <CardVideo video={item} full />
             </Col>
           ))}
@@ -110,14 +115,14 @@ const Release = inject('release')(
           skeleton={SkeletonVertical}
           titleUrl={urlGenerator.toUserListVideo({ tag: TAGS.KIDS })}
           isLoading={videos[TAGS.KIDS].loading}
-          itemsInRow={PARAM_LIMIT_LARGE}
+          itemsInRow={PARAM_LIMIT_L}
           prevEnable={videos[TAGS.KIDS].hasPrev}
           nextEnable={videos[TAGS.KIDS].hasMore}
           onPrev={() => release.getVideo(TAGS.KIDS, false)}
           onNext={() => release.getVideo(TAGS.KIDS, true)}
         >
           {videos[TAGS.KIDS].media.map((item) => (
-            <Col key={item.id} md={6} xl={2}>
+            <Col key={item.id} xs={6} xl={2}>
               <CardVideo video={item} full />
             </Col>
           ))}
@@ -128,14 +133,14 @@ const Release = inject('release')(
           skeleton={SkeletonVertical}
           titleUrl={urlGenerator.toUserListVideo({ tag: TAGS.DOC })}
           isLoading={videos[TAGS.DOC].loading}
-          itemsInRow={PARAM_LIMIT_LARGE}
+          itemsInRow={PARAM_LIMIT_L}
           prevEnable={videos[TAGS.DOC].hasPrev}
           nextEnable={videos[TAGS.DOC].hasMore}
           onPrev={() => release.getVideo(TAGS.DOC, false)}
           onNext={() => release.getVideo(TAGS.DOC, true)}
         >
           {videos[TAGS.DOC].media.map((item) => (
-            <Col key={item.id} md={6} xl={2}>
+            <Col key={item.id} xs={6} xl={2}>
               <CardVideo video={item} full />
             </Col>
           ))}
@@ -146,14 +151,14 @@ const Release = inject('release')(
           skeleton={SkeletonVertical}
           titleUrl={urlGenerator.toUserListVideo({ tag: TAGS.TV })}
           isLoading={videos[TAGS.TV].loading}
-          itemsInRow={PARAM_LIMIT_LARGE}
+          itemsInRow={PARAM_LIMIT_L}
           prevEnable={release.isPrevTV}
           nextEnable={videos[TAGS.TV].hasMore}
           onPrev={() => release.getVideo(TAGS.TV, false)}
           onNext={() => release.getVideo(TAGS.TV, true)}
         >
           {videos[TAGS.TV].media.map((item) => (
-            <Col key={item.id} md={6} xl={2}>
+            <Col key={item.id} xs={6} xl={2}>
               <CardVideo video={item} full />
             </Col>
           ))}

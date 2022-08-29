@@ -4,7 +4,7 @@ import cookies from 'js-cookie';
 import { BasicStore } from './BasicStore';
 
 import {
-  PARAM_LIMIT_LARGE,
+  PARAM_LIMIT_L,
   PATH_URL_LIB_HISTORY,
   PATH_URL_VIDEOS,
 } from '../constants/API';
@@ -27,48 +27,48 @@ class MusicStore extends BasicStore {
       start: 0,
       media: [],
       hasMore: true,
-      total: PARAM_LIMIT_LARGE,
+      total: PARAM_LIMIT_L,
       loading: false,
     },
     trending: {
       start: 0,
       media: [],
       hasMore: true,
-      total: PARAM_LIMIT_LARGE,
+      total: PARAM_LIMIT_L,
       loading: false,
     },
     popular: {
       start: 0,
       media: [],
       hasMore: true,
-      total: PARAM_LIMIT_LARGE,
+      total: PARAM_LIMIT_L,
       loading: false,
     },
     recent: {
       start: 0,
       media: [],
       hasMore: true,
-      total: PARAM_LIMIT_LARGE,
+      total: PARAM_LIMIT_L,
       loading: false,
     },
     musicVideo: {
       start: 0,
       media: [],
       hasMore: true,
-      total: PARAM_LIMIT_LARGE,
+      total: PARAM_LIMIT_L,
       loading: false,
     },
   };
 
   canBack(type) {
-    const start = this.list[type].start - PARAM_LIMIT_LARGE;
+    const start = this.list[type].start - PARAM_LIMIT_L;
 
     return start > 0;
   }
 
   getParams(type, isBack = false) {
     let params = {
-      _limit: PARAM_LIMIT_LARGE,
+      _limit: PARAM_LIMIT_L,
       _where: {
         status: RELEASED,
         creator: MANAGER,
@@ -79,8 +79,8 @@ class MusicStore extends BasicStore {
       _start: this.list[type].start,
     };
 
-    if (isBack && params._start >= PARAM_LIMIT_LARGE) {
-      params._start -= PARAM_LIMIT_LARGE;
+    if (isBack && params._start >= PARAM_LIMIT_L) {
+      params._start -= PARAM_LIMIT_L;
     }
 
     switch (type) {
@@ -99,7 +99,7 @@ class MusicStore extends BasicStore {
       case 'recent': {
         return {
           _start: this.list[type].start,
-          _limit: PARAM_LIMIT_LARGE,
+          _limit: PARAM_LIMIT_L,
           'video.creator': MANAGER,
           'video.tags_contains': MUSIC,
         };

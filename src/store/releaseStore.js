@@ -8,8 +8,8 @@ import getVideoParams from '../utils/getVideoParams';
 import {
   MANAGER,
   USER,
-  PARAM_LIMIT_LARGE,
-  PARAM_LIMIT_MEDIUM,
+  PARAM_LIMIT_L,
+  PARAM_LIMIT_M,
   PARAM_LIMIT_SMALL,
   PATH_URL_VIDEOS,
 } from '../constants/API';
@@ -26,15 +26,15 @@ class ReleaseStore extends BasicStore {
     start: 0,
     media: [],
     hasMore: true,
-    limit: PARAM_LIMIT_LARGE,
-    total: PARAM_LIMIT_LARGE,
+    limit: PARAM_LIMIT_L,
+    total: PARAM_LIMIT_L,
     loading: false,
   };
   @observable video = {
     [TAGS.FAVORITE_USER]: {
       ...this.baseStore,
       creator: USER,
-      limit: PARAM_LIMIT_MEDIUM,
+      limit: PARAM_LIMIT_M,
       total: PARAM_LIMIT_SMALL,
     },
 

@@ -11,7 +11,7 @@ import { getTags } from '../../utils/formate';
 
 export default function CardMusic({ video }) {
   return (
-    <Col md={6} xl={3}>
+    <Col xs={6} xl={3} className="card-user-video">
       <Link href={`/details/${TYPE_MUSIC}?id=${video.id}`}>
         <Card style={{ border: '0px', cursor: 'pointer' }}>
           <CardPoster ratio={0.66} imgUrl={getPoster(video.poster_v)}>
