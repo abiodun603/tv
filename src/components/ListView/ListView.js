@@ -2,7 +2,6 @@ import React from 'react';
 import Link from 'next/link';
 import classNames from 'classnames';
 import { Container, Row, Col, Image } from 'react-bootstrap';
-import { useMediaQuery } from '@material-ui/core';
 
 import ArrowNextDis from '../../../public/icon/ic_arrow_next_dis.svg';
 import ArrowBackEn from '../../../public/icon/ic_arrow_prev_en.svg';
@@ -13,7 +12,7 @@ import { MockEmptySpace } from '../mock/MockEmptySpace';
 
 import { BlurOverlay } from '../ui/overlay/blur';
 
-import { PARAM_LIMIT_SMALL } from '../../constants/API';
+import { PARAM_LIMIT_M } from '../../constants/API';
 
 import { SkeletonHorizontal } from '../widgets/Skeletons';
 
@@ -27,20 +26,20 @@ export const ListView = (props) => {
     onPrev,
     isLoading = false,
     skeleton: Skeleton = SkeletonHorizontal,
-    itemsInRow = PARAM_LIMIT_SMALL,
+    itemsInRow = PARAM_LIMIT_M,
     isWhite = false,
     isCommingSoon,
     hasNavigion = true,
     isOnBoard = false,
+    isMobile = true,
   } = props;
-  const isMobile = useMediaQuery('(max-width:767px)');
 
   const content = (
     <Row>
       {isLoading ? (
-        Array(isMobile ? 1 : itemsInRow)
+        Array(itemsInRow)
           .fill(0)
-          .map((_, index) => <Skeleton key={index} />)
+          .map((_, index) => <Skeleton key={index} isMobile={isMobile} />)
       ) : props.children.length > 0 ? (
         props.children
       ) : (
@@ -85,11 +84,7 @@ export const ListView = (props) => {
         isOnBoard ? '' : isMobile ? 'py-3' : 'py-5',
       )}
     >
-      <div
-        className={`d-flex mb-3 align-items-center justify-content-between ${
-          isMobile ? 'flex-column' : 'flex-row'
-        }`}
-      >
+      <div className={`d-flex mb-3 align-items-center justify-content-between`}>
         <div>{titleElem}</div>
         {hasNavigion && navigation}
       </div>

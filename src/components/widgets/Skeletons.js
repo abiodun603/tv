@@ -2,7 +2,7 @@ import { Col } from 'react-bootstrap';
 import React from 'react';
 import Skeleton from '@material-ui/lab/Skeleton';
 
-export function SkeletonHorizontal() {
+export function SkeletonHorizontal({ isMobile }) {
   return (
     <Col>
       <Skeleton
@@ -11,14 +11,18 @@ export function SkeletonHorizontal() {
         height={176.9}
         style={{ borderRadius: '0.25rem 0.25rem 0rem 0rem' }}
       />
-      <Skeleton className="mt-3" animation="wave" variant="rect" />
-      <Skeleton
-        className="mt-3"
-        animation="wave"
-        variant="rect"
-        width={65}
-        style={{ borderRadius: '0rem 0rem 0.25rem 0.25rem' }}
-      />
+      {!isMobile && (
+        <>
+          <Skeleton className="mt-3" animation="wave" variant="rect" />
+          <Skeleton
+            className="mt-3"
+            animation="wave"
+            variant="rect"
+            width={65}
+            style={{ borderRadius: '0rem 0rem 0.25rem 0.25rem' }}
+          />
+        </>
+      )}
     </Col>
   );
 }

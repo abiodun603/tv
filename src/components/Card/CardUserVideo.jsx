@@ -34,6 +34,7 @@ export default class CardUserVideo extends Component {
       withTags = false,
       removeVideo = () => {},
       manageble = { isManageble: false, removingNeedsApprove: false },
+      isMobile,
     } = this.props;
 
     if (video.video) {
@@ -85,7 +86,7 @@ export default class CardUserVideo extends Component {
     return (
       <Card className={className} url={`/details/${TYPE_USER}?id=${video.id}`}>
         <CardPoster
-          ratio={16 / 9}
+          ratio={isMobile ? 16 / 13 : 16 / 9}
           imgUrl={
             video.preview_url
               ? getPreview(video.preview_url)
@@ -95,9 +96,9 @@ export default class CardUserVideo extends Component {
         >
           {statsContainer}
         </CardPoster>
-        {profileContainer}
-        {titleContainer}
-        {tagsContainer}
+        {!isMobile && profileContainer}
+        {!isMobile && titleContainer}
+        {!isMobile && tagsContainer}
         {manageble.isManageble && (
           <div
             onClick={(event) => {

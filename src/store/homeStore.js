@@ -4,8 +4,8 @@ import cookies from 'js-cookie';
 import http from '../api/axiosApi';
 import {
   MANAGER,
-  PARAM_LIMIT_LARGE,
-  PARAM_LIMIT_MEDIUM,
+  PARAM_LIMIT_L,
+  PARAM_LIMIT_M,
   PATH_URL_COLLECTIONS,
   PATH_URL_RECOMMENDED,
   PATH_URL_VIDEOS,
@@ -30,7 +30,7 @@ class HomeStore extends BasicStore {
       media: [],
       hasMore: true,
       loading: false,
-      limit: PARAM_LIMIT_MEDIUM,
+      limit: PARAM_LIMIT_M,
     },
 
     [TYPE_FILM]: {
@@ -38,6 +38,7 @@ class HomeStore extends BasicStore {
       media: [],
       hasMore: true,
       loading: false,
+      limit: PARAM_LIMIT_L,
     },
 
     [TYPE_REC]: {
@@ -45,6 +46,7 @@ class HomeStore extends BasicStore {
       media: [],
       hasMore: true,
       loading: false,
+      limit: PARAM_LIMIT_L,
     },
   };
 
@@ -195,7 +197,7 @@ class HomeStore extends BasicStore {
         tags_ncontains: [NEWS],
         ...this.getLanguageFilter(),
       },
-      _limit: PARAM_LIMIT_LARGE,
+      _limit: this.video[TYPE_REC].limit,
     };
 
     if (!isNext && this.video[TYPE_REC].start - params._limit <= 0) {
@@ -206,7 +208,7 @@ class HomeStore extends BasicStore {
 
     const start = isNext
       ? this.video[TYPE_REC].start
-      : this.video[TYPE_REC].start === 6
+      : this.video[TYPE_REC].start === params._limit
       ? 0
       : this.video[TYPE_REC].start - params._limit * 2;
 
@@ -244,7 +246,7 @@ class HomeStore extends BasicStore {
       return;
     }
 
-    const { limit = PARAM_LIMIT_LARGE } = this.video[type];
+    const { limit } = this.video[type];
 
     const params = {
       _sort: 'id:DESC',
@@ -266,7 +268,7 @@ class HomeStore extends BasicStore {
 
     const start = isNext
       ? this.video[type].start
-      : this.video[type].start === 6
+      : this.video[type].start === params._limit
       ? 0
       : this.video[type].start - params._limit * 2;
 
@@ -310,12 +312,12 @@ class HomeStore extends BasicStore {
 
     const start = isNext
       ? this.collections.start
-      : this.collections.start - PARAM_LIMIT_MEDIUM * 2;
+      : this.collections.start - PARAM_LIMIT_M * 2;
 
     const params = {
       _sort: 'last_video_update:DESC',
       _start: start,
-      _limit: PARAM_LIMIT_MEDIUM,
+      _limit: PARAM_LIMIT_M,
       ...firstParams,
     };
 
@@ -345,7 +347,7 @@ class HomeStore extends BasicStore {
   }
 
   @computed get isPrevCollection() {
-    const start = this.collections.start - PARAM_LIMIT_MEDIUM;
+    const start = this.collections.start - PARAM_LIMIT_M;
     return start <= 0;
   }
 
@@ -355,12 +357,12 @@ class HomeStore extends BasicStore {
   }
 
   @computed get isPrevAllVideo() {
-    const start = this.video[TYPE_FILM].start - PARAM_LIMIT_LARGE;
+    const start = this.video[TYPE_FILM].start - PARAM_LIMIT_L;
     return start <= 0;
   }
 
   @computed get isPrevRec() {
-    const start = this.video[TYPE_REC].start - PARAM_LIMIT_LARGE;
+    const start = this.video[TYPE_REC].start - PARAM_LIMIT_L;
     return start <= 0;
   }
 }

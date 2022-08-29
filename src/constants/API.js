@@ -1,3 +1,5 @@
+import mobile from 'is-mobile';
+
 export const BASE_URL = process.env.BASE_URL || 'https://api-testing.isabi.tv/';
 
 export const SINGLE_VIDEO = 'single';
@@ -81,3 +83,6 @@ export const TAG_DOC = 'doc';
 export const TAG_FAVORITE_USER = 'favorite_user';
 
 export const ALL_LANGUAGES_ID = 1;
+
+export const PARAM_LIMIT_M = mobile() ? 2 : 4;
+export const PARAM_LIMIT_L = mobile() ? 2 : 6;

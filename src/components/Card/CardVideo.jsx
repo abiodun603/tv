@@ -26,7 +26,7 @@ const CardVideo = ({ video = {}, className = '', maxWidthImage, full }) => {
   //   originFontSize / (video.title.length / maxDisplayCharInLine),
   // );
 
-  const ratio = isSmallWidth ? 1.2 : 0.66;
+  const ratio = isSmallWidth ? 1.2 : 0.8;
   return (
     <Card
       className={className}

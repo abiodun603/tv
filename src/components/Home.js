@@ -4,8 +4,8 @@ import { Col } from 'react-bootstrap';
 import { inject, observer } from 'mobx-react';
 
 import {
-  PARAM_LIMIT_LARGE,
-  PARAM_LIMIT_MEDIUM,
+  PARAM_LIMIT_L,
+  PARAM_LIMIT_M,
   TYPE_FILM,
   TYPE_REC,
   TYPE_USER,
@@ -29,7 +29,7 @@ import { ListView } from './ListView/ListView';
 
 const Home = inject('home')(
   observer((props) => {
-    const { home: homeStore } = props;
+    const { home: homeStore, isMobile } = props;
     const { video: videoList } = homeStore;
 
     useEffect(() => {
@@ -38,6 +38,10 @@ const Home = inject('home')(
       homeStore.getCollections(true, { _start: 0 });
       homeStore.getVideoRec(true, { _start: 0 });
     }, []);
+
+    const contests = isMobile
+      ? homeStore.contests.items.slice(0, 2)
+      : homeStore.contests.items;
 
     return (
       <>
@@ -54,10 +58,15 @@ const Home = inject('home')(
             onNext={() => homeStore.getVideo(TYPE_USER, true)}
             onPrev={() => homeStore.getVideo(TYPE_USER, false)}
             skeleton={SkeletonHorizontal}
+            isMobile={isMobile}
           >
             {videoList[TYPE_USER].media.map((item, key) => (
-              <Col key={key} md={6} xl={3} className="mb-4">
-                <CardUserVideo video={item} />
+              <Col key={key} xs={6} xl={3} className="mb-4">
+                <CardUserVideo
+                  video={item}
+                  isMobile={isMobile}
+                  className="card-user-video"
+                />
               </Col>
             ))}
           </ListView>
@@ -73,11 +82,12 @@ const Home = inject('home')(
             onPrev={() => homeStore.getVideo(TYPE_FILM, false)}
             isLoading={videoList[TYPE_FILM].loading}
             skeleton={SkeletonVertical}
-            itemsInRow={PARAM_LIMIT_LARGE}
+            itemsInRow={PARAM_LIMIT_L}
             isWhite
+            isMobile={isMobile}
           >
             {videoList[TYPE_FILM].media.map((item, key) => (
-              <Col key={key} md={6} xl={2} className="mb-4">
+              <Col key={key} xs={6} xl={2} className="mb-4">
                 <CardVideo video={item} full />
               </Col>
             ))}
@@ -95,11 +105,12 @@ const Home = inject('home')(
             onPrev={() => homeStore.getCollections(false)}
             isLoading={homeStore.collections.loading}
             skeleton={SkeletonHorizontalCollection}
-            itemsInRow={PARAM_LIMIT_MEDIUM}
+            itemsInRow={PARAM_LIMIT_M}
             isWhite={false}
+            isMobile={isMobile}
           >
             {homeStore.collections.items.map((item, key) => (
-              <Col key={key} md={6} xl={3} className="mb-4">
+              <Col key={key} xs={6} xl={3} className="mb-4">
                 <CardCollection data={item} transparent full />
               </Col>
             ))}
@@ -108,7 +119,7 @@ const Home = inject('home')(
 
         <div className="bg-white">
           <ListView
-            title="Recommended for you"
+            title={isMobile ? 'Recommended' : 'Recommended for you'}
             titleUrl={urlGenerator.toRecListVideo()}
             content={videoList[TYPE_REC]}
             nextEnable={videoList[TYPE_REC].hasMore}
@@ -117,11 +128,12 @@ const Home = inject('home')(
             onPrev={() => homeStore.getVideoRec(false)}
             isLoading={videoList[TYPE_REC].loading}
             skeleton={SkeletonVertical}
-            itemsInRow={PARAM_LIMIT_LARGE}
+            itemsInRow={PARAM_LIMIT_L}
             isWhite
+            isMobile={isMobile}
           >
             {videoList[TYPE_REC].media.map((item, key) => (
-              <Col key={key} md={6} xl={2} className="mb-4">
+              <Col key={key} xs={6} xl={2} className="mb-4">
                 <CardVideo video={item} full />
               </Col>
             ))}
@@ -137,12 +149,15 @@ const Home = inject('home')(
             prevEnable={false}
             isLoading={homeStore.contests.loading}
             skeleton={SkeletonHorizontal}
-            itemsInRow={PARAM_LIMIT_MEDIUM}
+            itemsInRow={PARAM_LIMIT_M}
             isWhite={false}
             isCommingSoon
+            isMobile={isMobile}
           >
-            {homeStore.contests.items.map((item, key) => (
-              <CardContest key={key} item={item} />
+            {contests.map((item, key) => (
+              <Col key={key} xs={6} xl={3} className="mb-4">
+                <CardContest key={key} item={item} />
+              </Col>
             ))}
           </ListView>
         </div>
