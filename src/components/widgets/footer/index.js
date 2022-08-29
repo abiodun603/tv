@@ -24,17 +24,17 @@ const Footer = () => {
     <footer className="footer">
       <Container>
         <Row>
-          <Col sm={3}>
-            <div className="mb-4">
+          <Col xs={12} xl={3} className="mb-2">
+            <div className="mb-2">
               <Logo size="small" />
             </div>
-            <div className="text text_view_secondary">
+            <div className="text text_view_secondary mb-4">
               Your go-to platform for all your Afrocentric Content
             </div>
           </Col>
-          <Col>
+          <Col xs={6} md={3} xl={2} className="mb-2">
             <ul className="footer__nav list-unstyled">
-              <li className="footer__nav-item font-weight-bold">About</li>
+              <li className="footer__nav-item fw-bold">About</li>
 
               <li className="footer__nav-item">
                 <Link href="/">
@@ -53,25 +53,9 @@ const Footer = () => {
               </li>
             </ul>
           </Col>
-          <Col>
+          <Col xs={6} md={3} xl={2} className="mb-2">
             <ul className="footer__nav list-unstyled">
-              <li className="footer__nav-item font-weight-bold">Support</li>
-              <li className="footer__nav-item">
-                <a
-                  href="mailto:support@isabitv.com"
-                  // onClick={() => {
-                  //   copyToClipboard('support@isabitv.com');
-                  // }}
-                  className="footer__nav-link"
-                >
-                  support@isabitv.com
-                </a>
-              </li>
-            </ul>
-          </Col>
-          <Col>
-            <ul className="footer__nav list-unstyled">
-              <li className="footer__nav-item font-weight-bold">Browse</li>
+              <li className="footer__nav-item fw-bold">Browse</li>
               <li className="footer__nav-item">
                 <Link
                   href={`/${PATH_URL_VIDEOS}/${TYPE_FILM}?title=Movies&tag=${MOVIES}`}
@@ -105,11 +89,22 @@ const Footer = () => {
               </li>
             </ul>
           </Col>
-          <Col>
+          <Col xs={6} md={3} xl={2} className="mb-2">
             <ul className="footer__nav list-unstyled">
-              <li className="footer__nav-item font-weight-bold">
-                Watch on the GO
+              <li className="footer__nav-item fw-bold">Support</li>
+              <li className="footer__nav-item">
+                <a
+                  href="mailto:support@isabitv.com"
+                  className="footer__nav-link text-break"
+                >
+                  support@isabitv.com
+                </a>
               </li>
+            </ul>
+          </Col>
+          <Col xs={6} md={3} xl={2} className="mb-2">
+            <ul className="footer__nav list-unstyled">
+              <li className="footer__nav-item fw-bold">Watch on the GO</li>
               <li className="footer__nav-item">
                 <a href="" className="footer__nav-link">
                   <img
@@ -131,7 +126,7 @@ const Footer = () => {
             </ul>
           </Col>
         </Row>
-        <div className="text text_view_secondary">
+        <div className="text text_view_secondary mt-4">
           © 2021 iSabiTV. All rights reserved.
         </div>
       </Container>
