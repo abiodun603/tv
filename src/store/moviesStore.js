@@ -1,7 +1,7 @@
 import { action, configure, observable, runInAction } from 'mobx';
 import cookies from 'js-cookie';
 
-import { PARAM_LIMIT_LARGE, PATH_URL_VIDEOS, MANAGER } from '../constants/API';
+import { PARAM_LIMIT_L, PATH_URL_VIDEOS, MANAGER } from '../constants/API';
 import http from '../api/axiosApi';
 
 configure({ enforceActions: 'always' });
@@ -30,11 +30,12 @@ class MoviesStore extends BasicStore {
     http.setToken(cookies.get('token'));
 
     const { start, limit, hasMore, hasPrev, loading } = this.getTypeData(type);
+    const _start = isNext ? start : start === limit ? 0 : start - limit * 2;
 
     let options = this.applyLanguageFilter({
       ...getVideoParams(videoType, tag),
       _sort: 'id:DESC',
-      _start: isNext ? start : start === limit ? 0 : start - limit * 2,
+      _start: _start < 0 ? 0 : _start,
       _limit: limit,
       ...params,
     });
@@ -65,7 +66,7 @@ class MoviesStore extends BasicStore {
           },
         ],
         _sort: 'id:DESC',
-        _start: isNext ? start : start === limit ? 0 : start - limit * 2,
+        _start: _start < 0 ? 0 : _start,
         _limit: limit,
         ...params,
       };
@@ -119,8 +120,8 @@ class MoviesStore extends BasicStore {
     }
 
     const defaultValues = {
-      start: PARAM_LIMIT_LARGE,
-      limit: PARAM_LIMIT_LARGE,
+      start: PARAM_LIMIT_L,
+      limit: PARAM_LIMIT_L,
       media: [],
       hasMore: false,
       hasPrev: false,

@@ -68,7 +68,7 @@ const Movies = inject('movies')(
           isWhite={idx % 2 !== 0}
         >
           {data.media.map((item, key) => (
-            <Col key={key} md={6} xl={2}>
+            <Col key={key} xs={6} xl={2} className="mb-4">
               <CardVideo video={item} full />
             </Col>
           ))}
