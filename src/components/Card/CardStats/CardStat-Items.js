@@ -6,7 +6,7 @@ export function CardStatsViews({ value }) {
   return (
     <div>
       <IoIosEye />
-      <span className="ml-1">{getNumber(value)}</span>
+      <span className="m-1">{getNumber(value)}</span>
     </div>
   );
 }
@@ -15,7 +15,7 @@ export function CardStatsLike({ value }) {
   return (
     <div>
       <IoIosThumbsUp />
-      <span className="ml-1">{getNumber(value)}</span>
+      <span className="m-1">{getNumber(value)}</span>
     </div>
   );
 }
@@ -24,7 +24,7 @@ export function CardStatsComment({ value }) {
   return (
     <div>
       <MdComment />
-      <span className="ml-1">{getNumber(value)}</span>
+      <span className="m-1">{getNumber(value)}</span>
     </div>
   );
 }

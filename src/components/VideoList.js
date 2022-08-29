@@ -3,6 +3,7 @@ import { inject, observer } from 'mobx-react';
 
 import { Col, Container, Row } from 'react-bootstrap';
 import Spinner from 'react-bootstrap/Spinner';
+import { PARAM_LIMIT_M } from '../constants/API';
 
 import * as TAGS from '../constants/tags';
 import * as TYPES from '../constants/types';
@@ -75,7 +76,7 @@ const VideoList = inject('videos')(
     };
 
     const getCardType = (item) => {
-      const { tag, size = 3 } = props;
+      const { tag } = props;
 
       if (
         tag === TAGS.FAVORITE_USER ||
@@ -83,7 +84,7 @@ const VideoList = inject('videos')(
         tag === TAGS.RECOMMENDED
       ) {
         return (
-          <Col key={item.id} xs={size} className="mb-3">
+          <Col key={item.id} md={6} xl={3} className="mb-3">
             <CardUserVideo video={item} />
           </Col>
         );

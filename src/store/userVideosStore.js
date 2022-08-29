@@ -2,7 +2,7 @@ import { action, configure, observable, runInAction } from 'mobx';
 import cookies from 'js-cookie';
 
 import {
-  PARAM_LIMIT_MEDIUM,
+  PARAM_LIMIT_M,
   PATH_URL_VIDEOS,
   PATH_URL_MY_UPLOADS,
   PATH_URL_RECOMMENDED,
@@ -19,19 +19,19 @@ import getVideoParams from '../utils/getVideoParams';
 const collectionQueryParams = {
   popular: {
     _sort: 'popular:DESC',
-    _limit: PARAM_LIMIT_MEDIUM,
+    _limit: PARAM_LIMIT_M,
     tags_ncontains: [TAGS.NEWS],
     ...getVideoParams(undefined, TAGS.POPULAR),
   },
   favorite: {
     _sort: 'id:DESC',
-    _limit: PARAM_LIMIT_MEDIUM,
+    _limit: PARAM_LIMIT_M,
     tags_ncontains: [TAGS.NEWS],
     ...getVideoParams(undefined, TAGS.FAVORITE_USER),
   },
   recommended: {
     _sort: 'id:DESC',
-    _limit: PARAM_LIMIT_MEDIUM,
+    _limit: PARAM_LIMIT_M,
     tags_ncontains: [TAGS.NEWS],
     ...getVideoParams(undefined, TAGS.RECOMMENDED),
   },
@@ -43,6 +43,7 @@ const initialCollectionState = {
   hasMore: true,
   hasPrev: false,
   data: [],
+  _limit: PARAM_LIMIT_M,
 };
 
 export class UserVideosStore extends BasicStore {
@@ -108,7 +109,7 @@ export class UserVideosStore extends BasicStore {
         this[collection].data = video;
         this[collection].start = start;
         this[collection].hasMore = has;
-        this[collection].hasPrev = this[collection].start > PARAM_LIMIT_MEDIUM;
+        this[collection].hasPrev = this[collection].start > PARAM_LIMIT_M;
         this[collection].loading = false;
       });
     } catch (e) {
@@ -137,9 +138,9 @@ export class UserVideosStore extends BasicStore {
 
   async loadPrev(collection) {
     const start =
-      this[collection].start === PARAM_LIMIT_MEDIUM
+      this[collection].start === PARAM_LIMIT_M
         ? 0
-        : this[collection].start - PARAM_LIMIT_MEDIUM * 2;
+        : this[collection].start - PARAM_LIMIT_M * 2;
 
     this.loadVideoToCollection(collection, {
       _start: start,
