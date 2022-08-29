@@ -71,7 +71,9 @@ export default class CardUserVideo extends Component {
           <UserBox
             avatarUrl={getPhoto(profile.photo)}
             url={social ? url.toContributor(social.id) : ''}
-            nickName={profile.username}
+            userName={[profile.name, profile.last_name]
+              .filter(Boolean)
+              .join(' ')}
             isMobile={isMobile}
           />
         </div>
