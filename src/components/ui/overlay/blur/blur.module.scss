@@ -17,6 +17,31 @@
   }
 }
 
+.msg_1 {
+  position: absolute;
+  top: 0%;
+  left: 0;
+
+  height: 100%;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-bottom: -8rem;
+
+  text-align: center;
+
+  font-size: 5rem;
+  font-weight: bold;
+  color: #2dbd58;
+
+  text-shadow: 5px -5px 12px #2b3331;
+
+  z-index: 999;
+}
+
 .msg {
   position: absolute;
   top: -40%;

@@ -88,7 +88,11 @@ export const ListView = (props) => {
         <div>{titleElem}</div>
         {hasNavigion && navigation}
       </div>
-      {isCommingSoon ? <BlurOverlay>{content}</BlurOverlay> : content}
+      {isCommingSoon ? (
+        <BlurOverlay className="msg_1">{content}</BlurOverlay>
+      ) : (
+        content
+      )}
     </Container>
   );
 };

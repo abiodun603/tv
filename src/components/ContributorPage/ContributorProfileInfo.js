@@ -18,11 +18,17 @@ export const ContributorProfileInfo = ({ contributor, isCurrentUser }) => {
     social,
     city,
     country,
-    phone,
-    email,
-    facebook,
-    instagram,
-    twitter,
+    contacts: {
+      phone,
+      email,
+      facebook,
+      instagram,
+      twitter,
+      display_email,
+      display_phone,
+      display_location,
+      display_social,
+    },
   } = profile;
 
   const profileInfoItem = (title, params = []) => {
@@ -139,10 +145,10 @@ export const ContributorProfileInfo = ({ contributor, isCurrentUser }) => {
         </Box>
       </Box>
       <div className="profile-view__body">
-        {profileInfoItem('Location', [city, country])}
-        {profileInfoItem('Email', [email])}
-        {profileInfoItem('Phone Number', [phone])}
-        {profileSocialLinks()}
+        {display_location && profileInfoItem('Location', [city, country])}
+        {display_email && profileInfoItem('Email', [email])}
+        {display_phone && profileInfoItem('Phone Number', [phone])}
+        {display_social && profileSocialLinks()}
       </div>
     </div>
   );

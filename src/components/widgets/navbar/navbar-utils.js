@@ -105,6 +105,14 @@ export const MOBLE_MENU = [
     title: 'News',
     href: url.toNews(),
   },
+  {
+    title: 'Contests',
+    href: url.toContests(),
+  },
+  {
+    title: 'Trending',
+    href: url.toTrending(),
+  },
 ];
 
 export const MOBLE_SUB_MENU = [
