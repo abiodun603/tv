@@ -10,6 +10,12 @@
   margin-left: 24px;
 }
 
+@media only screen and (max-width: 767px) {
+  .tabs__list .tab__item + .tab__item {
+    margin-left: 12px;
+  }
+}
+
 .tabs__list .tab__link {
   padding: 0.75rem 0;
   transition: background 0.2s ease-in-out;

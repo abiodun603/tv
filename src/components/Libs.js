@@ -1,58 +1,47 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { inject, observer } from 'mobx-react';
 
 import { Col, Container, Row, Tab, Nav } from 'react-bootstrap';
-import VideoGrid from './VideoGrid/VideoGrid';
+import VideoCardGrid from './VideoGrid/VideoCardGrid';
 
 import * as TYPES from '../constants/types';
 
-@inject('lib')
-@observer
-class Libs extends React.Component {
-  constructor(props) {
-    super(props);
+const Libs = inject('lib')(
+  observer((props) => {
+    const { isMobile } = props;
 
-    this.loadLibWatch = this.loadLibWatch.bind(this);
-    this.loadLibHistory = this.loadLibHistory.bind(this);
-    this.loadLibResume = this.loadLibResume.bind(this);
-    this.loadLibSubScribedCollections =
-      this.loadLibSubScribedCollections.bind(this);
-  }
+    useEffect(() => {
+      props.lib.updateFullResumeData();
+      loadLibResume(1);
+      loadLibCollections();
 
-  componentDidMount() {
-    this.props.lib.updateFullResumeData();
-    this.loadLibResume(1);
-    this.loadLibSubScribedCollections();
-  }
-  componentWillUnmount() {
-    this.props.lib.clearLibData();
-  }
+      return () => props.lib.clearLibData();
+    }, []);
 
-  loadLibWatch() {
-    this.props.lib.getLib(TYPES.LIB_WATCH);
-  }
+    const loadLibWatch = () => {
+      props.lib.getLib(TYPES.LIB_WATCH);
+    };
 
-  loadLibHistory() {
-    this.props.lib.getLib(TYPES.LIB_HISTORY);
-  }
+    const loadLibHistory = () => {
+      props.lib.getLib(TYPES.LIB_HISTORY);
+    };
 
-  loadLibResume(page) {
-    this.props.lib.getResume(page);
-  }
+    const loadLibResume = (page) => {
+      props.lib.getResume(page);
+    };
 
-  loadLibSubScribedCollections() {
-    this.props.lib.getSubscribedCollecions({});
-  }
+    const loadLibCollections = () => {
+      props.lib.getSubscribedCollecions({});
+    };
 
-  render() {
-    const historyData = this.props.lib.video[TYPES.LIB_HISTORY];
-    const watchData = this.props.lib.video[TYPES.LIB_WATCH];
-    const resumeData = this.props.lib.video[TYPES.LIB_RESUME];
+    const historyData = props.lib.video[TYPES.LIB_HISTORY];
+    const watchData = props.lib.video[TYPES.LIB_WATCH];
+    const resumeData = props.lib.video[TYPES.LIB_RESUME];
     const subscribedCollectionsData =
-      this.props.lib.video[TYPES.LIB_SUBSCRIBED_COLLECTIONS];
+      props.lib.video[TYPES.LIB_SUBSCRIBED_COLLECTIONS];
 
     return (
-      <Container className="py-5 px-5">
+      <Container className={isMobile ? 'py-3 px-2' : 'py-5 px-5'}>
         <Row className="mb-3">
           <Col>
             <span className="text-title">My Library</span>
@@ -93,38 +82,35 @@ class Libs extends React.Component {
             <Col>
               <Tab.Content>
                 <Tab.Pane eventKey="history">
-                  <VideoGrid
+                  <VideoCardGrid
                     data={historyData.media}
                     loading={historyData.loading}
-                    hasMore={this.props.lib.isNextHistory}
-                    hasContainer={false}
-                    loadData={this.loadLibHistory}
+                    hasMore={props.lib.isNextHistory}
+                    loadData={loadLibHistory}
                   />
                 </Tab.Pane>
                 <Tab.Pane eventKey="watch">
-                  <VideoGrid
+                  <VideoCardGrid
                     data={watchData.media}
                     loading={watchData.loading}
-                    hasMore={this.props.lib.isNextWatch}
-                    hasContainer={false}
-                    loadData={this.loadLibWatch}
+                    hasMore={props.lib.isNextWatch}
+                    loadData={loadLibWatch}
                   />
                 </Tab.Pane>
                 <Tab.Pane eventKey="resume">
-                  <VideoGrid
+                  <VideoCardGrid
                     data={resumeData.media}
-                    hasMore={this.props.lib.isNextResume}
-                    hasContainer={false}
-                    loadData={this.loadLibResume}
+                    loading={false}
+                    hasMore={props.lib.isNextResume}
+                    loadData={loadLibResume}
                   />
                 </Tab.Pane>
                 <Tab.Pane eventKey="subscibed_collections">
-                  <VideoGrid
+                  <VideoCardGrid
                     data={subscribedCollectionsData.media}
                     loading={subscribedCollectionsData.loading}
-                    hasMore={this.props.lib.isNextWatchSubscribedCollections}
-                    hasContainer={false}
-                    loadData={this.loadLibSubscribedCollections}
+                    hasMore={props.lib.isNextWatchSubscribedCollections}
+                    loadData={loadLibCollections}
                   />
                 </Tab.Pane>
               </Tab.Content>
@@ -133,7 +119,7 @@ class Libs extends React.Component {
         </Tab.Container>
       </Container>
     );
-  }
-}
+  }),
+);
 
 export default Libs;

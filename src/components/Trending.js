@@ -1,16 +1,15 @@
 import { Col, Container, Row, Spinner } from 'react-bootstrap';
-import React from 'react';
+import React, { useEffect } from 'react';
 import CardTrending from './cards/CardTrending';
 import { inject, observer } from 'mobx-react';
 import { ButtonTextGreen } from './widgets/Button';
 
-@inject('trending')
-@observer
-class Trending extends React.Component {
-  componentDidMount() {
-    this.props.trending.getTrending();
-  }
-  render() {
+const Trending = inject('trending')(
+  observer((props) => {
+    useEffect(() => {
+      props.trending.getTrending();
+    }, []);
+
     return (
       <div className="bg-light-gray">
         <Container>
@@ -24,14 +23,14 @@ class Trending extends React.Component {
             </Col>
           </Row>
           <Row>
-            {this.props.trending.media.map((item, key) => (
+            {props.trending.media.map((item, key) => (
               <CardTrending
-                complaint={() => this.props.trending.complaintByVideo(key)}
+                complaint={() => props.trending.complaintByVideo(key)}
                 key={key}
                 video={item}
               />
             ))}
-            {this.props.trending.loading ? (
+            {props.trending.loading ? (
               <Spinner
                 animation="border"
                 variant="success"
@@ -41,10 +40,10 @@ class Trending extends React.Component {
               ``
             )}
           </Row>
-          {this.props.trending.isNext ? (
+          {props.trending.isNext ? (
             <Row>
               <Col className="text-center my-5">
-                <ButtonTextGreen onClick={this.props.trending.getTrending}>
+                <ButtonTextGreen onClick={props.trending.getTrending}>
                   Show more
                 </ButtonTextGreen>
               </Col>
@@ -55,7 +54,7 @@ class Trending extends React.Component {
         </Container>
       </div>
     );
-  }
-}
+  }),
+);
 
 export default Trending;

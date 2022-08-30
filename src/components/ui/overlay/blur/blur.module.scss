@@ -3,8 +3,6 @@
 }
 
 .blur {
-  position: relative;
-
   &:after {
     position: absolute;
     left: 0;
@@ -15,13 +13,13 @@
     backdrop-filter: blur(3px);
     content: '';
     pointer-events: unset;
-    z-index: 99999999;
+    z-index: 99;
   }
 }
 
 .msg {
   position: absolute;
-  top: 0;
+  top: -40%;
   left: 0;
 
   height: 100%;
@@ -41,9 +39,14 @@
 
   text-shadow: 5px -5px 12px #2b3331;
 
-  z-index: 999999999;
+  z-index: 999;
 }
 
+@media screen and (max-width: 767px) {
+  .msg {
+    top: -45%;
+  }
+}
 .child {
   position: relative;
   z-index: 0;

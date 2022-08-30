@@ -33,7 +33,7 @@ export default class CardUserVideo extends Component {
       withTags = true,
       removeVideo = () => {},
       manageble = { isManageble: false, removingNeedsApprove: false },
-      isMobile,
+      isMobile = false,
     } = this.props;
 
     if (video.video) {
@@ -46,7 +46,7 @@ export default class CardUserVideo extends Component {
       : { last_name: 'dash', name: 'board', username: 'dashboard' };
 
     const titleContainer = withTitle && (
-      <div className="mt-3">
+      <div className="m-2">
         <CardTitle title={video.title} />
       </div>
     );

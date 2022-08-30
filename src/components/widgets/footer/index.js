@@ -106,22 +106,28 @@ const Footer = () => {
             <ul className="footer__nav list-unstyled">
               <li className="footer__nav-item fw-bold">Watch on the GO</li>
               <li className="footer__nav-item">
-                <a href="" className="footer__nav-link">
+                <Link
+                  href="https://apps.apple.com/us/app/isabitv/id1522221735"
+                  className="footer__nav-link"
+                >
                   <img
                     src="/image/market/app_store.svg"
                     alt=""
                     className="img-fluid mb-2"
                   />
-                </a>
+                </Link>
               </li>
               <li className="footer__nav-item">
-                <a href="" className="footer__nav-link">
+                <Link
+                  href="https://play.google.com/store/apps/details?id=com.rvtech.iSabiTV"
+                  className="footer__nav-link"
+                >
                   <img
                     src="/image/market/app_google.svg"
                     alt=""
                     className="img-fluid"
                   />
-                </a>
+                </Link>
               </li>
             </ul>
           </Col>
