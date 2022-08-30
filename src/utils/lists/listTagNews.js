@@ -7,7 +7,7 @@ export default [
 
   { key: 4, label: 'Business', enabled: false },
   { key: 5, label: 'Gossip / Amedo', enabled: false },
-  { key: 6, label: 'Crime', enabled: false },
+  { key: 6, label: 'Crimes', enabled: false },
 
   { key: 7, label: 'Economic', enabled: false },
   { key: 8, label: 'Culture', enabled: false },

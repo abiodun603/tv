@@ -32,12 +32,14 @@ const News = inject('news')(
 
     useEffect(() => {
       const selectedTag = categories.find((c) => c.key === activeTab);
-      if (selectedTag) {
-        loadNews(selectedTag.label);
-      }
+      loadNews(selectedTag?.label);
     }, [activeTab]);
 
     const loadNews = (tag = TYPE_NEWS) => {
+      if (tag === 'All') {
+        tag = TYPE_NEWS
+      }
+
       props.news.getNews('news', {
         _where: { tags_contains: [tag] },
       });

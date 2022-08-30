@@ -26,7 +26,7 @@ class NewsStore extends BasicStore {
   }
 
   @action
-  getNews(tag = TYPE_NEWS, params = {}) {
+  getNews(tag = TYPE_NEWS, params = {}, shouldReload = true) {
     http.setToken(cookies.get('token'));
 
     if (this.tag !== tag) {
@@ -35,7 +35,7 @@ class NewsStore extends BasicStore {
 
     const options = this.applyLanguageFilter({
       _sort: 'id:DESC',
-      _start: this.start,
+      _start: shouldReload ? 0 : this.start,
       _limit: PARAM_LIMIT_ALL,
       ...params,
     });
@@ -52,7 +52,8 @@ class NewsStore extends BasicStore {
         let data = res.data;
         if (data.success) {
           runInAction(() => {
-            this.media = this.media.concat(data.result.video); // thats how "show more" adds cards in media(it conctas all of the new data with the previous banch of data)
+            const videos = data.result.video.filter(v => !!v.tags.includes('news'));
+            this.media = shouldReload ? videos : this.media.concat(videos); // thats how "show more" adds cards in media(it conctas all of the new data with the previous banch of data)
             this.start = data.result.start;
             this.hasMore = data.result.has;
             this.loading = false;
