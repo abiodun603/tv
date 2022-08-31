@@ -43,7 +43,7 @@ const AuthLayout = inject(
     return (
       <>
         <Head>
-          <title>IsabiTV</title>
+          <title>iSabiTV</title>
         </Head>
         <div className="page theme theme_font_default theme_color_default theme_space_default theme_size_default">
           <div id="recaptcha-container" />
