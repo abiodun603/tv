@@ -46,13 +46,21 @@ const getCardsByType = (data) => {
     } else if (item.count_video >= 0) {
       collections.push(item);
     } else if (creator === MANAGER) {
-      const midx = managerVideos.findIndex((c) => c.id === item.id);
-      if (midx < 0) {
+      if (item.video) {
+        const midx = managerVideos.findIndex((c) => c.id === item.video.id);
+        if (midx < 0) {
+          managerVideos.push(item.video);
+        }
+      } else {
         managerVideos.push(item);
       }
     } else if (creator === USER) {
-      const uidx = userVideos.findIndex((c) => c.id === item.id);
-      if (uidx < 0) {
+      if (item.video) {
+        const uidx = userVideos.findIndex((c) => c.id === item.video.id);
+        if (uidx < 0) {
+          userVideos.push(item.video);
+        }
+      } else {
         userVideos.push(item);
       }
     } else if (status === COMING_SOON) {
@@ -61,13 +69,21 @@ const getCardsByType = (data) => {
         comingSoon.push(item);
       }
     } else if (type === SINGLE_VIDEO || type === SERIES) {
-      const midx = managerVideos.findIndex((c) => c.id === item.id);
-      if (midx < 0) {
+      if (item.video) {
+        const midx = managerVideos.findIndex((c) => c.id === item.video.id);
+        if (midx < 0) {
+          managerVideos.push(item.video);
+        }
+      } else {
         managerVideos.push(item);
       }
     } else {
-      const uidx = userVideos.findIndex((c) => c.id === item.id);
-      if (uidx < 0) {
+      if (item.video) {
+        const uidx = userVideos.findIndex((c) => c.id === item.video.id);
+        if (uidx < 0) {
+          userVideos.push(item.video);
+        }
+      } else {
         userVideos.push(item);
       }
     }
