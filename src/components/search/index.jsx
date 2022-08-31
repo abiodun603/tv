@@ -7,19 +7,15 @@ import { Col, Container, Row, Spinner } from 'react-bootstrap';
 
 import { toJS } from 'mobx';
 
-import SearchStore from '../../store/searchStore';
-import AuthStore from '../../store/authStore';
-
 import { SkeletonHorizontal, SkeletonVertical } from '../widgets/Skeletons';
 
 import CardVideo from '../Card/CardVideo';
 import CardUserVideo from '../Card/CardUserVideo';
 import { SearchFilter } from './search-filter';
-import { ArrowToolbar } from '../ui/arrow-toolbar';
 
 import {
-  PARAM_LIMIT_LARGE,
-  PARAM_LIMIT_MEDIUM,
+  PARAM_LIMIT_L,
+  PARAM_LIMIT_M,
   TYPE_FILM,
   TYPE_USER,
 } from '../../constants/API';
@@ -42,62 +38,54 @@ const RouterWatcher = ({ searchStore }) => {
   return null;
 };
 
-@inject('ui', 'search', 'auth')
-@observer
-class SearchComponent extends React.Component {
-  componentDidMount() {
-    this.props.search.setLanguages(
-      this.props.auth.profileStore.profile.languages
-    );
+const SearchComponent = inject(
+  'ui',
+  'search',
+  'auth',
+)(
+  observer((props) => {
+    useEffect(() => {
+      props.search.setLanguages(props.auth.profileStore.profile.languages);
 
-    if (this.isFirstMount()) {
-      //if this page is mounted for the first time, then updateParams wont request the video because of "if (title_contains !== query) " there, so we request those video ourselves
-      this.props.search.getVideo(TYPE_USER);
-      this.props.search.getVideo(TYPE_FILM);
-    }
+      loadInitialVideos();
 
-    this.updateParams();
+      updateParams();
 
-    this.props.search.getSearchHistory();
-  }
+      props.search.getSearchHistory();
+    }, []);
 
-  updateParams() {
-    const getQuery = (router) => router.query.query;
+    const loadInitialVideos = () => {
+      // this method was created in order not to load videos several times(because updateParams, which is also called in componentDidMount is able to request videos)
+      const getQuery = (router) => router.query.query;
+      const {
+        filter: { title_contains },
+      } = props.search;
 
-    const {
-      filter: { title_contains },
-    } = this.props.search;
-    const query = getQuery(this.props.router);
+      const query = getQuery(props.router);
+      if (!title_contains && !query) {
+        props.search.getVideo(TYPE_USER);
+        props.search.getVideo(TYPE_FILM);
+      }
+    };
 
-    if (title_contains !== query) {
-      this.props.search.setKeyword(query);
+    const updateParams = () => {
+      const getQuery = (router) => router.query.query;
 
-      this.props.search.apply();
-    }
-  }
+      const {
+        filter: { title_contains },
+      } = props.search;
+      const query = getQuery(props.router);
 
-  isFirstMount() {
-    // this method was created in order not to load videos several times(because updateParams, which is also called in componentDidMount is able to request videos)
-    const getQuery = (router) => router.query.query;
-    const {
-      filter: { title_contains },
-    } = this.props.search;
+      if (title_contains !== query) {
+        props.search.setKeyword(query);
 
-    const query = getQuery(this.props.router);
-    if (!title_contains && !query) {
-      return true;
-    }
-    return false;
-  }
+        props.search.apply();
+      }
+    };
 
-  componentDidUpdate(prevProps) {
-    this.updateParams();
-  }
+    const videos = props.search.videos;
 
-  render() {
-    const videos = this.props.search.videos;
-
-    if (this.props.search.filterLoading) {
+    if (props.search.filterLoading) {
       return <Spinner animation="border" variant="success" className="mt-4" />;
     }
 
@@ -105,8 +93,8 @@ class SearchComponent extends React.Component {
 
     if (isEmpty) {
       return (
-        <Container className="mt-5">
-          <SearchFilter />
+        <Container className={props.isMobile ? 'mt-3' : 'mt-5'}>
+          <SearchFilter search={props.search} ui={props.ui} />
           <Row className=" mt-5 mb-5 container-size">
             <MockEmptySpace mainText={'Nothing found'} />
           </Row>
@@ -114,27 +102,27 @@ class SearchComponent extends React.Component {
       );
     }
     return (
-      <Container className="mt-5">
-        <SearchFilter />
+      <Container className={props.isMobile ? 'mt-3' : 'mt-5'}>
+        <SearchFilter search={props.search} ui={props.ui} />
 
         <Row className={'mt-5 mb-5'}>
-          {this.props.search.videos[TYPE_FILM].total > 0 && (
+          {props.search.videos[TYPE_FILM].total > 0 && (
             <ListView
               title="Movies"
               skeleton={SkeletonVertical}
               titleUrl={urlGenerator.toFilmListVideo({
-                params: JSON.stringify(toJS(this.props.search.filter)),
+                params: JSON.stringify(toJS(props.search.filter)),
               })}
               isLoading={videos[TYPE_FILM].loading}
-              itemsInRow={PARAM_LIMIT_LARGE}
+              itemsInRow={PARAM_LIMIT_L}
               isOnBoard
-              prevEnable={!this.props.search.isPrevAllVideo}
+              prevEnable={!props.search.isPrevAllVideo}
               nextEnable={videos[TYPE_FILM].hasMore}
-              onPrev={() => this.props.search.getVideo(TYPE_FILM, false)}
-              onNext={() => this.props.search.getVideo(TYPE_FILM, true)}
+              onPrev={() => props.search.getVideo(TYPE_FILM, false)}
+              onNext={() => props.search.getVideo(TYPE_FILM, true)}
             >
               {videos[TYPE_FILM].media.map((item, key) => (
-                <Col key={item.id} xs="2">
+                <Col key={item.id} xs={6} xl={2}>
                   <CardVideo video={item} />
                 </Col>
               ))}
@@ -142,24 +130,24 @@ class SearchComponent extends React.Component {
           )}
         </Row>
         <Row className={'mt-5 mb-5'}>
-          {this.props.search.videos[TYPE_USER].total > 0 && (
+          {props.search.videos[TYPE_USER].total > 0 && (
             <ListView
               title="Videos"
               skeleton={SkeletonHorizontal}
               titleUrl={urlGenerator.toUserListVideo({
-                params: JSON.stringify(toJS(this.props.search.filter)),
+                params: JSON.stringify(toJS(props.search.filter)),
               })}
               isLoading={videos[TYPE_USER].loading}
-              itemsInRow={PARAM_LIMIT_MEDIUM}
-              prevEnable={!this.props.search.isPrevUser}
+              itemsInRow={PARAM_LIMIT_M}
+              prevEnable={!props.search.isPrevUser}
               isOnBoard
               nextEnable={videos[TYPE_USER].hasMore}
-              onPrev={() => this.props.search.getVideo(TYPE_USER, false)}
-              onNext={() => this.props.search.getVideo(TYPE_USER, true)}
+              onPrev={() => props.search.getVideo(TYPE_USER, false)}
+              onNext={() => props.search.getVideo(TYPE_USER, true)}
             >
               {videos[TYPE_USER].media.map((item, key) => (
-                <Col key={key} md={6} xl={3} className="mb-4">
-                  <CardUserVideo video={item} />
+                <Col key={key} xs={6} xl={3} className="mb-4">
+                  <CardUserVideo video={item} isMobile={props.isMobile} />
                 </Col>
               ))}
             </ListView>
@@ -167,7 +155,6 @@ class SearchComponent extends React.Component {
         </Row>
       </Container>
     );
-  }
-}
-
+  }),
+);
 export const Search = withRouter(SearchComponent);

@@ -1,22 +1,9 @@
 import React from 'react';
-import { Col, Container, Row, Modal } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import { inject, observer } from 'mobx-react';
 
-import Button from '@material-ui/core/Button';
-import { Chip } from '@material-ui/core';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Dialog from '@material-ui/core/Dialog';
-
-import { ButtonContainer, ButtonTextGreen } from '../../widgets/Button';
-import {
-  CustomTextField,
-  GreenCheckbox,
-  LanguagesSelect,
-} from '../../widgets/Field';
-
-import SearchStore from '../../../store/searchStore';
-import UIStore from '../../../store/uiStore';
+import { CustomTextField, LanguagesSelect } from '../../widgets/Field';
 
 import listYear from '../../../utils/lists/listYear';
 

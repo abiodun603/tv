@@ -11,8 +11,8 @@ import cookies from 'js-cookie';
 import { BasicStore } from './BasicStore';
 
 import {
-  PARAM_LIMIT_LARGE,
-  PARAM_LIMIT_MEDIUM,
+  PARAM_LIMIT_L,
+  PARAM_LIMIT_M,
   PATH_URL_VIDEOS,
   TYPE_FILM,
   TYPE_USER,
@@ -92,7 +92,7 @@ class SearchStore extends BasicStore {
     }
 
     let start = 0;
-    const limit = type === TYPE_USER ? PARAM_LIMIT_MEDIUM : PARAM_LIMIT_LARGE;
+    const limit = type === TYPE_USER ? PARAM_LIMIT_M : PARAM_LIMIT_L;
 
     if (isNext != null) {
       if (
@@ -274,12 +274,12 @@ class SearchStore extends BasicStore {
   }
 
   @computed get isPrevUser() {
-    const start = this.videos[TYPE_USER].start - PARAM_LIMIT_MEDIUM;
+    const start = this.videos[TYPE_USER].start - PARAM_LIMIT_M;
     return start <= 0;
   }
 
   @computed get isPrevAllVideo() {
-    const start = this.videos[TYPE_FILM].start - PARAM_LIMIT_LARGE;
+    const start = this.videos[TYPE_FILM].start - PARAM_LIMIT_L;
     return start <= 0;
   }
 

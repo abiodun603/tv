@@ -38,13 +38,17 @@
 /* modal_theme_full */
 .modal_theme_full {
   background: rgba(250, 250, 250, 0.1);
-  backdrop-filter: blur(27px);
+  backdrop-filter: blur(54px);
 }
 
 .modal_theme_full .modal-content {
   padding: 1rem;
   background: transparent;
   border: 0;
+}
+
+.modal_theme_full .modal-dialog-centered {
+  margin-top: 80px;
 }
 
 .modal__close {

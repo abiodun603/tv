@@ -2,8 +2,17 @@
   width: 46px;
   height: 46px;
   opacity: 1;
-  background: url(close_size_l.svg) center no-repeat;
+  background: url('/icon/close_size_l.svg') center no-repeat;
   background-size: 26px;
+}
+
+@media screen and (max-width: 767px) {
+  .close_size_l {
+    width: 30px;
+    height: 30px;
+    margin-right: 16px;
+    background-size: 15px;
+  }
 }
 
 .close_size_l span {
@@ -11,5 +20,5 @@
 }
 
 .close_light {
-  background: url(close_size_l-light.svg) center no-repeat;
+  background: url('/icon/close_size_l-light.svg') center no-repeat;
 }
