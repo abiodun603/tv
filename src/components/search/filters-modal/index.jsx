@@ -107,7 +107,7 @@ export class FiltersModal extends React.Component {
             <div className="font-weight-bold mb-3">Release Year</div>
 
             <Row className="mb-4">
-              <Col md={2} sm={3}>
+              <Col md={2} sm={3} className="mb-2">
                 <CustomTextField
                   select
                   label="From"
@@ -123,7 +123,7 @@ export class FiltersModal extends React.Component {
                 </CustomTextField>
               </Col>
 
-              <Col md={2} sm={3}>
+              <Col md={2} sm={3} className="mb-2">
                 <CustomTextField
                   select
                   label="To"

@@ -39,19 +39,37 @@ const getCardsByType = (data) => {
       : RELEASED;
 
     if (isNews) {
-      news.push(item);
+      const nidx = news.findIndex((c) => c.id === item.id);
+      if (nidx < 0) {
+        news.push(item);
+      }
     } else if (item.count_video >= 0) {
       collections.push(item);
     } else if (creator === MANAGER) {
-      managerVideos.push(item);
+      const midx = managerVideos.findIndex((c) => c.id === item.id);
+      if (midx < 0) {
+        managerVideos.push(item);
+      }
     } else if (creator === USER) {
-      userVideos.push(item);
+      const uidx = userVideos.findIndex((c) => c.id === item.id);
+      if (uidx < 0) {
+        userVideos.push(item);
+      }
     } else if (status === COMING_SOON) {
-      comingSoon.push(item);
+      const cidx = comingSoon.findIndex((c) => c.id === item.id);
+      if (cidx < 0) {
+        comingSoon.push(item);
+      }
     } else if (type === SINGLE_VIDEO || type === SERIES) {
-      managerVideos.push(item);
+      const midx = managerVideos.findIndex((c) => c.id === item.id);
+      if (midx < 0) {
+        managerVideos.push(item);
+      }
     } else {
-      userVideos.push(item);
+      const uidx = userVideos.findIndex((c) => c.id === item.id);
+      if (uidx < 0) {
+        userVideos.push(item);
+      }
     }
   });
 

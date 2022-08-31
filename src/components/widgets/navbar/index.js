@@ -199,8 +199,15 @@ export const NavBar = inject(
                   <UserProfile profile={profile} />
                 </>
               )}
+              {isMobile && (
+                <Link href={url.toSearch()}>
+                  <Box mx={1} className="clickable">
+                    <span className="icon icon_name_search-navbar icon_size_l" />
+                  </Box>
+                </Link>
+              )}
               {!isDeskTop && (
-                <Box ml={4}>
+                <Box ml={isMobile ? 1 : 4}>
                   <IconButton
                     edge="end"
                     className={classes.menuButton}
