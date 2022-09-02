@@ -1,15 +1,23 @@
 import React from 'react';
+import Head from 'next/head';
 import { useMediaQuery } from '@material-ui/core';
 
-import Page from '../src/components/Page';
-import Home from '../src/components/Home';
+import LandingPage from '../src/components/LandingPage';
 
 export default function Index() {
   const isMobile = useMediaQuery('(max-width:767px)');
 
   return (
-    <Page>
-      <Home isMobile={isMobile} />
-    </Page>
+    <>
+      <Head>
+        <title>iSabiTV</title>
+      </Head>
+      <LandingPage />
+    </>
   );
+}
+
+export async function getServerSideProps() {
+  // Pass data to the page via props
+  return { props: { data: 'hello' } };
 }

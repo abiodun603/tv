@@ -1,0 +1,189 @@
+.isabitv-banner {
+  height: 1084px;
+}
+
+/* Banner */
+.isabitv-banner .wrapper {
+  background-image: url('/image/bg_home.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 100%;
+}
+
+.isabitv-banner .header {
+  padding: 120px 16px;
+}
+
+.isabitv-banner .heading {
+  line-height: 1;
+  max-width: 700px;
+  font-size: 64px;
+  font-weight: 500;
+}
+
+.isabitv-banner .sub-heading {
+  max-width: 600px;
+  font-size: 24px;
+  color: RGBA(43, 51, 49, 0.6);
+}
+
+.isabitv-faq {
+  padding: 60px 0;
+}
+
+.isabitv-faq .wrapper {
+  max-width: 800px;
+}
+
+.isabitv-faq .bg {
+  background-image: url('/image/bg_faq1.JPG');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+/* FQAs */
+.isabitv-faq .heading {
+  font-size: 52px;
+  font-weight: 500;
+}
+
+/* Intro */
+.isabitv-intro {
+  background-color: RGBA(43, 51, 49, 0.05);
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+}
+
+.isabitv-intro .img img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.isabitv-intro .desc {
+  max-width: 555px;
+}
+
+.isabitv-intro .desc .title {
+  font-size: 32px;
+  font-weight: 500;
+}
+
+.isabitv-intro .desc .sub-title {
+  font-size: 16px;
+  padding: 40px 0;
+  color: RGBA(43, 51, 49, 0.6);
+}
+
+.isabitv-intro .desc .icon img:first-child {
+  padding-right: 20px;
+}
+
+@media screen and (max-width: 1199px) {
+  .isabitv-banner {
+    height: 800px;
+  }
+
+  /* Banner */
+  .isabitv-banner .heading {
+    max-width: 560px;
+    font-size: 48px;
+  }
+
+  .isabitv-banner .sub-heading {
+    max-width: 500px;
+    font-size: 20px;
+  }
+
+  /* Intro */
+  .isabitv-intro .desc {
+    max-width: 400px;
+  }
+
+  .isabitv-intro .desc .title {
+    font-size: 24px;
+  }
+
+  .isabitv-intro .desc .sub-title {
+    padding: 26px 0;
+  }
+}
+
+@media screen and (max-width: 999px) {
+  /* Intro */
+  .isabitv-intro {
+    padding-top: 20px;
+  }
+
+  .isabitv-intro .desc {
+    max-width: 400px;
+  }
+
+  .isabitv-intro .desc .sub-title {
+    padding: 16px 0;
+  }
+
+  .isabitv-intro .desc .icon img {
+    width: 120px;
+  }
+  .isabitv-intro .desc .icon img:last-child {
+    height: 32px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  /* Banner */
+  .isabitv-banner {
+    height: 568px;
+  }
+
+  .isabitv-banner .header {
+    padding: 60px 16px;
+  }
+
+  .isabitv-banner .heading {
+    max-width: 340px;
+    font-size: 30px;
+  }
+
+  .isabitv-banner .sub-heading {
+    max-width: 340px;
+    font-size: 16px;
+    padding-top: 10px !important;
+  }
+
+  /* Intro */
+  .isabitv-intro {
+    display: flex;
+    flex-direction: column;
+    background-color: #2dbd58;
+  }
+
+  .isabitv-intro .img {
+    order: 2;
+  }
+
+  .isabitv-intro .desc {
+    max-width: 100%;
+    padding: 30px 16px;
+    order: 1;
+  }
+
+  .isabitv-intro .desc .title {
+    color: white;
+  }
+
+  .isabitv-intro .desc .sub-title {
+    padding: 40px 0;
+    color: RGBA(255, 255, 255, 0.8);
+  }
+}
+@media screen and (max-width: 339px) {
+  .isabitv-banner .heading,
+  .isabitv-banner .sub-heading {
+    max-width: auto;
+  }
+}
