@@ -6,6 +6,7 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Logo } from '../ui/logo';
 import { ButtonContainer } from '../widgets/Button';
 import FaqAccordions from './Faq';
+import Footer from '../widgets/footer';
 
 const LandingPage = () => {
   const theme = useTheme();
@@ -17,11 +18,11 @@ const LandingPage = () => {
         <div className="wrapper">
           <div className="d-flex justify-content-between align-items-center px-4 navbar">
             <Logo />
-            <ButtonContainer>Sign In</ButtonContainer>
+            <ButtonContainer size="large">Sign In</ButtonContainer>
           </div>
           <div className="d-flex justify-content-center flex-column align-items-center header">
             <div className="heading text-center">
-              All Your Favorite Movies In One Place
+              All your Afrocentric Content in one place
             </div>
             <div className="sub-heading text-center pt-4">
               Watch thousands of amazing movies and TV shows. Available Anywhere
@@ -30,11 +31,19 @@ const LandingPage = () => {
         </div>
       </div>
       {/* FQAs */}
-      <div className="d-flex justify-content-center align-items-center flex-column isabitv-faq">
-        <div className="heading py-4">Frequently Asked Questions</div>
-        <div className="wrapper">
-          <FaqAccordions />
+      <div className="isabitv-faq">
+        <div className="d-flex justify-content-center align-items-center flex-column">
+          <div className="heading py-4">Frequently Asked Questions</div>
+          <div className="wrapper">
+            <FaqAccordions />
+          </div>
         </div>
+      </div>
+      <div className="isabitv-bg">
+        <div className="bg1" />
+        <div className="bg2" />
+        <div className="bg3" />
+        <div className="bg4" />
       </div>
       {/* Introduce Mobile Apps */}
       <div className="isabitv-intro">
@@ -75,7 +84,7 @@ const LandingPage = () => {
           </div>
         </div>
       </div>
-      <div style={{ height: '400px' }}></div>
+      <Footer />
     </>
   );
 };

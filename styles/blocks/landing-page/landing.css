@@ -17,7 +17,7 @@
 
 .isabitv-banner .heading {
   line-height: 1;
-  max-width: 700px;
+  max-width: 800px;
   font-size: 64px;
   font-weight: 500;
 }
@@ -28,6 +28,7 @@
   color: RGBA(43, 51, 49, 0.6);
 }
 
+/* FQAs */
 .isabitv-faq {
   padding: 60px 0;
 }
@@ -36,17 +37,47 @@
   max-width: 800px;
 }
 
-.isabitv-faq .bg {
+.isabitv-faq .heading {
+  font-size: 52px;
+  font-weight: 500;
+}
+
+.isabitv-bg {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  height: 1200px;
+}
+
+.isabitv-bg .bg1 {
+  background-image: url('/image/bg_faq.JPG');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 100%;
+}
+
+.isabitv-bg .bg2 {
   background-image: url('/image/bg_faq1.JPG');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  height: 100%;
 }
-
-/* FQAs */
-.isabitv-faq .heading {
-  font-size: 52px;
-  font-weight: 500;
+.isabitv-bg .bg3 {
+  background-image: url('/image/bg_faq3.JPG');
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: cover;
+  height: 100%;
+}
+.isabitv-bg .bg4 {
+  background-image: url('/image/bg_faq4.JPG');
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: cover;
+  height: 100%;
 }
 
 /* Intro */
@@ -89,7 +120,7 @@
 
   /* Banner */
   .isabitv-banner .heading {
-    max-width: 560px;
+    max-width: 620px;
     font-size: 48px;
   }
 
@@ -109,6 +140,14 @@
 
   .isabitv-intro .desc .sub-title {
     padding: 26px 0;
+  }
+
+  .isabitv-faq .heading {
+    font-size: 36px;
+  }
+
+  .isabitv-bg {
+    height: 800px;
   }
 }
 
@@ -145,7 +184,7 @@
   }
 
   .isabitv-banner .heading {
-    max-width: 340px;
+    max-width: 380px;
     font-size: 30px;
   }
 
@@ -153,6 +192,10 @@
     max-width: 340px;
     font-size: 16px;
     padding-top: 10px !important;
+  }
+  /* FAQs */
+  .isabitv-faq {
+    padding: 20px 0;
   }
 
   /* Intro */
@@ -179,6 +222,14 @@
   .isabitv-intro .desc .sub-title {
     padding: 40px 0;
     color: RGBA(255, 255, 255, 0.8);
+  }
+
+  .isabitv-faq .heading {
+    font-size: 24px;
+  }
+
+  .isabitv-bg {
+    height: 400px;
   }
 }
 @media screen and (max-width: 339px) {

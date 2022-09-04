@@ -14,3 +14,9 @@
 .footer__nav-link:not([aria-disabled='true']):hover {
   color: var(--color-link-hover);
 }
+
+@media screen and (max-width: 767px) {
+  .footer {
+    padding: 24px 0;
+  }
+}

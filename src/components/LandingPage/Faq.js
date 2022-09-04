@@ -110,7 +110,7 @@ export default function FaqAccordions() {
       <Accordion
         square
         expanded={expanded === 'panel4'}
-        onChange={handleChange('panel3')}
+        onChange={handleChange('panel4')}
       >
         <AccordionSummary aria-controls="panel4d-content" id="panel3d-header">
           <Typography>Collapsible Group Item #4</Typography>
@@ -127,7 +127,7 @@ export default function FaqAccordions() {
       <Accordion
         square
         expanded={expanded === 'panel5'}
-        onChange={handleChange('panel3')}
+        onChange={handleChange('panel5')}
       >
         <AccordionSummary aria-controls="panel5d-content" id="panel3d-header">
           <Typography>Collapsible Group Item #5</Typography>
@@ -144,7 +144,7 @@ export default function FaqAccordions() {
       <Accordion
         square
         expanded={expanded === 'panel6'}
-        onChange={handleChange('panel3')}
+        onChange={handleChange('panel6')}
       >
         <AccordionSummary aria-controls="panel6d-content" id="panel3d-header">
           <Typography>Collapsible Group Item #6</Typography>
