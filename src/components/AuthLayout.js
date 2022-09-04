@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { autorun } from 'mobx';
 import { inject, observer } from 'mobx-react';
 import Head from 'next/head';
+import Router from 'next/router';
 import { Container, Row, Spinner } from 'react-bootstrap';
 import { STATUS_LOADING, STATUS_NO_AUTH, STATUS_AUTH } from '../constants/auth';
 
@@ -38,6 +39,10 @@ const AuthLayout = inject(
       if (storeAuth.status === STATUS_AUTH) {
         props.search.getSearchHistory();
       }
+
+      if (storeAuth.status === STATUS_NO_AUTH) {
+        // Router.push('/')
+      }
     }, [storeAuth.status]);
 
     return (
@@ -58,7 +63,7 @@ const AuthLayout = inject(
               </Row>
             </Container>
           ) : storeAuth.status === STATUS_NO_AUTH ? (
-            <Auth />
+            <>{children}</>
           ) : (
             <>
               <NavBar searchHistory={search.searchHistory} />

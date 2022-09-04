@@ -25,7 +25,7 @@ export const SeriesControlsMock = ({}) => {
     });
 
   return (
-    <Container className="mb-3 px-0">
+    <Container className="mb-3">
       <Row>
         <Col>
           <Button

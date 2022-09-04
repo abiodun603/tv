@@ -1,12 +1,11 @@
 import React from 'react';
 import Link from 'next/link';
-import { Container } from '@material-ui/core';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { useTheme } from '@material-ui/core/styles';
 
 import { Logo } from '../ui/logo';
-import { ButtonContainer } from '../widgets/Button';
 import FaqAccordions from './Faq';
 import Footer from '../widgets/footer';
+import { Box } from '../widgets/Box';
 
 const LandingPage = () => {
   const theme = useTheme();
@@ -18,7 +17,20 @@ const LandingPage = () => {
         <div className="wrapper">
           <div className="d-flex justify-content-between align-items-center px-4 navbar">
             <Logo />
-            <ButtonContainer size="large">Sign In</ButtonContainer>
+            <Link href="/auth">
+              <Box
+                className="clickable"
+                bgcolor={theme.palette.primary.main}
+                color={theme.palette.background.default}
+                textAlign="center"
+                py={1}
+                px={2}
+                borderRadius={4}
+                fontSize={20}
+              >
+                Sign In
+              </Box>
+            </Link>
           </div>
           <div className="d-flex justify-content-center flex-column align-items-center header">
             <div className="heading text-center">
