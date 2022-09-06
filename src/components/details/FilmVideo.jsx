@@ -38,8 +38,14 @@ const FilmVideo = inject(
   'ui',
 )(
   observer((props) => {
+    const { videoData, anotherVideo, seriesData, episodeData, loading } =
+      props.video;
+
     const [trailerDialog, setTrailerDialog] = useState(false);
     const isMobile = useMediaQuery('(max-width:767px)');
+
+    const [currentSeason, setCurrentSeason] = useState(1);
+    const [currentEpisode, setCurrentEpisode] = useState({ series: 1 });
 
     useEffect(() => {
       if (props.id > 0) {
@@ -47,16 +53,27 @@ const FilmVideo = inject(
       }
     }, [props.id]);
 
-    const onSelectSeason = ({ season, episode }) => {
-      props.video.getSeries(props.id, season, episode);
+    useEffect(() => {
+      if (seriesData) {
+        const season = seriesData?.seasons[0]?.season;
+        const episode = seriesData?.episodes[0];
+
+        if (season && episode) {
+          setCurrentSeason(season);
+          setCurrentEpisode(episode);
+        }
+      }
+    }, [seriesData]);
+
+    const onSelectSeason = (season) => {
+      setCurrentSeason(season);
+      props.video.getSeries(props.id, season);
     };
 
-    const onSelectEpisode = ({ episode_id }) => {
-      props.video.getEpisode(episode_id);
+    const onSelectEpisode = (episode) => {
+      setCurrentEpisode(episode);
+      props.video.getEpisode(episode.id);
     };
-
-    const { videoData, anotherVideo, seriesData, episodeData, loading } =
-      props.video;
 
     const currentFilm = videoData.media;
 
@@ -86,9 +103,25 @@ const FilmVideo = inject(
         {isMobile ? (
           <div className="m-3 mb-0">
             <p className="text-title mb-0">{videoData.title}</p>
-            <p className="mb-0">
+            <p className="mb-3">
               {videoData.year} · {getTags(videoData.tags)}
             </p>
+            <Row>
+              {videoData.type === SERIES &&
+                (seriesData.episodes.length === 0 ||
+                seriesData.seasons.length === 0 ? (
+                  <SeriesControlsMock />
+                ) : (
+                  <SeriesControls
+                    currentSeason={currentSeason}
+                    currentEpisode={currentEpisode}
+                    seasons={seriesData.seasons}
+                    episodes={seriesData.episodes}
+                    onSelectEpisode={onSelectEpisode}
+                    onSelectSeason={onSelectSeason}
+                  />
+                ))}
+            </Row>
           </div>
         ) : (
           <Container fluid className={style.topContainer}>
@@ -102,6 +135,7 @@ const FilmVideo = inject(
                         ? getPoster(episodeData.poster_vertical)
                         : getPoster(videoData.poster_v)
                     }
+                    alt="Movie Overview"
                   />
                   <Col className="ml-5">
                     <Row className="mt-3">
@@ -119,10 +153,12 @@ const FilmVideo = inject(
                           <SeriesControlsMock />
                         ) : (
                           <SeriesControls
-                            seriesData={seriesData}
+                            currentSeason={currentSeason}
+                            currentEpisode={currentEpisode}
+                            seasons={seriesData.seasons}
+                            episodes={seriesData.episodes}
                             onSelectEpisode={onSelectEpisode}
                             onSelectSeason={onSelectSeason}
-                            allEpisodes={currentFilm}
                           />
                         ))}
                     </Row>
@@ -149,6 +185,7 @@ const FilmVideo = inject(
                   ? getPoster(episodeData.poster_horizontal)
                   : getPoster(videoData.poster_h)
               }
+              alt="Poster"
             />
           </Container>
         )}

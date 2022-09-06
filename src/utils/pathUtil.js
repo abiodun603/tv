@@ -36,10 +36,9 @@ export function getMedia(media) {
   }
   if (media && media.length > 0 && media[0].stream_video_url != null) {
     return media[0].stream_video_url;
-  } else {
-    //video player is waiting at list for one video, so its impoertantn to export at least something
-    return 'https://d1mqj23dlohn3i.cloudfront.net/media/my-video360p.m3u8';
   }
+
+  return 'https://d1mqj23dlohn3i.cloudfront.net/media/my-video360p.m3u8';
 }
 
 export function getTrailer(media) {

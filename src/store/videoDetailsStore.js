@@ -16,6 +16,7 @@ import {
   PATH_URL_VIDEO,
   PATH_URL_VIDEOS,
   PATH_URL_EPISODES,
+  SERIES,
 } from '../constants/API';
 import http from '../api/axiosApi';
 
@@ -140,7 +141,12 @@ class VideoDetailsStore extends BasicStore {
       }
 
       runInAction(() => {
-        this.loading.video = false;
+        if (data.type === 'series') {
+          this.getSeries(id, 1, {}, [SERIES]);
+        } else {
+          this.loading.video = false;
+        }
+
         this.videoData = data;
 
         this.videoData.startFrom = data.resumeTime || 0;
@@ -180,7 +186,12 @@ class VideoDetailsStore extends BasicStore {
       }
 
       runInAction(() => {
-        this.loading.video = false;
+        if (data.episodes.length > 0) {
+          this.getEpisode(data.episodes[0].id);
+        } else {
+          this.loading.video = false;
+        }
+
         this.seriesData.seasons = data.seasons;
         this.seriesData.episodes = data.episodes;
 
