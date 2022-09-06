@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
 import { autorun } from 'mobx';
 import { inject, observer } from 'mobx-react';
+import Router, { useRouter } from 'next/router';
 import Head from 'next/head';
-import Router from 'next/router';
 import { Container, Row, Spinner } from 'react-bootstrap';
 import { STATUS_LOADING, STATUS_NO_AUTH, STATUS_AUTH } from '../constants/auth';
 
-import Auth from './Auth';
 import Footer from './widgets/footer';
 import { NavBar } from './widgets/navbar';
 
@@ -17,6 +16,7 @@ const AuthLayout = inject(
 )(
   observer((props) => {
     const { auth: storeAuth, search, children } = props;
+    const router = useRouter();
 
     useEffect(() => {
       storeAuth.startListener();
@@ -37,14 +37,29 @@ const AuthLayout = inject(
 
     useEffect(() => {
       if (storeAuth.status === STATUS_AUTH) {
+        if (router.pathname === '/auth' || router.pathname === '/') {
+          Router.push('/home');
+        }
         props.search.getSearchHistory();
-      }
-
-      if (storeAuth.status === STATUS_NO_AUTH) {
-        // Router.push('/')
       }
     }, [storeAuth.status]);
 
+    if (
+      storeAuth.status === STATUS_AUTH &&
+      (router.pathname === '/auth' || router.pathname === '/')
+    ) {
+      return (
+        <Container fluid>
+          <Row className="justify-content-center vh-100 align-items-center">
+            <Spinner
+              animation="grow"
+              variant="success"
+              className="mx-auto my-auto"
+            />
+          </Row>
+        </Container>
+      );
+    }
     return (
       <>
         <Head>
