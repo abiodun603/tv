@@ -131,7 +131,7 @@ const FilmVideo = inject(
                   <Image
                     className={style.posterVertical}
                     src={
-                      episodeData
+                      episodeData && videoData.type === 'series'
                         ? getPoster(episodeData.poster_vertical)
                         : getPoster(videoData.poster_v)
                     }
@@ -181,7 +181,7 @@ const FilmVideo = inject(
               fluid
               className={style.posterBackground}
               src={
-                episodeData
+                episodeData && videoData.type === 'series'
                   ? getPoster(episodeData.poster_horizontal)
                   : getPoster(videoData.poster_h)
               }
@@ -196,20 +196,24 @@ const FilmVideo = inject(
               <Row className="d-flex justify-content-center">
                 <PlayerWithAds
                   onProgress={
-                    episodeData
+                    episodeData && videoData.type === 'series'
                       ? props.video.onProgressEpisode
                       : props.video.onProgressVideo
                   }
                   onDuration={
-                    episodeData
+                    episodeData && videoData.type === 'series'
                       ? props.video.onDurationEpisode
                       : props.video.onDurationVideo
                   }
                   url={
-                    episodeData ? getMedia(episodeData) : getMedia(currentFilm)
+                    episodeData && videoData.type === 'series'
+                      ? getMedia(episodeData)
+                      : getMedia(currentFilm)
                   }
                   startFrom={
-                    episodeData ? episodeData.startFrom : videoData.startFrom
+                    episodeData && videoData.type === 'series'
+                      ? episodeData.startFrom
+                      : videoData.startFrom
                   }
                   videojsOptions={{
                     height: 400,
