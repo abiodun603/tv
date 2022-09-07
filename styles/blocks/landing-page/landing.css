@@ -228,11 +228,8 @@
     font-size: 24px;
   }
 
-  /* .isabitv-bg {
-    height: 400px;
-  } */
   .isabitv-bg {
-    grid-template-columns: 1fr;
+    height: 400px;
   }
 }
 @media screen and (max-width: 339px) {
