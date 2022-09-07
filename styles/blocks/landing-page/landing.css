@@ -77,14 +77,14 @@
 .isabitv-bg .bg3 {
   background-image: url('/image/bg_faq3.JPG');
   background-repeat: no-repeat;
-  background-position: left;
+  background-position: center;
   background-size: cover;
   height: 100%;
 }
 .isabitv-bg .bg4 {
   background-image: url('/image/bg_faq4.JPG');
   background-repeat: no-repeat;
-  background-position: left;
+  background-position: center;
   background-size: cover;
   height: 100%;
 }
