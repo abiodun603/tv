@@ -56,12 +56,12 @@ const LandingPage = inject('auth')(
             </div>
           </div>
         </div>
-        <div className="isabitv-bg">
+        {/* <div className="isabitv-bg">
           <div className="bg1" />
           <div className="bg2" />
           <div className="bg3" />
           <div className="bg4" />
-        </div>
+        </div> */}
         {/* Introduce Mobile Apps */}
         <div className="isabitv-intro">
           <div className="img">

@@ -42,7 +42,7 @@
   font-weight: 500;
 }
 
-.isabitv-bg {
+/* .isabitv-bg {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 10px;
@@ -78,7 +78,7 @@
   background-position: left;
   background-size: cover;
   height: 100%;
-}
+} */
 
 /* Intro */
 .isabitv-intro {
@@ -146,9 +146,9 @@
     font-size: 36px;
   }
 
-  .isabitv-bg {
+  /* .isabitv-bg {
     height: 800px;
-  }
+  } */
 }
 
 @media screen and (max-width: 999px) {
@@ -228,9 +228,9 @@
     font-size: 24px;
   }
 
-  .isabitv-bg {
+  /* .isabitv-bg {
     height: 400px;
-  }
+  } */
 }
 @media screen and (max-width: 339px) {
   .isabitv-banner .heading,
