@@ -9,9 +9,9 @@ const PageHOC = ({ children }) => {
   const { enqueueSnackbar } = useSnackbar();
   const router = useRouter();
 
-  useEffect(() => {
-    window.recaptchaVerifier = recaptchaVerifier();
-  });
+  // useEffect(() => {
+  //   window.recaptchaVerifier = recaptchaVerifier();
+  // });
 
   return (
     <AuthLayout router={router} snackbar={enqueueSnackbar}>

@@ -1,15 +1,15 @@
-.isabitv-banner {
+/* .isabitv-banner {
   height: 1120px;
-}
+} */
 
 /* Banner */
-.isabitv-banner .wrapper {
+/* .isabitv-banner .wrapper {
   background-image: url('/image/bg_home.png');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   height: 100%;
-}
+} */
 
 .isabitv-banner .header {
   padding: 150px 16px;
@@ -42,7 +42,7 @@
   font-weight: 500;
 }
 
-/* .isabitv-bg {
+.isabitv-bg {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 10px;
@@ -78,7 +78,7 @@
   background-position: left;
   background-size: cover;
   height: 100%;
-} */
+}
 
 /* Intro */
 .isabitv-intro {
@@ -114,9 +114,9 @@
 }
 
 @media screen and (max-width: 1199px) {
-  .isabitv-banner {
+  /* .isabitv-banner {
     height: 800px;
-  }
+  } */
 
   /* Banner */
   .isabitv-banner .heading {
@@ -146,9 +146,9 @@
     font-size: 36px;
   }
 
-  /* .isabitv-bg {
+  .isabitv-bg {
     height: 800px;
-  } */
+  }
 }
 
 @media screen and (max-width: 999px) {
@@ -175,9 +175,9 @@
 
 @media screen and (max-width: 767px) {
   /* Banner */
-  .isabitv-banner {
+  /* .isabitv-banner {
     height: 568px;
-  }
+  } */
 
   .isabitv-banner .header {
     padding: 60px 16px;
@@ -202,7 +202,7 @@
   .isabitv-intro {
     display: flex;
     flex-direction: column;
-    background-color: #2dbd58;
+    /* background-color: #2dbd58; */
   }
 
   .isabitv-intro .img {
@@ -215,13 +215,13 @@
     order: 1;
   }
 
-  .isabitv-intro .desc .title {
+  /* .isabitv-intro .desc .title {
     color: white;
-  }
+  } */
 
   .isabitv-intro .desc .sub-title {
     padding: 40px 0;
-    color: RGBA(255, 255, 255, 0.8);
+    /* color: RGBA(255, 255, 255, 0.8); */
   }
 
   .isabitv-faq .heading {
@@ -231,6 +231,9 @@
   /* .isabitv-bg {
     height: 400px;
   } */
+  .isabitv-bg {
+    grid-template-columns: 1fr;
+  }
 }
 @media screen and (max-width: 339px) {
   .isabitv-banner .heading,

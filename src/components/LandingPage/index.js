@@ -47,6 +47,12 @@ const LandingPage = inject('auth')(
             </div>
           </div>
         </div>
+        <div className="isabitv-bg">
+          <div className="bg1" />
+          <div className="bg2" />
+          <div className="bg3" />
+          <div className="bg4" />
+        </div>
         {/* FQAs */}
         <div className="isabitv-faq">
           <div className="d-flex justify-content-center align-items-center flex-column">
@@ -56,12 +62,6 @@ const LandingPage = inject('auth')(
             </div>
           </div>
         </div>
-        {/* <div className="isabitv-bg">
-          <div className="bg1" />
-          <div className="bg2" />
-          <div className="bg3" />
-          <div className="bg4" />
-        </div> */}
         {/* Introduce Mobile Apps */}
         <div className="isabitv-intro">
           <div className="img">
