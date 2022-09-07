@@ -42,11 +42,37 @@ const AuthLayout = inject(
         }
         props.search.getSearchHistory();
       }
+
+      if (
+        storeAuth.status === STATUS_NO_AUTH &&
+        router.pathname !== '/auth' &&
+        router.pathname !== '/'
+      ) {
+        Router.replace('/auth');
+      }
     }, [storeAuth.status]);
 
     if (
       storeAuth.status === STATUS_AUTH &&
       (router.pathname === '/auth' || router.pathname === '/')
+    ) {
+      return (
+        <Container fluid>
+          <Row className="justify-content-center vh-100 align-items-center">
+            <Spinner
+              animation="grow"
+              variant="success"
+              className="mx-auto my-auto"
+            />
+          </Row>
+        </Container>
+      );
+    }
+
+    if (
+      storeAuth.status === STATUS_NO_AUTH &&
+      router.pathname !== '/auth' &&
+      router.pathname !== '/'
     ) {
       return (
         <Container fluid>
