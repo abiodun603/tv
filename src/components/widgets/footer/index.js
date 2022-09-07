@@ -51,6 +51,16 @@ const Footer = () => {
                   <a className="footer__nav-link">Privacy Policy</a>
                 </Link>
               </li>
+              <li className="footer__nav-item">
+                <Link href="/documents/iSabiTV_Cookie_Policy.pdf">
+                  <a className="footer__nav-link">Cookies policy</a>
+                </Link>
+              </li>
+              <li className="footer__nav-item">
+                <Link href="/documents/iSabiTV_GDPR_Policy.pdf">
+                  <a className="footer__nav-link">GDPR</a>
+                </Link>
+              </li>
             </ul>
           </Col>
           <Col xs={6} md={3} xl={2} className="mb-2">
