@@ -62,14 +62,18 @@ export default function FaqAccordions() {
         onChange={handleChange('panel1')}
       >
         <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-          <Typography>Collapsible Group Item #1</Typography>
+          <Typography>What is iSabiTV?</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum
-            dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada
-            lacus ex, sit amet blandit leo lobortis eget.
+            iSabiTV is a free online streaming “Ads based” service that offers a
+            wide variety of Afrocentric related content. These include movies,
+            TV shows, kids and family, documentaries, and much more. iSabiTV
+            also has a User Generated Content (UGC) interface that allows for
+            users to upload their own personal and unique content worthy of
+            showcasing. iSabiTV also has a contests page (coming soon) that
+            would put up family friendly and mind challenging contests where the
+            contestants get to win various prices.
           </Typography>
         </AccordionDetails>
       </Accordion>
@@ -79,14 +83,15 @@ export default function FaqAccordions() {
         onChange={handleChange('panel2')}
       >
         <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
-          <Typography>Collapsible Group Item #2</Typography>
+          <Typography>
+            Is there a limit to how many movies I can stream?
+          </Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum
-            dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada
-            lacus ex, sit amet blandit leo lobortis eget.
+            There is absolutely no limit to what you can stream. You are only
+            able to download content on your mobile app if the uploader allows
+            for the content to be downloaded.
           </Typography>
         </AccordionDetails>
       </Accordion>
@@ -96,14 +101,15 @@ export default function FaqAccordions() {
         onChange={handleChange('panel3')}
       >
         <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
-          <Typography>Collapsible Group Item #3</Typography>
+          <Typography>
+            How much does it cost to use the iSabiTV Platform?
+          </Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum
-            dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada
-            lacus ex, sit amet blandit leo lobortis eget.
+            Right now, there is absolutely no cost associated with the platform.
+            Just sign up and access all our content offerings. You are also able
+            to upload your own unique and value adding content.
           </Typography>
         </AccordionDetails>
       </Accordion>
@@ -113,14 +119,15 @@ export default function FaqAccordions() {
         onChange={handleChange('panel4')}
       >
         <AccordionSummary aria-controls="panel4d-content" id="panel3d-header">
-          <Typography>Collapsible Group Item #4</Typography>
+          <Typography>Where can I watch?</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum
-            dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada
-            lacus ex, sit amet blandit leo lobortis eget.
+            You can watch anywhere and anytime with no restrictions. All you
+            have to do is to login with your iSabiTV account and start watching
+            right away. You can also download your favorite content if allowed
+            by the creator on the iOS or Android mobile app. If using your web
+            browser, you are only able to watch but not download.
           </Typography>
         </AccordionDetails>
       </Accordion>
@@ -130,14 +137,12 @@ export default function FaqAccordions() {
         onChange={handleChange('panel5')}
       >
         <AccordionSummary aria-controls="panel5d-content" id="panel3d-header">
-          <Typography>Collapsible Group Item #5</Typography>
+          <Typography>How can I cancel or close my account?</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum
-            dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada
-            lacus ex, sit amet blandit leo lobortis eget.
+            You are able to cancel or close your account right from the settings
+            option on your profile.
           </Typography>
         </AccordionDetails>
       </Accordion>
@@ -147,14 +152,15 @@ export default function FaqAccordions() {
         onChange={handleChange('panel6')}
       >
         <AccordionSummary aria-controls="panel6d-content" id="panel3d-header">
-          <Typography>Collapsible Group Item #6</Typography>
+          <Typography>Is iSabiTV safe for kids?</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum
-            dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada
-            lacus ex, sit amet blandit leo lobortis eget.
+            The iSabiTV platform is designed to have only family friendly
+            content that should be safe for kids. While we cannot always control
+            what individual users upload, we do have a flag mechanism that
+            allows for you to flag any inappropriate content. This would allow
+            us to intervene and take the appropriate action.
           </Typography>
         </AccordionDetails>
       </Accordion>
