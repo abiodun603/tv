@@ -101,7 +101,7 @@ const Footer = () => {
           </Col>
           <Col xs={6} md={3} xl={2} className="mb-2">
             <ul className="footer__nav list-unstyled">
-              <li className="footer__nav-item fw-bold">Support</li>
+              <li className="footer__nav-item fw-bold">Contact Us</li>
               <li className="footer__nav-item">
                 <a
                   href="mailto:support@isabitv.com"
