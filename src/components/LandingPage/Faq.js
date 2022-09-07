@@ -73,7 +73,7 @@ export default function FaqAccordions() {
             users to upload their own personal and unique content worthy of
             showcasing. iSabiTV also has a contests page (coming soon) that
             would put up family friendly and mind challenging contests where the
-            contestants get to win various prices.
+            contestants get to win various prizes.
           </Typography>
         </AccordionDetails>
       </Accordion>
@@ -109,7 +109,7 @@ export default function FaqAccordions() {
           <Typography>
             Right now, there is absolutely no cost associated with the platform.
             Just sign up and access all our content offerings. You are also able
-            to upload your own unique and value adding content.
+            to upload your own unique content.
           </Typography>
         </AccordionDetails>
       </Accordion>

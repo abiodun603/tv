@@ -17,18 +17,30 @@
 
 .isabitv-banner .heading {
   line-height: 1.1;
-  max-width: 950px;
+  max-width: 800px;
   font-size: 64px;
-  /* text-shadow: 2px 5px #d3d3d3; */
-  color: #259f00;
-  background-color: #f3ec78;
-  background-image: linear-gradient(45deg, #51f800, #31b700, #25a000, #259f00);
+  font-weight: bold;
+  color: black;
   background-size: 100%;
   -webkit-background-clip: text;
   -moz-background-clip: text;
   -webkit-text-fill-color: transparent;
   -moz-text-fill-color: transparent;
-  font-weight: bold;
+  -webkit-text-fill-color: transparent;
+  background-image: -webkit-linear-gradient(
+    top,
+    rgba(30, 30, 30, 1) 0%,
+    rgba(30, 30, 30, 1) 12%,
+    rgba(40, 40, 40, 1) 25%,
+    rgba(28, 28, 28, 1) 39%,
+    rgba(17, 17, 17, 1) 50%,
+    rgba(0, 0, 0, 1) 51%,
+    rgba(5, 5, 5, 1) 60%,
+    rgba(17, 17, 17, 1) 76%,
+    rgba(11, 11, 11, 1) 91%,
+    rgba(0, 0, 0, 1) 100%
+  );
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
 }
 
 .isabitv-banner .sub-heading {
@@ -129,7 +141,7 @@
 
   /* Banner */
   .isabitv-banner .heading {
-    max-width: 750px;
+    max-width: 600px;
     font-size: 48px;
   }
 
@@ -193,7 +205,7 @@
   }
 
   .isabitv-banner .heading {
-    max-width: 450px;
+    max-width: 400px;
     font-size: 30px;
   }
 
