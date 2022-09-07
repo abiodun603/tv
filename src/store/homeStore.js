@@ -197,7 +197,7 @@ class HomeStore extends BasicStore {
         tags_ncontains: [NEWS],
         ...this.getLanguageFilter(),
       },
-      _limit: this.video[TYPE_REC].limit,
+      _limit: this.video[TYPE_REC].limit || PARAM_LIMIT_L,
     };
 
     if (!isNext && this.video[TYPE_REC].start - params._limit <= 0) {

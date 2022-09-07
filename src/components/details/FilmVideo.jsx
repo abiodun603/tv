@@ -288,7 +288,7 @@ const FilmVideo = inject(
               hasNavigion={false}
             >
               {(anotherVideo.data || []).map((item) => (
-                <Col key={item.id} xs="2">
+                <Col key={item.id} xs={6} xl={3}>
                   <CardVideo video={item} />
                 </Col>
               ))}
