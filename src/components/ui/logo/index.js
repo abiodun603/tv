@@ -12,9 +12,9 @@ const small = '/logo/logo.png';
 const medium = '/logo/logo@2x.png';
 const large = '/logo/logo@3x.png';
 
-export const Logo = ({ height, size = 'medium' }) => {
+export const Logo = ({ height, size = 'medium', pageUrl = '' }) => {
   return (
-    <Link href={url.toHome()}>
+    <Link href={pageUrl || url.toHome()}>
       <a>
         <Image
           src={small}

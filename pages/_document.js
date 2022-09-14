@@ -20,6 +20,14 @@ export default class MyDocument extends Document {
             name="description"
             content="Your go-to platform for all your Afrocentric Content"
           />
+          <meta property="og:title" content="iSabiTV" />
+          <meta
+            property="og:description"
+            content="All your Afrocentric Content in one place"
+          />
+          <meta property="og:url" content="https://isabitv.com/" />
+          <meta property="og:type" content="website" />
+          <link rel="icon" href="/favicon.ico" />
           <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"

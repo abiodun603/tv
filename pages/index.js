@@ -10,19 +10,7 @@ export default function Index() {
   return (
     <>
       <Head>
-        <title>iSabiTV</title>
-        <meta
-          name="description"
-          content="All your Afrocentric Content in one place"
-        />
-        <meta property="og:title" content="iSabiTV" />
-        <meta
-          property="og:description"
-          content="All your Afrocentric Content in one place"
-        />
-        <meta property="og:url" content="https://isabitv.com/" />
-        <meta property="og:type" content="website" />
-        <link rel="icon" href="/favicon.ico" />
+        <title>iSabiTV - All Your Afrocentric Content</title>
       </Head>
       <LandingPage />
     </>
