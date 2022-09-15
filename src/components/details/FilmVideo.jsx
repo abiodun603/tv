@@ -247,6 +247,7 @@ const FilmVideo = inject(
                   height: 400,
                   width: 'auto',
                 }}
+                onProgress={() => null}
               />
             </ContentDialog>
             <hr />

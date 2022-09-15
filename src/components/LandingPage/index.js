@@ -20,7 +20,7 @@ const LandingPage = inject('auth')(
         <div className="isabitv-banner">
           <div className="wrapper">
             <div className="d-flex justify-content-between align-items-center px-4 navbar">
-              <Logo />
+              <Logo pageUrl="/" />
               <Link href={storeAuth.status === STATUS_AUTH ? '/home' : '/auth'}>
                 <Box
                   className="clickable"
