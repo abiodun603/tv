@@ -65,7 +65,7 @@ const VideoList = inject('videos')(
       loadVideo();
 
       return () => props.videos.clearData();
-    }, []);
+    }, [props.type, props.tag]);
 
     const loadVideo = () => {
       const { tag, params, type } = props;
