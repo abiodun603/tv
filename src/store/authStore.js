@@ -1,6 +1,7 @@
 import Router from 'next/router';
 import {
   observable,
+  makeAutoObservable,
   computed,
   action,
   configure,
@@ -38,7 +39,7 @@ class AuthStore extends BasicStore {
   get profileStore() {
     return this.rootStore.stores.profile;
   }
-
+  
   constructor(...args) {
     super(...args);
 
@@ -89,10 +90,11 @@ class AuthStore extends BasicStore {
     );
   }
 
+
   async checkUserProfile(idToken) {
     try {
       const authUser = firebase.getCurrentUser();
-
+      console.log(authUser.refreshToken)
       http.setToken(idToken);
 
       const res = await http.post('profile/isUser', {

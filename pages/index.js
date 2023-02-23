@@ -17,7 +17,4 @@ export default function Index() {
   );
 }
 
-export async function getServerSideProps() {
-  // Pass data to the page via props
-  return { props: { data: 'hello' } };
-}
+

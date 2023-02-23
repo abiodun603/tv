@@ -1,6 +1,6 @@
 import mobile from 'is-mobile';
 
-export const BASE_URL = process.env.BASE_URL || 'https://api-testing.isabi.tv/';
+export const BASE_URL = process.env.BASE_URL || 'https://api.isabi.tv/';
 
 export const SINGLE_VIDEO = 'single';
 export const SERIES = 'series';

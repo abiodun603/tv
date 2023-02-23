@@ -12,6 +12,7 @@ import '../styles/components.scss';
 import initializeStore from '../src/store/store';
 import App from 'next/app';
 import { SnackbarProvider } from 'notistack';
+import OfflineBanner from '../src/components/OfflineBanner';
 
 function CustomApp({ Component, pageProps }) {
   let store = initializeStore();
@@ -22,6 +23,7 @@ function CustomApp({ Component, pageProps }) {
         <ThemeProvider theme={theme}>
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <CssBaseline />
+          <OfflineBanner />
           <Component {...pageProps} />
         </ThemeProvider>
       </Provider>
