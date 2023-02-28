@@ -24,10 +24,15 @@ import { useState, useEffect } from 'react';
 
 function MyComponent() {
   const [isOnline, setIsOnline] = useState(true);
+  const [showComponent, setShowComponent] = useState(true);
 
   useEffect(() => {
     const handleOnline = () => setIsOnline(true);
     const handleOffline = () => setIsOnline(false);
+
+    const timeoutId = setTimeout(() => {
+      setShowComponent(true);
+    }, 5000);
 
     window.addEventListener('online', handleOnline);
     window.addEventListener('offline', handleOffline);
@@ -35,12 +40,15 @@ function MyComponent() {
     return () => {
       window.removeEventListener('online', handleOnline);
       window.removeEventListener('offline', handleOffline);
+
+      clearTimeout(timeoutId);
+
     };
-  }, []);
+  }, [isOnline]);
 
   return (
     <div>
-      <p>{isOnline ? 'Welcome back online' : 'You are Offline, Please Check your Network connection'}</p>
+      {!isOnline && <p>{isOnline ? 'Welcome back online' : 'You are Offline, Please Check your Network connection'}</p>}
     </div>
   );
 }

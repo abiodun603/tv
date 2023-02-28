@@ -5,11 +5,11 @@ import { withTheme } from 'styled-components';
 
 import AppTheme from '../../../theme';
 
-export const Spinner = withStyles({
-  root: {
-    color: AppTheme.palette.primary.main,
-  },
-})((props) => <CircularProgress color="default" {...props} />);
+// export const Spinner = withStyles({
+//   root: {
+//     color: AppTheme.palette.primary.main,
+//   },
+// })((props) => <CircularProgress color="default" {...props} />);
 
 export const ThreeDotsLoader = (props) => {
   return (
