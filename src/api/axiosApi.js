@@ -8,9 +8,6 @@ axios.defaults.baseURL = BASE_URL;
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 axios.defaults.headers.put['Content-Type'] = 'application/json';
 
-const authUser = firebase.getCurrentUser();
-console.log(authUser)
-
 axios.interceptors.request.use((config) => {
   config.paramsSerializer = (params) => {
     return qs.stringify(params);

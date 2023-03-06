@@ -86,7 +86,7 @@ class AuthStore extends BasicStore {
           clearInterval(timer);
         }
       }),
-      1000,
+      200,
     );
   }
 

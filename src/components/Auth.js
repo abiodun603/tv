@@ -214,11 +214,7 @@ const SignInForm = observer(({ storeAuth, theme }) => {
           />
         </Box>
       </Box>
-      {storeAuth.loading ? (
-        <Box display="flex" justifyContent="center" mb={5}>
-          <Spinner color="primary" />
-        </Box>
-      ) : (
+      {
         <Box
           display="flex"
           justifyContent="space-between"
@@ -243,7 +239,7 @@ const SignInForm = observer(({ storeAuth, theme }) => {
             {storeAuth.nameButtonNext}
           </TextButton>
         </Box>
-      )}
+      }
       <Box
         display={storeAuth.typeAuth === AUTH_PHONE ? 'none' : 'flex'}
         justifyContent="center"

@@ -12,10 +12,12 @@ export default class MyDocument extends Document {
           <meta name="theme-color" content={theme.palette.primary.main} />
           <meta charSet="UTF-8" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-          <meta
+          {
+            /* <meta
             name="viewport"
             content="width=device-width,initial-scale=1.0"
-          />
+          /> */
+          }
           <meta
             name="description"
             content="Your go-to platform for all your Afrocentric Content"
