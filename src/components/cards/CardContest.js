@@ -32,7 +32,7 @@ export function CardContest({ item }) {
   return (
     <div className="contest-card col mb-4">
       <div className="contest-card__media mb-3">
-        <img
+        <Image
           src={item.image.url}
           className="contest-card__cover rounded"
           alt=""

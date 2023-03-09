@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { Col } from 'react-bootstrap';
 
@@ -19,7 +20,7 @@ export const NewsCard = ({ item }) => {
         <div className="news-card__body card-body">
           <div className="news-card__header media mb-3 d-flex justify-content-between align-items-center">
             <div className="d-flex justify-content-start align-items-center">
-              <img
+              <Image
                 src={getPhoto(owner.photo)}
                 width="32"
                 height="32"
@@ -39,7 +40,7 @@ export const NewsCard = ({ item }) => {
           </div>
           <Link href={`/details/${TYPE_NEWS}?id=${item.id}`}>
             <div className="news-card__media">
-              <img
+              <Image
                 src={getPreview(item.preview_url)}
                 className="news-card__media-image rounded"
                 alt=""

@@ -1,3 +1,4 @@
+'use client'
 import Router from 'next/router';
 import {
   observable,
@@ -94,7 +95,6 @@ class AuthStore extends BasicStore {
   async checkUserProfile(idToken) {
     try {
       const authUser = firebase.getCurrentUser();
-      console.log(authUser.refreshToken)
       http.setToken(idToken);
 
       const res = await http.post('profile/isUser', {

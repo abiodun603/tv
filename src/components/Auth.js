@@ -79,7 +79,7 @@ const SignInForm = observer(({ storeAuth, theme }) => {
 
   return (
     <>
-      <Grid
+      {/*<Grid
         container
         spacing={4}
         direction="row"
@@ -120,7 +120,7 @@ const SignInForm = observer(({ storeAuth, theme }) => {
         <Separator color={theme.palette.grey.grey10} spacing={theme.spacing(4)}>
           or
         </Separator>
-      </Box>
+      </Box>*/}
       <TabsCustom
         value={storeAuth.typeAuth}
         onChange={storeAuth.setTypeAuth}
@@ -170,7 +170,7 @@ const SignInForm = observer(({ storeAuth, theme }) => {
               !storeAuth.validated.password
                 ? storeAuth.isSignIn
                   ? 'Your password is wrong.'
-                  : 'Password must be more than 6 characters including at least one number and one character.'
+                  : 'Password must be more than 6 characters including at least one number, one character and a Capital letter.'
                 : ''
             }
             value={storeAuth.password}

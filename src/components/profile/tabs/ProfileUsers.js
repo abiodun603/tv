@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 
 class ProfileUsers extends React.Component {
@@ -34,7 +35,7 @@ class ProfileUsers extends React.Component {
         <div className="users-list row align-items-center mb-3">
           <div className="col col-sm-4">
             <div className="media">
-              <img
+              <Image
                 src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100%25' height='100%25' fill='%23ccc'%3E%3C/rect%3E%3C/svg%3E"
                 width="52"
                 height="52"
@@ -103,7 +104,7 @@ class ProfileUsers extends React.Component {
         <div className="users-list row align-items-center mb-3">
           <div className="col col-sm-4">
             <div className="media">
-              <img
+              <Image
                 src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100%25' height='100%25' fill='%23ccc'%3E%3C/rect%3E%3C/svg%3E"
                 width="52"
                 height="52"

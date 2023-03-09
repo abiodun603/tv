@@ -15,7 +15,6 @@ const large = '/logo/logo@3x.png';
 export const Logo = ({ height, size = 'medium', pageUrl = '' }) => {
   return (
     <Link href={pageUrl || url.toHome()}>
-      <a>
         <Image
           src={small}
           srcSet={`${small} 300w, ${medium} 768w, ${large} 1280w`}
@@ -26,7 +25,6 @@ export const Logo = ({ height, size = 'medium', pageUrl = '' }) => {
           })}
           alt="logo"
         />
-      </a>
     </Link>
   );
 };

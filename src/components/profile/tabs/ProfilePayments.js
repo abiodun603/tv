@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 
 class ProfilePayments extends React.Component {
@@ -10,7 +11,7 @@ class ProfilePayments extends React.Component {
         <div className="row mb-3">
           <div className="col">
             <div className="payment-method media p-3 mb-3">
-              <img
+              <Image
                 src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100%25' height='100%25' fill='%23ccc'%3E%3C/rect%3E%3C/svg%3E"
                 width="40"
                 height="40"
@@ -33,7 +34,7 @@ class ProfilePayments extends React.Component {
             </div>
 
             <div className="payment-method media p-3 mb-3">
-              <img
+              <Image
                 src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100%25' height='100%25' fill='%23ccc'%3E%3C/rect%3E%3C/svg%3E"
                 width="40"
                 height="40"
@@ -102,7 +103,7 @@ class ProfilePayments extends React.Component {
             </div>
 
             <div className="payment-method media p-3 mb-3">
-              <img
+              <Image
                 src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100%25' height='100%25' fill='%23ccc'%3E%3C/rect%3E%3C/svg%3E"
                 width="40"
                 height="40"
@@ -140,7 +141,7 @@ class ProfilePayments extends React.Component {
             <div className="overflow-auto">
               <ul className="list-unstyled">
                 <li className="media mb-4">
-                  <img
+                  <Image
                     src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100%25' height='100%25' fill='%23ccc'%3E%3C/rect%3E%3C/svg%3E"
                     width="40"
                     height="40"

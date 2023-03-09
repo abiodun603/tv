@@ -2,6 +2,7 @@ import React from 'react';
 import { inject, observer } from 'mobx-react';
 import { CardContest } from './cards/CardContest';
 import CardContestItem from './cards/CardContestItem';
+import Image from 'next/image';
 
 @inject('contests')
 @observer
@@ -63,13 +64,13 @@ class Contest extends React.Component {
               </div>
               <div className="col">
                 <div className="contest-promo">
-                  <img
+                  <Image
                     src="/fake_data/contest-promo__image.jpg"
                     alt=""
                     className="contest-promo__image img-fluid"
                   />
                   <div className="contest-promo__label">
-                    <img
+                    <Image
                       src="/fake_data/contest-promo__counter.png"
                       alt=""
                       className="contest-promo__counter"
