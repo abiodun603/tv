@@ -1,8 +1,7 @@
-'use client'
+
 import Router from 'next/router';
 import {
   observable,
-  makeAutoObservable,
   computed,
   action,
   configure,

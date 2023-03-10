@@ -1,3 +1,4 @@
+'use client'
 import React, { useState } from 'react';
 import { Container, useMediaQuery } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';

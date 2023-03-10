@@ -19,6 +19,7 @@
 // });
 
 // export default OfflineBanner;
+'use client'
 
 import { useState, useEffect } from 'react';
 

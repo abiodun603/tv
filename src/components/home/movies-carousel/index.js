@@ -1,3 +1,4 @@
+'use client'
 import React, { useEffect, useState } from 'react';
 import { inject, observer } from 'mobx-react';
 import { Carousel } from 'react-responsive-carousel';
