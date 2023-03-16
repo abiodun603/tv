@@ -79,7 +79,7 @@ const SignInForm = observer(({ storeAuth, theme }) => {
 
   return (
     <>
-      {/*<Grid
+      <Grid
         container
         spacing={4}
         direction="row"
@@ -93,7 +93,7 @@ const SignInForm = observer(({ storeAuth, theme }) => {
             src="/icon/ic_google.svg"
           />
         </Grid>
-        <Grid item>
+        {/*<Grid item>
           <Avatar
             variant="square"
             onClick={() => authSocial(FACEBOOK)}
@@ -114,13 +114,13 @@ const SignInForm = observer(({ storeAuth, theme }) => {
             src="/icon/ic_ig.svg"
             disabled
           />
-        </Grid>
+        </Grid>*/}
       </Grid>
       <Box display="flex" justifyContent="center" mt={2} mb={4}>
         <Separator color={theme.palette.grey.grey10} spacing={theme.spacing(4)}>
           or
         </Separator>
-      </Box>*/}
+      </Box>
       <TabsCustom
         value={storeAuth.typeAuth}
         onChange={storeAuth.setTypeAuth}

@@ -80,18 +80,6 @@ const MyProfile = inject(
       signOut();
     };
 
-    const handleChangeName = (event) => {
-      setFirstName({ name: event.target.value });
-    };
-
-    const handleChangeLastName = (event) => {
-      setLastName({ lastName: event.target.value });
-    };
-
-    const handleChangeUserName = (event) => {
-      setUserName({ userName: event.target.value });
-    };
-
     const handleSave = () => {
       profileStore.setName(firstName);
       profileStore.setLastName(lastName);
@@ -103,6 +91,7 @@ const MyProfile = inject(
     const isDataValid = Boolean(
       firstName && lastName && userName && profileStore.profile.birthday,
     );
+  
 
     return (
       <Box ml={isMobile ? 0 : 4}>
@@ -147,7 +136,9 @@ const MyProfile = inject(
                   className="mt-3"
                   helperText={!firstName ? 'Incorrect name' : ''}
                   value={firstName || ''}
-                  onChange={handleChangeName}
+                  onChange={(event) => {
+                    setFirstName(event.target.value)
+                  }}
                 />
               </Box>
             </Grid>
@@ -161,7 +152,9 @@ const MyProfile = inject(
                   className="mt-3"
                   helperText={!lastName ? 'Incorrect last name' : ''}
                   value={lastName || ''}
-                  onChange={handleChangeLastName}
+                  onChange={(event) => {
+                    setLastName(event.target.value)
+                  }}
                 />
               </Box>
             </Grid>
@@ -174,7 +167,9 @@ const MyProfile = inject(
                   label="Username"
                   helperText={!userName ? 'Incorrect username' : ''}
                   value={userName || ''}
-                  onChange={handleChangeUserName}
+                  onChange={(event) => {
+                    setUserName(event.target.value)
+                  }}
                 />
               </Box>
             </Grid>
@@ -271,11 +266,12 @@ const MyProfile = inject(
                     profileStore.setCountry(event.target.value)
                   }
                 >
-                  {props.countries.list.map((country) => (
-                    <MenuItem key={country.id} value={country.shortcode}>
+                  {props.countries.list.map((country)  => {
+                    return <MenuItem key={country.id} value={country.shortcode}>
                       {country.title}
                     </MenuItem>
-                  ))}
+                  })}
+                  
                 </CustomTextField>
               </Box>
             </Grid>
