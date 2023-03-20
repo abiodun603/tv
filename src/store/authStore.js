@@ -95,13 +95,22 @@ class AuthStore extends BasicStore {
     try {
       const authUser = firebase.getCurrentUser();
       http.setToken(idToken);
-
+      console.log(authUser)
+ 
       const res = await http.post('profile/isUser', {
         email: authUser.email,
         phone: authUser.phone,
-      });
-      const isRegisteredUser = res.data.success;
+      }); 
 
+
+      const isRegisteredUser = res.data.success;
+      if (res.status === 200){
+        console.log(authUser.email)
+        this.changeSignIn()
+
+      }
+
+      
       if (isRegisteredUser) {
         const response = await http.get('profile');
 
@@ -115,12 +124,13 @@ class AuthStore extends BasicStore {
         if (this.isSignIn) {
           await firebase.doSignOut();
           cookies.remove('token');
-
+          debugger
           return {
             status: STATUS_NO_AUTH,
             errorMsg: "Account doesn't exist!",
           };
         } else {
+          
           return {
             status: STATUS_NO_AUTH,
             type: TYPE_CREATE_PROFILE,
@@ -139,7 +149,7 @@ class AuthStore extends BasicStore {
         runInAction(() => {
           this.status = STATUS_LOADING;
         });
-
+        
         firebase
           .getCurrentUser()
           .getIdToken(true)
@@ -230,6 +240,7 @@ class AuthStore extends BasicStore {
 
   @action.bound
   signUpEmail() {
+
     if (!valEmail(this.email)) {
       this.validated.email = false;
     }

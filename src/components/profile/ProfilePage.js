@@ -63,15 +63,15 @@ function a11yProps(index) {
 
 const TAB_MENU = [
   { title: 'Uploads', icon: UploadIcon, disabled: false },
-  { title: 'Subscription', icon: SubscriptionsIcon, disabled: true },
-  { title: 'Payment methods', icon: PaymentIcon, disabled: true },
-  { title: 'Parental control', icon: SupervisorAccountIcon, disabled: true },
+  // { title: 'Subscription', icon: SubscriptionsIcon, disabled: true },
+  // { title: 'Payment methods', icon: PaymentIcon, disabled: true },
+  // { title: 'Parental control', icon: SupervisorAccountIcon, disabled: true },
   {
     title: 'Settings',
     icon: SettingsIcon,
     disabled: false,
   },
-  { title: 'Active users', icon: VerifiedUserIcon, disabled: true },
+  // { title: 'Active users', icon: VerifiedUserIcon, disabled: true },
 ];
 
 function TabPanel(props) {
@@ -227,21 +227,21 @@ const ProfilePage = inject('profile')(
               <UserContent profileId={profileId} />
             </Box>
           </TabPanel>
-          <TabPanel className={classes.tabPanel} value={tabIndex} index={2}>
+          <TabPanel className={classes.tabPanel} value={tabIndex} index={6}>
             <ProfileSub />
           </TabPanel>
-          <TabPanel className={classes.tabPanel} value={tabIndex} index={3}>
+          {/*<TabPanel className={classes.tabPanel} value={tabIndex} index={3}>
             <ProfilePayments />
           </TabPanel>
           <TabPanel className={classes.tabPanel} value={tabIndex} index={4}>
             <ProfileParental />
-          </TabPanel>
-          <TabPanel className={classes.tabPanel} value={tabIndex} index={5}>
+            </TabPanel>*/}
+          <TabPanel className={classes.tabPanel} value={tabIndex} index={2}>
             <ProfileSettings />
           </TabPanel>
-          <TabPanel className={classes.tabPanel} value={tabIndex} index={6}>
+          {/*<TabPanel className={classes.tabPanel} value={tabIndex} index={6}>
             <ProfileUsers />
-          </TabPanel>
+          </TabPanel>*/}
         </div>
       </Container>
     );

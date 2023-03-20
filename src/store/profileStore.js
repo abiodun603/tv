@@ -90,8 +90,10 @@ class ProfileStore extends BasicStore {
 
   @action.bound
   createUser() {
-    let profile = toJS(this.profile);
 
+    debugger;
+    let profile = toJS(this.profile);
+    debugger
     if (!valText(profile.username)) {
       this.validated.username = false;
       return;
@@ -114,6 +116,8 @@ class ProfileStore extends BasicStore {
     http
       .post(PATH_URL_PROFILE_CREATE, JSON.stringify(profile))
       .then((res) => {
+    debugger;
+
         if (res.data.success) {
           runInAction(() => {
             this.isSuccess = true;
