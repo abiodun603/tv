@@ -93,7 +93,7 @@ class AuthStore extends BasicStore {
 
   async checkUserProfile(idToken) {
     try {
-      const authUser = firebase.getCurrentUser();
+      const authUser = firebase.getCurrentUser().providerData[0];
       http.setToken(idToken);
       console.log(authUser)
  
@@ -120,6 +120,7 @@ class AuthStore extends BasicStore {
             profile: response.data.result,
           };
         }
+        debugger
       } else {
         if (this.isSignIn) {
           await firebase.doSignOut();

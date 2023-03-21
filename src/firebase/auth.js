@@ -39,6 +39,7 @@ export const signInSocial = (type) => {
   }
 
   return auth.signInWithRedirect(provider);
+  
 };
 
 export const signInPhone = (verificationId, code) => {
