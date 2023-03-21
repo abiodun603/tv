@@ -40,7 +40,6 @@ const AuthContainer = styled.div`
   margin: 0 auto;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
-
   @media only screen and (max-width: 767px) {
     width: 99%;
     height: 100vh;
@@ -78,183 +77,187 @@ const SignInForm = observer(({ storeAuth, theme }) => {
   };
 
   return (
-    <div>
-    <Grid
-    container
-    spacing={4}
-    direction="row"
-    justifyContent="center"
-    alignItems="center"
-  >
-    <Grid item>
-      <Avatar
-        variant="square"
-        onClick={() => authSocial(GOOGLE)}
-        src="/icon/ic_google.svg"
-      />
-    </Grid>
-    {/*<Grid item>
-      <Avatar
-        variant="square"
-        onClick={() => authSocial(FACEBOOK)}
-        src="/icon/ic_fb.svg"
-      />
-    </Grid>
-    <Grid item>
-      <Avatar
-        variant="square"
-        className="disabled"
-        src="/icon/ic_twitter.svg"
-      />
-    </Grid>
-    <Grid item>
-      <Avatar
-        variant="square"
-        className="disabled"
-        src="/icon/ic_ig.svg"
-        disabled
-      />
-    </Grid>*/}
-  </Grid>
-  <Box display="flex" justifyContent="center" mt={2} mb={4}>
-    <Separator color={theme.palette.grey.grey10} spacing={theme.spacing(4)}>
-      or
-    </Separator>
-  </Box>
-  <TabsCustom
-    value={storeAuth.typeAuth}
-    onChange={storeAuth.setTypeAuth}
-    centered
-  >
-    <TabCustom label="Email" />
-    <TabCustom label="Phone" />
-  </TabsCustom>
-  <Box
-    display="flex"
-    justifyContent="center"
-    flexDirection="column"
-    mx={4}
-    mt={4}
-    mb={3}
-  >
-    <Box
-      mb={2}
-      display={storeAuth.typeAuth === AUTH_PHONE ? 'none' : 'block'}
-    >
-      <CustomTextField
-        id="email"
-        fullWidth
-        error={!storeAuth.validated.email}
-        label="Email"
-        type="email"
-        helperText={
-          !storeAuth.validated.email ? 'Your e-mail is wrong' : ''
-        }
-        value={storeAuth.email}
-        onChange={(event) => {
-          storeAuth.setEmail(event.target.value);
-        }}
-      />
-    </Box>
-    <Box
-      mb={2}
-      display={storeAuth.typeAuth === AUTH_PHONE ? 'none' : 'block'}
-    >
-      <CustomTextField
-        id="password"
-        fullWidth
-        error={!storeAuth.validated.password}
-        label="Password"
-        type="password"
-        helperText={
-          !storeAuth.validated.password
-            ? storeAuth.isSignIn
-              ? 'Your password is wrong.'
-              : 'Password must be more than 6 characters including at least one number, one character and a Capital letter.'
-            : ''
-        }
-        value={storeAuth.password}
-        onChange={(event) => {
-          storeAuth.setPassword(event.target.value);
-        }}
-      />
-    </Box>
-    <Box
-      mb={2}
-      display={storeAuth.typeAuth === AUTH_EMAIL ? 'none' : 'block'}
-    >
-      <CustomPhoneField
-        id="phone"
-        fullWidth
-        error={!storeAuth.validated.phone}
-        label="Phone"
-        type="phone"
-        defaultCountry={'us'}
-        helperText={
-          !storeAuth.validated.phone ? 'Your phone number is wrong' : ''
-        }
-        value={storeAuth.phone}
-        onChange={(value) => {
-          storeAuth.setPhone(value);
-        }}
-      />
-    </Box>
-    <Box mb={2} display={storeAuth.isSendCode ? 'none' : 'block'}>
-      <CustomTextField
-        id="code"
-        fullWidth
-        error={!storeAuth.validated.code}
-        type="number"
-        label="Code"
-        helperText={!storeAuth.validated.code ? 'Your code is wrong' : ''}
-        value={storeAuth.code}
-        onChange={(event) => {
-          storeAuth.setCode(event.target.value);
-        }}
-      />
-    </Box>
-  </Box>
-  {
-    <Box
-      display="flex"
-      justifyContent="space-between"
-      flexDirection="row"
-      mx={4}
-      mb={5}
-    >
-      {!storeAuth.isForgotPassword && (
-        <TextButton onClick={storeAuth.forgotPassword}>
-          Forgot password?
-        </TextButton>
+    <>
+      <Grid
+        container
+        spacing={4}
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Grid item>
+          <Avatar
+            variant="square"
+            onClick={() => authSocial(GOOGLE)}
+            src="/icon/ic_google.svg"
+          />
+        </Grid>
+        {/*<Grid item>
+          <Avatar
+            variant="square"
+            onClick={() => authSocial(FACEBOOK)}
+            src="/icon/ic_fb.svg"
+          />
+        </Grid>
+        <Grid item>
+          <Avatar
+            variant="square"
+            className="disabled"
+            src="/icon/ic_twitter.svg"
+          />
+        </Grid>
+        <Grid item>
+          <Avatar
+            variant="square"
+            className="disabled"
+            src="/icon/ic_ig.svg"
+            disabled
+          />
+        </Grid>*/}
+      </Grid>
+      <Box display="flex" justifyContent="center" mt={2} mb={4}>
+        <Separator color={theme.palette.grey.grey10} spacing={theme.spacing(4)}>
+          or
+        </Separator>
+      </Box>
+      <TabsCustom
+        value={storeAuth.typeAuth}
+        onChange={storeAuth.setTypeAuth}
+        centered
+      >
+        <TabCustom label="Email" />
+        <TabCustom label="Phone" />
+      </TabsCustom>
+      <Box
+        display="flex"
+        justifyContent="center"
+        flexDirection="column"
+        mx={4}
+        mt={4}
+        mb={3}
+      >
+        <Box
+          mb={2}
+          display={storeAuth.typeAuth === AUTH_PHONE ? 'none' : 'block'}
+        >
+          <CustomTextField
+            id="email"
+            fullWidth
+            error={!storeAuth.validated.email}
+            label="Email"
+            type="email"
+            helperText={
+              !storeAuth.validated.email ? 'Your e-mail is wrong' : ''
+            }
+            value={storeAuth.email}
+            onChange={(event) => {
+              storeAuth.setEmail(event.target.value);
+            }}
+          />
+        </Box>
+        <Box
+          mb={2}
+          display={storeAuth.typeAuth === AUTH_PHONE ? 'none' : 'block'}
+        >
+          <CustomTextField
+            id="password"
+            fullWidth
+            error={!storeAuth.validated.password}
+            label="Password"
+            type="password"
+            helperText={
+              !storeAuth.validated.password
+                ? storeAuth.isSignIn
+                  ? 'Your password is wrong.'
+                  : 'Password must be more than 6 characters including at least one number and one character.'
+                : ''
+            }
+            value={storeAuth.password}
+            onChange={(event) => {
+              storeAuth.setPassword(event.target.value);
+            }}
+          />
+        </Box>
+        <Box
+          mb={2}
+          display={storeAuth.typeAuth === AUTH_EMAIL ? 'none' : 'block'}
+        >
+          <CustomPhoneField
+            id="phone"
+            fullWidth
+            error={!storeAuth.validated.phone}
+            label="Phone"
+            type="phone"
+            defaultCountry={'us'}
+            helperText={
+              !storeAuth.validated.phone ? 'Your phone number is wrong' : ''
+            }
+            value={storeAuth.phone}
+            onChange={(value) => {
+              storeAuth.setPhone(value);
+            }}
+          />
+        </Box>
+        <Box mb={2} display={storeAuth.isSendCode ? 'none' : 'block'}>
+          <CustomTextField
+            id="code"
+            fullWidth
+            error={!storeAuth.validated.code}
+            type="number"
+            label="Code"
+            helperText={!storeAuth.validated.code ? 'Your code is wrong' : ''}
+            value={storeAuth.code}
+            onChange={(event) => {
+              storeAuth.setCode(event.target.value);
+            }}
+          />
+        </Box>
+      </Box>
+      {storeAuth.loading ? (
+        <Box display="flex" justifyContent="center" mb={5}>
+          <Spinner color="primary" />
+        </Box>
+      ) : (
+        <Box
+          display="flex"
+          justifyContent="space-between"
+          flexDirection="row"
+          mx={4}
+          mb={5}
+        >
+          {!storeAuth.isForgotPassword && (
+            <TextButton onClick={storeAuth.forgotPassword}>
+              Forgot password?
+            </TextButton>
+          )}
+          {!storeAuth.isSendCode && (
+            <TextButton onClick={storeAuth.sendCodePhone}>
+              {storeAuth.second <= 0
+                ? 'Resend code'
+                : `Time left: ${storeAuth.second} s`}
+            </TextButton>
+          )}
+          {storeAuth.isForgotPassword && storeAuth.isSendCode && <div />}
+          <TextButton onClick={storeAuth.nextStep} imageSrc="icon/ic_arrow.svg">
+            {storeAuth.nameButtonNext}
+          </TextButton>
+        </Box>
       )}
-      {!storeAuth.isSendCode && (
-        <TextButton onClick={storeAuth.sendCodePhone}>
-          {storeAuth.second <= 0
-            ? 'Resend code'
-            : `Time left: ${storeAuth.second} s`}
+      <Box
+        display={storeAuth.typeAuth === AUTH_PHONE ? 'none' : 'flex'}
+        justifyContent="center"
+        mb={7}
+      >
+        <TextButton
+          onClick={storeAuth.changeSignIn}
+          helperText={
+            storeAuth.isSignIn ? 'New to iSabiTv?' : 'Have an account?'
+          }
+        >
+          {storeAuth.isSignIn ? 'Sign Up' : 'Sign In'}
         </TextButton>
-      )}
-      {storeAuth.isForgotPassword && storeAuth.isSendCode && <div />}
-      <TextButton onClick={storeAuth.nextStep} imageSrc="icon/ic_arrow.svg">
-        {storeAuth.nameButtonNext}
-      </TextButton>
-    </Box>
-  }
-  <Box
-    display={storeAuth.typeAuth === AUTH_PHONE ? 'none' : 'flex'}
-    justifyContent="center"
-    mb={7}
-  >
-    <TextButton
-      onClick={storeAuth.changeSignIn}
-      helperText={
-        storeAuth.isSignIn ? 'New to iSabiTv?' : 'Have an account?'
-      }
-    >
-      {storeAuth.isSignIn ? 'Sign Up' : 'Sign In'}
-    </TextButton>
-  </Box>
-    </div>
+      </Box>
+    </>
   );
 });
 

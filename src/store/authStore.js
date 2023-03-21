@@ -104,11 +104,11 @@ class AuthStore extends BasicStore {
 
 
       const isRegisteredUser = res.data.success;
-      if (res.status === 200){
-        console.log(authUser.email)
-        this.changeSignIn()
+      // if (res.status === 200){
+      //   console.log(authUser.email)
+      //   this.changeSignIn()
 
-      }
+      // }
 
       
       if (isRegisteredUser) {
@@ -131,7 +131,7 @@ class AuthStore extends BasicStore {
             errorMsg: "Account doesn't exist!",
           };
         } else {
-          
+          debugger
           return {
             status: STATUS_NO_AUTH,
             type: TYPE_CREATE_PROFILE,
