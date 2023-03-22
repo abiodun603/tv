@@ -241,7 +241,7 @@ class ProfileStore extends BasicStore {
   }
 
   @action.bound
-  deleteUser() {}
+  deleteUser() {} 
 
   @action.bound
   changePassword() {
@@ -343,9 +343,10 @@ class ProfileStore extends BasicStore {
     await http.setToken(cookies.get('token'));
 
     return http
-      .delete(PATH_URL_PROFILE_REMOVE_ACCOUNT)
+      .delete(PATH_URL_PROFILE_REMOVE_ACCOUNT, ) 
       .then(
         action('successRemoveAccount', (res) => {
+          console.log(res.data)
           this.toast.show({
             message: 'Removed Account Successfully',
             type: 'success',

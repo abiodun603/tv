@@ -28,7 +28,7 @@ const http = {
     return axios.get(url, { params: params });
   },
   post: function (url, data) {
-    return axios.post(url, data);
+    return axios.post(url, data); 
   },
   delete: function (url, params) {
     return axios.delete(url, { params: { ...params } });

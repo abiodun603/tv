@@ -77,7 +77,7 @@ const SignInForm = observer(({ storeAuth, theme }) => {
   };
 
   return (
-    <>
+    <div>
       <Grid
         container
         spacing={4}
@@ -257,7 +257,7 @@ const SignInForm = observer(({ storeAuth, theme }) => {
           {storeAuth.isSignIn ? 'Sign Up' : 'Sign In'}
         </TextButton>
       </Box>
-    </>
+    </div>
   );
 });
 
