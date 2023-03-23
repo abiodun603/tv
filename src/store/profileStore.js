@@ -111,6 +111,9 @@ class ProfileStore extends BasicStore {
       return;
     }
 
+    profile.email = firebase.getCurrentUser().providerData[0].email;
+    profile.phone = firebase.getCurrentUser().providerData[0].phoneNumber;
+
     this.loading = true;
 
     http
@@ -161,6 +164,7 @@ class ProfileStore extends BasicStore {
 
   @action.bound
   updateUser() {
+    debugger
     let profile = toJS(this.profile);
 
     if (!valText(this.profile.username)) {
@@ -342,8 +346,18 @@ class ProfileStore extends BasicStore {
   async removeAccount() {
     await http.setToken(cookies.get('token'));
 
+    //delete account from firebase
+    const user = firebase.getCurrentUser()
+    user.delete()
+    .then(() => {
+      console.log("User Account deleted successfully")
+    })
+    .catch((error) => {
+      console.log('Error deleting User account', error)
+    })
+
     return http
-      .delete(PATH_URL_PROFILE_REMOVE_ACCOUNT, ) 
+      .delete(PATH_URL_PROFILE_REMOVE_ACCOUNT) 
       .then(
         action('successRemoveAccount', (res) => {
           console.log(res.data)

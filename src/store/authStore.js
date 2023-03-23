@@ -104,14 +104,12 @@ class AuthStore extends BasicStore {
 
 
       const isRegisteredUser = res.data.success;
-      this.setEmail(authUser.email);
-        // generate random password
-        const randomPassword = "Pa$$w0rd!"
+      if (res.status === 200 && isRegisteredUser === false){
+        console.log(authUser.email)
+        this.isSignIn === 'false'
 
-        this.setPassword(randomPassword);
-        console.log(authUser, 'conrifmed');
-        this.signUpEmail();
-        // this.changeSignIn()
+      }
+
       
       if (isRegisteredUser) {
         const response = await http.get('profile');
@@ -122,18 +120,19 @@ class AuthStore extends BasicStore {
             profile: response.data.result,
           };
         }
-        debugger
+        
       } else {
         if (this.isSignIn) {
           await firebase.doSignOut();
           cookies.remove('token');
           debugger
+          
           return {
             status: STATUS_NO_AUTH,
             errorMsg: "Account doesn't exist!",
           };
         } else {
-          
+          console.log(res.data)
           return {
             status: STATUS_NO_AUTH,
             type: TYPE_CREATE_PROFILE,

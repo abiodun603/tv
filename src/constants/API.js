@@ -37,7 +37,7 @@ export const PATH_URL_COUNTRIES = 'countries/';
 export const PATH_URL_COLLECTIONS = 'collections/';
 export const PATH_URL_COLLECTION = 'collection/';
 
-export const PATH_URL_COMING_SOON = 'comings';
+export const PATH_URL_COMING_SOON = 'comings'; 
 
 export const PATH_URL_CONTESTS = 'contests/';
 

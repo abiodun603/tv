@@ -172,7 +172,7 @@ const ProfilePage = inject('profile')(
             mt={1}
             borderRadius={4}
           >
-            Upload Video
+            Content Upload
           </Box>
         </Link>
       </Box>
