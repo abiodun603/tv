@@ -1,6 +1,7 @@
 import React from 'react';
 import { inject, observer } from 'mobx-react';
 import { Container, Grid, Avatar, NoSsr, useTheme } from '@material-ui/core';
+import apple from '../assets/apple.png';
 import styled from 'styled-components';
 import {
   compose,
@@ -16,7 +17,6 @@ import {
   AUTH_PHONE,
   FACEBOOK,
   GOOGLE,
-  TWITTER,
   TYPE_CREATE_PROFILE,
 } from '../constants/auth';
 import { TabsCustom, TabCustom } from './widgets/Tabs';
@@ -93,14 +93,15 @@ const SignInForm = observer(({ storeAuth, theme }) => {
             src="/icon/ic_google.svg"
           />
         </Grid>
+
         <Grid item>
           <Avatar
             variant="square"
             onClick={() => authSocial(FACEBOOK)}
-            src="/icon/ic_fb.svg"
+            src={apple}
           />
         </Grid>
-        <Grid item>
+        {/*  <Grid item>
           <Avatar
             variant="square"
             className="disabled"
@@ -114,7 +115,7 @@ const SignInForm = observer(({ storeAuth, theme }) => {
             src="/icon/ic_ig.svg"
             disabled
           />
-        </Grid>
+        </Grid> */}
       </Grid>
       <Box display="flex" justifyContent="center" mt={2} mb={4}>
         <Separator color={theme.palette.grey.grey10} spacing={theme.spacing(4)}>
