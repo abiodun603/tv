@@ -1,3 +1,4 @@
+'use client'
 import React from 'react';
 import Link from 'next/link';
 import { useTheme } from '@material-ui/core/styles';
@@ -8,6 +9,7 @@ import FaqAccordions from './Faq';
 import Footer from '../widgets/footer';
 import { Box } from '../widgets/Box';
 import { STATUS_AUTH } from '../../constants/auth';
+import Image from 'next/image';
 
 const LandingPage = inject('auth')(
   observer((props) => {
@@ -65,7 +67,7 @@ const LandingPage = inject('auth')(
         {/* Introduce Mobile Apps */}
         <div className="isabitv-intro">
           <div className="img">
-            <img src="/image/bg_intro.png" alt="intro" />
+            <Image src="/image/bg_intro.png" alt="intro" width='100' height='100' style={{width: 'auto', height: 'auto'}} />
           </div>
           <div className="desc m-auto">
             <div className="title">
@@ -82,19 +84,21 @@ const LandingPage = inject('auth')(
                 href="https://apps.apple.com/us/app/isabitv/id1522221735"
                 className="app"
               >
-                <img
+                <Image
                   src="/image/market/app_store.svg"
                   alt=""
                   className="img-fluid"
+                  width='100' height='100' style={{width: 'auto', height: 'auto'}}
                 />
               </Link>
               <Link
                 href="https://play.google.com/store/apps/details?id=com.rvtech.iSabiTV"
                 className="app"
               >
-                <img
+                <Image
                   src="/image/market/app_google.svg"
                   alt=""
+                  width='100' height='100' style={{width: 'auto', height: 'auto'}}
                   className="img-fluid"
                 />
               </Link>

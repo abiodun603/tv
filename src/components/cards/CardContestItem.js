@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 export default function CardContest({ item }) {
@@ -6,7 +7,7 @@ export default function CardContest({ item }) {
       <div className="news-card card card_theme_default h-100">
         <div className="news-card__body card-body">
           <div className="news-card__header media mb-3">
-            <img
+            <Image
               src={item.image.url}
               width="32"
               height="32"
@@ -21,7 +22,7 @@ export default function CardContest({ item }) {
             </div>
           </div>
           <div className="news-card__media">
-            <img
+            <Image
               src={item.image.url}
               className="news-card__media-image rounded"
               alt=""

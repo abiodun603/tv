@@ -1,3 +1,4 @@
+
 import Router from 'next/router';
 import {
   observable,
@@ -38,7 +39,7 @@ class AuthStore extends BasicStore {
   get profileStore() {
     return this.rootStore.stores.profile;
   }
-
+  
   constructor(...args) {
     super(...args);
 
@@ -85,22 +86,27 @@ class AuthStore extends BasicStore {
           clearInterval(timer);
         }
       }),
-      1000,
+      200,
     );
   }
 
+
   async checkUserProfile(idToken) {
     try {
-      const authUser = firebase.getCurrentUser();
-
+      const authUser = firebase.getCurrentUser().providerData[0];
       http.setToken(idToken);
-
+      console.log(authUser)
+ 
       const res = await http.post('profile/isUser', {
         email: authUser.email,
         phone: authUser.phone,
-      });
-      const isRegisteredUser = res.data.success;
+      }); 
 
+
+      const isRegisteredUser = res.data.success;
+      
+
+      
       if (isRegisteredUser) {
         const response = await http.get('profile');
 
@@ -110,20 +116,27 @@ class AuthStore extends BasicStore {
             profile: response.data.result,
           };
         }
+        
       } else {
-        if (this.isSignIn) {
-          await firebase.doSignOut();
-          cookies.remove('token');
-
-          return {
-            status: STATUS_NO_AUTH,
-            errorMsg: "Account doesn't exist!",
-          };
-        } else {
+        if (res.status === 200 && isRegisteredUser === false){
+          console.log(authUser.email)
           return {
             status: STATUS_NO_AUTH,
             type: TYPE_CREATE_PROFILE,
           };
+  
+        } else {
+          if(this.isSignIn){
+          await firebase.doSignOut();
+          cookies.remove('token');
+          debugger
+          
+          return {
+            status: STATUS_NO_AUTH,
+            errorMsg: "Account doesn't exist!",
+          };
+        }
+          
         }
       }
     } catch (err) {
@@ -138,7 +151,7 @@ class AuthStore extends BasicStore {
         runInAction(() => {
           this.status = STATUS_LOADING;
         });
-
+        
         firebase
           .getCurrentUser()
           .getIdToken(true)
@@ -229,6 +242,7 @@ class AuthStore extends BasicStore {
 
   @action.bound
   signUpEmail() {
+
     if (!valEmail(this.email)) {
       this.validated.email = false;
     }

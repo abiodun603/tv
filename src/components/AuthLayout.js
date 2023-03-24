@@ -7,7 +7,7 @@ import { Container, Row, Spinner } from 'react-bootstrap';
 import { STATUS_LOADING, STATUS_NO_AUTH, STATUS_AUTH } from '../constants/auth';
 
 import Footer from './widgets/footer';
-import { NavBar } from './widgets/navbar';
+import {  Bar, NavBar } from './widgets/navbar';
 
 const AuthLayout = inject(
   'auth',
@@ -87,7 +87,7 @@ const AuthLayout = inject(
       );
     }
     return (
-      <>
+      <div>
         <Head>
           <title>iSabiTV</title>
         </Head>
@@ -104,16 +104,16 @@ const AuthLayout = inject(
               </Row>
             </Container>
           ) : storeAuth.status === STATUS_NO_AUTH ? (
-            <>{children}</>
+            <div>{children}</div>
           ) : (
-            <>
+            <div>
               <NavBar searchHistory={search.searchHistory} />
               {children}
               <Footer />
-            </>
+            </div>
           )}
         </div>
-      </>
+      </div>
     );
   }),
 );

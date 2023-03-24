@@ -2,6 +2,7 @@ import React from 'react';
 import { inject, observer } from 'mobx-react';
 import Link from 'next/link';
 import { CardContest } from './cards/CardContest';
+import Image from 'next/image';
 
 @inject('contests')
 @observer
@@ -34,7 +35,7 @@ class Contests extends React.Component {
             <div className="col-sm-8">
               <div className="contest-card contest-card_size_l">
                 <div className="contest-card__media">
-                  <img
+                  <Image
                     src={`/fake_data/contests/contest-1.png`}
                     className="contest-card__cover rounded"
                     alt=""
@@ -70,7 +71,7 @@ class Contests extends React.Component {
             <div className="col-sm-4">
               <div className="contest-vote-grid__card-s contest-card contest-card_size_s">
                 <div className="contest-card__media">
-                  <img
+                  <Image
                     src={`/fake_data/contests/contest-2.png`}
                     className="contest-card__cover rounded"
                     alt=""
@@ -104,7 +105,7 @@ class Contests extends React.Component {
 
               <div className="contest-card contest-card_size_s">
                 <div className="contest-card__media">
-                  <img
+                  <Image
                     src={`/fake_data/contests/contest-3.png`}
                     className="contest-card__cover rounded"
                     alt=""
@@ -142,7 +143,7 @@ class Contests extends React.Component {
             <div className="col-sm-4">
               <div className="contest-vote-grid__card-s contest-card contest-card_size_s">
                 <div className="contest-card__media">
-                  <img
+                  <Image
                     src={`/fake_data/contests/contest-4.png`}
                     className="contest-card__cover rounded"
                     alt=""
@@ -176,7 +177,7 @@ class Contests extends React.Component {
 
               <div className="contest-card contest-card_size_s">
                 <div className="contest-card__media">
-                  <img
+                  <Image
                     src={`/fake_data/contests/contest-5.png`}
                     className="contest-card__cover rounded"
                     alt=""
@@ -212,7 +213,7 @@ class Contests extends React.Component {
             <div className="col-sm-8">
               <div className="contest-card contest-card_size_l">
                 <div className="contest-card__media">
-                  <img
+                  <Image
                     src={`/fake_data/contests/contest-7.png`}
                     className="contest-card__cover rounded"
                     alt=""

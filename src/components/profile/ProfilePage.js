@@ -1,5 +1,6 @@
+'use client';
 import React, { useState } from 'react';
-import { Container, useMediaQuery } from '@material-ui/core';
+import { Container, Menu, useMediaQuery } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Link from 'next/link';
 import { inject, observer } from 'mobx-react';
@@ -23,6 +24,14 @@ import { PROFILE_UPLOADS } from '../../constants/routes';
 import UploadPhoto from '../widgets/UploadPhoto';
 import UserContent from '../UserContent/UserContent';
 import { Box } from '../widgets/Box';
+import Button from '@mui/material/Button';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
+import Grow from '@mui/material/Grow';
+import Paper from '@mui/material/Paper';
+import Popper from '@mui/material/Popper';
+import MenuItem from '@mui/material/MenuItem';
+import MenuList from '@mui/material/MenuList';
+import Stack from '@mui/material/Stack';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -62,15 +71,15 @@ function a11yProps(index) {
 
 const TAB_MENU = [
   { title: 'Uploads', icon: UploadIcon, disabled: false },
-  { title: 'Subscription', icon: SubscriptionsIcon, disabled: true },
-  { title: 'Payment methods', icon: PaymentIcon, disabled: true },
-  { title: 'Parental control', icon: SupervisorAccountIcon, disabled: true },
+  // { title: 'Subscription', icon: SubscriptionsIcon, disabled: true },
+  // { title: 'Payment methods', icon: PaymentIcon, disabled: true },
+  // { title: 'Parental control', icon: SupervisorAccountIcon, disabled: true },
   {
     title: 'Settings',
     icon: SettingsIcon,
     disabled: false,
   },
-  { title: 'Active users', icon: VerifiedUserIcon, disabled: true },
+  // { title: 'Active users', icon: VerifiedUserIcon, disabled: true },
 ];
 
 function TabPanel(props) {
@@ -89,6 +98,115 @@ function TabPanel(props) {
   );
 }
 
+const MenuListComposition = () => {
+  const theme = useTheme();
+  const [open, setOpen] = React.useState(false);
+  const anchorRef = React.useRef(null);
+
+  const handleToggle = () => {
+    setOpen((prevOpen) => !prevOpen);
+  };
+
+  const handleClose = (event) => {
+    if (anchorRef.current && anchorRef.current.contains(event.target)) {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  function handleListKeyDown(event) {
+    if (event.key === 'Tab') {
+      event.preventDefault();
+      setOpen(false);
+    } else if (event.key === 'Escape') {
+      setOpen(false);
+    }
+  }
+
+  // return focus to the button when we transitioned from !open -> open
+  const prevOpen = React.useRef(open);
+  React.useEffect(() => {
+    if (prevOpen.current === true && open === false) {
+      anchorRef.current.focus();
+    }
+
+    prevOpen.current = open;
+  }, [open]);
+
+  return (
+    <Stack direction="row" spacing={2}>
+      <div>
+        <Button
+          ref={anchorRef}
+          id="composition-button"
+          aria-controls={open ? 'composition-menu' : undefined}
+          aria-expanded={open ? 'true' : undefined}
+          aria-haspopup="true"
+          onClick={handleToggle}
+          // bgcolor={theme.palette.primary.main}
+          // color={theme.palette.background.default}
+          style={{
+            color: '#FFFFFF',
+            backgroundColor: '#2EBC58',
+            paddingHorizontal: 30,
+            paddingVertical: 30,
+          }}
+        >
+          Content Upload
+        </Button>
+        <Popper
+          open={open}
+          anchorEl={anchorRef.current}
+          role={undefined}
+          placement="bottom-start"
+          transition
+          disablePortal
+          style={{ zIndex: 100 }}
+        >
+          {({ TransitionProps, placement }) => (
+            <Grow
+              {...TransitionProps}
+              style={{
+                transformOrigin:
+                  placement === 'bottom-start' ? 'left top' : 'left bottom',
+              }}
+            >
+              <Paper style={{ background: '#FFFFFF' }}>
+                <ClickAwayListener onClickAway={handleClose}>
+                  <MenuList
+                    autoFocusItem={open}
+                    id="composition-menu"
+                    aria-labelledby="composition-button"
+                    onKeyDown={handleListKeyDown}
+                    style={{ background: '#FFFFFF' }}
+                  >
+                    <MenuItem onClick={handleClose}>
+                      <Link href="/upload?music">Music</Link>
+                    </MenuItem>
+
+                    <MenuItem onClick={handleClose}>
+                      <Link href="/upload?music">Video</Link>
+                    </MenuItem>
+
+                    <MenuItem onClick={handleClose}>
+                      <Link href="/upload?music">News</Link>
+                    </MenuItem>
+
+                    <MenuItem disabled onClick={handleClose}>
+                      <Link href="/upload?music"> Podcasts</Link>
+                    </MenuItem>
+                  </MenuList>
+                </ClickAwayListener>
+              </Paper>
+            </Grow>
+          )}
+        </Popper>
+      </div>
+    </Stack>
+  );
+};
+
 const ProfilePage = inject('profile')(
   observer((props) => {
     const {
@@ -105,12 +223,22 @@ const ProfilePage = inject('profile')(
     const [tabIndex, setTabIndex] = useState(0);
     const isMobile = useMediaQuery('(max-width:767px)');
 
+    // dropdown
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
+    const handleClick = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
+
     const handleChange = (event, newValue) => {
       setTabIndex(newValue);
     };
 
     const UserProfileBox = () => (
-      <Box mr={1} p={1.5}>
+      <Box mr={1} p={1.5} style={{ position: 'relative' }}>
         <Box
           display="flex"
           flexDirection="row"
@@ -161,7 +289,7 @@ const ProfilePage = inject('profile')(
             <Box textAlign="center">{storeProfile.social.count_following}</Box>
           </Box>
         </Box>
-        <Link href="/upload">
+        {/* <Link href="/upload">
           <Box
             className="clickable"
             bgcolor={theme.palette.primary.main}
@@ -171,9 +299,10 @@ const ProfilePage = inject('profile')(
             mt={1}
             borderRadius={4}
           >
-            Upload Video
+            Content Upload
           </Box>
-        </Link>
+        </Link> */}
+        <MenuListComposition />
       </Box>
     );
 
@@ -226,21 +355,21 @@ const ProfilePage = inject('profile')(
               <UserContent profileId={profileId} />
             </Box>
           </TabPanel>
-          <TabPanel className={classes.tabPanel} value={tabIndex} index={2}>
+          <TabPanel className={classes.tabPanel} value={tabIndex} index={6}>
             <ProfileSub />
           </TabPanel>
-          <TabPanel className={classes.tabPanel} value={tabIndex} index={3}>
+          {/*<TabPanel className={classes.tabPanel} value={tabIndex} index={3}>
             <ProfilePayments />
           </TabPanel>
           <TabPanel className={classes.tabPanel} value={tabIndex} index={4}>
             <ProfileParental />
-          </TabPanel>
-          <TabPanel className={classes.tabPanel} value={tabIndex} index={5}>
+            </TabPanel>*/}
+          <TabPanel className={classes.tabPanel} value={tabIndex} index={2}>
             <ProfileSettings />
           </TabPanel>
-          <TabPanel className={classes.tabPanel} value={tabIndex} index={6}>
+          {/*<TabPanel className={classes.tabPanel} value={tabIndex} index={6}>
             <ProfileUsers />
-          </TabPanel>
+          </TabPanel>*/}
         </div>
       </Container>
     );

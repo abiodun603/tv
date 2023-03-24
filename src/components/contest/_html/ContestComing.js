@@ -1,5 +1,6 @@
 import React from 'react';
 import { inject, observer } from 'mobx-react';
+import Image from 'next/image';
 
 @inject('contests')
 @observer
@@ -39,7 +40,7 @@ class ContestComing extends React.Component {
               </div>
               <div className="col">
                 <div className="contest-promo">
-                  <img
+                  <Image
                     src="/fake_data/contest-promo__image.jpg"
                     alt=""
                     className="contest-promo__image img-fluid"
@@ -125,7 +126,7 @@ class ContestComing extends React.Component {
             <div className="row">
               <div className="contest-card col">
                 <div className="contest-card__media mb-3">
-                  <img
+                  <Image
                     src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100%25' height='100%25' fill='%23ccc'%3E%3C/rect%3E%3C/svg%3E"
                     className="contest-card__cover rounded"
                     alt=""
@@ -181,7 +182,7 @@ class ContestComing extends React.Component {
 
               <div className="contest-card col">
                 <div className="contest-card__media mb-3">
-                  <img
+                  <Image
                     src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100%25' height='100%25' fill='%23ccc'%3E%3C/rect%3E%3C/svg%3E"
                     className="contest-card__cover rounded"
                     alt=""

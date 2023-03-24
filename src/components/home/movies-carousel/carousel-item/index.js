@@ -9,6 +9,7 @@ import { getTags } from '../../../../utils/formate';
 import css from './carousel-item.module.scss';
 
 import * as url from '../../../../lib/url/generator';
+import Image from 'next/image';
 
 const formatSubText = (...args) => args.filter(Boolean).join(' - ');
 
@@ -22,11 +23,11 @@ export const CarouselItem = ({ video, active = false }) => {
           'cursor-pointer',
         )}
       >
-        <img src={getPoster(video.poster_h)} alt="" />
+        <Image src={getPoster(video.poster_h)} alt="" />
 
         <span className={css.text}>
           <Link href={url.toFilmDetails(video.id)}>
-            <a>{video.title}</a>
+            {video.title}
           </Link>
           <br />
           <span className={css.subText}>

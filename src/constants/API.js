@@ -1,6 +1,6 @@
 import mobile from 'is-mobile';
 
-export const BASE_URL = process.env.BASE_URL || 'https://api-testing.isabi.tv/';
+export const BASE_URL = process.env.BASE_URL || 'https://api.isabi.tv/';
 
 export const SINGLE_VIDEO = 'single';
 export const SERIES = 'series';
@@ -27,7 +27,7 @@ export const PATH_URL_COMMENT_CREATE = 'comment/create';
 export const PATH_URL_LIKE_CREATE = 'like/create';
 export const PATH_URL_LIKE_DELETE = (id) => `like/delete/${id}`;
 
-export const PATH_URL_LIB_WATCH = 'lib/watch';
+export const PATH_URL_LIB_WATCH = 'lib/watch'; 
 export const PATH_URL_LIB_HISTORY = 'lib/history';
 export const PATH_URL_LIB_SUBSCIBED_COLLECTIONS = '/collections/my';
 export const PATH_URL_LIB_COMPLAINT = 'complaints/create';
@@ -37,7 +37,7 @@ export const PATH_URL_COUNTRIES = 'countries/';
 export const PATH_URL_COLLECTIONS = 'collections/';
 export const PATH_URL_COLLECTION = 'collection/';
 
-export const PATH_URL_COMING_SOON = 'comings';
+export const PATH_URL_COMING_SOON = 'comings'; 
 
 export const PATH_URL_CONTESTS = 'contests/';
 

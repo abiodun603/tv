@@ -40,7 +40,6 @@ const AuthContainer = styled.div`
   margin: 0 auto;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
-
   @media only screen and (max-width: 767px) {
     width: 99%;
     height: 100vh;
@@ -78,7 +77,7 @@ const SignInForm = observer(({ storeAuth, theme }) => {
   };
 
   return (
-    <>
+    <div>
       <Grid
         container
         spacing={4}
@@ -93,8 +92,7 @@ const SignInForm = observer(({ storeAuth, theme }) => {
             src="/icon/ic_google.svg"
           />
         </Grid>
-
-        <Grid item>
+        {/*<Grid item>
           <Avatar
             variant="square"
             onClick={() => authSocial(FACEBOOK)}
@@ -115,7 +113,7 @@ const SignInForm = observer(({ storeAuth, theme }) => {
             src="/icon/ic_ig.svg"
             disabled
           />
-        </Grid> */}
+        </Grid>*/}
       </Grid>
       <Box display="flex" justifyContent="center" mt={2} mb={4}>
         <Separator color={theme.palette.grey.grey10} spacing={theme.spacing(4)}>
@@ -259,7 +257,7 @@ const SignInForm = observer(({ storeAuth, theme }) => {
           {storeAuth.isSignIn ? 'Sign Up' : 'Sign In'}
         </TextButton>
       </Box>
-    </>
+    </div>
   );
 });
 

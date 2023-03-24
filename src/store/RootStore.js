@@ -1,4 +1,5 @@
 import HomeStore from './homeStore';
+// import { makeAutoObservable } from 'mobx';
 import ProfileStore from './profileStore';
 import AuthStore from './authStore';
 import Toast from './toast';
@@ -38,7 +39,19 @@ export class RootStore {
 
   constructor() {
     this.stores = this.initiateStores();
+
+    // makeAutoObservable(this);
+    // window.addEventListener('online', this.setOnline);
+    // window.addEventListener('offline', this.setOffline);
   }
+
+  // setOnline = () => {
+  //   this.isOnline = true;
+  // }
+
+  // setOffline = () => {
+  //   this.isOnline = false;
+  // }
 
   refreshStore() {
     this.stores = this.initiateStores();

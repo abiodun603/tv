@@ -8,7 +8,7 @@ const nextConfig = {
   reactStrictMode: false,
   swcMinify: true,
   // experimental: {
-  //   forceSwcTransforms: true,
+  //   appDir: true,
   // },
   webpack(config) {
     config.module.rules.push({

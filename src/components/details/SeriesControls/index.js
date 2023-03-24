@@ -1,3 +1,4 @@
+'use client'
 import React, { useState, useEffect, useRef } from 'react';
 import { Button, Menu, MenuItem, Fade } from '@material-ui/core';
 import { ArrowDropDown } from '@material-ui/icons';

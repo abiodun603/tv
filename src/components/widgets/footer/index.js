@@ -12,6 +12,7 @@ import {
   TYPE_PODCAST,
 } from '../../../constants/API';
 import { KIDS } from '../../../constants/genres';
+import Image from 'next/image';
 
 const Footer = () => {
   const copyToClipboard = (value) => {
@@ -37,28 +38,28 @@ const Footer = () => {
               <li className="footer__nav-item fw-bold">About</li>
 
               <li className="footer__nav-item">
-                <Link href="/">
-                  <a className="footer__nav-link">iSabiTV</a>
+                <Link className="footer__nav-link" href="/">
+                  iSabiTV
                 </Link>
               </li>
               <li className="footer__nav-item">
-                <Link href="/documents/iSabiTV_TermsOfUse.pdf">
-                  <a className="footer__nav-link">Terms of Use</a>
+                <Link className="footer__nav-link" href="/documents/iSabiTV_TermsOfUse.pdf">
+                  Terms of Use
                 </Link>
               </li>
               <li className="footer__nav-item">
-                <Link href="/documents/iSabiTV_Privacy_Policy.pdf">
-                  <a className="footer__nav-link">Privacy Policy</a>
+                <Link className="footer__nav-link" href="/documents/iSabiTV_Privacy_Policy.pdf">
+                  Privacy Policy
                 </Link>
               </li>
               <li className="footer__nav-item">
-                <Link href="/documents/iSabiTV_Cookie_Policy.pdf">
-                  <a className="footer__nav-link">Cookies policy</a>
+                <Link className="footer__nav-link" href="/documents/iSabiTV_Cookie_Policy.pdf">
+                  Cookies policy
                 </Link>
               </li>
               <li className="footer__nav-item">
-                <Link href="/documents/iSabiTV_GDPR_Policy.pdf">
-                  <a className="footer__nav-link">GDPR</a>
+                <Link className="footer__nav-link" href="/documents/iSabiTV_GDPR_Policy.pdf">
+                  GDPR
                 </Link>
               </li>
             </ul>
@@ -68,33 +69,36 @@ const Footer = () => {
               <li className="footer__nav-item fw-bold">Browse</li>
               <li className="footer__nav-item">
                 <Link
+                  className="footer__nav-link"
                   href={`/${PATH_URL_VIDEOS}/${TYPE_FILM}?title=Movies&tag=${MOVIES}`}
                 >
-                  <a className="footer__nav-link">Movies</a>
+                  Movies
                 </Link>
               </li>
               <li className="footer__nav-item">
                 <Link
+                  className="footer__nav-link"
                   href={`/${PATH_URL_VIDEOS}/${TYPE_FILM}?title=TV&tag=${TV}`}
                 >
-                  <a className="footer__nav-link">TV</a>
+                  TV
                 </Link>
               </li>
               <li className="footer__nav-item">
                 <Link
+                  className="footer__nav-link"
                   href={`/${PATH_URL_VIDEOS}/film?title=${KIDS}%2FAnimations&tag=${TAG_KIDS}`}
                 >
-                  <a className="footer__nav-link">Kids</a>
+                  Kids
                 </Link>
               </li>
               <li className="footer__nav-item">
-                <Link href={`/${PATH_URL_VIDEOS}/${TYPE_PODCAST}`}>
-                  <a className="footer__nav-link">Podcasts</a>
+                <Link className="footer__nav-link" href={`/${PATH_URL_VIDEOS}/${TYPE_PODCAST}`}>
+                  Podcasts
                 </Link>
               </li>
               <li className="footer__nav-item">
-                <Link href={`/${TYPE_NEWS}`}>
-                  <a className="footer__nav-link">News</a>
+                <Link className="footer__nav-link" href={`/${TYPE_NEWS}`}>
+                  News
                 </Link>
               </li>
             </ul>

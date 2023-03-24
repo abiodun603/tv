@@ -70,8 +70,9 @@ const ChangePassword = inject(
               type="password"
               error={!store.validated.newPass}
               helperText={
-                !store.validated.newPass ? 'Incorrect new password' : ''
+                !store.validated.newPass ? 'Password must be more than 6 characters including at least one number, one character and a Capital letter.' : ''
               }
+              
               value={store.password.new}
               onChange={(e) => store.setNewPass(e.target.value)}
               fullWidth

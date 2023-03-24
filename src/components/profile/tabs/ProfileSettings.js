@@ -1,3 +1,4 @@
+'use client';
 import React, { useState, useEffect } from 'react';
 import { inject, observer } from 'mobx-react';
 import classNames from 'classnames';
@@ -106,6 +107,15 @@ const ProfileSettings = inject('auth')(
               </Box>
             </Grid>
             <Grid item xs={12}>
+              <Box
+                display="flex"
+                flexDirection="row"
+                alignItems="center"
+                justifyContent="space-between"
+                mb={1}
+              >
+                <Box>Watch History</Box>
+              </Box>
               <Box mb={2}>
                 <Toggler
                   id="track_watch"
