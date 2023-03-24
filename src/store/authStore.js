@@ -104,11 +104,7 @@ class AuthStore extends BasicStore {
 
 
       const isRegisteredUser = res.data.success;
-      if (res.status === 200 && isRegisteredUser === false){
-        console.log(authUser.email)
-        this.isSignIn === 'false'
-
-      }
+      
 
       
       if (isRegisteredUser) {
@@ -122,7 +118,15 @@ class AuthStore extends BasicStore {
         }
         
       } else {
-        if (this.isSignIn) {
+        if (res.status === 200 && isRegisteredUser === false){
+          console.log(authUser.email)
+          return {
+            status: STATUS_NO_AUTH,
+            type: TYPE_CREATE_PROFILE,
+          };
+  
+        } else {
+          if(this.isSignIn){
           await firebase.doSignOut();
           cookies.remove('token');
           debugger
@@ -131,12 +135,8 @@ class AuthStore extends BasicStore {
             status: STATUS_NO_AUTH,
             errorMsg: "Account doesn't exist!",
           };
-        } else {
-          console.log(res.data)
-          return {
-            status: STATUS_NO_AUTH,
-            type: TYPE_CREATE_PROFILE,
-          };
+        }
+          
         }
       }
     } catch (err) {
