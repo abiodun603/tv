@@ -8,6 +8,7 @@ import {
 } from '@material-ui/pickers';
 
 import AppTheme from '../../../theme';
+import moment from 'moment';
 export { default as MultiSelect } from './MultiSelect';
 export { default as LanguagesSelect } from './LanguagesSelect';
 
@@ -68,7 +69,7 @@ export const CustomDatePicker = withStyles({
   },
 })((props) => (
   <MuiPickersUtilsProvider utils={DateFnsUtils}>
-    <KeyboardDatePicker {...props} />
+    <KeyboardDatePicker maxDate={moment().subtract(15, 'years')} {...props} />
   </MuiPickersUtilsProvider>
 ));
 

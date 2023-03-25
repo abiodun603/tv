@@ -90,10 +90,9 @@ class ProfileStore extends BasicStore {
 
   @action.bound
   createUser() {
-
     debugger;
     let profile = toJS(this.profile);
-    debugger
+    debugger;
     if (!valText(profile.username)) {
       this.validated.username = false;
       return;
@@ -118,8 +117,10 @@ class ProfileStore extends BasicStore {
 
     http
       .post(PATH_URL_PROFILE_CREATE, JSON.stringify(profile))
+      // profile/check-username
+
       .then((res) => {
-    debugger;
+        debugger;
 
         if (res.data.success) {
           runInAction(() => {
@@ -164,7 +165,7 @@ class ProfileStore extends BasicStore {
 
   @action.bound
   updateUser() {
-    debugger
+    debugger;
     let profile = toJS(this.profile);
 
     if (!valText(this.profile.username)) {
@@ -245,7 +246,7 @@ class ProfileStore extends BasicStore {
   }
 
   @action.bound
-  deleteUser() {} 
+  deleteUser() {}
 
   @action.bound
   changePassword() {
@@ -329,7 +330,7 @@ class ProfileStore extends BasicStore {
             type: 'error',
             visible: true,
           });
-        })
+        }),
       )
       .catch((e) => {
         runInAction(() => {
@@ -347,20 +348,21 @@ class ProfileStore extends BasicStore {
     await http.setToken(cookies.get('token'));
 
     //delete account from firebase
-    const user = firebase.getCurrentUser()
-    user.delete()
-    .then(() => {
-      console.log("User Account deleted successfully")
-    })
-    .catch((error) => {
-      console.log('Error deleting User account', error)
-    })
+    const user = firebase.getCurrentUser();
+    user
+      .delete()
+      .then(() => {
+        console.log('User Account deleted successfully');
+      })
+      .catch((error) => {
+        console.log('Error deleting User account', error);
+      });
 
     return http
-      .delete(PATH_URL_PROFILE_REMOVE_ACCOUNT) 
+      .delete(PATH_URL_PROFILE_REMOVE_ACCOUNT)
       .then(
         action('successRemoveAccount', (res) => {
-          console.log(res.data)
+          console.log(res.data);
           this.toast.show({
             message: 'Removed Account Successfully',
             type: 'success',
@@ -373,7 +375,7 @@ class ProfileStore extends BasicStore {
             type: 'error',
             visible: true,
           });
-        })
+        }),
       )
       .catch((e) => {
         runInAction(() => {
@@ -407,7 +409,7 @@ class ProfileStore extends BasicStore {
             type: 'error',
             visible: true,
           });
-        })
+        }),
       )
       .catch((e) => {
         runInAction(() => {
@@ -435,7 +437,7 @@ class ProfileStore extends BasicStore {
             type: 'error',
             visible: true,
           });
-        })
+        }),
       )
       .catch((e) => {
         runInAction(() => {
@@ -500,7 +502,7 @@ class ProfileStore extends BasicStore {
             visible: true,
           });
         }
-      })
+      }),
     );
   }
 

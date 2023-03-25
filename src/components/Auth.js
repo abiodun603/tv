@@ -28,6 +28,8 @@ import {
 } from './widgets/Field';
 import { TextButton } from './ui/buttons/TextButton';
 import { Spinner } from './ui/spiner';
+import { app } from 'firebase';
+import Image from 'next/image';
 
 const AuthContainer = styled.div`
   width: 612px;
@@ -92,12 +94,29 @@ const SignInForm = observer(({ storeAuth, theme }) => {
             src="/icon/ic_google.svg"
           />
         </Grid>
-        {/*<Grid item>
-          <Avatar
-            variant="square"
-            onClick={() => authSocial(FACEBOOK)}
-            src={apple}
-          />
+        <Grid item>
+          <div
+            style={{
+              width: 40,
+              height: 40,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              borderWidth: 2,
+              borderRadius: 1,
+              borderColor: 'red',
+            }}
+          >
+            {/* <Avatar
+              style={{
+                background: '#ffffff',
+              }}
+              variant="square"
+              onClick={() => authSocial(FACEBOOK)}
+            > */}
+            {/* <Image src={apple} alt="" width={18} height={18} /> */}
+            {/* </Avatar> */}
+          </div>
         </Grid>
         {/*  <Grid item>
           <Avatar
@@ -126,7 +145,7 @@ const SignInForm = observer(({ storeAuth, theme }) => {
         centered
       >
         <TabCustom label="Email" />
-        <TabCustom label="Phone" />
+        {/* <TabCustom label="Phone" /> */}
       </TabsCustom>
       <Box
         display="flex"
@@ -284,6 +303,7 @@ const AccountCreationForm = observer(({ storeAuth }) => {
             storeProfile.setUserName(event.target.value);
           }}
         />
+        {storeProfile.profile.username}
       </Box>
       <Box mb={2}>
         <CustomTextField
