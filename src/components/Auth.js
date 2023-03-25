@@ -98,31 +98,14 @@ const SignInForm = observer(({ storeAuth, theme }) => {
             src="/icon/ic_google.svg"
           />
         </Grid>
+        
         <Grid item>
-          <div
-            style={{
-              width: 40,
-              height: 40,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              borderWidth: 2,
-              borderRadius: 1,
-              borderColor: 'red',
-            }}
-          >
-            {/* <Avatar
-              style={{
-                background: '#ffffff',
-              }}
-              variant="square"
-              onClick={() => authSocial(FACEBOOK)}
-            > */}
-            {/* <Image src={apple} alt="" width={18} height={18} /> */}
-            {/* </Avatar> */}
-          </div>
+          <Avatar
+            variant="square"
+            src="/icon/apple.png"
+          />
         </Grid>
-        <Grid item>
+        {/*<Grid item>
           <Avatar
             variant="square"
             className="disabled"
@@ -136,7 +119,7 @@ const SignInForm = observer(({ storeAuth, theme }) => {
             src="/icon/ic_ig.svg"
             disabled
           />
-        </Grid>
+          </Grid>*/}
       </Grid>
       <Box display="flex" justifyContent="center" mt={2} mb={4}>
         <Separator color={theme.palette.grey.grey10} spacing={theme.spacing(4)}>
