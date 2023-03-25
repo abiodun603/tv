@@ -15,6 +15,7 @@ import {
   PATH_URL_SEARCH_HISTORY_MY,
   PATH_URL_SEARCH_HISTORY_MY_LIST,
   PATH_URL_PROFILE_REMOVE_ACCOUNT,
+  PATH_URL_PROFILE_CHECK_USERNAME,
 } from '../constants/API';
 
 import { PROFILE_MY } from '../constants/routes';
@@ -162,6 +163,9 @@ class ProfileStore extends BasicStore {
         });
       });
   }
+
+  @action.bound
+  updateUser() {}
 
   @action.bound
   updateUser() {

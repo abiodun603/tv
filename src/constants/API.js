@@ -47,6 +47,7 @@ export const PATH_URL_PROFILE_UPDATE = 'profile/update';
 export const PATH_URL_PROFILE_REMOVE_UPLOADS = 'profile/removeUploads';
 export const PATH_URL_PROFILE_REMOVE_ACCOUNT = 'profile/delete/my';
 export const PATH_URL_PROFILE_CLEAR_HISTORY = 'profile/clearHistory';
+export const PATH_URL_PROFILE_CHECK_USERNAME = 'profile/check-username';
 
 export const PATH_URL_SEARCH_HISTORY_MY = 'search-history/my';
 export const PATH_URL_SEARCH_HISTORY_MY_LIST = 'search-history/my/list';

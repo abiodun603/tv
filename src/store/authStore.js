@@ -129,7 +129,6 @@ class AuthStore extends BasicStore {
           if(this.isSignIn){
           await firebase.doSignOut();
           cookies.remove('token');
-          debugger
           
           return {
             status: STATUS_NO_AUTH,
