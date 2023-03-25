@@ -34,7 +34,9 @@ import { useDebounce } from 'usehooks-ts';
 import http from '../api/axiosApi';
 import { PATH_URL_PROFILE_CHECK_USERNAME } from '../constants/API';
 import { Chip } from '@mui/material';
-
+import { BiCheck } from 'react-icons/bi';
+import { MdCancel } from 'react-icons/md';
+import { TailSpin } from 'react-loader-spinner';
 const AuthContainer = styled.div`
   width: 612px;
   position: absolute;
@@ -271,6 +273,7 @@ const AccountCreationForm = observer(({ storeAuth }) => {
   const storeProfile = storeAuth.profileStore;
   const debouncedValue = useDebounce(storeProfile.profile.username, 3000);
   const [avail, setAvail] = useState([]);
+  const [loading, setLoading] = useState('IDLE');
   const handleChangeBirthday = (data) => {
     storeProfile.setBirthday(data);
   };
@@ -278,22 +281,28 @@ const AccountCreationForm = observer(({ storeAuth }) => {
   // Fetch API (optional)
   useEffect(() => {
     if (debouncedValue !== '') {
-      http
-        .post(PATH_URL_PROFILE_CHECK_USERNAME, {
-          username: debouncedValue,
-          first_name: storeProfile.profile.name,
-          last_name: storeProfile.profile.last_name,
-        })
-        .then((res) => {
-          if (res.data) {
-            console.log(res?.data);
-            setAvail(res?.data?.availableUsernames);
-          }
-        });
+      try {
+        setLoading('PENDING');
+        http
+          .post(PATH_URL_PROFILE_CHECK_USERNAME, {
+            username: debouncedValue,
+            first_name: storeProfile.profile.name,
+            last_name: storeProfile.profile.last_name,
+          })
+          .then((res) => {
+            console.log(res.data);
+            if (res.data) {
+              setLoading('FULFILLED');
+              setAvail(res?.data?.availableUsernames);
+            }
+          });
+      } catch (err) {
+        console.log(err);
+      }
     }
   }, [debouncedValue]);
 
-  console.log(avail);
+  console.log(loading);
 
   return (
     <Box display="flex" justifyContent="center" flexDirection="column" m={4}>
@@ -341,10 +350,58 @@ const AccountCreationForm = observer(({ storeAuth }) => {
             storeProfile.setUserName(event.target.value);
           }}
         />
-        {avail?.length > 0 &&
-          avail.map((name, index) => {
-            return <Chip label={name} key={index} />;
-          })}
+        {loading === 'PENDING' && (
+          <div
+            style={{
+              position: 'absolute',
+              right: '22%',
+              fontSize: '20',
+              color: '#ED4337',
+              marginBottom: -20,
+            }}
+          >
+            <TailSpin height="15" width="15" radius="9" />
+          </div>
+        )}
+        {avail?.length > 0 && (
+          <MdCancel
+            style={{
+              position: 'absolute',
+              right: '22%',
+              fontSize: '20',
+              color: '#ED4337',
+              marginTop: 20,
+            }}
+          />
+        )}
+        {avail === undefined && (
+          <BiCheck
+            style={{
+              position: 'absolute',
+              right: '22%',
+              marginTop: 20,
+              fontSize: '20',
+              color: '#4BB543',
+            }}
+          />
+        )}
+
+        {/*  */}
+
+        <Box>
+          {avail?.length > 0 && (
+            <p style={{ color: '#C81C2E', fontSize: 10, marginTop: 2 }}>
+              {' '}
+              Username already exist.
+            </p>
+          )}
+        </Box>
+        <Box>
+          {avail?.length > 0 &&
+            avail.map((name, index) => {
+              return <Chip label={name} key={index} />;
+            })}
+        </Box>
       </Box>
       <Box mb={4}>
         <CustomDatePicker
