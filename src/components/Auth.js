@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { inject, observer } from 'mobx-react';
 import { Container, Grid, Avatar, NoSsr, useTheme } from '@material-ui/core';
 import styled from 'styled-components';
@@ -30,6 +30,10 @@ import { TextButton } from './ui/buttons/TextButton';
 import { Spinner } from './ui/spiner';
 import { app } from 'firebase';
 import Image from 'next/image';
+import { useDebounce } from 'usehooks-ts';
+import http from '../api/axiosApi';
+import { PATH_URL_PROFILE_CHECK_USERNAME } from '../constants/API';
+import { Chip } from '@mui/material';
 
 const AuthContainer = styled.div`
   width: 612px;
@@ -282,29 +286,34 @@ const SignInForm = observer(({ storeAuth, theme }) => {
 
 const AccountCreationForm = observer(({ storeAuth }) => {
   const storeProfile = storeAuth.profileStore;
-
+  const debouncedValue = useDebounce(storeProfile.profile.username, 3000);
+  const [avail, setAvail] = useState([]);
   const handleChangeBirthday = (data) => {
     storeProfile.setBirthday(data);
   };
 
+  // Fetch API (optional)
+  useEffect(() => {
+    if (debouncedValue !== '') {
+      http
+        .post(PATH_URL_PROFILE_CHECK_USERNAME, {
+          username: debouncedValue,
+          first_name: storeProfile.profile.name,
+          last_name: storeProfile.profile.last_name,
+        })
+        .then((res) => {
+          if (res.data) {
+            console.log(res?.data);
+            setAvail(res?.data?.availableUsernames);
+          }
+        });
+    }
+  }, [debouncedValue]);
+
+  console.log(avail);
+
   return (
     <Box display="flex" justifyContent="center" flexDirection="column" m={4}>
-      <Box mb={2}>
-        <CustomTextField
-          id="username"
-          fullWidth
-          error={!storeProfile.validated.username}
-          label="Username"
-          helperText={
-            !storeProfile.validated.username ? 'Incorrect username' : ''
-          }
-          value={storeProfile.profile.username}
-          onChange={(event) => {
-            storeProfile.setUserName(event.target.value);
-          }}
-        />
-        {storeProfile.profile.username}
-      </Box>
       <Box mb={2}>
         <CustomTextField
           id="name"
@@ -334,6 +343,25 @@ const AccountCreationForm = observer(({ storeAuth }) => {
             storeProfile.setLastName(event.target.value);
           }}
         />
+      </Box>
+      <Box mb={2}>
+        <CustomTextField
+          id="username"
+          fullWidth
+          error={!storeProfile.validated.username}
+          label="Username"
+          helperText={
+            !storeProfile.validated.username ? 'Incorrect username' : ''
+          }
+          value={storeProfile.profile.username}
+          onChange={(event) => {
+            storeProfile.setUserName(event.target.value);
+          }}
+        />
+        {avail?.length > 0 &&
+          avail.map((name, index) => {
+            return <Chip label={name} key={index} />;
+          })}
       </Box>
       <Box mb={4}>
         <CustomDatePicker
