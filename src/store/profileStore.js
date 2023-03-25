@@ -15,6 +15,7 @@ import {
   PATH_URL_SEARCH_HISTORY_MY,
   PATH_URL_SEARCH_HISTORY_MY_LIST,
   PATH_URL_PROFILE_REMOVE_ACCOUNT,
+  PATH_URL_PROFILE_CHECK_USERNAME
 } from '../constants/API';
 
 import { PROFILE_MY } from '../constants/routes';
@@ -90,10 +91,8 @@ class ProfileStore extends BasicStore {
 
   @action.bound
   createUser() {
-
-    debugger;
     let profile = toJS(this.profile);
-    debugger
+
     if (!valText(profile.username)) {
       this.validated.username = false;
       return;
@@ -119,7 +118,6 @@ class ProfileStore extends BasicStore {
     http
       .post(PATH_URL_PROFILE_CREATE, JSON.stringify(profile))
       .then((res) => {
-    debugger;
 
         if (res.data.success) {
           runInAction(() => {
@@ -162,9 +160,15 @@ class ProfileStore extends BasicStore {
       });
   }
 
+
+  @action.bound
+  updateUser(){
+    
+  }
+
   @action.bound
   updateUser() {
-    debugger
+
     let profile = toJS(this.profile);
 
     if (!valText(this.profile.username)) {

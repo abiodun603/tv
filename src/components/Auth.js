@@ -1,7 +1,6 @@
 import React from 'react';
 import { inject, observer } from 'mobx-react';
 import { Container, Grid, Avatar, NoSsr, useTheme } from '@material-ui/core';
-import apple from '../assets/apple.png';
 import styled from 'styled-components';
 import {
   compose,
@@ -17,6 +16,7 @@ import {
   AUTH_PHONE,
   FACEBOOK,
   GOOGLE,
+  TWITTER,
   TYPE_CREATE_PROFILE,
 } from '../constants/auth';
 import { TabsCustom, TabCustom } from './widgets/Tabs';
@@ -96,10 +96,10 @@ const SignInForm = observer(({ storeAuth, theme }) => {
           <Avatar
             variant="square"
             onClick={() => authSocial(FACEBOOK)}
-            src={apple}
+            src="/icon/ic_fb.svg"
           />
         </Grid>
-        {/*  <Grid item>
+        <Grid item>
           <Avatar
             variant="square"
             className="disabled"
@@ -126,7 +126,7 @@ const SignInForm = observer(({ storeAuth, theme }) => {
         centered
       >
         <TabCustom label="Email" />
-        <TabCustom label="Phone" />
+        {/*<TabCustom label="Phone" />*/}
       </TabsCustom>
       <Box
         display="flex"
@@ -178,7 +178,7 @@ const SignInForm = observer(({ storeAuth, theme }) => {
             }}
           />
         </Box>
-        <Box
+        {/*<Box
           mb={2}
           display={storeAuth.typeAuth === AUTH_EMAIL ? 'none' : 'block'}
         >
@@ -211,7 +211,7 @@ const SignInForm = observer(({ storeAuth, theme }) => {
               storeAuth.setCode(event.target.value);
             }}
           />
-        </Box>
+          </Box>*/}
       </Box>
       {storeAuth.loading ? (
         <Box display="flex" justifyContent="center" mb={5}>
