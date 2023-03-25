@@ -338,6 +338,7 @@ const AccountCreationForm = observer(({ storeAuth }) => {
       </Box>
       <Box mb={2}>
         <CustomTextField
+          style={{postion: 'relative'}}
           id="username"
           fullWidth
           error={!storeProfile.validated.username}
@@ -357,7 +358,8 @@ const AccountCreationForm = observer(({ storeAuth }) => {
               right: '22%',
               fontSize: '20',
               color: '#ED4337',
-              marginBottom: -20,
+              top: '99%'
+              
             }}
           >
             <TailSpin height="15" width="15" radius="9" />
