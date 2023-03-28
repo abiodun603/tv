@@ -165,9 +165,6 @@ class ProfileStore extends BasicStore {
   }
 
   @action.bound
-  updateUser() {}
-
-  @action.bound
   updateUser() {
     debugger;
     let profile = toJS(this.profile);

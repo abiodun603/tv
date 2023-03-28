@@ -100,12 +100,9 @@ const SignInForm = observer(({ storeAuth, theme }) => {
             src="/icon/ic_google.svg"
           />
         </Grid>
-        
+
         <Grid item>
-          <Avatar
-            variant="square"
-            src="/icon/apple.png"
-          />
+          <Avatar variant="square" src="/icon/apple.png" />
         </Grid>
         {/*<Grid item>
           <Avatar
@@ -278,6 +275,15 @@ const AccountCreationForm = observer(({ storeAuth }) => {
     storeProfile.setBirthday(data);
   };
 
+  const handleValidateInput = () => {
+    const regex = /^[a-zA-Z0-9_]*$/; // regex to only allow letters, numbers, and underscores
+    const value = event.target.value;
+
+    if (regex.test(value)) {
+      setInputValue(value);
+    }
+  };
+
   // Fetch API (optional)
   useEffect(() => {
     if (debouncedValue !== '') {
@@ -338,7 +344,7 @@ const AccountCreationForm = observer(({ storeAuth }) => {
       </Box>
       <Box mb={2}>
         <CustomTextField
-          style={{postion: 'relative'}}
+          style={{ postion: 'relative' }}
           id="username"
           fullWidth
           error={!storeProfile.validated.username}
@@ -349,6 +355,12 @@ const AccountCreationForm = observer(({ storeAuth }) => {
           value={storeProfile.profile.username}
           onChange={(event) => {
             storeProfile.setUserName(event.target.value);
+            const regex = /^[a-zA-Z0-9_]*$/; // regex to only allow letters, numbers, and underscores
+            const value = event.target.value;
+
+            if (regex.test(value)) {
+              storeProfile.setUserName(value);
+            }
           }}
         />
         {loading === 'PENDING' && (
@@ -358,8 +370,7 @@ const AccountCreationForm = observer(({ storeAuth }) => {
               right: '22%',
               fontSize: '20',
               color: '#ED4337',
-              top: '99%'
-              
+              top: '99%',
             }}
           >
             <TailSpin height="15" width="15" radius="9" />
