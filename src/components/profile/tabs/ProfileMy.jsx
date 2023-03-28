@@ -92,6 +92,14 @@ const MyProfile = inject(
       firstName && lastName && userName && profileStore.profile.birthday,
     );
   
+    const handleValidateInput = (event) => {
+      const regex = /^[a-zA-Z0-9_]*$/; // regex to only allow letters, numbers, and underscores
+      const value = event.target.value;
+  
+      if (regex.test(value)) {
+        storeProfile.setUserName(value);
+      }
+    };
 
     return (
       <Box ml={isMobile ? 0 : 4}>
@@ -167,9 +175,7 @@ const MyProfile = inject(
                   label="Username"
                   helperText={!userName ? 'Incorrect username' : ''}
                   value={userName || ''}
-                  onChange={(event) => {
-                    setUserName(event.target.value)
-                  }}
+                  onChange={handleValidateInput}
                 />
               </Box>
             </Grid>
