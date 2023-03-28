@@ -275,15 +275,6 @@ const AccountCreationForm = observer(({ storeAuth }) => {
     storeProfile.setBirthday(data);
   };
 
-  const handleValidateInput = (event) => {
-    const regex = /^[a-zA-Z0-9_]*$/; // regex to only allow letters, numbers, and underscores
-    const value = event.target.value;
-
-    if (regex.test(value)) {
-      storeProfile.setUserName(value);
-    }
-  };
-
   // Fetch API (optional)
   useEffect(() => {
     if (debouncedValue !== '') {
@@ -292,7 +283,7 @@ const AccountCreationForm = observer(({ storeAuth }) => {
         http
           .post(PATH_URL_PROFILE_CHECK_USERNAME, {
             username: debouncedValue,
-            first_name: storeProfile.profile.name,
+            first_name: stor - eProfile.profile.name,
             last_name: storeProfile.profile.last_name,
           })
           .then((res) => {
@@ -309,6 +300,26 @@ const AccountCreationForm = observer(({ storeAuth }) => {
   }, [debouncedValue]);
 
   console.log(loading);
+  const handleValidateInput = (event) => {
+    const regex = /^[a-zA-Z0-9_]*$/; // regex to only allow letters, numbers, and underscores
+    const value = event.target.value;
+
+    if (regex.test(value)) {
+      storeProfile.setUserName(value);
+    }
+  };
+
+  function CommonKeyPressIsAlpha(e) {
+    e = e || event;
+    var keypressed = String.fromCharCode(e.keyCode || e.which);
+    var matched = /[a-z]/i.test(keypressed);
+    document.getElementById('report').innerHTML = matched
+      ? ''
+      : 'Invalid character [<b>' +
+        (keypressed || 'unknown') +
+        "</b>]. Valid input here: 'a-z' and/or 'A-Z'";
+    return matched;
+  }
 
   return (
     <Box display="flex" justifyContent="center" flexDirection="column" m={4}>
@@ -324,6 +335,7 @@ const AccountCreationForm = observer(({ storeAuth }) => {
           onChange={(event) => {
             storeProfile.setName(event.target.value);
           }}
+          // onKeyPress={(e) => CommonKeyPressIsAlpha(e)}
         />
       </Box>
       <Box mb={2}>
@@ -354,7 +366,12 @@ const AccountCreationForm = observer(({ storeAuth }) => {
           }
           value={storeProfile.profile.username}
           onChange={handleValidateInput}
+          onKeyPress={(e) => CommonKeyPressIsAlpha(e)}
         />
+        <span
+          id="report"
+          style={{ color: '#C81C2E', fontSize: 10, marginTop: 2 }}
+        ></span>
         {loading === 'PENDING' && (
           <div
             style={{
