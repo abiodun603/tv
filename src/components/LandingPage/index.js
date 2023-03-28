@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React from 'react';
 import Link from 'next/link';
 import { useTheme } from '@material-ui/core/styles';
@@ -67,7 +67,13 @@ const LandingPage = inject('auth')(
         {/* Introduce Mobile Apps */}
         <div className="isabitv-intro">
           <div className="img">
-            <Image src="/image/bg_intro.png" alt="intro" width='100' height='100' style={{width: 'auto', height: 'auto'}} />
+            <Image
+              src="/image/bg_intro.png"
+              alt="intro"
+              width={500}
+              height={500}
+              style={{ width: 'auto', height: 'auto' }}
+            />
           </div>
           <div className="desc m-auto">
             <div className="title">
@@ -88,7 +94,9 @@ const LandingPage = inject('auth')(
                   src="/image/market/app_store.svg"
                   alt=""
                   className="img-fluid"
-                  width='100' height='100' style={{width: 'auto', height: 'auto'}}
+                  width="100"
+                  height="100"
+                  style={{ width: 'auto', height: 'auto' }}
                 />
               </Link>
               <Link
@@ -98,7 +106,9 @@ const LandingPage = inject('auth')(
                 <Image
                   src="/image/market/app_google.svg"
                   alt=""
-                  width='100' height='100' style={{width: 'auto', height: 'auto'}}
+                  width="100"
+                  height="100"
+                  style={{ width: 'auto', height: 'auto' }}
                   className="img-fluid"
                 />
               </Link>
