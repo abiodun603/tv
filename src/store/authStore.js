@@ -102,10 +102,7 @@ class AuthStore extends BasicStore {
         phone: authUser.phone,
       }); 
 
-
       const isRegisteredUser = res.data.success;
-      
-
       
       if (isRegisteredUser) {
         const response = await http.get('profile');

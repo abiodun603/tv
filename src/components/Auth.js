@@ -275,12 +275,12 @@ const AccountCreationForm = observer(({ storeAuth }) => {
     storeProfile.setBirthday(data);
   };
 
-  const handleValidateInput = () => {
+  const handleValidateInput = (event) => {
     const regex = /^[a-zA-Z0-9_]*$/; // regex to only allow letters, numbers, and underscores
     const value = event.target.value;
 
     if (regex.test(value)) {
-      setInputValue(value);
+      storeProfile.setUserName(value);
     }
   };
 
@@ -353,15 +353,7 @@ const AccountCreationForm = observer(({ storeAuth }) => {
             !storeProfile.validated.username ? 'Incorrect username' : ''
           }
           value={storeProfile.profile.username}
-          onChange={(event) => {
-            storeProfile.setUserName(event.target.value);
-            const regex = /^[a-zA-Z0-9_]*$/; // regex to only allow letters, numbers, and underscores
-            const value = event.target.value;
-
-            if (regex.test(value)) {
-              storeProfile.setUserName(value);
-            }
-          }}
+          onChange={handleValidateInput}
         />
         {loading === 'PENDING' && (
           <div

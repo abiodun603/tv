@@ -164,6 +164,7 @@ class ProfileStore extends BasicStore {
       });
   }
 
+
   @action.bound
   updateUser() {
     debugger;
