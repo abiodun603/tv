@@ -69,7 +69,7 @@ export const CustomDatePicker = withStyles({
   },
 })((props) => (
   <MuiPickersUtilsProvider utils={DateFnsUtils}>
-    <KeyboardDatePicker maxDate={moment().subtract(15, 'years')} {...props} />
+    <KeyboardDatePicker maxDate={moment().subtract(13, 'years')} {...props} />
   </MuiPickersUtilsProvider>
 ));
 
