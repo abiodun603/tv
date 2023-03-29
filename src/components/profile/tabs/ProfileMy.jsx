@@ -1,8 +1,12 @@
-'use client'
+'use client';
 import React, { useState, useEffect } from 'react';
 import { inject, observer } from 'mobx-react';
 import classNames from 'classnames';
 import { Spinner } from 'react-bootstrap';
+import 'react-phone-number-input/style.css';
+import PhoneInput from 'react-phone-number-input';
+// import { PATH_URL_COUNTRIES } from '../../../constants/API';
+
 import { MenuItem, Grid, makeStyles, useMediaQuery } from '@material-ui/core';
 
 import { Box } from '../../widgets/Box';
@@ -37,6 +41,7 @@ const MyProfile = inject(
 )(
   observer((props) => {
     const { profileStore, signOut } = props.auth;
+    const [value, setValue] = useState();
     const [removeAccountDialog, setRemoveAccountDialog] = useState(false);
     const [logoutDialog, setLogoutDialog] = useState(false);
     const [userName, setUserName] = useState('');
@@ -91,15 +96,21 @@ const MyProfile = inject(
     const isDataValid = Boolean(
       firstName && lastName && userName && profileStore.profile.birthday,
     );
-  
+
     const handleValidateInput = (event) => {
       const regex = /^[a-zA-Z0-9_]*$/; // regex to only allow letters, numbers, and underscores
       const value = event.target.value;
-  
+
       if (regex.test(value)) {
         storeProfile.setUserName(value);
       }
     };
+
+    const countries = [
+      { value: 'AF', label: 'Afghanistan' },
+      { value: 'AL', label: 'Albania' },
+      { value: 'DZ', label: 'Algeria' },
+    ];
 
     return (
       <Box ml={isMobile ? 0 : 4}>
@@ -145,7 +156,7 @@ const MyProfile = inject(
                   helperText={!firstName ? 'Incorrect name' : ''}
                   value={firstName || ''}
                   onChange={(event) => {
-                    setFirstName(event.target.value)
+                    setFirstName(event.target.value);
                   }}
                 />
               </Box>
@@ -161,7 +172,7 @@ const MyProfile = inject(
                   helperText={!lastName ? 'Incorrect last name' : ''}
                   value={lastName || ''}
                   onChange={(event) => {
-                    setLastName(event.target.value)
+                    setLastName(event.target.value);
                   }}
                 />
               </Box>
@@ -209,19 +220,18 @@ const MyProfile = inject(
               </Box>
             </Grid>
             <Grid item xs={12} md={8}>
-              <Box mb={2}>
-                <CustomTextField
+              <Box style={{borderBottom: '1px solid #D3D3D3'}} mb={2}>
+                <label for="username" style={{fontSize: '11px', opacity: '90%'}}>Phone Number</label>
+                <PhoneInput
+                className={"input-phone-number"}
                   id="phone"
                   fullWidth
                   error={!profileStore.validated.phone}
                   helperText={
                     !profileStore.validated.phone ? 'Incorrect phone' : ''
                   }
-                  label="Phone number"
                   value={profileStore.profile.phone || ''}
-                  onChange={(event) => {
-                    profileStore.setPhone(event.target.value);
-                  }}
+                  onChange={profileStore.setPhone}
                 />
               </Box>
             </Grid>
@@ -272,12 +282,19 @@ const MyProfile = inject(
                     profileStore.setCountry(event.target.value)
                   }
                 >
-                  {props.countries.list.map((country)  => {
-                    return <MenuItem key={country.id} value={country.shortcode}>
-                      {country.title}
-                    </MenuItem>
+                  {props.countries.list.map((country) => {
+                    return (
+                      <MenuItem key={country.id} value={country.shortcode}>
+                        {country.name}
+                      </MenuItem>
+                    );
                   })}
-                  
+                  {/*<option value="">--Please choose a country--</option>
+                  {countries.map((country) => (
+                    <option key={country.id} value={country.value}>
+                      {country.label}
+                    </option>
+                  ))}*/}
                 </CustomTextField>
               </Box>
             </Grid>
