@@ -145,14 +145,13 @@ const MyProfile = inject(
             md={6}
             className={classNames(classes.gridContainer, classes.rBorder)}
           >
-            <Grid item xs={12} sm={12} md={6}>
+            <Grid item xs={12}>
               <Box mr={isMobile ? 0 : 2} mb={2}>
                 <CustomTextField
                   id="name"
                   fullWidth
                   error={!firstName}
                   label="Name"
-                  className="mt-3"
                   helperText={!firstName ? 'Incorrect name' : ''}
                   value={firstName || ''}
                   onChange={(event) => {
@@ -161,14 +160,13 @@ const MyProfile = inject(
                 />
               </Box>
             </Grid>
-            <Grid item xs={12} sm={12} md={6}>
+            <Grid item xs={12}>
               <Box mb={2}>
                 <CustomTextField
                   id="last_name"
                   fullWidth
                   error={!lastName}
                   label="Last Name"
-                  className="mt-3"
                   helperText={!lastName ? 'Incorrect last name' : ''}
                   value={lastName || ''}
                   onChange={(event) => {
@@ -190,7 +188,7 @@ const MyProfile = inject(
                 />
               </Box>
             </Grid>
-            <Grid item xs={12} md={8}>
+            <Grid item xs={12}>
               <Box mb={2}>
                 <CustomTextField
                   id="email"
@@ -207,23 +205,14 @@ const MyProfile = inject(
                 />
               </Box>
             </Grid>
-            <Grid item xs={12} md={4} className={classes.gridFlex}>
-              <Box mb={2} ml={isMobile ? 0 : 2}>
-                <Toggler
-                  id="email-show"
-                  title="Show On/Off"
-                  checked={Boolean(profileStore.profile.display_email)}
-                  onChange={(event) => {
-                    profileStore.setShowEmail(event.target.checked);
-                  }}
-                />
-              </Box>
-            </Grid>
+
             <Grid item xs={12} md={8}>
-              <Box style={{borderBottom: '1px solid #D3D3D3'}} mb={2}>
-                <label for="username" style={{fontSize: '11px', opacity: '90%'}}>Phone Number</label>
+              <Box mb={2} style={{ borderBottom: '1px solid #D3D3D3' }}>
+                <label for="phone" style={{ fontSize: '11px', opacity: '90%' }}>
+                  Phone Number
+                </label>
                 <PhoneInput
-                className={"input-phone-number"}
+                  className={'input-phone-number'}
                   id="phone"
                   fullWidth
                   error={!profileStore.validated.phone}
@@ -235,18 +224,7 @@ const MyProfile = inject(
                 />
               </Box>
             </Grid>
-            <Grid item xs={12} md={4} className={classes.gridFlex}>
-              <Box mb={2} ml={isMobile ? 0 : 2}>
-                <Toggler
-                  id="phone-show"
-                  title="Show On/Off"
-                  checked={Boolean(profileStore.profile.display_phone)}
-                  onChange={(event) => {
-                    profileStore.setShowPhone(event.target.checked);
-                  }}
-                />
-              </Box>
-            </Grid>
+
             <Grid item xs={12}>
               <Box mb={2}>
                 <CustomDatePicker
@@ -270,7 +248,7 @@ const MyProfile = inject(
                 />
               </Box>
             </Grid>
-            <Grid item xs={12} md={4}>
+            <Grid item xs={12} md={8}>
               <Box mb={2}>
                 <CustomTextField
                   id="select-country"
@@ -298,8 +276,8 @@ const MyProfile = inject(
                 </CustomTextField>
               </Box>
             </Grid>
-            <Grid item xs={12} md={4}>
-              <Box mb={2} ml={isMobile ? 0 : 2}>
+            <Grid item xs={12} md={8}>
+              <Box mb={4}>
                 <CustomTextField
                   id="city"
                   fullWidth
@@ -311,7 +289,7 @@ const MyProfile = inject(
                 />
               </Box>
             </Grid>
-            <Grid item xs={12} md={4} className={classes.gridFlex}>
+            {/*<Grid item xs={12} md={4} className={classes.gridFlex}>
               <Box mb={2} ml={isMobile ? 0 : 2}>
                 <Toggler
                   id="location-show"
@@ -322,8 +300,8 @@ const MyProfile = inject(
                   }}
                 />
               </Box>
-            </Grid>
-            <Grid item xs={12}>
+                </Grid>*/}
+            {/*<Grid item xs={12}>
               <Box mb={2}>
                 <MultiSelect
                   loading={props.languages.loading}
@@ -336,6 +314,29 @@ const MyProfile = inject(
                     value: item.id,
                     label: item.name,
                   }))}
+                />
+              </Box>
+                </Grid>*/}
+
+            <Grid item xs={12}>
+              <Box mb={2}>
+                {profileStore.profile.email ? (
+                  <ChangePassword />
+                ) : (
+                  <div style={{ height: '54px' }} />
+                )}
+              </Box>
+            </Grid>
+
+            <Grid item xs={12}>
+              <Box mb={2}>
+                <RemoveAccount
+                  onClick={toggleRemoveAccount}
+                  dialog={{
+                    opened: removeAccountDialog,
+                    onClose: toggleRemoveAccount.bind(this),
+                    onSubmit: handleSubmitRemoveAccount.bind(this),
+                  }}
                 />
               </Box>
             </Grid>
@@ -351,16 +352,6 @@ const MyProfile = inject(
                 >
                   <Box mb={2}>
                     <Box fontWeight="500">Social Media</Box>
-                  </Box>
-                  <Box>
-                    <Toggler
-                      id="social-show"
-                      title="Show On/Off"
-                      checked={Boolean(profileStore.profile.display_social)}
-                      onChange={(event) => {
-                        profileStore.setShowSocial(event.target.checked);
-                      }}
-                    />
                   </Box>
                 </Box>
                 <CustomTextField
@@ -400,16 +391,125 @@ const MyProfile = inject(
                 />
               </Box>
             </Grid>
-            <Grid item xs={12}>
-              <Box mb={2}>
-                {profileStore.profile.email ? (
-                  <ChangePassword />
-                ) : (
-                  <div style={{ height: '54px' }} />
-                )}
+
+            <Box my={4}>
+              <Box fontWeight="500">Security & Authentication</Box>
+            </Box>
+
+            <Grid item xs={12} style={{ marginBottom: '20px' }}>
+              <Box
+                display="flex"
+                alignItems="center"
+                justifyContent="space-between"
+                backgroundColor="blue"
+              >
+                <Box>
+                  <Box>2-Step Authentication</Box>
+                </Box>
+                <Box>
+                  <Toggler
+                    
+                    title="Show On/Off"
+                    checked={Boolean(true)}
+                    
+                  />
+                </Box>
               </Box>
             </Grid>
-            <Grid item xs={12}>
+
+            <Grid item xs={12} style={{ marginBottom: '20px' }}>
+              <Box
+                display="flex"
+                alignItems="center"
+                justifyContent="space-between"
+                backgroundColor="blue"
+              >
+                <Box>
+                  <Box>Display my contact email</Box>
+                </Box>
+                <Box>
+                  <Toggler
+                    id="email-show"
+                    title="Show On/Off"
+                    checked={Boolean(profileStore.profile.display_email)}
+                    onChange={(event) => {
+                      profileStore.setShowEmail(event.target.checked);
+                    }}
+                  />
+                </Box>
+              </Box>
+            </Grid>
+
+            <Grid item xs={12} style={{ marginBottom: '20px' }}>
+              <Box
+                display="flex"
+                alignItems="center"
+                justifyContent="space-between"
+                backgroundColor="blue"
+              >
+                <Box>
+                  <Box>Display my contact phone number</Box>
+                </Box>
+                <Box>
+                  <Toggler
+                    id="phone-show"
+                    title="Show On/Off"
+                    checked={Boolean(profileStore.profile.display_phone)}
+                    onChange={(event) => {
+                      profileStore.setShowPhone(event.target.checked);
+                    }}
+                  />
+                </Box>
+              </Box>
+            </Grid>
+
+            <Grid item xs={12} style={{ marginBottom: '20px' }}>
+              <Box
+                display="flex"
+                alignItems="center"
+                justifyContent="space-between"
+                backgroundColor="blue"
+              >
+                <Box>
+                  <Box>Display my location</Box>
+                </Box>
+                <Box>
+                  <Toggler
+                    id="location-show"
+                    title="Show On/Off"
+                    checked={Boolean(profileStore.profile.display_location)}
+                    onChange={(event) => {
+                      profileStore.setShowLocation(event.target.checked);
+                    }}
+                  />
+                </Box>
+              </Box>
+            </Grid>
+
+            <Grid item xs={12} mb={2} style={{ marginBottom: '20px' }}>
+              <Box
+                display="flex"
+                alignItems="center"
+                justifyContent="space-between"
+                backgroundColor="blue"
+              >
+                <Box>
+                  <Box>Display my social media</Box>
+                </Box>
+                <Box>
+                  <Toggler
+                    id="social-show"
+                    title="Show On/Off"
+                    checked={Boolean(profileStore.profile.display_social)}
+                    onChange={(event) => {
+                      profileStore.setShowSocial(event.target.checked);
+                    }}
+                  />
+                </Box>
+              </Box>
+            </Grid>
+            
+            <Grid item xs={6}>
               <Box mb={2}>
                 <ButtonText
                   onClick={toggleLogoutDialog}
@@ -425,18 +525,6 @@ const MyProfile = inject(
                   opened={logoutDialog}
                   onClose={toggleLogoutDialog}
                   onSubmit={signOut}
-                />
-              </Box>
-            </Grid>
-            <Grid item xs={12}>
-              <Box mb={2}>
-                <RemoveAccount
-                  onClick={toggleRemoveAccount}
-                  dialog={{
-                    opened: removeAccountDialog,
-                    onClose: toggleRemoveAccount.bind(this),
-                    onSubmit: handleSubmitRemoveAccount.bind(this),
-                  }}
                 />
               </Box>
             </Grid>
