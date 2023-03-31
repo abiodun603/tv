@@ -256,8 +256,11 @@ const MyProfile = inject(
                 >
                   {props.countries.list.map((country) => {
                     return (
-                      <MenuItem key={country.id} value={country.shortcode}>
-                        {country.name.common}
+                      <MenuItem
+                        key={country.idd.root}
+                        value={country.name.common}
+                      >
+                        {`${country.flag} ${country.name.common}`}
                       </MenuItem>
                     );
                   })}

@@ -37,7 +37,7 @@ import { Chip } from '@mui/material';
 import { BiCheck } from 'react-icons/bi';
 import { MdCancel } from 'react-icons/md';
 import { TailSpin } from 'react-loader-spinner';
-import { ReCAPTCHA } from 'react-google-recaptcha';
+import ReCAPTCHA from 'react-google-recaptcha';
 const AuthContainer = styled.div`
   width: 612px;
   position: absolute;
@@ -323,7 +323,19 @@ const AccountCreationForm = observer(({ storeAuth }) => {
     return matched;
   }
 
-  const onChange = () => {};
+  const onReCAPTCHAChange = (captchaCode) => {
+    // If the reCAPTCHA code is null or undefined indicating that
+    // the reCAPTCHA was expired then return early
+    if (!captchaCode) {
+      return;
+    }
+    // Else reCAPTCHA was executed successfully so proceed with the
+    // alert
+    alert(`Hey, ${email}`);
+    // Reset the reCAPTCHA so that it can be executed again if user
+    // submits another email.
+    recaptchaRef.current.reset();
+  };
 
   return (
     <Box display="flex" justifyContent="center" flexDirection="column" m={4}>
@@ -429,10 +441,7 @@ const AccountCreationForm = observer(({ storeAuth }) => {
             })}
         </Box>
       </Box>
-      <ReCAPTCHA
-        sitekey="6LfHGkglAAAAAAKWgo5SqZQGLNAJgnXqsDnYVCkP"
-        onChange={onChange}
-      />
+
       <Box mb={4}>
         <CustomDatePicker
           id="birthday"
@@ -442,6 +451,14 @@ const AccountCreationForm = observer(({ storeAuth }) => {
           helperText={!storeProfile.validated.birthday ? 'Incorrect Date' : ''}
           value={storeProfile.profile.birthday}
           onChange={handleChangeBirthday}
+        />
+      </Box>
+      <Box mb={4}>
+        <ReCAPTCHA
+          ref={recaptchaRef}
+          sitekey="6LfHGkglAAAAAAKWgo5SqZQGLNAJgnXqsDnYVCkP"
+          onChange={onReCAPTCHAChange}
+          size="visible"
         />
       </Box>
 

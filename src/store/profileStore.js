@@ -91,9 +91,10 @@ class ProfileStore extends BasicStore {
 
   @action.bound
   createUser() {
-    debugger;
+    // debugger;
     let profile = toJS(this.profile);
-    debugger;
+    console.log(profile);
+    // debugger;
     if (!valText(profile.username)) {
       this.validated.username = false;
       return;
@@ -121,7 +122,7 @@ class ProfileStore extends BasicStore {
       // profile/check-username
 
       .then((res) => {
-        debugger;
+        // debugger;
 
         if (res.data.success) {
           runInAction(() => {
@@ -163,7 +164,6 @@ class ProfileStore extends BasicStore {
         });
       });
   }
-
 
   @action.bound
   updateUser() {
