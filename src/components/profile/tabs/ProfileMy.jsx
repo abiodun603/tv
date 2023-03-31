@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import { Spinner } from 'react-bootstrap';
 import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input';
+
 // import { PATH_URL_COUNTRIES } from '../../../constants/API';
 
 import { MenuItem, Grid, makeStyles, useMediaQuery } from '@material-ui/core';
@@ -12,6 +13,8 @@ import { MenuItem, Grid, makeStyles, useMediaQuery } from '@material-ui/core';
 import { Box } from '../../widgets/Box';
 import ChangePassword from '../../dialogs/ChangePassword';
 import ConfirmDialog from '../../dialogs/Confirm';
+import ManageAccountDialog from '../../dialogs/ManageAccount';
+
 import {
   CustomDatePicker,
   CustomTextField,
@@ -20,6 +23,9 @@ import {
 import { ButtonContainer, ButtonText } from '../../widgets/Button';
 import Toggler from './../../Toggler/Toggler';
 import RemoveAccount from '../buttons/RemoveAccount';
+
+import SettingsIcon from '@mui/icons-material/Settings';
+import CloseIcon from '@mui/icons-material/Close';
 
 const useStyles = makeStyles((theme) => ({
   gridContainer: {
@@ -41,7 +47,6 @@ const MyProfile = inject(
 )(
   observer((props) => {
     const { profileStore, signOut } = props.auth;
-    const [value, setValue] = useState();
     const [removeAccountDialog, setRemoveAccountDialog] = useState(false);
     const [logoutDialog, setLogoutDialog] = useState(false);
     const [userName, setUserName] = useState('');
@@ -106,11 +111,11 @@ const MyProfile = inject(
       }
     };
 
-    const countries = [
-      { value: 'AF', label: 'Afghanistan' },
-      { value: 'AL', label: 'Albania' },
-      { value: 'DZ', label: 'Algeria' },
-    ];
+    const [modal, setModal] = useState(false);
+
+    const toggleModal = () => {
+      setModal(!modal);
+    };
 
     return (
       <Box ml={isMobile ? 0 : 4}>
@@ -329,17 +334,51 @@ const MyProfile = inject(
             </Grid>
 
             <Grid item xs={12}>
-              <Box mb={2}>
-                <RemoveAccount
-                  onClick={toggleRemoveAccount}
-                  dialog={{
-                    opened: removeAccountDialog,
-                    onClose: toggleRemoveAccount.bind(this),
-                    onSubmit: handleSubmitRemoveAccount.bind(this),
-                  }}
-                />
+              <Box
+                mb={2}
+                style={{
+                  fontSize: '12px',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  gap: '5px',
+                  alignItems: 'center',
+                }}
+                onClick={toggleModal}
+              >
+                <SettingsIcon style={{ fontSize: 'medium' }} />
+                MANAGE ACCOUNT
               </Box>
             </Grid>
+
+            {modal && (
+              <Grid
+                item
+                xs={12}
+                style={{ backgroundColor: '#f2f2eb', borderRadius: '5px' }}
+              >
+                <Box mb={2} mt={2} mx={3}>
+                  <RemoveAccount
+                    onClick={toggleRemoveAccount}
+                    dialog={{
+                      opened: removeAccountDialog,
+                      onClose: toggleRemoveAccount.bind(this),
+                      onSubmit: handleSubmitRemoveAccount.bind(this),
+                    }}
+                  />
+                  <div style={{ display: 'flex', justifyContent: 'right' }}>
+                    <div
+                      style={{
+                        cursor: 'pointer',
+                      }}
+                    >
+                      <p onClick={toggleModal} style={{ fontSize: '15px' }}>
+                        Close
+                      </p>
+                    </div>
+                  </div>
+                </Box>
+              </Grid>
+            )}
           </Grid>
           <Grid container item xs={12} md={6} className={classes.gridContainer}>
             <Grid item xs={12}>
@@ -407,12 +446,7 @@ const MyProfile = inject(
                   <Box>2-Step Authentication</Box>
                 </Box>
                 <Box>
-                  <Toggler
-                    
-                    title="Show On/Off"
-                    checked={Boolean(true)}
-                    
-                  />
+                  <Toggler title="Show On/Off" checked={Boolean(true)} />
                 </Box>
               </Box>
             </Grid>
@@ -508,7 +542,7 @@ const MyProfile = inject(
                 </Box>
               </Box>
             </Grid>
-            
+
             <Grid item xs={6}>
               <Box mb={2}>
                 <ButtonText
