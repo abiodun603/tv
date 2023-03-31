@@ -22,9 +22,11 @@ class CountriesStore extends BasicStore {
     this.loading = true;
 
     http
-      .get('https://restcountries.com/v3.1/all')
+      .get(PATH_URL_COUNTRIES)
       .then((res) => {
         const data = res.data;
+        debugger;
+        console.log(data);
         runInAction(() => {
           this.list = data || [];
           this.loading = false;
