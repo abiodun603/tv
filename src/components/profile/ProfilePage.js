@@ -218,7 +218,7 @@ const ProfilePage = inject('profile')(
       },
     } = props;
     const theme = useTheme();
-    const [profileId, setProfileId] = useState(storeProfile.social.id);
+    const [profileId, setProfileId] = useState(storeProfile?.social?.id);
     const classes = useStyles();
     const [tabIndex, setTabIndex] = useState(0);
     const isMobile = useMediaQuery('(max-width:767px)');
@@ -274,19 +274,23 @@ const ProfilePage = inject('profile')(
             <Box color={theme.palette.grey.default} fontSize={12}>
               Videos
             </Box>
-            <Box textAlign="center">{storeProfile.social.count_videos}</Box>
+            <Box textAlign="center">{storeProfile?.social?.count_videos}</Box>
           </Box>
           <Box>
             <Box color={theme.palette.grey.default} fontSize={12}>
               Followers
             </Box>
-            <Box textAlign="center">{storeProfile.social.count_followers}</Box>
+            <Box textAlign="center">
+              {storeProfile?.social?.count_followers}
+            </Box>
           </Box>
           <Box>
             <Box color={theme.palette.grey.default} fontSize={12}>
               Following
             </Box>
-            <Box textAlign="center">{storeProfile.social.count_following}</Box>
+            <Box textAlign="center">
+              {storeProfile?.social?.count_following}
+            </Box>
           </Box>
         </Box>
         {/* <Link href="/upload">

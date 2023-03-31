@@ -37,6 +37,7 @@ import { Chip } from '@mui/material';
 import { BiCheck } from 'react-icons/bi';
 import { MdCancel } from 'react-icons/md';
 import { TailSpin } from 'react-loader-spinner';
+import { ReCAPTCHA } from 'react-google-recaptcha';
 const AuthContainer = styled.div`
   width: 612px;
   position: absolute;
@@ -271,6 +272,7 @@ const AccountCreationForm = observer(({ storeAuth }) => {
   const debouncedValue = useDebounce(storeProfile.profile.username, 3000);
   const [avail, setAvail] = useState([]);
   const [loading, setLoading] = useState('IDLE');
+  const recaptchaRef = React.createRef();
   const handleChangeBirthday = (data) => {
     storeProfile.setBirthday(data);
   };
@@ -283,7 +285,7 @@ const AccountCreationForm = observer(({ storeAuth }) => {
         http
           .post(PATH_URL_PROFILE_CHECK_USERNAME, {
             username: debouncedValue,
-            first_name: stor - eProfile.profile.name,
+            first_name: storeProfile.profile.name,
             last_name: storeProfile.profile.last_name,
           })
           .then((res) => {
@@ -320,6 +322,8 @@ const AccountCreationForm = observer(({ storeAuth }) => {
         "</b>]. Valid input here: 'a-z' and/or 'A-Z'";
     return matched;
   }
+
+  const onChange = () => {};
 
   return (
     <Box display="flex" justifyContent="center" flexDirection="column" m={4}>
@@ -382,7 +386,7 @@ const AccountCreationForm = observer(({ storeAuth }) => {
               top: '99%',
             }}
           >
-            <TailSpin height="15" width="15" radius="9" />
+            <TailSpin height="25" width="25" radius="9" />
           </div>
         )}
         {avail?.length > 0 && (
@@ -425,6 +429,10 @@ const AccountCreationForm = observer(({ storeAuth }) => {
             })}
         </Box>
       </Box>
+      <ReCAPTCHA
+        sitekey="6LfHGkglAAAAAAKWgo5SqZQGLNAJgnXqsDnYVCkP"
+        onChange={onChange}
+      />
       <Box mb={4}>
         <CustomDatePicker
           id="birthday"
@@ -436,6 +444,7 @@ const AccountCreationForm = observer(({ storeAuth }) => {
           onChange={handleChangeBirthday}
         />
       </Box>
+
       {storeProfile.loading ? (
         <Box display="flex" justifyContent="center" mb={4}>
           <Spinner color="primary" />

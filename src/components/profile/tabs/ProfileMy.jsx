@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { useState, useEffect } from 'react';
 import { inject, observer } from 'mobx-react';
 import classNames from 'classnames';
@@ -58,7 +58,7 @@ const MyProfile = inject(
       setUserName(userName);
       setFirstName(name);
       setLastName(lastName);
-    }, []);
+    }, [profileStore.profile, props.countries, props.languages]);
 
     const toggleRemoveAccount = () => {
       setRemoveAccountDialog(!removeAccountDialog);
@@ -91,16 +91,16 @@ const MyProfile = inject(
     const isDataValid = Boolean(
       firstName && lastName && userName && profileStore.profile.birthday,
     );
-  
+
     const handleValidateInput = (event) => {
       const regex = /^[a-zA-Z0-9_]*$/; // regex to only allow letters, numbers, and underscores
       const value = event.target.value;
-  
+
       if (regex.test(value)) {
         storeProfile.setUserName(value);
       }
     };
-
+    console.log(props.countries.list);
     return (
       <Box ml={isMobile ? 0 : 4}>
         <Grid container>
@@ -145,7 +145,7 @@ const MyProfile = inject(
                   helperText={!firstName ? 'Incorrect name' : ''}
                   value={firstName || ''}
                   onChange={(event) => {
-                    setFirstName(event.target.value)
+                    setFirstName(event.target.value);
                   }}
                 />
               </Box>
@@ -161,7 +161,7 @@ const MyProfile = inject(
                   helperText={!lastName ? 'Incorrect last name' : ''}
                   value={lastName || ''}
                   onChange={(event) => {
-                    setLastName(event.target.value)
+                    setLastName(event.target.value);
                   }}
                 />
               </Box>
@@ -272,12 +272,13 @@ const MyProfile = inject(
                     profileStore.setCountry(event.target.value)
                   }
                 >
-                  {props.countries.list.map((country)  => {
-                    return <MenuItem key={country.id} value={country.shortcode}>
-                      {country.title}
-                    </MenuItem>
+                  {props.countries.list.map((country) => {
+                    return (
+                      <MenuItem key={country.id} value={country.shortcode}>
+                        {country.name.common}
+                      </MenuItem>
+                    );
                   })}
-                  
                 </CustomTextField>
               </Box>
             </Grid>
