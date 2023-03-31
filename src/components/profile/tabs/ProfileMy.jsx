@@ -13,7 +13,6 @@ import { MenuItem, Grid, makeStyles, useMediaQuery } from '@material-ui/core';
 import { Box } from '../../widgets/Box';
 import ChangePassword from '../../dialogs/ChangePassword';
 import ConfirmDialog from '../../dialogs/Confirm';
-import ManageAccountDialog from '../../dialogs/ManageAccount';
 
 import {
   CustomDatePicker,
