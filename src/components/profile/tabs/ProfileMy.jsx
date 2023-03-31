@@ -68,7 +68,7 @@ const MyProfile = inject(
       setUserName(userName);
       setFirstName(name);
       setLastName(lastName);
-    }, []);
+    }, [profileStore.profile, props.countries, props.languages]);
 
     const toggleRemoveAccount = () => {
       setRemoveAccountDialog(!removeAccountDialog);
@@ -110,6 +110,7 @@ const MyProfile = inject(
         storeProfile.setUserName(value);
       }
     };
+    console.log(props.countries.list);
 
     const [modal, setModal] = useState(false);
 
@@ -267,17 +268,14 @@ const MyProfile = inject(
                 >
                   {props.countries.list.map((country) => {
                     return (
-                      <MenuItem key={country.id} value={country.shortcode}>
-                        {country.name}
+                      <MenuItem
+                        key={country.idd.root}
+                        value={country.name.common}
+                      >
+                        {`${country.flag} ${country.name.common}`}
                       </MenuItem>
                     );
                   })}
-                  {/*<option value="">--Please choose a country--</option>
-                  {countries.map((country) => (
-                    <option key={country.id} value={country.value}>
-                      {country.label}
-                    </option>
-                  ))}*/}
                 </CustomTextField>
               </Box>
             </Grid>

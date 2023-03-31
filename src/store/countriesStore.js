@@ -12,20 +12,21 @@ class CountriesStore extends BasicStore {
   @observable loading = false;
   @observable list = [];
 
-  @action 
+  @action
   load() {
     const token = cookies.get('token');
+    console.log(token);
 
     http.setToken(token);
 
     this.loading = true;
 
     http
-      .get(PATH_URL_COUNTRIES)
+      .get('https://restcountries.com/v3.1/all')
       .then((res) => {
         const data = res.data;
-        debugger
-        console.log(data)
+        // debugger;
+        console.log(data);
         runInAction(() => {
           this.list = data || [];
           this.loading = false;
