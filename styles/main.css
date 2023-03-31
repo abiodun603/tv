@@ -8,6 +8,12 @@ html {
   font-family: 'Roboto Serif', 'Helvetica', 'Arial', sans-serif !important;
 }
 
+.input-phone-number input{
+  outline: none !important;
+  border:none !important;
+  box-shadow: none !important;
+}
+
 *:focus {
   outline: none !important;
 }
