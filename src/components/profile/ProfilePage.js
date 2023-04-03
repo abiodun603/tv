@@ -32,6 +32,7 @@ import Popper from '@mui/material/Popper';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import Stack from '@mui/material/Stack';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -71,15 +72,15 @@ function a11yProps(index) {
 
 const TAB_MENU = [
   { title: 'Uploads', icon: UploadIcon, disabled: false },
-  // { title: 'Subscription', icon: SubscriptionsIcon, disabled: true },
-  // { title: 'Payment methods', icon: PaymentIcon, disabled: true },
-  // { title: 'Parental control', icon: SupervisorAccountIcon, disabled: true },
+  { title: 'Subscription', icon: SubscriptionsIcon, disabled: true },
+  { title: 'Payment methods', icon: PaymentIcon, disabled: true },
+  { title: 'Parental control', icon: SupervisorAccountIcon, disabled: true },
   {
     title: 'Settings',
     icon: SettingsIcon,
     disabled: false,
   },
-  // { title: 'Active users', icon: VerifiedUserIcon, disabled: true },
+  { title: 'Active users', icon: VerifiedUserIcon, disabled: true },
 ];
 
 function TabPanel(props) {
@@ -108,6 +109,7 @@ const MenuListComposition = () => {
   };
 
   const handleClose = (event) => {
+    const uploadPageTitle = event.target.innerText
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
     }
@@ -151,9 +153,13 @@ const MenuListComposition = () => {
             backgroundColor: '#2EBC58',
             paddingHorizontal: 30,
             paddingVertical: 30,
+            display: 'flex',
+            gap: '4px'
           }}
+          // disabled = {disabled}
         >
           Content Upload
+          <ArrowDropDownIcon style={{fontSize: 'medium'}}/>
         </Button>
         <Popper
           open={open}
@@ -182,14 +188,14 @@ const MenuListComposition = () => {
                     style={{ background: '#FFFFFF' }}
                   >
                     <MenuItem onClick={handleClose}>
-                      <Link href="/upload?music">Music</Link>
+                      <Link href="/upload?music">Videos</Link>
                     </MenuItem>
 
                     <MenuItem onClick={handleClose}>
-                      <Link href="/upload?music">Video</Link>
+                      <Link href="/upload?music">Music Video</Link>
                     </MenuItem>
 
-                    <MenuItem onClick={handleClose}>
+                    <MenuItem disabled onClick={handleClose}>
                       <Link href="/upload?music">News</Link>
                     </MenuItem>
 
@@ -362,18 +368,18 @@ const ProfilePage = inject('profile')(
           <TabPanel className={classes.tabPanel} value={tabIndex} index={6}>
             <ProfileSub />
           </TabPanel>
-          {/*<TabPanel className={classes.tabPanel} value={tabIndex} index={3}>
+          <TabPanel className={classes.tabPanel} value={tabIndex} index={3}>
             <ProfilePayments />
           </TabPanel>
           <TabPanel className={classes.tabPanel} value={tabIndex} index={4}>
             <ProfileParental />
-            </TabPanel>*/}
+          </TabPanel>
           <TabPanel className={classes.tabPanel} value={tabIndex} index={2}>
             <ProfileSettings />
           </TabPanel>
-          {/*<TabPanel className={classes.tabPanel} value={tabIndex} index={6}>
+          <TabPanel className={classes.tabPanel} value={tabIndex} index={6}>
             <ProfileUsers />
-          </TabPanel>*/}
+          </TabPanel>
         </div>
       </Container>
     );
