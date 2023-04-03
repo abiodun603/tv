@@ -32,6 +32,7 @@ import Popper from '@mui/material/Popper';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import Stack from '@mui/material/Stack';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -108,6 +109,7 @@ const MenuListComposition = () => {
   };
 
   const handleClose = (event) => {
+    const uploadPageTitle = event.target.innerText
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
     }
@@ -151,10 +153,13 @@ const MenuListComposition = () => {
             backgroundColor: '#2EBC58',
             paddingHorizontal: 30,
             paddingVertical: 30,
+            display: 'flex',
+            gap: '4px'
           }}
           // disabled = {disabled}
         >
           Content Upload
+          <ArrowDropDownIcon style={{fontSize: 'medium'}}/>
         </Button>
         <Popper
           open={open}
@@ -183,14 +188,14 @@ const MenuListComposition = () => {
                     style={{ background: '#FFFFFF' }}
                   >
                     <MenuItem onClick={handleClose}>
-                      <Link href="/upload?music">Music</Link>
+                      <Link href="/upload?music">Videos</Link>
                     </MenuItem>
 
                     <MenuItem onClick={handleClose}>
-                      <Link href="/upload?music">Video</Link>
+                      <Link href="/upload?music">Music Video</Link>
                     </MenuItem>
 
-                    <MenuItem onClick={handleClose}>
+                    <MenuItem disabled onClick={handleClose}>
                       <Link href="/upload?music">News</Link>
                     </MenuItem>
 
