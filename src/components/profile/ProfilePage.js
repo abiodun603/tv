@@ -33,6 +33,7 @@ import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import Stack from '@mui/material/Stack';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import myStore from '../../store/uploadName';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -109,7 +110,8 @@ const MenuListComposition = () => {
   };
 
   const handleClose = (event) => {
-    const uploadPageTitle = event.target.innerText
+    const uploadPageTitle = event.target.innerText;
+    myStore.nameupload(uploadPageTitle);
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
     }
@@ -138,7 +140,7 @@ const MenuListComposition = () => {
 
   return (
     <Stack direction="row" spacing={2}>
-      <div>
+      <div style={{ margin: 'auto', marginTop: '10px', width: 'full' }}>
         <Button
           ref={anchorRef}
           id="composition-button"
@@ -154,12 +156,12 @@ const MenuListComposition = () => {
             paddingHorizontal: 30,
             paddingVertical: 30,
             display: 'flex',
-            gap: '4px'
+            gap: '4px',
           }}
           // disabled = {disabled}
         >
           Content Upload
-          <ArrowDropDownIcon style={{fontSize: 'medium'}}/>
+          <ArrowDropDownIcon style={{ fontSize: 'medium' }} />
         </Button>
         <Popper
           open={open}
@@ -344,6 +346,7 @@ const ProfilePage = inject('profile')(
                 icon={<menu.icon />}
                 aria-label={menu.title}
                 disabled={menu.disabled}
+                style={{ cursor: 'pointer', color: 'black' }}
               />
             ))}
           </ProfileTabs>
@@ -365,7 +368,7 @@ const ProfilePage = inject('profile')(
               <UserContent profileId={profileId} />
             </Box>
           </TabPanel>
-          <TabPanel className={classes.tabPanel} value={tabIndex} index={6}>
+          <TabPanel className={classes.tabPanel} value={tabIndex} index={2}>
             <ProfileSub />
           </TabPanel>
           <TabPanel className={classes.tabPanel} value={tabIndex} index={3}>
@@ -374,7 +377,8 @@ const ProfilePage = inject('profile')(
           <TabPanel className={classes.tabPanel} value={tabIndex} index={4}>
             <ProfileParental />
           </TabPanel>
-          <TabPanel className={classes.tabPanel} value={tabIndex} index={2}>
+          */}
+          <TabPanel className={classes.tabPanel} value={tabIndex} index={5}>
             <ProfileSettings />
           </TabPanel>
           <TabPanel className={classes.tabPanel} value={tabIndex} index={6}>

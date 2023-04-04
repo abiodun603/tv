@@ -1,5 +1,6 @@
 import React from 'react';
 import { inject, observer } from 'mobx-react';
+import myStore from '../store/uploadName';
 
 import { Form, Col, Row, ProgressBar } from 'react-bootstrap';
 import DropZone from './widgets/DropZone';
@@ -14,6 +15,7 @@ import {
 } from './widgets/Field';
 
 import style from '../../styles/dropZone.module.css';
+
 
 import { SINGLE_VIDEO } from '../constants/types';
 
@@ -54,9 +56,10 @@ const Upload = inject(
       <Container id={style.settings_background}>
         <Row className={`bg-light-gray ${isMobile ? 'pb-5' : 'py-5'}`}>
           <Col xs={12} className={`bg-white ${isMobile ? 'px-2 py-5' : 'p-5'}`}>
-            <Row>
-              <Col lg={6}>
+            <Row >
+              <Col lg={6} style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
                 <h2 className="text-dark">Upload Video</h2>
+                <h4>{myStore.uploadName}</h4>
               </Col>
             </Row>
             <Row>
@@ -90,7 +93,7 @@ const Upload = inject(
                   ) : (
                     <DropZone upload={storeUpload} />
                   )}
-                </div>
+                </div> 
               </Col>
               <Col lg={6} className={`mb-4 ${isMobile ? 'px-2' : 'px-5'}`}>
                 <Form>
