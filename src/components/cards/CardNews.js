@@ -62,6 +62,8 @@ export default class CardNews extends Component {
               <Link href={`/details/news?id=${this.props.item.video.id}`}>
                 <Col className="position-relative">
                   <Image
+                    width='100'
+                    alt=""
                     className="card-user-video-img"
                     src={getPreview(this.props.item.video.preview_url)}
                   />
