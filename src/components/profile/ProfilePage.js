@@ -377,7 +377,6 @@ const ProfilePage = inject('profile')(
           <TabPanel className={classes.tabPanel} value={tabIndex} index={4}>
             <ProfileParental />
           </TabPanel>
-          */}
           <TabPanel className={classes.tabPanel} value={tabIndex} index={5}>
             <ProfileSettings />
           </TabPanel>
