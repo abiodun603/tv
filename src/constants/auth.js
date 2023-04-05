@@ -1,6 +1,7 @@
 export const GOOGLE = 0;
 export const TWITTER = 1;
 export const FACEBOOK = 2;
+export const APPLE = 3;
 
 export const STATUS_NO_AUTH = 0;
 export const STATUS_AUTH = 2;

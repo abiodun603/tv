@@ -1,11 +1,14 @@
-import { 
+import {
   auth,
   providerFacebook,
   providerGoogle,
   providerPhone,
   providerTwitter,
 } from './firebase';
-import { FACEBOOK, TWITTER } from '../constants/auth';
+import { APPLE, FACEBOOK, TWITTER } from '../constants/auth';
+// ============================================== //
+import { getAuth, signInWithPopup, OAuthProvider } from 'firebase/auth';
+// const provider = new OAuthProvider('apple.com');
 
 export const onAuthStateChanged = (callback) =>
   auth.onAuthStateChanged(callback);
@@ -33,13 +36,15 @@ export const signInSocial = (type) => {
     case TWITTER:
       provider = providerTwitter;
       break;
+    // case APPLE:
+    //   provider = providerApple;
+    //   provider.setCustomParameters({ prompt: 'select_account' });
     default:
       provider = providerGoogle;
       provider.setCustomParameters({ prompt: 'select_account' });
   }
 
   return auth.signInWithRedirect(provider);
-  
 };
 
 export const signInPhone = (verificationId, code) => {
