@@ -122,7 +122,7 @@ export const MOBLE_SUB_MENU = [
   },
   {
     title: 'Settings',
-    href: url.toSettings(),
+    href: url.toSettings,
   },
 ];
 
