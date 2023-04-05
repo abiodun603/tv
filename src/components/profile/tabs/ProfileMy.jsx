@@ -25,6 +25,7 @@ import RemoveAccount from '../buttons/RemoveAccount';
 
 import SettingsIcon from '@mui/icons-material/Settings';
 import CloseIcon from '@mui/icons-material/Close';
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   gridContainer: {
@@ -52,7 +53,21 @@ const MyProfile = inject(
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const classes = useStyles();
+    const [countryCode, setcountryCode] = useState('');
     const isMobile = useMediaQuery('(max-width:959px)');
+
+    useEffect(() => {
+      try {
+        axios.get('https://api.ipregistry.co/?key=tryout').then((res) => {
+          console.log(res);
+          setcountryCode(res?.data?.location?.country?.code);
+        });
+      } catch {
+        (err) => console.log(err);
+      }
+    }, []);
+
+    console.log(countryCode);
 
     useEffect(() => {
       const {
@@ -95,7 +110,7 @@ const MyProfile = inject(
       profileStore.setUserName(userName);
 
       profileStore.updateUser();
-      console.log(profileStore)
+      console.log(profileStore);
     };
 
     const isDataValid = Boolean(
@@ -220,7 +235,7 @@ const MyProfile = inject(
                 <PhoneInput
                   className={'input-phone-number'}
                   id="phone"
-                  defaultCountry="NG"
+                  defaultCountry={countryCode}
                   fullWidth
                   error={!profileStore.validated.phone}
                   helperText={
