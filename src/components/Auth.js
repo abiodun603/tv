@@ -38,6 +38,7 @@ import { BiCheck } from 'react-icons/bi';
 import { MdCancel } from 'react-icons/md';
 import { TailSpin } from 'react-loader-spinner';
 import ReCAPTCHA from 'react-google-recaptcha';
+import { signInWithApple } from '../firebase/auth';
 const AuthContainer = styled.div`
   width: 612px;
   position: absolute;
@@ -103,7 +104,11 @@ const SignInForm = observer(({ storeAuth, theme }) => {
         </Grid>
 
         <Grid item>
-          <Avatar variant="square" src="/icon/apple.png" />
+          <Avatar
+            onClick={() => signInWithApple()}
+            variant="square"
+            src="/icon/apple.png"
+          />
         </Grid>
         {/*<Grid item>
           <Avatar

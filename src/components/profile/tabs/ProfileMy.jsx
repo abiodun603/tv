@@ -95,6 +95,7 @@ const MyProfile = inject(
       profileStore.setUserName(userName);
 
       profileStore.updateUser();
+      console.log(profileStore)
     };
 
     const isDataValid = Boolean(
@@ -219,6 +220,7 @@ const MyProfile = inject(
                 <PhoneInput
                   className={'input-phone-number'}
                   id="phone"
+                  defaultCountry="NG"
                   fullWidth
                   error={!profileStore.validated.phone}
                   helperText={

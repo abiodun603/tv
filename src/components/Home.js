@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { useEffect } from 'react';
 
 import { Col } from 'react-bootstrap';
@@ -38,7 +38,7 @@ const Home = inject('home')(
       homeStore.getVideo(TYPE_FILM, true, { _start: 0 });
       homeStore.getCollections(true, { _start: 0 });
       homeStore.getVideoRec(true, { _start: 0 });
-    }, []);
+    }, [homeStore]);
 
     const contests = isMobile
       ? homeStore.contests.items.slice(0, 2)

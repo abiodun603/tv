@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { useState, useEffect } from 'react';
 import { Row } from 'react-bootstrap';
 
@@ -38,7 +38,7 @@ const News = inject('news')(
 
     const loadNews = (tag = TYPE_NEWS) => {
       if (tag === 'All') {
-        tag = TYPE_NEWS
+        tag = TYPE_NEWS;
       }
 
       props.news.getNews('news', {

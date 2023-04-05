@@ -7,7 +7,7 @@ import { Container, Row, Spinner } from 'react-bootstrap';
 import { STATUS_LOADING, STATUS_NO_AUTH, STATUS_AUTH } from '../constants/auth';
 
 import Footer from './widgets/footer';
-import {  Bar, NavBar } from './widgets/navbar';
+import { Bar, NavBar } from './widgets/navbar';
 
 const AuthLayout = inject(
   'auth',
@@ -33,7 +33,7 @@ const AuthLayout = inject(
           });
         }
       });
-    }, []);
+    }, [props, storeAuth]);
 
     useEffect(() => {
       if (storeAuth.status === STATUS_AUTH) {
@@ -50,7 +50,7 @@ const AuthLayout = inject(
       ) {
         Router.replace('/auth');
       }
-    }, [storeAuth.status]);
+    }, [props.search, router.pathname, storeAuth.status]);
 
     if (
       storeAuth.status === STATUS_AUTH &&
@@ -93,7 +93,7 @@ const AuthLayout = inject(
         </Head>
         <div className="page theme theme_font_default theme_color_default theme_space_default theme_size_default">
           <div id="recaptcha-container" />
-          {storeAuth.status === STATUS_LOADING ? (
+          {/* {storeAuth.status === STATUS_LOADING ? (
             <Container fluid>
               <Row className="justify-content-center vh-100 align-items-center">
                 <Spinner
@@ -103,7 +103,8 @@ const AuthLayout = inject(
                 />
               </Row>
             </Container>
-          ) : storeAuth.status === STATUS_NO_AUTH ? (
+          ) :  */}
+          {storeAuth.status === STATUS_NO_AUTH ? (
             <div>{children}</div>
           ) : (
             <div>
