@@ -6,7 +6,7 @@ import { BasicStore } from './BasicStore';
 import { PATH_URL_COUNTRIES } from '../constants/API';
 import http from '../api/axiosApi';
 
-configure({ enforceActions: 'always' });
+configure({ enforceActions: 'never' });
 
 class CountriesStore extends BasicStore {
   @observable loading = false;
@@ -14,23 +14,20 @@ class CountriesStore extends BasicStore {
 
   @action
   load() {
-    const token = cookies.get('token');
-    console.log(token);
-
-    http.setToken(token);
-
     this.loading = true;
 
     http
       .get('https://restcountries.com/v3.1/all')
       .then((res) => {
-        const data = res.data;
-        // debugger;
-        console.log(data);
-        runInAction(() => {
-          this.list = data || [];
-          this.loading = false;
-        });
+        if (res.data) {
+          const data = res.data;
+          // debugger;
+          console.log(data);
+          runInAction(() => {
+            this.list = data || [];
+            this.loading = false;
+          });
+        }
       })
       .catch((e) => {
         runInAction(() => {

@@ -270,7 +270,7 @@ const MyProfile = inject(
                 />
               </Box>
             </Grid>
-            <Grid item xs={12} md={8}>
+            {/* <Grid item xs={12} md={8}>
               <Box mb={2}>
                 <CustomTextField
                   id="select-country"
@@ -294,7 +294,7 @@ const MyProfile = inject(
                   })}
                 </CustomTextField>
               </Box>
-            </Grid>
+            </Grid> */}
             <Grid item xs={12} md={8}>
               <Box mb={4}>
                 <CustomTextField
