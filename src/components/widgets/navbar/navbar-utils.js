@@ -61,6 +61,7 @@ export const NavBarLink = ({ menu, isDesktop = true }) => {
   );
 };
 
+
 export const MENU = [
   {
     title: 'Home',
@@ -122,7 +123,7 @@ export const MOBLE_SUB_MENU = [
   },
   {
     title: 'Settings',
-    href: url.toSettings,
+    href: url.toSettings(),
   },
 ];
 

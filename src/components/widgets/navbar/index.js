@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core';
 import { inject, observer } from 'mobx-react';
 import { Menu as MenuIcon } from '@material-ui/icons';
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 import Link from 'next/link';
 import { Box } from '../Box';
 import { Logo } from '../../ui/logo';

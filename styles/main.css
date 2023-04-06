@@ -12,6 +12,16 @@ html {
   outline: none !important;
   border:none !important;
   box-shadow: none !important;
+  font-size: 90%;
+  font-family: 'Roboto Serif', 'Helvetica', 'Arial', sans-serif;
+}
+
+.tempdelete {
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  gap: 5px;
+  padding: 3px;
 }
 
 *:focus {
