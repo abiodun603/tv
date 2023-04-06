@@ -24,7 +24,7 @@ import Toggler from './../../Toggler/Toggler';
 import RemoveAccount from '../buttons/RemoveAccount';
 
 import SettingsIcon from '@mui/icons-material/Settings';
-import CloseIcon from '@mui/icons-material/Close';
+import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 
 const useStyles = makeStyles((theme) => ({
   gridContainer: {
@@ -44,7 +44,7 @@ const MyProfile = inject(
   'languages',
   'countries',
 )(
-  observer((props) => {
+  ((props) => {
     const { profileStore, signOut } = props.auth;
     const [removeAccountDialog, setRemoveAccountDialog] = useState(false);
     const [logoutDialog, setLogoutDialog] = useState(false);
@@ -95,7 +95,6 @@ const MyProfile = inject(
       profileStore.setUserName(userName);
 
       profileStore.updateUser();
-      console.log(profileStore)
     };
 
     const isDataValid = Boolean(
@@ -110,7 +109,6 @@ const MyProfile = inject(
         storeProfile.setUserName(value);
       }
     };
-    console.log(props.countries.list);
 
     const [modal, setModal] = useState(false);
 
@@ -355,7 +353,14 @@ const MyProfile = inject(
                 xs={12}
                 style={{ backgroundColor: '#f2f2eb', borderRadius: '5px' }}
               >
-                <Box mb={2} mt={2} mx={3}>
+                <Box mb={2} mt={3} mx={3}>
+                  <div
+                    className='tempdelete'
+                    disabled
+                  >
+                    <AccessTimeFilledIcon style={{ fontSize: 'medium' }} />
+                    <p>TEMPORARILY DISABLE MY ACCOUNT</p>
+                  </div>
                   <RemoveAccount
                     onClick={toggleRemoveAccount}
                     dialog={{

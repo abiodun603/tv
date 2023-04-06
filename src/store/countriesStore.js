@@ -15,7 +15,6 @@ class CountriesStore extends BasicStore {
   @action
   load() {
     const token = cookies.get('token');
-    console.log(token);
 
     http.setToken(token);
 
@@ -25,8 +24,6 @@ class CountriesStore extends BasicStore {
       .get('https://restcountries.com/v3.1/all')
       .then((res) => {
         const data = res.data;
-        // debugger;
-        console.log(data);
         runInAction(() => {
           this.list = data || [];
           this.loading = false;

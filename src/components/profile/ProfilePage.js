@@ -345,7 +345,7 @@ const ProfilePage = inject('profile')(
                 icon={<menu.icon />}
                 aria-label={menu.title}
                 disabled={menu.disabled}
-                style={{cursor: 'pointer', color: 'black'}}
+                style={{cursor: 'pointer'}}
               />
             ))}
           </ProfileTabs>
