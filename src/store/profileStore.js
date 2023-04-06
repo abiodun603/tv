@@ -167,7 +167,7 @@ class ProfileStore extends BasicStore {
 
   @action.bound
   updateUser() {
-    debugger;
+    // debugger;
     let profile = toJS(this.profile);
 
     if (!valText(this.profile.username)) {
