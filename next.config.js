@@ -7,9 +7,14 @@ const nextConfig = {
   env,
   reactStrictMode: false,
   swcMinify: true,
-  // experimental: {
-  //   appDir: true,
-  // },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'd2pvw7djt6urpd.cloudfront.net',
+      },
+    ],
+  },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,

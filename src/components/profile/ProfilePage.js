@@ -110,7 +110,7 @@ const MenuListComposition = () => {
   };
 
   const handleClose = (event) => {
-    const uploadPageTitle = event.target.innerText
+    const uploadPageTitle = event.target.innerText;
     myStore.nameupload(uploadPageTitle);
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
@@ -140,7 +140,7 @@ const MenuListComposition = () => {
 
   return (
     <Stack direction="row" spacing={2}>
-      <div style={{margin: 'auto', marginTop: '10px', width: 'full'}}>
+      <div style={{ margin: 'auto', marginTop: '10px', width: 'full' }}>
         <Button
           ref={anchorRef}
           id="composition-button"
@@ -156,11 +156,12 @@ const MenuListComposition = () => {
             paddingHorizontal: 30,
             paddingVertical: 30,
             display: 'flex',
-            gap: '4px'
+            gap: '4px',
           }}
+          // disabled = {disabled}
         >
           Content Upload
-          <ArrowDropDownIcon style={{fontSize: 'medium'}}/>
+          <ArrowDropDownIcon style={{ fontSize: 'medium' }} />
         </Button>
         <Popper
           open={open}
@@ -179,14 +180,14 @@ const MenuListComposition = () => {
                   placement === 'bottom-start' ? 'left top' : 'left bottom',
               }}
             >
-              <Paper style={{ background: '#FFFFFF'}}>
+              <Paper style={{ background: '#FFFFFF' }}>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList
                     autoFocusItem={open}
                     id="composition-menu"
                     aria-labelledby="composition-button"
                     onKeyDown={handleListKeyDown}
-                    style={{ background: '#FFFFFF'}}
+                    style={{ background: '#FFFFFF' }}
                   >
                     <MenuItem onClick={handleClose}>
                       <Link href="/upload?music">Videos</Link>
@@ -345,7 +346,7 @@ const ProfilePage = inject('profile')(
                 icon={<menu.icon />}
                 aria-label={menu.title}
                 disabled={menu.disabled}
-                style={{cursor: 'pointer'}}
+                style={{ cursor: 'pointer' }}
               />
             ))}
           </ProfileTabs>
@@ -370,18 +371,18 @@ const ProfilePage = inject('profile')(
           <TabPanel className={classes.tabPanel} value={tabIndex} index={2}>
             <ProfileSub />
           </TabPanel>
-          {/*<TabPanel className={classes.tabPanel} value={tabIndex} index={3}>
+          <TabPanel className={classes.tabPanel} value={tabIndex} index={3}>
             <ProfilePayments />
           </TabPanel>
           <TabPanel className={classes.tabPanel} value={tabIndex} index={4}>
             <ProfileParental />
-            </TabPanel>*/}
+          </TabPanel>
           <TabPanel className={classes.tabPanel} value={tabIndex} index={5}>
             <ProfileSettings />
           </TabPanel>
-          {/*<TabPanel className={classes.tabPanel} value={tabIndex} index={6}>
+          <TabPanel className={classes.tabPanel} value={tabIndex} index={6}>
             <ProfileUsers />
-          </TabPanel>*/}
+          </TabPanel>
         </div>
       </Container>
     );

@@ -44,7 +44,8 @@ export const NewsCard = ({ item }) => {
                 src={getPreview(item.preview_url)}
                 className="news-card__media-image rounded"
                 alt=""
-                width='100'
+                width="100"
+                height="100"
               />
               <div className="news-card__play"></div>
               <div className="news-card__info">
