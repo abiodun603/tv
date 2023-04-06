@@ -28,7 +28,7 @@ import {
 } from './widgets/Field';
 import { TextButton } from './ui/buttons/TextButton';
 import { Spinner } from './ui/spiner';
-import { app } from 'firebase';
+import firebase, { app } from 'firebase';
 import Image from 'next/image';
 import { useDebounce } from 'usehooks-ts';
 import http from '../api/axiosApi';
@@ -38,7 +38,6 @@ import { BiCheck } from 'react-icons/bi';
 import { MdCancel } from 'react-icons/md';
 import { TailSpin } from 'react-loader-spinner';
 import ReCAPTCHA from 'react-google-recaptcha';
-import { signInWithApple } from '../firebase/auth';
 const AuthContainer = styled.div`
   width: 612px;
   position: absolute;
@@ -86,6 +85,15 @@ const SignInForm = observer(({ storeAuth, theme }) => {
     storeAuth.signInFirebaseSocial(type);
   };
 
+  const auth = firebase.auth();
+
+  const signInWithApple = async () => {
+    const provider = new firebase.auth.OAuthProvider('apple.com');
+    const result = await auth.signInWithPopup(provider);
+
+    console.log(result.user); // logged-in Apple user
+  };
+
   return (
     <div>
       <Grid
@@ -105,7 +113,7 @@ const SignInForm = observer(({ storeAuth, theme }) => {
 
         <Grid item>
           <Avatar
-            onClick={() => signInWithApple()}
+            onClick={signInWithApple}
             variant="square"
             src="/icon/apple.png"
           />
