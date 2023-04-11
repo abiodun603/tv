@@ -187,7 +187,7 @@ const MenuListComposition = () => {
                     id="composition-menu"
                     aria-labelledby="composition-button"
                     onKeyDown={handleListKeyDown}
-                    style={{ background: '#FFFFFF' }}
+                    style={{ background: '#FFFFFF', display: 'flex', flexDirection: 'column', alignItems: 'start', width: '182%', paddingLeft: '10%' }}
                   >
                     <MenuItem onClick={handleClose}>
                       <Link href="/upload?music">Videos</Link>
