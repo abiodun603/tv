@@ -175,9 +175,8 @@ class ProfileStore extends BasicStore {
       });
   }
 
-  @action.bound
+  @action
   updateUser() {
-    // debugger;
     let profile = toJS(this.profile);
 
     if (!valText(this.profile.username)) {

@@ -5,6 +5,8 @@ import classNames from 'classnames';
 import { Spinner } from 'react-bootstrap';
 import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input';
+import { Country, City } from 'country-state-city';
+import countries from 'get-countries-info';
 
 // import { PATH_URL_COUNTRIES } from '../../../constants/API';
 
@@ -51,10 +53,9 @@ const MyProfile = inject(
   const [userName, setUserName] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [bound, setBound] = useState('');
-  const [phone, setPhone] = useState('');
+  const [selectedCountry, setSelectedCountry] = useState('');
+  const [selectedCity, setSelectedCity] = useState('');
   const classes = useStyles();
-  const [countryCode, setcountryCode] = useState('');
   const isMobile = useMediaQuery('(max-width:959px)');
 
   useEffect(() => {
@@ -62,7 +63,8 @@ const MyProfile = inject(
       username: userName,
       name: name,
       last_name: lastName,
-      phone: phone,
+      country: selectedCountry,
+      city: selectedCity,
     } = profileStore.profile;
 
     props.languages.load();
@@ -71,15 +73,10 @@ const MyProfile = inject(
     setUserName(userName);
     setFirstName(name);
     setLastName(lastName);
-    setPhone(phone);
-  }, [
-    profileStore.phone,
-    profileStore.profile,
-    props.countries,
-    props.languages,
-  ]);
+    setSelectedCountry(selectedCountry);
+    setSelectedCity(selectedCity);
+  }, [profileStore.profile, props.countries, props.languages]);
 
-  console.log(profileStore.profile);
   const toggleRemoveAccount = () => {
     setRemoveAccountDialog(!removeAccountDialog);
   };
@@ -104,38 +101,10 @@ const MyProfile = inject(
     profileStore.setName(firstName);
     profileStore.setLastName(lastName);
     profileStore.setUserName(userName);
-    profileStore.setPhone(phone);
+    profileStore.setCountry(selectedCountry);
+    profileStore.setCity(selectedCity);
     profileStore.updateUser();
-    // if(profileStore.updateUser()){
-    //   const {
-    //     username: userName,
-    //     name: name,
-    //     last_name: lastName,
-    //   } = profileStore.profile;
-
-    //   props.languages.load();
-    //   props.countries.load();
-
-    //   setUserName(userName);
-    //   setFirstName(name);
-    //   setLastName(lastName);
-    // }
   };
-
-  // useEffect(() => {
-  //   const {
-  //     username: userName,
-  //     name: name,
-  //     last_name: lastName,
-  //   } = profileStore.profile;
-
-  //   props.languages.load();
-  //   props.countries.load();
-
-  //   setUserName(userName);
-  //   setFirstName(name);
-  //   setLastName(lastName);
-  // }, []);
 
   const isDataValid = Boolean(
     firstName && lastName && userName && profileStore.profile.birthday,
@@ -146,7 +115,7 @@ const MyProfile = inject(
     const value = event.target.value;
 
     if (regex.test(value)) {
-      storeProfile.setUserName(value);
+      setUserName(value);
     }
   };
 
@@ -156,7 +125,20 @@ const MyProfile = inject(
     setModal(!modal);
   };
 
-  console.log(profileStore?.state);
+  const handleCountrySelect = (e) => {
+    setSelectedCountry(e.target.value);
+    setSelectedCity('');
+  };
+
+  const handleCitySelect = (e) => {
+    setSelectedCity(e.target.value);
+  };
+
+  const convertCountryToCode = countries({ name: selectedCountry });
+  console.log(convertCountryToCode[0]);
+  const getCode = convertCountryToCode[0].ISO.alpha2;
+
+  const countryCities = City.getCitiesOfCountry(getCode);
 
   return (
     <Box ml={isMobile ? 0 : 4}>
@@ -254,13 +236,13 @@ const MyProfile = inject(
 
           <Grid item xs={12} md={8}>
             <Box mb={2} style={{ borderBottom: '1px solid #D3D3D3' }}>
-              <label for="phone" style={{ fontSize: '11px', opacity: '90%' }}>
+              <label for="phone" className="profileCountryLabel">
                 Phone Number
               </label>
               <PhoneInput
                 className={'input-phone-number'}
                 id="phone"
-                defaultCountry={'NG'}
+                defaultCountry="NG"
                 fullWidth
                 error={!profileStore.validated.phone}
                 helperText={
@@ -296,41 +278,48 @@ const MyProfile = inject(
             </Box>
           </Grid>
           <Grid item xs={12} md={8}>
-            <Box mb={2}>
-              <CustomTextField
-                id="select-country"
-                select
-                fullWidth
-                label="Country"
-                value={profileStore.profile.country || ''}
-                onChange={(event) =>
-                  profileStore.setCountry(event.target.value)
-                }
-              >
-                {props.countries.list.map((country) => {
-                  return (
-                    <MenuItem
-                      key={country.idd.root}
-                      value={country.name.common}
-                    >
-                      {`${country.flag} ${country.name.common}`}
-                    </MenuItem>
-                  );
-                })}
-              </CustomTextField>
+            <Box mb={2} style={{ borderBottom: '1px solid #D3D3D3' }}>
+              <div>
+                <label htmlFor="country" className="profileCountryLabel">
+                  Country
+                </label>
+                <select
+                  className="profileCountryField"
+                  value={selectedCountry || ''}
+                  onChange={handleCountrySelect}
+                >
+                  {Country.getAllCountries().map((data) => {
+                    return (
+                      <option key={data.flag} value={data.name}>
+                        {data.name}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
             </Box>
           </Grid>
           <Grid item xs={12} md={8}>
-            <Box mb={4}>
-              <CustomTextField
-                id="city"
-                fullWidth
-                label="City"
-                value={profileStore.profile.city || ''}
-                onChange={(event) => {
-                  profileStore.setCity(event.target.value);
-                }}
-              />
+            <Box mb={4} style={{ borderBottom: '1px solid #D3D3D3' }}>
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <label className="profileCountryLabel" htmlFor="city">
+                  City
+                </label>
+                <select
+                  id="city"
+                  className="profileCountryField"
+                  value={selectedCity || ''}
+                  onChange={handleCitySelect}
+                  disabled={!selectedCountry}
+                >
+                  <option value="">Select a city</option>
+                  {countryCities.map((city) => (
+                    <option key={city.name} value={city.name}>
+                      {city.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </Box>
           </Grid>
           {/*<Grid item xs={12} md={4} className={classes.gridFlex}>
@@ -423,7 +412,243 @@ const MyProfile = inject(
             </Grid>
           )}
         </Grid>
-        <ProfileSociail />
+        <Grid container item xs={12} md={6} className={classes.gridContainer}>
+          <Grid item xs={12}>
+            <Box mb={2}>
+              <Box
+                display="flex"
+                flexDirection="row"
+                alignItems="center"
+                justifyContent="space-between"
+              >
+                <Box mb={2}>
+                  <Box fontWeight="500">Social Media</Box>
+                </Box>
+              </Box>
+              <CustomTextField
+                id="instagram"
+                fullWidth
+                label="Instagram"
+                value={profileStore.profile.instagram || ''}
+                onChange={(event) => {
+                  profileStore.setInstagram(event.target.value);
+                }}
+              />
+            </Box>
+          </Grid>
+          <Grid item xs={12}>
+            <Box mb={2}>
+              <CustomTextField
+                id="facebook"
+                fullWidth
+                label="Facebook"
+                value={profileStore.profile.facebook || ''}
+                onChange={(event) => {
+                  profileStore.setFacebook(event.target.value);
+                }}
+              />
+            </Box>
+          </Grid>
+          <Grid item xs={12}>
+            <Box mb={2}>
+              <CustomTextField
+                id="twitter"
+                fullWidth
+                label="Twitter"
+                value={profileStore.profile.twitter || ''}
+                onChange={(event) => {
+                  profileStore.setTwitter(event.target.value);
+                }}
+              />
+            </Box>
+          </Grid>
+
+          <Box my={4}>
+            <Box fontWeight="500">Security & Authentication</Box>
+          </Box>
+
+          <Grid item xs={12} style={{ marginBottom: '20px' }}>
+            <Box
+              display="flex"
+              alignItems="center"
+              justifyContent="space-between"
+              backgroundColor="blue"
+            >
+              <Box>
+                <Box>2-Step Authentication</Box>
+              </Box>
+              <Box>
+                <Toggler title="Show On/Off" checked={Boolean(true)} />
+              </Box>
+            </Box>
+          </Grid>
+
+          <Grid item xs={12} style={{ marginBottom: '20px' }}>
+            <Box
+              display="flex"
+              alignItems="center"
+              justifyContent="space-between"
+              backgroundColor="blue"
+            >
+              <Box>
+                <Box>Display my contact email</Box>
+              </Box>
+              <Box>
+                <Toggler
+                  id="email-show"
+                  title="Show On/Off"
+                  checked={Boolean(profileStore.profile.display_email)}
+                  onChange={(event) => {
+                    profileStore.setShowEmail(event.target.checked);
+                  }}
+                />
+              </Box>
+            </Box>
+          </Grid>
+
+          <Grid item xs={12} style={{ marginBottom: '20px' }}>
+            <Box
+              display="flex"
+              alignItems="center"
+              justifyContent="space-between"
+              backgroundColor="blue"
+            >
+              <Box>
+                <Box>Display my contact phone number</Box>
+              </Box>
+              <Box>
+                <Toggler
+                  id="phone-show"
+                  title="Show On/Off"
+                  checked={Boolean(profileStore.profile.display_phone)}
+                  onChange={(event) => {
+                    profileStore.setShowPhone(event.target.checked);
+                  }}
+                />
+              </Box>
+            </Box>
+          </Grid>
+
+          <Grid item xs={12} style={{ marginBottom: '20px' }}>
+            <Box
+              display="flex"
+              alignItems="center"
+              justifyContent="space-between"
+              backgroundColor="blue"
+            >
+              <Box>
+                <Box>Display my location</Box>
+              </Box>
+              <Box>
+                <Toggler
+                  id="location-show"
+                  title="Show On/Off"
+                  checked={Boolean(profileStore.profile.display_location)}
+                  onChange={(event) => {
+                    profileStore.setShowLocation(event.target.checked);
+                  }}
+                />
+              </Box>
+            </Box>
+          </Grid>
+
+          <Grid item xs={12} mb={2} style={{ marginBottom: '20px' }}>
+            <Box
+              display="flex"
+              alignItems="center"
+              justifyContent="space-between"
+              backgroundColor="blue"
+            >
+              <Box>
+                <Box>Display my social media</Box>
+              </Box>
+              <Box>
+                <Toggler
+                  id="social-show"
+                  title="Show On/Off"
+                  checked={Boolean(profileStore.profile.display_social)}
+                  onChange={(event) => {
+                    profileStore.setShowSocial(event.target.checked);
+                  }}
+                />
+              </Box>
+            </Box>
+          </Grid>
+
+          <Grid item xs={6}>
+            <Box mb={2}>
+              <ButtonText
+                onClick={toggleLogoutDialog}
+                startIcon={
+                  <span className="account-list__logout-icon icon icon_name_logout" />
+                }
+              >
+                <span className="font-weight-bold text text_view_secondary text-uppercase">
+                  Logout
+                </span>
+              </ButtonText>
+              <ConfirmDialog
+                opened={logoutDialog}
+                onClose={toggleLogoutDialog}
+                onSubmit={signOut}
+              />
+            </Box>
+          </Grid>
+          <Grid item xs={12}>
+            <div style={{ height: '54px' }} />
+          </Grid>
+
+          <Grid item xs={12}>
+            <Box
+              mb={2}
+              style={{
+                fontSize: '12px',
+                cursor: 'pointer',
+                display: 'flex',
+                gap: '5px',
+                alignItems: 'center',
+              }}
+              onClick={toggleModal}
+            >
+              <SettingsIcon style={{ fontSize: 'medium' }} />
+              MANAGE ACCOUNT
+            </Box>
+          </Grid>
+
+          {modal && (
+            <Grid
+              item
+              xs={12}
+              style={{ backgroundColor: '#f2f2eb', borderRadius: '5px' }}
+            >
+              <Box mb={2} mt={3} mx={3}>
+                <div className="tempdelete" disabled>
+                  <AccessTimeFilledIcon style={{ fontSize: 'medium' }} />
+                  <p>TEMPORARILY DISABLE MY ACCOUNT</p>
+                </div>
+                <RemoveAccount
+                  onClick={toggleRemoveAccount}
+                  dialog={{
+                    opened: removeAccountDialog,
+                    onClose: toggleRemoveAccount.bind(this),
+                    onSubmit: handleSubmitRemoveAccount.bind(this),
+                  }}
+                />
+                <div style={{ display: 'flex', justifyContent: 'right' }}>
+                  <div
+                    style={{
+                      cursor: 'pointer',
+                    }}
+                  >
+                    <p onClick={toggleModal} style={{ fontSize: '15px' }}>
+                      Close
+                    </p>
+                  </div>
+                </div>
+              </Box>
+            </Grid>
+          )}
+        </Grid>
       </Grid>
     </Box>
   );

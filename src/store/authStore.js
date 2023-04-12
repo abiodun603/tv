@@ -95,7 +95,6 @@ class AuthStore extends BasicStore {
     try {
       const authUser = firebase.getCurrentUser().providerData[0];
       http.setToken(idToken);
-      console.log(authUser)
  
       const res = await http.post('profile/isUser', {
         email: authUser.email,
@@ -116,7 +115,6 @@ class AuthStore extends BasicStore {
         
       } else {
         if (res.status === 200 && isRegisteredUser === false){
-          console.log(authUser.email)
           return {
             status: STATUS_NO_AUTH,
             type: TYPE_CREATE_PROFILE,
