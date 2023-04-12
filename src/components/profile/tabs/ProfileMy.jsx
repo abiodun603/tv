@@ -51,28 +51,18 @@ const MyProfile = inject(
   const [userName, setUserName] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [bound, setBound] = useState('');
+  const [phone, setPhone] = useState('');
   const classes = useStyles();
   const [countryCode, setcountryCode] = useState('');
   const isMobile = useMediaQuery('(max-width:959px)');
-
-  useEffect(() => {
-    try {
-      axios.get('https://api.ipregistry.co/?key=tryout').then((res) => {
-        console.log(res);
-        setcountryCode(res?.data?.location?.country?.code);
-      });
-    } catch {
-      (err) => console.log(err);
-    }
-  }, []);
-
-  console.log(countryCode);
 
   useEffect(() => {
     const {
       username: userName,
       name: name,
       last_name: lastName,
+      phone: phone,
     } = profileStore.profile;
 
     props.languages.load();
@@ -81,8 +71,15 @@ const MyProfile = inject(
     setUserName(userName);
     setFirstName(name);
     setLastName(lastName);
-  }, [profileStore.profile, props.countries, props.languages]);
+    setPhone(phone);
+  }, [
+    profileStore.phone,
+    profileStore.profile,
+    props.countries,
+    props.languages,
+  ]);
 
+  console.log(profileStore.profile);
   const toggleRemoveAccount = () => {
     setRemoveAccountDialog(!removeAccountDialog);
   };
@@ -107,9 +104,38 @@ const MyProfile = inject(
     profileStore.setName(firstName);
     profileStore.setLastName(lastName);
     profileStore.setUserName(userName);
-
+    profileStore.setPhone(phone);
     profileStore.updateUser();
+    // if(profileStore.updateUser()){
+    //   const {
+    //     username: userName,
+    //     name: name,
+    //     last_name: lastName,
+    //   } = profileStore.profile;
+
+    //   props.languages.load();
+    //   props.countries.load();
+
+    //   setUserName(userName);
+    //   setFirstName(name);
+    //   setLastName(lastName);
+    // }
   };
+
+  // useEffect(() => {
+  //   const {
+  //     username: userName,
+  //     name: name,
+  //     last_name: lastName,
+  //   } = profileStore.profile;
+
+  //   props.languages.load();
+  //   props.countries.load();
+
+  //   setUserName(userName);
+  //   setFirstName(name);
+  //   setLastName(lastName);
+  // }, []);
 
   const isDataValid = Boolean(
     firstName && lastName && userName && profileStore.profile.birthday,
@@ -129,6 +155,8 @@ const MyProfile = inject(
   const toggleModal = () => {
     setModal(!modal);
   };
+
+  console.log(profileStore?.state);
 
   return (
     <Box ml={isMobile ? 0 : 4}>
@@ -232,7 +260,7 @@ const MyProfile = inject(
               <PhoneInput
                 className={'input-phone-number'}
                 id="phone"
-                defaultCountry={countryCode}
+                defaultCountry={'NG'}
                 fullWidth
                 error={!profileStore.validated.phone}
                 helperText={
@@ -267,31 +295,31 @@ const MyProfile = inject(
               />
             </Box>
           </Grid>
-          {/* <Grid item xs={12} md={8}>
-              <Box mb={2}>
-                <CustomTextField
-                  id="select-country"
-                  select
-                  fullWidth
-                  label="Country"
-                  value={profileStore.profile.country || ''}
-                  onChange={(event) =>
-                    profileStore.setCountry(event.target.value)
-                  }
-                >
-                  {props.countries.list.map((country) => {
-                    return (
-                      <MenuItem
-                        key={country.idd.root}
-                        value={country.name.common}
-                      >
-                        {`${country.flag} ${country.name.common}`}
-                      </MenuItem>
-                    );
-                  })}
-                </CustomTextField>
-              </Box>
-            </Grid> */}
+          <Grid item xs={12} md={8}>
+            <Box mb={2}>
+              <CustomTextField
+                id="select-country"
+                select
+                fullWidth
+                label="Country"
+                value={profileStore.profile.country || ''}
+                onChange={(event) =>
+                  profileStore.setCountry(event.target.value)
+                }
+              >
+                {props.countries.list.map((country) => {
+                  return (
+                    <MenuItem
+                      key={country.idd.root}
+                      value={country.name.common}
+                    >
+                      {`${country.flag} ${country.name.common}`}
+                    </MenuItem>
+                  );
+                })}
+              </CustomTextField>
+            </Box>
+          </Grid>
           <Grid item xs={12} md={8}>
             <Box mb={4}>
               <CustomTextField
