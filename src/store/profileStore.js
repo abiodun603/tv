@@ -1,7 +1,13 @@
 import Router from 'next/router';
-import { observable, action, configure, runInAction, toJS } from 'mobx';
+import {
+  observable,
+  action,
+  configure,
+  runInAction,
+  toJS,
+  makeAutoObservable,
+} from 'mobx';
 import cookies from 'js-cookie';
-
 import http from '../api/axiosApi';
 import * as firebase from '../firebase/auth';
 import { credentialsEmail } from '../firebase/firebase';
@@ -28,6 +34,8 @@ import { getFormDataWithImage } from '../utils/getFormDataWithImage';
 configure({ enforceActions: 'always' });
 
 class ProfileStore extends BasicStore {
+  state = 'pending';
+
   constructor(props) {
     super(props);
 
@@ -88,6 +96,8 @@ class ProfileStore extends BasicStore {
   @action clearProfile() {
     this.profile = { ...this.cleanProfile };
   }
+
+  state = 'pending';
 
   @action.bound
   createUser() {
@@ -165,9 +175,8 @@ class ProfileStore extends BasicStore {
       });
   }
 
-  @action.bound
+  @action
   updateUser() {
-    // debugger;
     let profile = toJS(this.profile);
 
     if (!valText(this.profile.username)) {
@@ -212,7 +221,7 @@ class ProfileStore extends BasicStore {
               type: 'success',
               visible: true,
             });
-
+            this.state = 'done';
             this.loading = false;
           });
         } else {
@@ -232,6 +241,7 @@ class ProfileStore extends BasicStore {
               });
             }
             this.loading = false;
+            this.state = 'error';
           });
         }
       })

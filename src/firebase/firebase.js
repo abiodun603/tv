@@ -16,6 +16,15 @@ if (!firebase.apps.length) {
 }
 
 const auth = firebase.auth();
+
+// apple
+// export const  signInWithApple = async() => {
+//   const provider = new firebase.auth.OAuthProvider('apple.com');
+//   const result = await auth.signInWithPopup(provider);
+
+//   console.log(result.user); // logged-in Apple user
+// }
+
 const providerPhone = new firebase.auth.PhoneAuthProvider();
 const providerGoogle = new firebase.auth.GoogleAuthProvider().addScope('email');
 const providerFacebook = new firebase.auth.FacebookAuthProvider();

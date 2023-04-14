@@ -327,7 +327,7 @@ const AccountCreationForm = observer(({ storeAuth }) => {
   function CommonKeyPressIsAlpha(e) {
     e = e || event;
     var keypressed = String.fromCharCode(e.keyCode || e.which);
-    var matched = /[a-z]/i.test(keypressed);
+    var matched = /[a-zA-Z0-9~\-_.]/i.test(keypressed);
     document.getElementById('report').innerHTML = matched
       ? ''
       : 'Invalid character [<b>' +
@@ -347,7 +347,6 @@ const AccountCreationForm = observer(({ storeAuth }) => {
     alert(`Hey, ${email}`);
     // Reset the reCAPTCHA so that it can be executed again if user
     // submits another email.
-    recaptchaRef.current.reset();
   };
 
   return (
@@ -471,7 +470,6 @@ const AccountCreationForm = observer(({ storeAuth }) => {
           ref={recaptchaRef}
           sitekey="6LfHGkglAAAAAAKWgo5SqZQGLNAJgnXqsDnYVCkP"
           onChange={onReCAPTCHAChange}
-          size="visible"
         />
       </Box>
 
